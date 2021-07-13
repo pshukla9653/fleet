@@ -60,7 +60,7 @@
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="{{ url('/') }}">
-            <img class="logo" src="{{ asset('assets/images/2cd53329007f7006f2163482c685b371.png') }}" title="" alt=""/></a>
+            
 
 			<ul class="nav navbar-nav visible-xs-block">
 				<li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>

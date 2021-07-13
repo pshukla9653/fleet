@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jul 13, 2021 at 07:27 AM
+-- Generation Time: Jul 13, 2021 at 12:08 PM
 -- Server version: 5.7.23
 -- PHP Version: 7.4.21
 
@@ -173,14 +173,15 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `roles`
 --
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'web', '2021-07-12 07:20:43', '2021-07-12 07:20:43');
+(1, 'Admin', 'web', '2021-07-12 07:20:43', '2021-07-12 07:20:43'),
+(2, 'Sub Admin', 'web', '2021-07-13 05:12:33', '2021-07-13 05:12:33');
 
 -- --------------------------------------------------------
 
@@ -202,9 +203,13 @@ CREATE TABLE IF NOT EXISTS `role_has_permissions` (
 
 INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (1, 1),
+(1, 2),
 (2, 1),
+(2, 2),
 (3, 1),
-(4, 1);
+(3, 2),
+(4, 1),
+(4, 2);
 
 -- --------------------------------------------------------
 
@@ -216,26 +221,35 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `company_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `first_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `jab_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone_number` bigint(20) DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `post_code` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `company_name`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'Prashant Shukla', 'prashant@ssak.co.in', NULL, '$2y$10$ysFEUFVR0NzNlRlZG5pH3.UUAll11eAZ18sPUfU/KoqzA9YQXYMS2', NULL, '2021-07-12 07:20:43', '2021-07-12 07:20:43'),
-(2, NULL, 'Hira', 'hira@ssak.co.in', NULL, '$2y$10$IKoEH7Bm8xiB2xX8r/30xu/rFjwEWDufAZxP4KGNZz1hw.i831j1K', NULL, '2021-07-12 07:28:13', '2021-07-12 07:28:13'),
-(3, NULL, 'Manoj', 'manoj@ssak.co.in', NULL, '$2y$10$UQveHmRBoML0ucHdNC2Cmubp4Z0Lt4cXHIEar8xKbvghlVTu.bxCa', NULL, '2021-07-13 01:53:27', '2021-07-13 01:53:27'),
-(4, 'SSAK', 'Aniket', 'aniket@ssak.co.in', NULL, '$2y$10$tJBVGuydngnXiksyZhIoCekRtFpIEUWcHq9VWk4.OKl4jfxwMCrTK', NULL, '2021-07-13 01:56:27', '2021-07-13 01:56:27');
+INSERT INTO `users` (`id`, `company_name`, `first_name`, `last_name`, `email`, `email_verified_at`, `password`, `remember_token`, `jab_title`, `phone_number`, `address`, `city`, `country`, `post_code`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'Prashant Shukla', NULL, 'prashant@ssak.co.in', NULL, '$2y$10$ysFEUFVR0NzNlRlZG5pH3.UUAll11eAZ18sPUfU/KoqzA9YQXYMS2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-07-12 07:20:43', '2021-07-12 07:20:43'),
+(2, NULL, 'Hira', NULL, 'hira@ssak.co.in', NULL, '$2y$10$IKoEH7Bm8xiB2xX8r/30xu/rFjwEWDufAZxP4KGNZz1hw.i831j1K', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-07-12 07:28:13', '2021-07-12 07:28:13'),
+(3, NULL, 'Manoj', NULL, 'manoj@ssak.co.in', NULL, '$2y$10$UQveHmRBoML0ucHdNC2Cmubp4Z0Lt4cXHIEar8xKbvghlVTu.bxCa', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-07-13 01:53:27', '2021-07-13 01:53:27'),
+(4, 'SSAK', 'Aniket', NULL, 'aniket@ssak.co.in', NULL, '$2y$10$tJBVGuydngnXiksyZhIoCekRtFpIEUWcHq9VWk4.OKl4jfxwMCrTK', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-07-13 01:56:27', '2021-07-13 01:56:27'),
+(5, 'SSAK Solution', 'Prashant', NULL, 'prashant1@ssak.co.in', NULL, '$2y$10$dUWwhmNXR4mtMF7NJMHdQ.inx9MWVy5Qx4JrKJfuaRVTVgtUhi72W', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-07-13 04:55:58', '2021-07-13 04:55:58'),
+(6, NULL, 'Prashant', 'Shukla', 'pra2@ssak.co.in', NULL, '$2y$10$d.E9ED9SGnvu0kiI7hL34OxwqleVSpsAub8ds5PNRSCWAdy5vh4ra', NULL, 'ghnbfgjbgfmb', 7545124578, 'lucjncn', 'nunvuevn', 'nuevnrenv', 'vmruvn', '2021-07-13 06:38:11', '2021-07-13 06:38:11');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
