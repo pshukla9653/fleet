@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Company;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -67,18 +68,24 @@ class RegisterController extends Controller
     {
         
 		//var_dump($data); exit;
-		return User::create([
-            'first_name' => $data['first_name'],
-			'last_name' => $data['last_name'],
+		$Company =  Company::create([
             'company_name' => $data['company_name'],
 			'jab_title' => $data['jab_title'],
-			'email' => $data['email'],
-			'phone_number' => $data['phone_number'],
-            'password' => Hash::make($data['password']),
 			'address' => $data['address'],
 			'city' => $data['city'],
 			'country' => $data['country'],
 			'post_code' => $data['post_code'],
         ]);
+		
+		$user =  User::create([
+			'company_id' => $Company['id'],
+            'first_name' => $data['first_name'],
+			'last_name' => $data['last_name'],
+			'jab_title' => $data['jab_title'],
+			'email' => $data['email'],
+			'phone_number' => $data['phone_number'],
+            'password' => Hash::make($data['password']),
+        ]);
+		return $user;
     }
 }

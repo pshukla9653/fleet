@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('company_id');
 			$table->string('first_name');
 			$table->string('last_name');
+			$table->string('phone_number')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -29,7 +30,6 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('company_name')->nullable();
 			$table->string('jab_title')->nullable();
-			$table->string('phone_number')->nullable();
 			$table->string('address')->nullable();
 			$table->string('city')->nullable();
 			$table->string('country')->nullable();
