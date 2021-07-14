@@ -83,7 +83,7 @@
 				<li class="dropdown dropdown-user">
 					<a class="dropdown-toggle" data-toggle="dropdown">
 						<img src="{{ asset('assets/images/placeholder.jpg') }}" alt="">
-						<span>{{ Auth::user()->name }}</span>
+						<span>{{ Auth::user()->first_name.' '.Auth::user()->last_name }}</span>
 						<i class="caret"></i>
 					</a>
 
