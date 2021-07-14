@@ -152,8 +152,13 @@
 								<!-- Main -->
 				 <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
                  <li class="active"> <a href="{{ url('/') }}"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+                  @can('user-list')
                  <li class=""> <a href="{{ route('users.index') }}"><i class="fa fa-home"></i> <span>Manage Users</span></a></li>
+                 @endcan
+                 
+                 @can('role-list')
                  <li class=""> <a href="{{ route('roles.index') }}"><i class="fa fa-home"></i> <span>Manage Role</span></a></li>
+                 @endcan
                         						
 
 							</ul>
