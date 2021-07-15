@@ -10,7 +10,7 @@ class Company extends Model
     use HasFactory;
 	
 	protected $table = 'Company';
-    public $timestamps = true;
+   // public $timestamps = true;
 	
 	protected $fillable = [
 		'company_name',
