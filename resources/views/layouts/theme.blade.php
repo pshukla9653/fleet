@@ -159,6 +159,9 @@
                  @can('role-list')
                  <li class=""> <a href="{{ route('roles.index') }}"><i class="fa fa-home"></i> <span>Manage Role</span></a></li>
                  @endcan
+                 @can('contact-list')
+                 <li class=""> <a href="{{ route('contacts.index') }}"><i class="fa fa-home"></i> <span>Manage Contact</span></a></li>
+                 @endcan
                         						
 
 							</ul>
