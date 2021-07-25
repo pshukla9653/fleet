@@ -63,6 +63,7 @@ class ContactController extends Controller
         ]);
     
         $input = $request->all();
+		$input['company_id'] = Auth()->user()->company_id;
     
         $contact = Contact::create($input);
         
@@ -131,11 +132,10 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contact $contact)
+    public function destroy($id)
     {
-        //
 		Contact::find($contact->id)->delete();
-        return redirect()->route('contact.index')
+        return redirect()->route('contacts.index')
                         ->with('success','Contact deleted successfully');
     }
 }

@@ -1,0 +1,171 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use DB;
+use App\Models\Brand;
+
+class BrandController extends Controller
+{
+	 /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+	function __construct()
+    {
+        //  $this->middleware('permission:brand-list|brand-create|brand-edit|brand-delete', ['only' => ['index','store']]);
+        //  $this->middleware('permission:brand-create', ['only' => ['create','store']]);
+        //  $this->middleware('permission:brand-edit', ['only' => ['edit','update']]);
+        //  $this->middleware('permission:brand-delete', ['only' => ['destroy']]);
+    }
+	/**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        //
+		$brand = brand::orderBy('id','DESC')->paginate(5);
+        return view('brand.index', compact('brand'))
+            ->with('i', ($request->input('page', 1) - 1) * 5);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+		
+        $brand = Role::pluck('name','name')->all();
+        return view('brand.create', compact('brand'));
+		
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+		$this->validate($request, [
+            'brand_name' => 'required',
+             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+  
+        $input = $request->all();
+  
+        if ($image = $request->file('image')) {
+             $destinationPath = 'upload/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+           $image->move($destinationPath, $profileImage);
+            $input['file_name'] = "$profileImage";
+			$input['company_id'] = Auth()->user()->company_id;
+        }
+    
+         Brand::create($input);
+     
+    
+        return redirect()->route('brand.index')
+                        ->with('success','Brand created successfully');
+						
+    
+        
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Contact  $contact
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+		$brand = Brand::find($id);
+        return view('brand.show', compact('brand'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Contact  $contact
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+		$brand  = Brand::find($id);
+    	//var_dump($brand); exit;
+        return view('brand.edit', compact('brand'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Contact  $contact
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Brand $brand)
+    {
+        //
+		$this->validate($request, [
+            'brand_name' => 'required',
+            
+        ]);
+    	
+         $input = $request->all();
+  
+        if ($image = $request->file('image')) {
+            $destinationPath = 'upload/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['file_name'] = "$profileImage";
+			
+			$file = public_path('upload/'. $brand['file_name']);
+			if (file_exists($file)) {
+  				@unlink($file);
+				}
+        }else{
+            unset($input['image']);
+        }
+          
+        $brand->update($input);
+    
+        return redirect()->route('brand.index')
+                        ->with('success','Brand updated successfully');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Contact  $contact
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+		$brand = Brand::Find($id);
+		$file = public_path('upload/'. $brand['file_name']);
+		if (file_exists($file)) {
+  			@unlink($file);
+		}
+		Brand::find($id)->delete();
+		
+        return redirect()->route('brand.index')
+                        ->with('success','Barnd deleted successfully');
+    }
+	
+}
+
+

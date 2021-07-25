@@ -153,14 +153,23 @@
 				 <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
                  <li class="active"> <a href="{{ url('/') }}"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
                   @can('user-list')
-                 <li class=""> <a href="{{ route('users.index') }}"><i class="fa fa-home"></i> <span>Manage Users</span></a></li>
+                 <li class=""> <a href="{{ route('users.index') }}"><i class="fa fa-home"></i> <span>Users</span></a></li>
                  @endcan
                  
                  @can('role-list')
-                 <li class=""> <a href="{{ route('roles.index') }}"><i class="fa fa-home"></i> <span>Manage Role</span></a></li>
+                 <li class=""> <a href="{{ route('roles.index') }}"><i class="fa fa-home"></i> <span>Role</span></a></li>
                  @endcan
                  @can('contact-list')
-                 <li class=""> <a href="{{ route('contacts.index') }}"><i class="fa fa-home"></i> <span>Manage Contact</span></a></li>
+                 <li class=""> <a href="{{ route('contacts.index') }}"><i class="fa fa-home"></i> <span>Contact</span></a></li>
+                 @endcan
+                  @can('brand-list')
+                 <li class=""> <a href="{{ route('brand.index') }}"><i class="fa fa-home"></i> <span>Brand</span></a></li>
+                 @endcan
+                 @can('region-list')
+                 <li class=""> <a href="{{ route('regions.index') }}"><i class="fa fa-home"></i> <span>Region</span></a></li>
+                 @endcan
+                 @can('department-list')
+                 <li class=""> <a href="{{ route('departments.index') }}"><i class="fa fa-home"></i> <span>Department</span></a></li>
                  @endcan
                         						
 
@@ -190,6 +199,30 @@
 
 	</div>
     
-
+<script>
+		window.setTimeout(function () {
+			$(".alert-success").fadeTo(300, 0).slideUp(300, function () {
+				$(this).remove();
+			});
+		}, 3000);
+    	window.setTimeout(function () {
+			$(".alert-info").fadeTo(300, 0).slideUp(300, function () {
+				$(this).remove();
+			});
+		}, 3000);
+		window.setTimeout(function () {
+			$(".alert-danger").fadeTo(300, 0).slideUp(300, function () {
+				$(this).remove();
+			});
+		}, 3000);
+    
+		window.setTimeout(function () {
+			$(".alert-warning").fadeTo(300, 0).slideUp(300, function () {
+				$(this).remove();
+			});
+		}, 3000);
+    
+	
+    </script>
 </body>
 </html>
