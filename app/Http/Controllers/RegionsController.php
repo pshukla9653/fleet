@@ -9,10 +9,10 @@ class RegionsController extends Controller
 {
     function __construct()
     {
-        //  $this->middleware('permission:region-list|region-create|region-edit|region-delete', ['only' => ['index','store']]);
-        //  $this->middleware('permission:region-create', ['only' => ['create','store']]);
-        //  $this->middleware('permission:region-edit', ['only' => ['edit','update']]);
-        //  $this->middleware('permission:region-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:region-list|region-create|region-edit|region-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:region-create', ['only' => ['create','store']]);
+         $this->middleware('permission:region-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:region-delete', ['only' => ['destroy']]);
     }
 	
 	/**
