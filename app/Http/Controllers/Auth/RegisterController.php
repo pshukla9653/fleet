@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\Company;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+
 
 class RegisterController extends Controller
 {
@@ -70,7 +73,7 @@ class RegisterController extends Controller
 		//var_dump($data); exit;
 		$Company =  Company::create([
             'company_name' => $data['company_name'],
-			'jab_title' => $data['jab_title'],
+			'job_title' => $data['job_title'],
 			'address' => $data['address'],
 			'city' => $data['city'],
 			'country' => $data['country'],
@@ -81,11 +84,17 @@ class RegisterController extends Controller
 			'company_id' => $Company['id'],
             'first_name' => $data['first_name'],
 			'last_name' => $data['last_name'],
-			'jab_title' => $data['jab_title'],
 			'email' => $data['email'],
 			'phone_number' => $data['phone_number'],
             'password' => Hash::make($data['password']),
         ]);
+		$role = Role::find(['name' => 'Admin']);
+     
+        $permissions = Permission::pluck('id','id')->all();
+   
+        $role->syncPermissions($permissions);
+     
+        $user->assignRole([$role->id]);
 		return $user;
     }
 }

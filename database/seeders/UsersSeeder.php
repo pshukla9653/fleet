@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Company;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -17,17 +18,26 @@ class UsersSeeder extends Seeder
     public function run()
     {
         //
+		$Company =  Company::create([
+            'company_name' => 'News Paper Fleet',
+			'job_title' => 'Director',
+			'address' => 'Street Address',
+			'city' => 'City',
+			'country' => 'Country',
+			'post_code' => '123456',
+        ]);
 		$user = User::create([
-            'company_id' => '0',
-        	'first_name' => 'Hira',
-			'last_name' => 'Shukla', 
-        	'email' => 'hira@ssak.co.in',
+            'company_id' => $Company['id'],
+        	'first_name' => 'Company',
+			'last_name' => 'admin', 
+        	'email' => 'admin@fleet.com',
         	'password' => bcrypt('12345678')
         ]);
     
-        $role = Role::create(['name' => 'New Role']);
+        $role = Role::create(['name' => 'Company Admin']);
      
-        $permissions = array(5,6,7,8);
+        
+		$permissions = Permission::pluck('id','id')->all();
    		
         $role->syncPermissions($permissions);
      

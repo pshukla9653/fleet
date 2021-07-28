@@ -62,7 +62,7 @@ class UserController extends Controller
     
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
-    
+    	$input['company_id'] = Auth()->user()->company_id;
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
     

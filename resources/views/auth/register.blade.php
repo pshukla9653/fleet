@@ -52,12 +52,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="jab_title" class="col-md-4 col-form-label text-md-right">{{ __('Job Title') }}</label>
+                            <label for="job_title" class="col-md-4 col-form-label text-md-right">{{ __('Job Title') }}</label>
 
                             <div class="col-md-6">
-                                <input id="jab_title" type="text" class="form-control @error('jab_title') is-invalid @enderror" name="jab_title" value="{{ old('jab_title') }}" required autocomplete="jab_title" >
+                                <input id="jab_title" type="text" class="form-control @error('job_title') is-invalid @enderror" name="job_title" value="{{ old('job_title') }}" required autocomplete="jab_title" >
 
-                                @error('jab_title')
+                                @error('job_title')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
