@@ -84,16 +84,18 @@ $(function() {
 
     // External table additions
     // ------------------------------
-    
     // Lightbox
     $('[data-popup="lightbox"]').fancybox({
         padding: 3
     });
 
+
     // Styles checkboxes, radios
     $('.styled').uniform({
     	radioClass: 'choice'
     });
+
+
 
     // Enable Select2 select for the length option
     $('.dataTables_length select').select2({

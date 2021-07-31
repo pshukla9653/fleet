@@ -1,114 +1,52 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+	<title>{{ config('app.name', 'Laravel') }}</title>
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+	<!-- Global stylesheets -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+	<link href="{{ asset('assets/css/icons/icomoon/styles.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('assets/css/icons/fontawesome/styles.min.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('assets/css/core.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('assets/css/components.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('assets/css/colors.css') }}" rel="stylesheet" type="text/css">
+	<!-- /global stylesheets -->
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900">
+	<!-- Core JS files -->
+	<script type="text/javascript" src="{{ asset('assets/js/plugins/loaders/pace.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/core/libraries/bootstrap.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/plugins/loaders/blockui.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/plugins/tables/datatables/datatables.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/plugins/tables/datatables/extensions/responsive.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/pages/datatables_responsive.js') }}"></script>
+	<!-- /core JS files -->
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('assets/css/icons/icomoon/styles.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/icons/fontawesome/styles.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/core.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/colors.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/croppie.min.css') }}">
-        
+	<!-- Theme JS files -->
+	<script type="text/javascript" src="{{ asset('assets/js/plugins/visualization/d3/d3.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/plugins/visualization/d3/d3_tooltip.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/plugins/forms/styling/switchery.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/plugins/forms/styling/uniform.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/plugins/forms/selects/bootstrap_multiselect.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/plugins/ui/moment/moment.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/plugins/pickers/daterangepicker.js') }}"></script>
 
-        <!--Core Scripts -->
-        <script src="{{ asset('assets/js/plugins/loaders/pace.min.js') }}" defer></script>
-        <script src="{{ asset('assets/js/core/libraries/jquery.min.js') }}" defer></script>
-        <script src="{{ asset('assets/js/core/libraries/bootstrap.min.js') }}" defer></script>
-        <script src="{{ asset('assets/js/plugins/loaders/blockui.min.js') }}" defer></script>
-        <script src="{{ asset('assets/js/plugins/editors/summernote/summernote.min.js') }}" defer></script>
-        <script src="{{ asset('assets/js/croppie.min.js') }}" defer></script>
-        
-         <!--Theme Scripts -->
-        <script src="{{ asset('assets/js/plugins/tables/datatables/datatables.min.js') }}" defer></script>
-        <script src="{{ asset('assets/js/plugins/tables/datatables/extensions/buttons.min.js') }}" defer></script>
-        <script src="{{ asset('assets/js/plugins/tables/datatables/extensions/responsive.min.js') }}" defer></script>
-        <script src="{{ asset('assets/js/plugins/tables/datatables/extensions/pdfmake/pdfmake.min.js') }}" defer></script>
-        <script src="{{ asset('assets/js/plugins/tables/datatables/extensions/pdfmake/vfs_fonts.min.js') }}" defer></script>
-        <script src="{{ asset('assets/js/plugins/tables/datatables/extensions/jszip/jszip.min.js') }}" defer></script>
-        <script src="{{ asset('assets/js/plugins/forms/selects/select2.min.js') }}" defer></script>
-        <script src="{{ asset('assets/js/plugins/visualization/d3/d3.min.js') }}" defer></script>
-        <script src="{{ asset('assets/js/plugins/visualization/d3/d3_tooltip.js') }}" defer></script>
-        <script src="{{ asset('assets/js/plugins/forms/styling/switchery.min.js') }}" defer></script>
-        <script src="{{ asset('assets/js/plugins/forms/styling/uniform.min.js') }}" defer></script>
-        <script src="{{ asset('assets/js/plugins/forms/selects/bootstrap_multiselect.js') }}" defer></script>
-        <script src="{{ asset('assets/js/plugins/ui/moment/moment.min.js') }}" defer></script>
-        <script src="{{ asset('assets/js/plugins/pickers/daterangepicker.js') }}" defer></script>
-        <script src="{{ asset('assets/js/plugins/forms/inputs/duallistbox.min.js') }}" defer></script>
-        <script src="{{ asset('assets/js/plugins/forms/inputs/formatter.min.js') }}" defer></script>
-        <script src="{{ asset('assets/js/plugins/notifications/pnotify.min.js') }}" defer></script>
-        <script src="{{ asset('assets/js/pages/form_layouts.js') }}" defer></script>
-        <script src="{{ asset('assets/js/core/app.js') }}" defer></script>
-        <script src="{{ asset('assets/js/pages/components_modals.js') }}" defer></script>
-        <script src="{{ asset('assets/js/pages/datatables_data_sources.js') }}" defer></script>
-        
-        
-    </head>
+	<script type="text/javascript" src="{{ asset('assets/js/core/app.js') }}"></script>
 
-<body class="navbar-top" style="overflow-x:hidden;">
 
-	<!-- Main navbar -->
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="{{ url('/') }}">
-            
+	<script type="text/javascript" src="{{ asset('assets/js/plugins/ui/ripple.min.js') }}"></script>
+	<!-- /theme JS files -->
 
-			<ul class="nav navbar-nav visible-xs-block">
-				<li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
-				<li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
-			</ul>
-		</div>
+</head>
 
-		<div class="navbar-collapse collapse" id="navbar-mobile">
-			<ul class="nav navbar-nav">
-				<li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
-			</ul>
+<body>
 
-			<p class="navbar-text"><span class="label bg-success">Online</span></p>
-            
-			<ul class="nav navbar-nav navbar-right">
-				
-
-				
-
-				<li class="dropdown dropdown-user">
-					<a class="dropdown-toggle" data-toggle="dropdown">
-						<img src="{{ asset('assets/images/placeholder.jpg') }}" alt="">
-						<span>{{ Auth::user()->first_name.' '.Auth::user()->last_name }}</span>
-						<i class="caret"></i>
-					</a>
-
-					<ul class="dropdown-menu dropdown-menu-right">
-						
-						<li><a href="{{ route('logout') }}" onClick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><i class="icon-switch2"></i> {{ __('Logout') }}</a></li>
-					</ul>
-				</li>
-			</ul>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-            <ul class="nav navbar-nav navbar-right">
-				<li><a onClick="window.history.go(1); return false;"><i class="fa fa-arrow-right"></i> Forword</a></li>
-			</ul>
-            <ul class="nav navbar-nav navbar-right">
-				<li><a onClick="window.location.href=window.location.href"><i class="fa fa-refresh"></i> Refresh</a></li>
-			</ul>
-            <ul class="nav navbar-nav navbar-right">
-				<li><a onClick="window.history.go(-1); return false;"><i class="fa fa-arrow-left"></i> Back</a></li>
-			</ul>
-		</div>
-	</div>
-	<!-- /main navbar -->
+	
 
 
 	<!-- Page container -->
@@ -118,79 +56,142 @@
 		<div class="page-content">
 
 			<!-- Main sidebar -->
-			<div class="sidebar sidebar-main sidebar-fixed">
+			<div class="sidebar sidebar-main">
 				<div class="sidebar-content">
 
 					<!-- User menu -->
-					<div class="sidebar-user">
+					<div class="sidebar-user-material">
 						<div class="category-content">
-							<div class="media">
-								<a href="#" class="media-left"><img src="{{ asset('assets/images/placeholder.jpg') }}" class="img-circle img-sm" alt=""></a>
-								<div class="media-body">
-									<span class="media-heading text-semibold">Admin</span>
-                                    
-								</div>
-
-								<div class="media-right media-middle">
-									<ul class="icons-list">
-										<li>
-											<a href="#"><i class="icon-cog3"></i></a>
-										</li>
-									</ul>
-								</div>
+							<div class="sidebar-user-material-content">
+								<a href="{{ url('/') }}"><img src="{{ asset('assets/images/Bentley-symbol-black-1920x1080_ba@2x.png') }}" class="img-responsive" alt=""></a>
+								
 							</div>
+														
+							
 						</div>
+						
+						
 					</div>
 					<!-- /user menu -->
 
 
 					<!-- Main navigation -->
-                    <div class="sidebar-category sidebar-category-visible">
+					<div class="sidebar-category sidebar-category-visible">
 						<div class="category-content no-padding">
 							<ul class="navigation navigation-main navigation-accordion">
 
 								<!-- Main -->
-				 <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
-                 <li class="active"> <a href="{{ url('/') }}"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
-                  @can('user-list')
-                 <li class=""> <a href="{{ route('users.index') }}"><i class="fa fa-home"></i> <span>Users</span></a></li>
-                 @endcan
-                 
-                 @can('role-list')
-                 <li class=""> <a href="{{ route('roles.index') }}"><i class="fa fa-home"></i> <span>Role</span></a></li>
-                 @endcan
-                 @can('contact-list')
-                 <li class=""> <a href="{{ route('contacts.index') }}"><i class="fa fa-home"></i> <span>Contact</span></a></li>
-                 @endcan
-                  @can('brand-list')
-                 <li class=""> <a href="{{ route('brand.index') }}"><i class="fa fa-home"></i> <span>Brand</span></a></li>
-                 @endcan
-                 @can('region-list')
-                 <li class=""> <a href="{{ route('regions.index') }}"><i class="fa fa-home"></i> <span>Region</span></a></li>
-                 @endcan
-                 @can('department-list')
-                 <li class=""> <a href="{{ route('departments.index') }}"><i class="fa fa-home"></i> <span>Department</span></a></li>
-                 @endcan
-                        						
+								<li class="navigation-header"><span>Menu</span> <i class="icon-menu" title="Main pages"></i></li>
+								<li class="active"><a href="{{ url('/') }}"><i class="icon-home4"></i> <span>DASHBOARD</span></a><span class="sidebar-control sidebar-main-toggle hidden-xs"><i class="fa fa-angle-double-left pull-right" style="position: absolute;
+									margin-top: -6.5em;
+									margin-left: 18.2em;"></i></span></li>
+								<li>
+									<a href="#"><i class="icon-stack2"></i> <span>OVERVIEW</span></a>
+									
+								</li>
+								<li>
+									<a href="#"><i class="icon-car"></i> <span>CONFIGURE</span></a>
+									<ul>
+										@can('role-list')
+										<li><a href="{{ route('roles.index') }}">Roles</a></li>
+										@endcan
+										@can('vehicles-list')
+										<li><a href="#">Vehicles</a></li>
+										@endcan
+										@can('region-list')
+										<li><a href="{{ route('regions.index') }}">Regions</a></li>
+										@endcan
+										@can('department-list')
+										<li><a href="{{ route('departments.index') }}">Department</a></li>
+										@endcan
+										@can('brand-list')
+										<li><a href="{{ route('brand.index') }}">Brands</a></li>
+										@endcan
+										<li><a href="#">Loan Type</a></li>
+										<li><a href="#">Email Templates</a></li>
+										<li><a href="#">History</a></li>
+										@can('user-list')
+										<li><a href="{{ route('users.index') }}">Users</a></li>
+										@endcan
+
+										<li><a href="#">Lists</a></li>
+										<li><a href="#">System Configuration</a></li>
+									</ul>
+								</li>
+								<li>
+									<a href="{{ route('contacts.index') }}"><i class="icon-user-plus"></i> <span>CONTACT PROFILES</span></a>
+									
+								</li>
+								<li>
+									<a href="#"><i class="icon-file-text2"></i> <span>REPORTS</span></a>
+									<ul>
+										<li><a href="#">By Vehicles</a></li>
+										<li><a href="#">By Company</a></li>
+										
+										
+									</ul>
+								</li>
+								<!-- /page kits -->
 
 							</ul>
 						</div>
 					</div>
-
-
-
-
-
-
-					
 					<!-- /main navigation -->
 
 				</div>
 			</div>
 			<!-- /main sidebar -->
 
-	<div class="content-wrapper"><!-- Page header -->
+
 			<!-- Main content -->
+			<div class="content-wrapper">
+<!-- Main navbar -->
+<div class="navbar navbar-default header-highlight" style="margin: 20px; border-radius: 3px; box-shadow:rgb(99 99 99 / 20%) 0px 2px 8px 0px; height: 30px !important;">
+	<div class="nav navbar-nav visible-xs-block">
+		<div style="text-align: right; margin: 15px; padding: 5px;"><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a>
+		<a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></div>
+	</div>
+
+	<div class="navbar-collapse collapse" id="navbar-mobile">
+		
+		<div class="nav navbar-nav"><h2 style="margin-top: 10px;">@yield('heading')</h2></div>
+		<ul class="nav navbar-nav navbar-right">
+				
+
+				
+
+			<li class="dropdown dropdown-user">
+				<a class="dropdown-toggle" data-toggle="dropdown">
+					<img src="{{ asset('assets/images/placeholder.jpg') }}" alt="">
+					<span>{{ Auth::user()->first_name.' '.Auth::user()->last_name }}</span>
+					<i class="caret"></i>
+				</a>
+
+				<ul class="dropdown-menu dropdown-menu-right">
+					
+					<li><a href="{{ route('logout') }}" onClick="event.preventDefault();
+												 document.getElementById('logout-form').submit();"><i class="icon-switch2"></i> {{ __('Logout') }}</a></li>
+				</ul>
+			</li>
+		</ul>
+		<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+									@csrf
+								</form>
+		
+		
+	</div>
+</div>
+<div class="page-header">
+	<div class="page-header-content">
+	  <div class="page-title">
+		<h6><i class="icon-home2 position-left"></i> <i class="fa fa-angle-double-right"></i> @yield('heading')</h6>
+	  </div>
+  <hr>
+	  
+	</div>
+	</div>
+<!-- /main navbar -->
+			<!-- Page header -->
 			@yield('content')
 			<!-- /main content -->
 
@@ -198,8 +199,8 @@
 		<!-- /page content -->
 
 	</div>
-    
-<script>
+	<!-- /page container -->
+	<script>
 		window.setTimeout(function () {
 			$(".alert-success").fadeTo(300, 0).slideUp(300, function () {
 				$(this).remove();

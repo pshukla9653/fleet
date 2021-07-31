@@ -134,8 +134,9 @@ class ContactController extends Controller
      */
     public function destroy($id)
     {
-		Contact::find($contact->id)->delete();
-        return redirect()->route('contacts.index')
+        //
+		Contact::find($id)->delete();
+        return redirect()->route('contact.index')
                         ->with('success','Contact deleted successfully');
     }
 }

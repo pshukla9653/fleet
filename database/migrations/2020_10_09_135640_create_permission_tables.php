@@ -25,10 +25,11 @@ class CreatePermissionTables extends Migration
             $table->string('name');
             $table->string('guard_name');
             $table->timestamps();
-        });
+        }); 
 
         Schema::create($tableNames['roles'], function (Blueprint $table) {
             $table->bigIncrements('id');
+			$table->foreignId('company_id')->nullable()->index();
             $table->string('name');
             $table->string('guard_name');
             $table->timestamps();

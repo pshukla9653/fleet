@@ -1,20 +1,23 @@
 @extends('layouts.theme')
 
-
+@section('heading','USERS')
 @section('content')
 
-<div class="page-header page-header-default">
-  <div class="page-header-content">
-    <div class="page-title">
-      <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Home</span> - User</h4>
-    </div>
+<div class="row">		
+  <div class="col-md-8" style="padding: 30px;">
+  <a onclick="location.reload();" class="btn btn-primary"><i class="icon-reload-alt position-left"></i> Refresh @yield('heading')</a>
+  @can('user-create')	
+  <a href="{{ route('users.create') }}" class="btn btn-primary"><i class="icon-plus-circle2 position-left"></i> Add New Item</a>
+  @endcan
   </div>
-  <div class="breadcrumb-line">
-    <ul class="breadcrumb">
-      <li><a href="#"><i class="icon-home2 position-left active"></i> User</a></li>
-    </ul>
+  <div class="col-md-4" style="padding: 30px;">
+  <form class="example" action="#">
+    <input type="text" placeholder="Search.." name="search">
+    <button type="submit"><i class="fa fa-search"></i></button>
+    </form>		
   </div>
-</div>
+  
+  </div>
 <!-- /page header --> 
 
 <!-- Content area -->
@@ -28,10 +31,8 @@
   <div class="panel panel-flat">
     <div class="panel-heading">
       <h5 class="panel-title"></h5>
-      <div class="heading-elements"> </div>
-      @can('user-create')
-      <div class="pull-right"> <a class="btn btn-success" href="{{ route('users.create') }}"> Create New User</a> </div>
-      @endcan
+      <div class="heading-elements">@yield('heading')</div>
+      
     </div>
     <div class="panel-body">
       <div class="row"> 
@@ -40,8 +41,7 @@
   <p>{{ $message }}</p>
 </div>
 @endif
-        <fieldset>
-          <legend class="text-semibold"> User List</legend>
+      
           
     <table class="table table-bordered">
  <tr>
@@ -77,8 +77,8 @@
   </tr>
  @endforeach
 </table>
-	{!! $data->render() !!}
-        </fieldset>
+	{!! $data->render() !!}0
+
       </div>
     </div>
   </div>

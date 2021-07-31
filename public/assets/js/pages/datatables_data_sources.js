@@ -18,7 +18,6 @@ $(function() {
     // Setting datatable defaults
     $.extend( $.fn.dataTable.defaults, {
         autoWidth: false,
-		responsive: true,
         columnDefs: [{ 
             orderable: false,
             width: '100px',
@@ -39,20 +38,14 @@ $(function() {
         }
     });
 
-	 // Basic initialization
-   
+
     // HTML sourced data
     $('.datatable-html').dataTable();
 
 
-    // leads AJAX sourced data
-    $('.datatable-leads').dataTable({
-        ajax: 'http://localhost/sunriseaqua/secure/leads/leadlist'
-    });
-	
-	// leads AJAX sourced data
-    $('.datatable-cutomerlist').dataTable({
-        ajax: 'http://localhost/sunriseaqua/secure/customer/customerlist'
+    // AJAX sourced data
+    $('.datatable-ajax').dataTable({
+        ajax: 'assets/demo_data/tables/datatable_ajax.json'
     });
 
 

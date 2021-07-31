@@ -15,7 +15,7 @@ class CreateBrandsTable extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
-			$table->foreignId('company_id');
+			$table->foreignId('company_id')->index();
 			$table->string('brand_name')->nullable();
 			$table->string('file_name')->nullable();
             $table->timestamps();

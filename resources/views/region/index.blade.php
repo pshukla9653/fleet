@@ -1,19 +1,23 @@
 @extends('layouts.theme')
 
-
+@section('heading','REGIONS')
 @section('content')
-<div class="page-header page-header-default">
-  <div class="page-header-content">
-    <div class="page-title">
-      <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Home</span> - Region</h4>
-    </div>
-  </div>
-  <div class="breadcrumb-line">
-    <ul class="breadcrumb">
-      <li><a href="#"><i class="icon-home2 position-left active"></i> Region</a></li>
-    </ul>
-  </div>
+
+<div class="row">		
+<div class="col-md-8" style="padding: 30px;">
+<a onclick="location.reload();" class="btn btn-primary"><i class="icon-reload-alt position-left"></i> Refresh @yield('heading')</a>
+@can('region-create')	
+<a href="{{ route('regions.create') }}" class="btn btn-primary"><i class="icon-plus-circle2 position-left"></i> Add New Item</a>
+@endcan
 </div>
+<div class="col-md-4" style="padding: 30px;">
+<form class="example" action="#">
+  <input type="text" placeholder="Search.." name="search">
+  <button type="submit"><i class="fa fa-search"></i></button>
+  </form>		
+</div>
+
+</div>	
 
 <div class="content"> 
   
@@ -24,12 +28,9 @@
   <!-- /main charts -->
   <div class="panel panel-flat">
     <div class="panel-heading">
-      <h5 class="panel-title"></h5>
-      <div class="heading-elements"><div class="pull-right"> 
-       @can('region-create')
-            <a class="btn btn-success" href="{{ route('regions.create') }}"> Create New Region</a>
-            @endcan
-       </div> </div>
+      <h5 class="panel-title">@yield('heading')</h5>
+      <div class="heading-elements">
+        </div>
       
     </div>
     <div class="panel-body">
@@ -40,8 +41,7 @@
     </div>
 @endif
 
-        <fieldset>
-          <legend class="text-semibold"> Region List</legend>
+        
           <table class="table table-bordered">
   <tr>
      <th>No</th>
@@ -69,7 +69,7 @@
 
 
 {!! $regions->render() !!}
-        </fieldset>
+      
       </div>
     </div>
   </div>
