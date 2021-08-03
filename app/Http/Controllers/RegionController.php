@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Regions;
+use App\Models\Region;
 use Illuminate\Http\Request;
 
-class RegionsController extends Controller
+class RegionController extends Controller
 {
     function __construct()
     {
@@ -23,7 +23,7 @@ class RegionsController extends Controller
     public function index(Request $request)
     {
         //
-		$regions = Regions::orderBy('id','DESC')->paginate(5);
+		$regions = Region::orderBy('id','DESC')->paginate(5);
         return view('region.index', compact('regions'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -36,7 +36,7 @@ class RegionsController extends Controller
     public function create()
     {
         //
-		$regions = Regions::pluck('region_name','region_name')->all();
+		$regions = Region::pluck('region_name','region_name')->all();
         return view('region.create', compact('regions'));
     }
 
@@ -56,7 +56,7 @@ class RegionsController extends Controller
         $input = $request->all();
 		$input['company_id'] = Auth()->user()->company_id;
     
-        $region = Regions::create($input);
+        $region = Region::create($input);
         
     
         return redirect()->route('regions.index')
@@ -68,13 +68,13 @@ class RegionsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Regionss  $regions
+     * @param  \App\Models\Region  $regions
      * @return \Illuminate\Http\Response
      */
    public function show($id)
     {
         //
-		$region = Regions::find($id);
+		$region = Region::find($id);
         return view('region.show', compact('region'));
     }
 
@@ -87,7 +87,7 @@ class RegionsController extends Controller
     public function edit($id)
     {
         //
-		$region = Regions::find($id);
+		$region = Region::find($id);
     	//var_dump($region); exit;
         return view('region.edit', compact('region'));
     }
@@ -96,7 +96,7 @@ class RegionsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Regionss  $regions
+     * @param  \App\Models\Region  $regions
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -110,7 +110,7 @@ class RegionsController extends Controller
         $input = $request->all();
         
     
-        $user = Regions::find($id);
+        $user = Region::find($id);
         $user->update($input);
     
         return redirect()->route('regions.index')
@@ -120,13 +120,13 @@ class RegionsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Regionss  $regions
+     * @param  \App\Models\Region  $regions
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
-		Regions::find($id)->delete();
+		Region::find($id)->delete();
         return redirect()->route('regions.index')
                         ->with('success','Region deleted successfully');
     }

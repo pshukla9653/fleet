@@ -9,12 +9,12 @@ class Company extends Model
 {
     use HasFactory;
 	
-	protected $table = 'Company';
+	protected $table = 'Companies';
    // public $timestamps = true;
 	
 	protected $fillable = [
 		'company_name',
-        'jab_title',
+        'job_title',
 		'address',
 		'city',
 		'country',

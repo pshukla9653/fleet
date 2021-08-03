@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use App\Scopes\CompanyScope;
+
 
 class Contact extends Model
 {
@@ -16,7 +18,6 @@ class Contact extends Model
 		'company_id',
 		'first_name',
         'last_name',
-		'company_name',
 		'job_title',
         'email',
 		'phone_number',
@@ -29,4 +30,8 @@ class Contact extends Model
         
 		
     ];
+	protected static function booted()
+    {
+        static::addGlobalScope(new CompanyScope);
+    }
 }

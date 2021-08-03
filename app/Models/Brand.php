@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use App\Scopes\CompanyScope;
+
 class Brand extends Model
 {
     use HasFactory;
@@ -25,5 +27,10 @@ class Brand extends Model
     public function setFilenamesAttribute($value)
     {
         $this->attributes['brands'] = json_encode($value);
+    }
+
+    protected static function booted()
+    {
+        static::addGlobalScope(new CompanyScope);
     }
 }

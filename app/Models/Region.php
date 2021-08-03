@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Scopes\CompanyScope;
 
-class Regions extends Model
+class Region extends Model
 {
     use HasFactory;
 	
@@ -13,4 +14,11 @@ class Regions extends Model
 		'company_id',
         'region_name',
     ];
+
+    protected static function booted()
+    {
+        static::addGlobalScope(new CompanyScope);
+    }
 }
+
+

@@ -5,7 +5,7 @@
 <div class="row">		
   <div class="col-md-8" style="padding: 30px;">
   <a onclick="location.reload();" class="btn btn-primary"><i class="icon-reload-alt position-left"></i> Refresh @yield('heading')</a>
-  <a href="{{ route('brand.index') }}" class="btn btn-primary"><i class=" icon-list-unordered position-left"></i> Item List</a>
+  <a href="{{ route('brands.index') }}" class="btn btn-primary"><i class=" icon-list-unordered position-left"></i> Item List</a>
   </div>
   <div class="col-md-4" style="padding: 30px;">
   <form class="example" action="#">
@@ -41,9 +41,9 @@
         </ul>
     </div>
 	@endif
-<form action="{{ route('brand.update',$brand->id) }}" method="POST" enctype="multipart/form-data"> 
+<form action="{{ route('brands.update',$brand->id) }}" method="POST" enctype="multipart/form-data"> 
         @csrf
-          {!! Form::model($brand, ['method' => 'PATCH','route' => ['brand.update', $brand->id]]) !!}
+          {!! Form::model($brand, ['method' => 'PATCH','route' => ['brands.update', $brand->id]]) !!}
 				<div class="row">
 					<div class="col-md-6">
                         <div class="form-group row">
@@ -60,7 +60,7 @@
                                 @enderror
                             </div>
                         </div>
-					{!! Form::open(array('route' => 'brand.store','method'=>'POST', 'enctype'=>'multipart/form-data')) !!}
+					{!! Form::open(array('route' => 'brands.store','method'=>'POST', 'enctype'=>'multipart/form-data')) !!}
                         <div class="form-group row">
                             
                             <label for="brand_name" class="col-md-4 col-form-label text-md-right">{{ __('Brand Logo') }}</label>

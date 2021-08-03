@@ -15,11 +15,11 @@
         <div class="row forrow">
           <h2 style="color: #fff; margin-top: 10px;">PRESS FLEET TOOL</h2>
         </div>
-        <div class="row forrow">
+<div class="row forrow">
           <form method="POST" action="{{ route('login') }}">
               @csrf
             <div class="container">
-              <input id="email" type="email"  placeholder="Username" class="username @error('email') is-invalid @enderror" value="{{ old('email') }}" name="email" required autocomplete="email" autofocus/><br>
+              <input id="email" type="email"  placeholder="Username" class="textbox @error('email') is-invalid @enderror" value="{{ old('email') }}" name="email" required autocomplete="email" autofocus/><br>
               @error('email')
                   <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -27,7 +27,7 @@
                   <br>
               @enderror
              
-              <input id="password" type="password" placeholder="Password" class="password @error('password') is-invalid @enderror" name="password" required autocomplete="current-password"><br>
+              <input id="password" type="password" placeholder="Password" class="textbox @error('password') is-invalid @enderror" name="password" required autocomplete="current-password"><br>
               @error('password')
                   <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
@@ -50,8 +50,8 @@
             </div>
           </form>
         </div>
-      </div>
-      <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"></div>
     </div>
-  </div>
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"></div>
+    </div>
+    </div>      
 @endsection

@@ -528,7 +528,7 @@ form.example::after {
 .navigation > li > ul li.active > a:hover,
 .navigation > li > ul li.active > a:focus {
   background-color: rgba(0, 0, 0, 0.2);
-  color: #fff;
+  color: #000;
 }
 .navigation .navigation-header {
   min-height: 30px;

@@ -31,7 +31,7 @@ class UserController extends Controller
         
         $data = User::orderBy('id','DESC')->paginate(5);
 		//var_dump($data); exit;
-        return view('users.index',compact('data'))
+        return view('users.index', compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
     
@@ -43,7 +43,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::pluck('name','name')->all();
-        return view('users.create',compact('roles'));
+        return view('users.create', compact('roles'));
     }
     
     /**

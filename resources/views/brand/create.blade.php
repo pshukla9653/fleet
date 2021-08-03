@@ -5,7 +5,7 @@
 <div class="row">		
   <div class="col-md-8" style="padding: 30px;">
   <a onclick="location.reload();" class="btn btn-primary"><i class="icon-reload-alt position-left"></i> Refresh @yield('heading')</a>
-  <a href="{{ route('brand.index') }}" class="btn btn-primary"><i class=" icon-list-unordered position-left"></i> Item List</a>
+  <a href="{{ route('brands.index') }}" class="btn btn-primary"><i class=" icon-list-unordered position-left"></i> Item List</a>
   </div>
   <div class="col-md-4" style="padding: 30px;">
   <form class="example" action="#">
@@ -41,7 +41,7 @@
           </ul>
         </div>
         @endif
-          {!! Form::open(array('route' => 'brand.store','method'=>'POST', 'enctype'=>'multipart/form-data')) !!}
+          {!! Form::open(array('route' => 'brands.store','method'=>'POST', 'enctype'=>'multipart/form-data')) !!}
           <div class="row">
 					<div class="col-md-6">
                         <div class="form-group row">

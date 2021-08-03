@@ -6,7 +6,7 @@
   <div class="col-md-8" style="padding: 30px;">
   <a onclick="location.reload();" class="btn btn-primary"><i class="icon-reload-alt position-left"></i> Refresh @yield('heading')</a>
   @can('brand-create')	
-  <a href="{{ route('brand.create') }}" class="btn btn-primary"><i class="icon-plus-circle2 position-left"></i> Add New Item</a>
+  <a href="{{ route('brands.create') }}" class="btn btn-primary"><i class="icon-plus-circle2 position-left"></i> Add New Item</a>
   @endcan
   </div>
   <div class="col-md-4" style="padding: 30px;">
@@ -57,12 +57,12 @@
 		</td>
           
         <td>
-            <a class="btn btn-info" href="{{ route('brand.show',$brands->id) }}">Show</a>
+            <a class="btn btn-info" href="{{ route('brands.show',$brands->id) }}">Show</a>
             @can('contact-edit')
-                <a class="btn btn-primary" href="{{ route('brand.edit',$brands->id) }}">Edit</a>
+                <a class="btn btn-primary" href="{{ route('brands.edit',$brands->id) }}">Edit</a>
             @endcan
             @can('contact-delete')
-                {!! Form::open(['method' => 'DELETE','route' => ['brand.destroy', $brands->id],'style'=>'display:inline']) !!}
+                {!! Form::open(['method' => 'DELETE','route' => ['brands.destroy', $brands->id],'style'=>'display:inline']) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                 {!! Form::close() !!}
             @endcan

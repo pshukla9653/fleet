@@ -15,7 +15,11 @@ class CreateBrandsTable extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
-			$table->foreignId('company_id')->index();
+			$table->unsignedBigInteger('company_id')->index();
+			$table->foreign('company_id')
+                ->references('id')
+                ->on('companies')
+                ->onDelete('cascade');
 			$table->string('brand_name')->nullable();
 			$table->string('file_name')->nullable();
             $table->timestamps();

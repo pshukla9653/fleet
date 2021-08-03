@@ -52,10 +52,7 @@
             <strong>Last Name:</strong>
             {{ $contact->last_name }}
         </div>
-         <div class="form-group">
-            <strong>Company Name:</strong>
-            {{ $contact->company_name }}
-        </div>
+         
          <div class="form-group">
             <strong>Job Title:</strong>
             {{ $contact->job_title }}

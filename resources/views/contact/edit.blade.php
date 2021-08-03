@@ -76,19 +76,7 @@
                                 @enderror
                             </div>
                         </div>
-						<div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Company') }}</label>
-
-                            <div class="col-md-6">
-                                {!! Form::text('company_name', null, array('placeholder' => 'Company Name','class' => 'form-control')) !!}
-
-                                @error('company_name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+						
                         <div class="form-group row">
                             <label for="jab_title" class="col-md-4 col-form-label text-md-right">{{ __('Job Title') }}</label>
 

@@ -44,7 +44,6 @@
   <tr>
      <th>No</th>
      <th>Name</th>
-     <th>Company Name</th>
      <th>Job Title</th>
      <th>E-Mail Address</th>
      <th>Phone Number</th>
@@ -55,7 +54,7 @@
     <tr>
         <td>{{ ++$i }}</td>
         <td>{{ $contact->first_name.' '.$contact->last_name }}</td>
-         <td>{{ $contact->company_name}}</td>
+       
           <td>{{ $contact->job_title}}</td>
            <td>{{ $contact->email}}</td>
             <td>{{ $contact->phone_number}}</td>

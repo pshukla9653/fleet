@@ -1,16 +1,48 @@
 @extends('layouts.theme')
 
+@section('heading','COMPANY')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+<div class="row">		
+    <div class="col-md-8" style="padding: 30px;">
+    <a onclick="location.reload();" class="btn btn-primary"><i class="icon-reload-alt position-left"></i> Refresh @yield('heading')</a>
+    <a href="{{ route('users.index') }}" class="btn btn-primary"><i class=" icon-list-unordered position-left"></i> Item List</a>
+    </div>
+    <div class="col-md-4" style="padding: 30px;">
+    <form class="example" action="#">
+      <input type="text" placeholder="Search.." name="search">
+      <button type="submit"><i class="fa fa-search"></i></button>
+      </form>		
+    </div>
+    
+    </div>	
+<!-- /page header --> 
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-                        <div class="row">
+<!-- Content area -->
+<div class="content"> 
+  
+  <!-- Main charts --> 
+  <!-- Quick stats boxes --> 
+  
+  <!-- /quick stats boxes --> 
+  <!-- /main charts -->
+  <div class="panel panel-flat">
+    <div class="panel-heading">
+      <h5 class="panel-title">@yield('heading')</h5>
+      <div class="heading-elements"> </div>
+    </div>
+    <div class="panel-body">
+      <div class="row"> @if (count($errors) > 0)
+        <div class="alert alert-danger"> <strong>Whoops!</strong> There were some problems with your input.<br>
+          <br>
+          <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+        @endif
+          {!! Form::open(array('route' => 'companies.store','method'=>'POST')) !!}
+          <div class="row">
 					<div class="col-md-6">
                         <div class="form-group row">
                             <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
@@ -39,7 +71,7 @@
                             </div>
                         </div>
 						<div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Company') }}</label>
+                            <label for="jab_title" class="col-md-4 col-form-label text-md-right">{{ __('Company Name') }}</label>
 
                             <div class="col-md-6">
                                 <input id="company_name" type="text" class="form-control @error('company_name') is-invalid @enderror" name="company_name" value="{{ old('company_name') }}" required autocomplete="company_name" >
@@ -52,10 +84,10 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="job_title" class="col-md-4 col-form-label text-md-right">{{ __('Job Title') }}</label>
+                            <label for="jab_title" class="col-md-4 col-form-label text-md-right">{{ __('Job Title') }}</label>
 
                             <div class="col-md-6">
-                                <input id="jab_title" type="text" class="form-control @error('job_title') is-invalid @enderror" name="job_title" value="{{ old('job_title') }}" required autocomplete="jab_title" >
+                                <input id="job_title" type="text" class="form-control @error('job_title') is-invalid @enderror" name="job_title" value="{{ old('job_title') }}" required autocomplete="job_title" >
 
                                 @error('job_title')
                                     <span class="invalid-feedback" role="alert">
@@ -78,7 +110,7 @@
                             </div>
                         </div>
 						 <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Phone Number') }}</label>
+                            <label for="phone_number" class="col-md-4 col-form-label text-md-right">{{ __('Phone Number') }}</label>
 
                             <div class="col-md-6">
                                 <input id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number" value="{{ old('phone_number') }}" required autocomplete="phone_number">
@@ -103,14 +135,18 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+
+                                
                             </div>
                         </div>
+                        
+
+                       
 					</div>
                     <div class="col-md-6">
                      <div class="form-group row">
@@ -126,6 +162,7 @@
                                 @enderror
                             </div>
                         </div>
+                        
 						<div class="form-group row">
                             <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('Town/City') }}</label>
 
@@ -170,17 +207,16 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('Submit') }}
                                 </button>
                             </div>
                         </div>
                     </div>
                         
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+          {!! Form::close() !!}
+      </div>
     </div>
+  </div>
 </div>
 @endsection

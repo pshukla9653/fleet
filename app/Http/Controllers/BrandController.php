@@ -29,7 +29,7 @@ class BrandController extends Controller
     public function index(Request $request)
     {
         //
-		$brand = brand::orderBy('id','DESC')->paginate(5);
+		$brand = Brand::orderBy('id','DESC')->paginate(5);
         return view('brand.index', compact('brand'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -67,7 +67,7 @@ class BrandController extends Controller
         if ($image = $request->file('image')) {
              $destinationPath = 'upload/';
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-           $image->move($destinationPath, $profileImage);
+            $image->move($destinationPath, $profileImage);
             $input['file_name'] = "$profileImage";
 			$input['company_id'] = Auth()->user()->company_id;
         }
@@ -75,7 +75,7 @@ class BrandController extends Controller
          Brand::create($input);
      
     
-        return redirect()->route('brand.index')
+        return redirect()->route('brands.index')
                         ->with('success','Brand created successfully');
 						
     
@@ -142,7 +142,7 @@ class BrandController extends Controller
           
         $brand->update($input);
     
-        return redirect()->route('brand.index')
+        return redirect()->route('brands.index')
                         ->with('success','Brand updated successfully');
     }
 
@@ -162,7 +162,7 @@ class BrandController extends Controller
 		}
 		Brand::find($id)->delete();
 		
-        return redirect()->route('brand.index')
+        return redirect()->route('brands.index')
                         ->with('success','Barnd deleted successfully');
     }
 	

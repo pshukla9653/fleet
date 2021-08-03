@@ -19,8 +19,14 @@ class UsersSeeder extends Seeder
     {
         //
 		
-		$user = User::create([
-            'company_id' => 1,
+		$company = Company::create([
+            'company_name' => 'Fleet',
+        	'job_title' => 'Company',
+			
+        ]);
+
+        $user = User::create([
+            'company_id' => $company['id'],
         	'first_name' => 'Company',
 			'last_name' => 'admin', 
         	'email' => 'user@fleet.com',

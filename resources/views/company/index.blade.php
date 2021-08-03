@@ -1,14 +1,13 @@
 @extends('layouts.theme')
 
-@section('heading','USERS')
+@section('heading','COMPANY')
 @section('content')
 
 <div class="row">		
   <div class="col-md-8" style="padding: 30px;">
   <a onclick="location.reload();" class="btn btn-primary"><i class="icon-reload-alt position-left"></i> Refresh @yield('heading')</a>
-  @can('user-create')	
-  <a href="{{ route('users.create') }}" class="btn btn-primary"><i class="icon-plus-circle2 position-left"></i> Add New Item</a>
-  @endcan
+  <a href="{{ route('companies.create') }}" class="btn btn-primary"><i class="icon-plus-circle2 position-left"></i> Add New Item</a>
+ 
   </div>
   <div class="col-md-4" style="padding: 30px;">
   <form class="example" action="#">
@@ -18,6 +17,7 @@
   </div>
   
   </div>
+  
 <!-- /page header --> 
 
 <!-- Content area -->
@@ -46,33 +46,23 @@
     <table class="table table-bordered">
  <tr>
    <th>No</th>
-   <th>Name</th>
-   <th>Email</th>
-   <th>Roles</th>
+   <th>Company Name</th>
+   <th>Job Title</th>
+   
+   <th>Address</th>
    <th width="280px">Action</th>
  </tr>
- @foreach ($data as $key => $user)
+ @foreach ($data as $key => $company)
   <tr>
     <td>{{ ++$i }}</td>
-    <td>{{ $user->first_name.' '.$user->last_name }}</td>
-    <td>{{ $user->email }}</td>
+    <td>{{ $company->company_name }}</td>
+    <td>{{ $company->job_title }}</td>
+    <td>{{ $company->address }}</td>
     <td>
-      @if(!empty($user->getRoleNames()))
-        @foreach($user->getRoleNames() as $v)
-           <label class="badge badge-success">{{ $v }}</label>
-        @endforeach
-      @endif
+     
     </td>
     <td>
-       <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
-       @can('user-edit')
-       <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
-       @endcan
-       @can('user-delete')
-        {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-        {!! Form::close() !!}
-        @endcan
+      
     </td>
   </tr>
  @endforeach

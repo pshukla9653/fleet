@@ -15,87 +15,7 @@
 
   <title>{{ config('app.name', 'Laravel') }}</title>
   <style type="text/css">
-  body{
-    background-color: cornflowerblue;
-    height: auto;
-  }
-  .forbg{
-    background-color: cornflowerblue;
-    height: auto;
-  }
-  .forrow{
-    justify-content: center;
-  }
-  .forcolumn{
-    border-radius: 40px;
-    /*background-color: rgb(22 0 49 / 82%);*/
-    margin-top: 50px;
-    padding-bottom: 30px;
-    background: linear-gradient( 
-1deg
-, #000000b3, transparent);
-  }
-  .username{
-   
-    width: 250px;
-    border-radius: 18px;
-    background-color: #add8e6a6;
-    border: none;
-    font-style: italic;
-    margin: 10px;
-    padding:10px;
-  }
-  .password{
-    width: 250px;
-    border-radius: 18px;
-    background-color: #add8e6a6;
-    border: none;
-    margin-top: 10px;
-    font-style: italic;
-    margin: 10px;
-    padding:10px;
-  }
-  .rememberme{
-    margin: 20px;
-  }
-  .button2 {
-    background-color: rgb(78 140 255 / 1);
-    border-radius: 15px;
-    width: 250px;
-    border: none;
-    margin-left:8px;
-   
-   
-  }
-  .login{
-    white-space: nowrap;
-    text-align: center;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 22px;
-    color: rgba(255,255,255,1);
-    margin-top: 10px;
-  }
-  .psw{
-    color: #fff;
-    margin-left: 72px;
-  }
-  ::placeholder {
-    color: #fff;
-    opacity: 1;
-  }
-
-  .traffic-jam {
-  margin: auto;
-  color: white;
-  height: 80px;
-  width: 80px;
-  display: flex;
-  fill: rgba(255, 255, 255, 1);
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-}
+  
 </style>
 </head>
 <body>
@@ -104,7 +24,7 @@
 <div id="stars3"></div>
 
 
-@yield('content')
+        @yield('content')
 
 <!-- Optional JavaScript; choose one of the two! -->
 
