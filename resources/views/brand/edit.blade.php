@@ -1,6 +1,6 @@
 @extends('layouts.theme')
 
-@section('heading','BRANDS')
+@section('heading','Brands')
 @section('content')
 <div class="row">		
   <div class="col-md-8" style="padding: 30px;">
@@ -65,7 +65,7 @@
                             
                             <label for="brand_name" class="col-md-4 col-form-label text-md-right">{{ __('Brand Logo') }}</label>
                             <div class="col-md-6">
-                                <input id="file_name" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" required autocomplete="image" >
+                                <input id="file_name" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" autocomplete="image" >
 
                                 @error('image')
                                     <span class="invalid-feedback" role="alert">

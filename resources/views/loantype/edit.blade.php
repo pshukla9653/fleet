@@ -1,11 +1,11 @@
 @extends('layouts.theme')
 
-@section('heading','Regions')
+@section('heading','Loan Types')
 @section('content')
 <div class="row">		
   <div class="col-md-8" style="padding: 30px;">
   <a onclick="location.reload();" class="btn btn-primary"><i class="icon-reload-alt position-left"></i> Refresh @yield('heading')</a>
-  <a href="{{ route('regions.index') }}" class="btn btn-primary"><i class=" icon-list-unordered position-left"></i> Item List</a>
+  <a href="{{ route('loantypes.index') }}" class="btn btn-primary"><i class=" icon-list-unordered position-left"></i> Item List</a>
   </div>
   <div class="col-md-4" style="padding: 30px;">
   <form class="example" action="#">
@@ -47,12 +47,12 @@
 
        
          
-          {!! Form::model($region, ['method' => 'PATCH','route' => ['regions.update', $region->id]]) !!}
+          {!! Form::model($loantype, ['method' => 'PATCH','route' => ['loantypes.update', $loantype->id]]) !!}
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
-            <strong>Region Name:</strong>
-            {!! Form::text('region_name', null, array('placeholder' => 'Region Name','class' => 'form-control')) !!}
+            <strong>Loan Type:</strong>
+            {!! Form::text('loan_type', null, array('placeholder' => 'Loan Type','class' => 'form-control')) !!}
         </div>
     </div>
   

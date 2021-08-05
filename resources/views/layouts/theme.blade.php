@@ -8,7 +8,9 @@
 	<title>{{ config('app.name', 'Laravel') }}</title>
 
 	<!-- Global stylesheets -->
-	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+	
+	
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
 	<link href="{{ asset('assets/css/icons/icomoon/styles.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('assets/css/icons/fontawesome/styles.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
@@ -22,6 +24,7 @@
 	<script type="text/javascript" src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/core/libraries/bootstrap.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/plugins/loaders/blockui.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/plugins/forms/selects/select2.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/plugins/tables/datatables/datatables.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/plugins/tables/datatables/extensions/responsive.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/pages/datatables_responsive.js') }}"></script>
@@ -36,12 +39,25 @@
 	<script type="text/javascript" src="{{ asset('assets/js/plugins/forms/selects/bootstrap_multiselect.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/plugins/ui/moment/moment.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/plugins/pickers/daterangepicker.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/pages/form_layouts.js') }}"></script>
 
 	<script type="text/javascript" src="{{ asset('assets/js/core/app.js') }}"></script>
 
 
 	<script type="text/javascript" src="{{ asset('assets/js/plugins/ui/ripple.min.js') }}"></script>
 	<!-- /theme JS files -->
+
+	<style>
+		body{
+			font-family: 'Montserrat', sans-serif !important;
+			font-weight: 400 !important;
+		}
+		.btn{
+
+			text-transform: initial !important;
+		}
+		
+	</style>	
 
 </head>
 
@@ -103,7 +119,7 @@
 									<a href="#"><i class="icon-car"></i> <span>CONFIGURE</span></a>
 									<ul>
 										@can('role-list')
-										<li style="margin-left: 12px;" class="{{ (request()->segment(1) == 'roles') ? 'active' : '' }}"><a href="{{ route('roles.index') }}">Roles</a></li>
+										<li style="margin-left:12px;" class="{{ (request()->segment(1) == 'roles') ? 'active' : '' }}"><a href="{{ route('roles.index') }}">Roles</a></li>
 										@endcan
 										@can('vehicle-list')
 										<li class="{{ (request()->segment(1) == 'vehicle') ? 'active' : '' }}"><a href="#">Vehicles</a></li>
@@ -117,8 +133,8 @@
 										@can('brand-list')
 										<li class="{{ (request()->segment(1) == 'brands') ? 'active' : '' }}"><a href="{{ route('brands.index') }}">Brands</a></li>
 										@endcan
-										@can('loan_type-list')
-										<li><a href="#">Loan Type</a></li>
+										@can('loantype-list')
+										<li class="{{ (request()->segment(1) == 'loantype') ? 'active' : '' }}"><a href="{{ route('loantypes.index') }}">Loan Type</a></li>
 										@endcan
 										@can('email_template-list')
 										<li><a href="#">Email Templates</a></li>
@@ -149,7 +165,7 @@
 									<a href="#"><i class="icon-file-text2"></i> <span>REPORTS</span></a>
 									<ul>
 										@can('report-by-vehicles')
-										<li><a href="#">By Vehicles</a></li>
+										<li style="margin-left:12px;"><a href="#">By Vehicles</a></li>
 										@endcan
 										@can('report-by-company')
 										<li><a href="#">By Company</a></li>
@@ -180,7 +196,7 @@
 
 	<div class="navbar-collapse collapse" id="navbar-mobile">
 		
-		<div class="nav navbar-nav"><h2 style="margin-top: 10px;">@yield('heading')</h2></div>
+		<div class="nav navbar-nav"><h2 style="margin-top: 10px; text-transform: uppercase;">@yield('heading')</h2></div>
 		<ul class="nav navbar-nav navbar-right">
 				
 

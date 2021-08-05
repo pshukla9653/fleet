@@ -1,6 +1,6 @@
 @extends('layouts.theme')
 
-@section('heading','REGIONS')
+@section('heading','Regions')
 @section('content')
 <div class="row">		
   <div class="col-md-8" style="padding: 30px;">

@@ -1,11 +1,11 @@
 @extends('layouts.theme')
 
-@section('heading','Departments')
+@section('heading','Loan Types')
 @section('content')
 <div class="row">		
   <div class="col-md-8" style="padding: 30px;">
   <a onclick="location.reload();" class="btn btn-primary"><i class="icon-reload-alt position-left"></i> Refresh @yield('heading')</a>
-  <a href="{{ route('departments.index') }}" class="btn btn-primary"><i class=" icon-list-unordered position-left"></i> Item List</a>
+  <a href="{{ route('loantypes.index') }}" class="btn btn-primary"><i class=" icon-list-unordered position-left"></i> Item List</a>
   </div>
   <div class="col-md-4" style="padding: 30px;">
   <form class="example" action="#">
@@ -14,7 +14,7 @@
     </form>		
   </div>
   
-  </div>
+  </div>	
 <!-- /page header --> 
 
 <!-- Content area -->
@@ -32,8 +32,7 @@
       
     </div>
     <div class="panel-body">
-      <div class="row"> 
-      @if (count($errors) > 0)
+      <div class="row"> @if (count($errors) > 0)
         <div class="alert alert-danger"> <strong>Whoops!</strong> There were some problems with your input.<br>
           <br>
           <ul>
@@ -42,24 +41,22 @@
             @endforeach
           </ul>
         </div>
-      @endif
+        @endif
        
+          {!! Form::open(array('route' => 'loantypes.store','method'=>'POST')) !!}
           <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Department Name:</strong>
-            {{ $department->department_name }}
-        </div>
-    </div>
-   
-</div>
-
+            <div class="col-xs-12 col-sm-12 col-md-12">
+              <div class="form-group"> <strong>Loan Type:</strong> {!! Form::text('loan_type', null, array('placeholder' => 'Loan Type','class' => 'form-control')) !!} </div>
+            </div>
+            
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+          {!! Form::close() !!}
+      
       </div>
     </div>
   </div>
 </div>
-
-
-
-
 @endsection

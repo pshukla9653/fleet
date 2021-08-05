@@ -10,6 +10,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\LoanTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,5 +37,6 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::resource('brands', BrandController::class);
 	Route::resource('regions', RegionController::class);
 	Route::resource('departments', DepartmentController::class);
+    Route::resource('loantypes', LoanTypeController::class);
 	
 });

@@ -1,13 +1,13 @@
 @extends('layouts.theme')
 
-@section('heading','Regions')
+@section('heading','Loan Types')
 @section('content')
 
 <div class="row">		
 <div class="col-md-8" style="padding: 30px;">
 <a onclick="location.reload();" class="btn btn-primary"><i class="icon-reload-alt position-left"></i> Refresh @yield('heading')</a>
-@can('region-create')	
-<a href="{{ route('regions.create') }}" class="btn btn-primary"><i class="icon-plus-circle2 position-left"></i> Add New Item</a>
+@can('loantype-create')	
+<a href="{{ route('loantypes.create') }}" class="btn btn-primary"><i class="icon-plus-circle2 position-left"></i> Add New Item</a>
 @endcan
 </div>
 <div class="col-md-4" style="padding: 30px;">
@@ -45,20 +45,20 @@
           <table class="table table-bordered">
   <tr>
      <th>No</th>
-     <th>Region Name</th>
+     <th>Loan Type</th>
      <th width="280px">Action</th>
   </tr>
-    @foreach ($regions as $key => $region)
+    @foreach ($loantypes as $key => $loantype)
     <tr>
         <td>{{ ++$i }}</td>
-        <td>{{ $region->region_name }}</td>
+        <td>{{ $loantype->loan_type }}</td>
         <td>
-            <a class="btn btn-info" href="{{ route('regions.show',$region->id) }}">Show</a>
-            @can('region-edit')
-                <a class="btn btn-primary" href="{{ route('regions.edit',$region->id) }}">Edit</a>
+            <a class="btn btn-info" href="{{ route('loantypes.show',$loantype->id) }}">Show</a>
+            @can('loantype-edit')
+                <a class="btn btn-primary" href="{{ route('loantypes.edit',$loantype->id) }}">Edit</a>
             @endcan
-            @can('region-delete')
-                {!! Form::open(['method' => 'DELETE','route' => ['regions.destroy', $region->id],'style'=>'display:inline']) !!}
+            @can('loantype-delete')
+                {!! Form::open(['method' => 'DELETE','route' => ['loantypes.destroy', $loantype->id],'style'=>'display:inline']) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                 {!! Form::close() !!}
             @endcan
@@ -68,7 +68,7 @@
 </table>
 
 
-{!! $regions->render() !!}
+{!! $loantypes->render() !!}
       
       </div>
     </div>

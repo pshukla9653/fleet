@@ -1,6 +1,6 @@
 @extends('layouts.theme')
 
-@section('heading','COMPANY')
+@section('heading','Companies')
 @section('content')
 
 <div class="row">		
@@ -41,14 +41,16 @@
   <p>{{ $message }}</p>
 </div>
 @endif
-      
+ </div>
+
+  <!-- /basic layout -->
+
           
     <table class="table table-bordered">
  <tr>
    <th>No</th>
    <th>Company Name</th>
    <th>Job Title</th>
-   
    <th>Address</th>
    <th width="280px">Action</th>
  </tr>

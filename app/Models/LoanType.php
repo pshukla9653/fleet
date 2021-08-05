@@ -6,18 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Scopes\CompanyScope;
 
-
-class Department extends Model
+class LoanType extends Model
 {
     use HasFactory;
-	
-	protected $fillable = [
+
+    protected $fillable = [
 		'company_id',
-        'department_name',
+        'loan_type',
     ];
 
+    // Add Company Globle Scope
     protected static function booted()
     {
         static::addGlobalScope(new CompanyScope);
     }
+
+
 }

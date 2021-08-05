@@ -40,7 +40,11 @@ class PermissionTableSeeder extends Seeder
 		   'department-list',
 		   'department-create',
 		   'department-edit',
-		   'department-delete'
+		   'department-delete',
+           'loantype-list',
+           'loantype-create',
+           'loantype-edit',
+           'loantype-delete',
         ];
      
         foreach ($permissions as $permission) {
