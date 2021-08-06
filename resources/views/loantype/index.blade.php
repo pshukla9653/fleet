@@ -43,25 +43,25 @@
 
         
           <table class="table table-bordered">
-  <tr>
-     <th>No</th>
-     <th>Loan Type</th>
-     <th width="280px">Action</th>
-  </tr>
+  
     @foreach ($loantypes as $key => $loantype)
     <tr>
-        <td>{{ ++$i }}</td>
-        <td>{{ $loantype->loan_type }}</td>
-        <td>
-            <a class="btn btn-info" href="{{ route('loantypes.show',$loantype->id) }}">Show</a>
-            @can('loantype-edit')
-                <a class="btn btn-primary" href="{{ route('loantypes.edit',$loantype->id) }}">Edit</a>
-            @endcan
-            @can('loantype-delete')
-                {!! Form::open(['method' => 'DELETE','route' => ['loantypes.destroy', $loantype->id],'style'=>'display:inline']) !!}
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+        <td style="width: 5%">
+      @can('loantype-edit')
+          <a href="{{ route('loantypes.edit',$loantype->id) }}"><i class="icon-pencil7"></i></a>
+      @endcan
+        </td>
+        <td style="width: 90%">{{ $loantype->loan_type }}</td>
+        <td style="width: 5%">
+          @can('loantype-delete')
+            <a onclick="deleterow();"><i class="icon-trash"></i></a>
+          @endcan  
+           
+                {!! Form::open(['method' => 'DELETE','route' => ['loantypes.destroy', $loantype->id],'style'=>'display:inline','id'=>"delete-form"]) !!}
+                    
                 {!! Form::close() !!}
-            @endcan
+                
+           
         </td>
     </tr>
     @endforeach
@@ -74,5 +74,13 @@
     </div>
   </div>
 </div>
-
+<script>
+  function deleterow(){
+    var x = confirm("Are you sure you want to delete?");
+  if (x)
+  $('#delete-form').submit()
+  else
+    return false;
+  }
+</script>
 @endsection
