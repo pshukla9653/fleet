@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\LoanType;
 use Illuminate\Http\Request;
+use Redirect,Response;
 
 class LoanTypeController extends Controller
 {
@@ -72,12 +73,7 @@ class LoanTypeController extends Controller
      * @param  \App\Models\LoanType  $loanType
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-		$loanType = LoanType::find($id);
-        return view('loantype.show', compact('loanType'));
-    }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -90,7 +86,7 @@ class LoanTypeController extends Controller
         //
 		$loantype = LoanType::find($id);
     	//var_dump($region); exit;
-        return view('loantype.edit', compact('loantype'));
+        return Response()->json($loantype);
     }
 
     /**
@@ -100,7 +96,7 @@ class LoanTypeController extends Controller
      * @param  \App\Models\LoanType  $loanType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
 		$this->validate($request, [
@@ -109,7 +105,7 @@ class LoanTypeController extends Controller
         ]);
     
         $input = $request->all();
-        
+       $id = $input['id'];
     
         $loantype = LoanType::find($id);
         $loantype->update($input);

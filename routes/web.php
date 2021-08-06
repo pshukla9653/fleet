@@ -38,5 +38,6 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::resource('regions', RegionController::class);
 	Route::resource('departments', DepartmentController::class);
     Route::resource('loantypes', LoanTypeController::class);
+    
 	
 });
