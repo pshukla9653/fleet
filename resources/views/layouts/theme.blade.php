@@ -28,7 +28,7 @@
 	<script type="text/javascript" src="{{ asset('assets/js/plugins/tables/datatables/datatables.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/plugins/tables/datatables/extensions/responsive.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/pages/datatables_responsive.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('assets/js/pages/form_bootstrap_select.js') }}"></script>
+
 	<!-- /core JS files -->
 
 	<!-- Theme JS files -->
@@ -134,7 +134,7 @@
 										<li class="{{ (request()->segment(1) == 'brands') ? 'active' : '' }}"><a href="{{ route('brands.index') }}">Brands</a></li>
 										@endcan
 										@can('loantype-list')
-										<li class="{{ (request()->segment(1) == 'loantype') ? 'active' : '' }}"><a href="{{ route('loantypes.index') }}">Loan Type</a></li>
+										<li class="{{ (request()->segment(1) == 'loantypes') ? 'active' : '' }}"><a href="{{ route('loantypes.index') }}">Loan Type</a></li>
 										@endcan
 										@can('email_template-list')
 										<li><a href="#">Email Templates</a></li>

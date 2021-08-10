@@ -52,15 +52,21 @@ class DepartmentController extends Controller
 		$this->validate($request, [
             'department_name' => 'required',
         ]);
-    
-        $input = $request->all();
-		$input['company_id'] = Auth()->user()->company_id;
-    
-        $department = Department::create($input);
         
-    
-        return redirect()->route('departments.index')
-                        ->with('success','Department created successfully');
+        if($request->id){
+            $input = $request->all();
+            $department = Department::find($request->id);
+            $department->update($input);
+        }
+        else{
+        $department   =   Department::Create(
+            [
+                'company_id' => Auth()->user()->company_id,
+                'department_name' => $request->department_name, 
+                
+            ]);
+        }
+            return response()->json(['success' => true]);
     
         
     }
@@ -71,12 +77,7 @@ class DepartmentController extends Controller
      * @param  \App\Models\Department  $departments
      * @return \Illuminate\Http\Response
      */
-   public function show($id)
-    {
-        //
-		$department = Department::find($id);
-        return view('department.show', compact('department'));
-    }
+   
 
     /**
      * Show the form for editing the specified resource.
@@ -84,12 +85,13 @@ class DepartmentController extends Controller
      * @param  \App\Models\Department  $departments
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
         //
-		$department = Department::find($id);
+      
+		$department = Department::find($request->id);
     	//var_dump($contact); exit;
-        return view('department.edit', compact('department'));
+        return response()->json($department);
     }
 
     /**
@@ -99,23 +101,7 @@ class DepartmentController extends Controller
      * @param  \App\Models\Department  $departments
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-		$this->validate($request, [
-            'department_name' => 'required',
-           
-        ]);
     
-        $input = $request->all();
-        
-    
-        $user = Department::find($id);
-        $user->update($input);
-    
-        return redirect()->route('departments.index')
-                        ->with('success','Department updated successfully');
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -123,11 +109,11 @@ class DepartmentController extends Controller
      * @param  \App\Models\Department  $departments
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
-		Department::find($id)->delete();
-        return redirect()->route('departments.index')
-                        ->with('success','Department deleted successfully');
+       
+		Department::find($request->id)->delete();
+        return response()->json(['success' => true]);
     }
 }

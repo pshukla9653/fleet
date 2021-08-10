@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 
 use DB;
 use Hash;
@@ -29,9 +30,10 @@ class UserController extends Controller
     public function index(Request $request)
     {
         
+        $roles = Role::pluck('name','name')->all();
         $data = User::orderBy('id','DESC')->paginate(5);
 		//var_dump($data); exit;
-        return view('users.index', compact('data'))
+        return view('users.index', compact('data','roles'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
     
@@ -62,13 +64,24 @@ class UserController extends Controller
         ]);
     
         $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
-    	$input['company_id'] = Auth()->user()->company_id;
-        $user = User::create($input);
-        $user->assignRole($request->input('roles'));
-    
-        return redirect()->route('users.index')
-                        ->with('success','User created successfully');
+        if($request->id){
+            $user = User::find($request->id);
+
+            if($input['password']){
+                $input['password'] = Hash::make($input['password']);
+            }
+
+            $user->update($input);
+        
+        }
+        else
+        {
+            $input['password'] = Hash::make($input['password']);
+    	    $input['company_id'] = Auth()->user()->company_id;
+            $user = User::create($input);
+            $user->assignRole($request->input('roles'));
+        }
+        return response()->json(['success' => true]);
     }
     
     /**

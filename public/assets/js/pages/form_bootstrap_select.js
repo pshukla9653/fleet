@@ -11,21 +11,7 @@
 
 $(function() {
 
-    // Override defaults
-    $.fn.selectpicker.defaults = {
-        iconBase: '',
-        tickIcon: 'icon-checkmark3'
-    }
-
-
-
-    // Basic setup
-    // ------------------------------
-
-    // Basic select
-    $('.bootstrap-select').selectpicker();
-
-
+ 
     // Dynamic refresh
     $('.rm-alaska').click(function() {
         $('.refresh-example').find('[value=AK]').remove();

@@ -28,17 +28,7 @@ class RegionController extends Controller
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-		$regions = Region::pluck('region_name','region_name')->all();
-        return view('region.create', compact('regions'));
-    }
+   
 
     /**
      * Store a newly created resource in storage.
@@ -53,69 +43,43 @@ class RegionController extends Controller
             'region_name' => 'required',
         ]);
     
-        $input = $request->all();
-		$input['company_id'] = Auth()->user()->company_id;
-    
-        $region = Region::create($input);
-        
-    
-        return redirect()->route('regions.index')
-                        ->with('success','Region created successfully');
+        if($request->id){
+            $input = $request->all();
+            $regions = Region::find($request->id);
+            $regions->update($input);
+        }
+        else{
+        $regions   =   Region::Create(
+            [
+                'company_id' => Auth()->user()->company_id,
+                'region_name' => $request->region_name, 
+                
+            ]);
+        }
+            return response()->json(['success' => true]);
     
         
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Region  $regions
-     * @return \Illuminate\Http\Response
-     */
-   public function show($id)
-    {
-        //
-		$region = Region::find($id);
-        return view('region.show', compact('region'));
-    }
-
+   
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Regionss  $regions
+     * @param  \App\Models\Region  $departments
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
         //
-		$region = Region::find($id);
-    	//var_dump($region); exit;
-        return view('region.edit', compact('region'));
+      
+		$Region = Region::find($request->id);
+    	//var_dump($contact); exit;
+        return response()->json($Region);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Region  $regions
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-		$this->validate($request, [
-            'region_name' => 'required',
-           
-        ]);
     
-        $input = $request->all();
-        
-    
-        $user = Region::find($id);
-        $user->update($input);
-    
-        return redirect()->route('regions.index')
-                        ->with('success','Region updated successfully');
-    }
+
+   
 
     /**
      * Remove the specified resource from storage.
@@ -123,11 +87,10 @@ class RegionController extends Controller
      * @param  \App\Models\Region  $regions
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
-		Region::find($id)->delete();
-        return redirect()->route('regions.index')
-                        ->with('success','Region deleted successfully');
+		Region::find($request->id)->delete();
+        return response()->json(['success' => true]);
     }
 }

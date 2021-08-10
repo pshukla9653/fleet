@@ -35,18 +35,7 @@ class ContactController extends Controller
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-		
-        $contacts = Role::pluck('name','name')->all();
-        return view('contact.create', compact('contacts'));
-    }
+   
 
     /**
      * Store a newly created resource in storage.
@@ -63,29 +52,23 @@ class ContactController extends Controller
         ]);
     
         $input = $request->all();
-		$input['company_id'] = Auth()->user()->company_id;
-    
-        $contact = Contact::create($input);
+		
+        if($request->id){
+            $regions = Contact::find($request->id);
+            $regions->update($input);
+        }
+        else{
+            $input['company_id'] = Auth()->user()->company_id;
+            $contact = Contact::create($input);
+        }
         
-    
-        return redirect()->route('contacts.index')
-                        ->with('success','Cantact created successfully');
+        
+        return response()->json(['success' => true]);
     
         
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-		$contact = Contact::find($id);
-        return view('contact.show', compact('contact'));
-    }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -93,38 +76,15 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
         //
-		$contact = Contact::find($id);
+		$contact = Contact::find($request->id);
     	//var_dump($contact); exit;
-        return view('contact.edit', compact('contact'));
+        return response()->json($contact);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-		$this->validate($request, [
-            'first_name' => 'required',
-            'email' => 'required|email',
-        ]);
     
-        $input = $request->all();
-        
-    
-        $user = Contact::find($id);
-        $user->update($input);
-    
-        return redirect()->route('contacts.index')
-                        ->with('success','Contact updated successfully');
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -132,11 +92,10 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
-		Contact::find($id)->delete();
-        return redirect()->route('contact.index')
-                        ->with('success','Contact deleted successfully');
+		Contact::find($request->id)->delete();
+        return response()->json(['success' => true]);
     }
 }

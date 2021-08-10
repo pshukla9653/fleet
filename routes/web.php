@@ -33,11 +33,21 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('companies', CompanyController::class);
     Route::resource('users', UserController::class);
+    Route::post('edit-user', [UserController::class, 'edit']);
+    Route::post('delete-user', [UserController::class, 'destroy']);
     Route::resource('contacts', ContactController::class);
+    Route::post('edit-contact', [ContactController::class, 'edit']);
+    Route::post('delete-contact', [ContactController::class, 'destroy']);
 	Route::resource('brands', BrandController::class);
 	Route::resource('regions', RegionController::class);
+    Route::post('edit-region', [RegionController::class, 'edit']);
+    Route::post('delete-region', [RegionController::class, 'destroy']);
 	Route::resource('departments', DepartmentController::class);
+    Route::post('edit-department', [DepartmentController::class, 'edit']);
+    Route::post('delete-department', [DepartmentController::class, 'destroy']);
     Route::resource('loantypes', LoanTypeController::class);
+    Route::post('edit-loantype', [LoanTypeController::class, 'edit']);
+    Route::post('delete-loantype', [LoanTypeController::class, 'destroy']);
     
 	
 });

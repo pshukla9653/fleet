@@ -30,18 +30,7 @@ class LoanTypeController extends Controller
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-		$loantypes = LoanType::pluck('loan_type','loan_type')->all();
-        return view('loantype.create', compact('loantypes'));
-    }
-
+  
     /**
      * Store a newly created resource in storage.
      *
@@ -55,64 +44,39 @@ class LoanTypeController extends Controller
             'loan_type' => 'required',
         ]);
     
-        $input = $request->all();
-		$input['company_id'] = Auth()->user()->company_id;
-    
-        $loantype = LoanType::create($input);
-        
-    
-        return redirect()->route('loantypes.index')
-                        ->with('success','Loan Type created successfully');
+        if($request->id){
+            $input = $request->all();
+            $loantype = LoanType::find($request->id);
+            $loantype->update($input);
+        }
+        else{
+        $loantype   =   LoanType::Create(
+            [
+                'company_id' => Auth()->user()->company_id,
+                'loan_type' => $request->loan_type, 
+                
+            ]);
+        }
+            return response()->json(['success' => true]);
     
         
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\LoanType  $loanType
-     * @return \Illuminate\Http\Response
-     */
-    
-
-    /**
+   /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\LoanType  $loanType
+     * @param  \App\Models\loanType  $loanType
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
         //
-		$loantype = LoanType::find($id);
-    	//var_dump($region); exit;
-        return Response()->json($loantype);
+      
+		$loanType = LoanType::find($request->id);
+    	//var_dump($contact); exit;
+        return response()->json($loanType);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\LoanType  $loanType
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
-        //
-		$this->validate($request, [
-            'loan_type' => 'required',
-           
-        ]);
-    
-        $input = $request->all();
-       $id = $input['id'];
-    
-        $loantype = LoanType::find($id);
-        $loantype->update($input);
-    
-        return redirect()->route('loantypes.index')
-                        ->with('success','Loan Type updated successfully');
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -120,11 +84,10 @@ class LoanTypeController extends Controller
      * @param  \App\Models\LoanType  $loanType
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
-		LoanType::find($id)->delete();
-        return redirect()->route('loantypes.index')
-                        ->with('success','Loan Type deleted successfully');
+		LoanType::find($request->id)->delete();
+        return response()->json(['success' => true]);
     }
 }
