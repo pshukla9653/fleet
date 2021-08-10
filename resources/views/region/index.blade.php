@@ -51,7 +51,7 @@
         <a onclick="edititem({{ $region->id }})"><i class="icon-pencil7"></i></a>
            
         @endcan
-          </td>
+      </td>
         
         <td style="width: 90%">{{ $region->region_name }}</td>
         <td style="width: 5%">

@@ -6957,3 +6957,27 @@ h6.panel-title,
 .popover-content {
   padding: 15px;
 }
+.traffic-jam {
+  margin: auto;
+  color: white;
+  height: 80px;
+  width: 80px;
+  display: flex;
+  fill: rgba(255, 255, 255, 1);
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.bg-login-f {
+  background-image: url('bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  /*border-color: #37474F;*/
+  /*color: #fff;*/
+}
+.login-form {
+  /*width: 393px;*/
+  border-radius: 34px;
+  background: linear-gradient(#243374, transparent);
+}

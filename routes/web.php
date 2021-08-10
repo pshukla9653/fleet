@@ -39,6 +39,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('edit-contact', [ContactController::class, 'edit']);
     Route::post('delete-contact', [ContactController::class, 'destroy']);
 	Route::resource('brands', BrandController::class);
+    Route::post('edit-brand', [BrandController::class, 'edit']);
+    Route::post('delete-brand', [BrandController::class, 'destroy']);
 	Route::resource('regions', RegionController::class);
     Route::post('edit-region', [RegionController::class, 'edit']);
     Route::post('delete-region', [RegionController::class, 'destroy']);

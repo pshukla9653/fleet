@@ -1,37 +1,52 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+	<title>{{ config('app.name', 'Laravel') }}</title>
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css')}}">
+	<!-- Global stylesheets -->
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+	<link href="{{ asset('assets/css/icons/icomoon/styles.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('assets/css/core.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('assets/css/components.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('assets/css/colors.css') }}" rel="stylesheet" type="text/css">
+	<!-- /global stylesheets -->
 
- 
 
-  <title>{{ config('app.name', 'Laravel') }}</title>
-  <style type="text/css">
-  
-</style>
+	<!-- /theme JS files -->
+
 </head>
-<body>
-<div id="stars"></div>
-<div id="stars2"></div>
-<div id="stars3"></div>
 
+<body class="login-container bg-slate-800 bg-login-f">
 
-        @yield('content')
+	<!-- Page container -->
+	<div class="page-container">
 
-<!-- Optional JavaScript; choose one of the two! -->
+		<!-- Page content -->
+		<div class="page-content">
 
-<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+			<!-- Main content -->
+			<div class="content-wrapper">
 
+				<!-- Content area -->
+				<div class="content">
+
+@yield('content')
+</div>
+<!-- /content area -->
+
+</div>
+<!-- /main content -->
+
+</div>
+<!-- /page content -->
+
+</div>
+<!-- /page container -->
 
 </body>
 </html>

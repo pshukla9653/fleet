@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use DB;
 use App\Models\Brand;
+use Illuminate\Support\Facades\Storage;
 
 class BrandController extends Controller
 {
@@ -152,18 +153,17 @@ class BrandController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
-		$brand = Brand::Find($id);
+		$brand = Brand::Find($request->id);
 		$file = public_path('upload/'. $brand['file_name']);
 		if (file_exists($file)) {
   			@unlink($file);
 		}
-		Brand::find($id)->delete();
+		Brand::find($request->id)->delete();
 		
-        return redirect()->route('brands.index')
-                        ->with('success','Barnd deleted successfully');
+        return response()->json(['success' => true]);
     }
 	
 }

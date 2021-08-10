@@ -58,12 +58,13 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'first_name' => 'required',
-            'email' => 'required|email|unique:users,email',
+            //'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
             'roles' => 'required'
         ]);
     
         $input = $request->all();
+
         if($request->id){
             $user = User::find($request->id);
 
@@ -102,13 +103,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        $user = User::find($id);
+        //echo "hi";exit;
+        $user = User::find($request->id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
-    
-        return view('users.edit',compact('user','roles','userRole'));
+        $data = ['user' => $user,'roles' => $roles,'userRole' => $userRole];
+        return response()->json($data);
+        //return view('users.edit',compact('user','roles','userRole'));
     }
     
     /**
@@ -150,10 +153,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        User::find($id)->delete();
-        return redirect()->route('users.index')
-                        ->with('success','User deleted successfully');
+        User::find($request->id)->delete();
+        return response()->json(['success' => true]);
     }
 }
