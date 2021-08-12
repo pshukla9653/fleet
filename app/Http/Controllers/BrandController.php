@@ -57,6 +57,26 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->id){
+            $input = $request->all();
+            $brand = Brand::find($request->id); 
+        if ($image = $request->file('image')) {
+            $destinationPath = 'upload/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['file_name'] = "$profileImage";
+			
+			$file = public_path('upload/'. $brand['file_name']);
+			if (file_exists($file)) {
+  				@unlink($file);
+				}
+        }else{
+            unset($input['image']);
+        }
+          
+        $brand->update($input);
+        }
+        else{
         //
 		$this->validate($request, [
             'brand_name' => 'required',
@@ -75,7 +95,7 @@ class BrandController extends Controller
     
          Brand::create($input);
      
-    
+        }
         return redirect()->route('brands.index')
                         ->with('success','Brand created successfully');
 						
@@ -83,29 +103,17 @@ class BrandController extends Controller
         
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-		$brand = Brand::find($id);
-        return view('brand.show', compact('brand'));
-    }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
         //
-		$brand  = Brand::find($id);
+		$brand  = Brand::find($request->id);
     	//var_dump($brand); exit;
         return response()->json($brand);
     }
@@ -140,7 +148,7 @@ class BrandController extends Controller
         }else{
             unset($input['image']);
         }
-          
+        $brand = Brand::find($request->id);  
         $brand->update($input);
     
         return redirect()->route('brands.index')

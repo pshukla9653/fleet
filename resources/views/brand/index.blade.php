@@ -56,7 +56,7 @@
     <tr>
       <td style="width: 15%">
         @can('brand-edit')
-        <a onclick="edititem({{ $brands->id }},{{$brands->brand_name}},{{$brands->file_name}})">
+        <a onclick="edititem({{ $brands->id }});">
           <img src="{{ asset('assets/images/icon/edit.png') }}" alt="delete"/>
         </a>
         @endcan
@@ -105,7 +105,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
           
-           
+          <input type="hidden" id="item_id" name="id">
             <div class="form-group"> <strong>{{ __('Brand Name') }}:</strong> {!! Form::text('brand_name', null, array('placeholder' => 'Brand Name','class' => 'form-control custom-modal-textbox', 'id' => 'brand_name')) !!} </div>
         </div>
     </div>
@@ -124,6 +124,7 @@
                               </div>
       </div>
   </div>
+  <div id="img-review"></div>
   
 </div>
 
@@ -135,57 +136,13 @@
         <button type="button" class="btn custom-modal-btn btn-danger" data-dismiss="modal">Cancel</button>
         
       </div>
-      <div id="popup_model_edit" class="modal fade">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header bg-primary">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h6 class="modal-title" id="form_heading"></h6>
-            </div>
-      
-            <div class="modal-body">
-              <div class="alert alert-danger print-error-msg" style="display:none">
-                <ul></ul>
-            </div>
-            <form action="{{ route('brands.update',$brands->id) }}" method="POST" enctype="multipart/form-data"> 
-      <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12">
-              <div class="form-group">
-                
-                  <input type="hidden" id="item_id" name="id">
-                  <div class="form-group"> <strong>{{ __('Brand Name') }}:</strong> {!! Form::text('brand_name', null, array('placeholder' => 'Brand Name','class' => 'form-control', 'id' => 'brand_name')) !!} </div>
-              </div>
-          </div>
-          <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-              
-               
-                <div class="form-group"> <strong>{{ __('Brand Logo') }}:</strong>
-                  <input id="file_name" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" required autocomplete="image" >
-      
-                                      @error('filenames[]')
-                                          <span class="invalid-feedback" role="alert">
-                                              <strong>{{ $message }}</strong>
-                                          </span>
-                                      @enderror
-                                    </div>
-            </div>
-        </div>
-        
-      </div>
-      
-            </div>
-      
-            <div class="modal-footer">
-              <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary" id="btn"></button>
-            </div>      
+          
 {!! Form::close() !!}      
     </div>
   </div>
 </div>
 <script type="text/javascript">
-function edititem(id, brand_name, file_name) {
+function edititem(id) {
   $.ajaxSetup({
          headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -198,11 +155,13 @@ function edititem(id, brand_name, file_name) {
             data: { id: id },
             dataType: 'json',
             success: function(res){
-             $('#form_heading').html("Update Brand");
+             $('#form_heading').html("Edit Brand");
              $('#btn').html('Update');
               $('#item_id').val(res.id);
               $('#brand_name').val(res.brand_name);
-              $('#popup_model_edit').modal('show');
+              $('#popup_model').modal('show');
+              
+             
               
            }
         });
