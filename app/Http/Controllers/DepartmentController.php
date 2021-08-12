@@ -56,10 +56,12 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
-		$this->validate($request, [
-            'department_name' => 'required',
-        ]);
+        if($request->id){
+            $validation = ['department_name' => 'required|unique:departments,department_name,'.$request->id];
+        }else{
+            $validation = ['department_name' => 'required|unique:departments,department_name'];
+        }
+		$this->validate($request, $validation);
         
         if($request->id){
             $input = $request->all();

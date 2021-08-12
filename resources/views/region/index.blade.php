@@ -223,6 +223,12 @@ function edititem(id) {
               $("#btn").html(btn);
               $("#btn"). attr("disabled", false);
             } 
+            },
+            error: function(xhr, status, error) {
+              var err = JSON.parse(xhr.responseText);
+              $(".text-danger").html(err.errors.region_name);
+              $("#btn").html('Submit');
+              $("#btn"). attr("disabled", false);
             }
          });
           }

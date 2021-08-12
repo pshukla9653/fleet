@@ -47,10 +47,13 @@ class RegionController extends Controller
      */
     public function store(Request $request)
     {
-        //
-		$this->validate($request, [
-            'region_name' => 'required',
-        ]);
+
+        if($request->id){
+            $validation = ['region_name' => 'required|unique:regions,region_name,'.$request->id];
+        }else{
+            $validation = ['region_name' => 'required|unique:regions,region_name'];
+        }
+		$this->validate($request, $validation);
     
         if($request->id){
             $input = $request->all();
