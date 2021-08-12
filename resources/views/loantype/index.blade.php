@@ -213,6 +213,12 @@ function edititem(id) {
               window.location.reload();
              //$("#btn").html('Submit');
              $("#btn"). attr("disabled", false);
+            },
+            error: function(xhr, status, error) {
+              var err = JSON.parse(xhr.responseText);
+              $(".text-danger").html(err.errors.loan_type);
+              $("#btn").html('Submit');
+              $("#btn"). attr("disabled", false);
             }
          });
         }

@@ -47,10 +47,12 @@ class LoanTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
-		$this->validate($request, [
-            'loan_type' => 'required',
-        ]);
+        if($request->id){
+            $validation = ['loan_type' => 'required|unique:loan_types,loan_type,'.$request->id];
+        }else{
+            $validation = ['loan_type' => 'required|unique:loan_types,loan_type'];
+        }
+		$this->validate($request, $validation);
     
         if($request->id){
             $input = $request->all();
