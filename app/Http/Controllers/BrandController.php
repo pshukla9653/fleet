@@ -59,14 +59,14 @@ class BrandController extends Controller
     {
         if($request->id){
             $input = $request->all();
-            $brand = Brand::find($request->id); 
+            $brand  = Brand::find($request->id);
         if ($image = $request->file('image')) {
-            $destinationPath = 'upload/';
+            $destinationPath = 'storage/';
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
             $input['file_name'] = "$profileImage";
 			
-			$file = public_path('upload/'. $brand['file_name']);
+			$file = public_path('storage/'. $brand['file_name']);
 			if (file_exists($file)) {
   				@unlink($file);
 				}
@@ -86,7 +86,7 @@ class BrandController extends Controller
         $input = $request->all();
   
         if ($image = $request->file('image')) {
-            $destinationPath = 'upload/';
+            $destinationPath = 'storage/';
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
             $input['file_name'] = "$profileImage";

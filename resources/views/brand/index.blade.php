@@ -65,7 +65,7 @@
       </td>
         
       <td style="width: 80%">
-		<img src="{{asset('upload/'.$brands->file_name)}}" width="50" height="50" style="border-radius:50%"/>
+		<img src="{{asset('storage/'.$brands->file_name)}}" width="50" height="50" style="border-radius:50%"/>
 		</td>
           
     <td style="width: 5%">

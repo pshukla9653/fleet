@@ -55,6 +55,10 @@ Run the Demo Seeder to get started with a few tenants and some users
 
 `php artisan migrate:fresh --seed`
 
+To create the symbolic link, you may use the storage:link Artisan command:
+
+`php artisan storage:link`
+
 Login to the app on your local maching using the following credentials:
 <br>
 Superadmin
