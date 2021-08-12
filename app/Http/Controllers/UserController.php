@@ -31,10 +31,18 @@ class UserController extends Controller
     {
         
         $roles = Role::pluck('name','name')->all();
+        if($request->input('search')){
+            $query = $request->input('search');
+            $data = User::where('first_name', 'LIKE', '%'. $query. '%')->orderBy('id','DESC')->paginate(10);
+           
+            return view('users.index', compact('data','roles'));
+            
+        }
+        else{
         $data = User::orderBy('id','DESC')->paginate(5);
-		//var_dump($data); exit;
         return view('users.index', compact('data','roles'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
+        }
     }
     
     /**

@@ -281,18 +281,25 @@ function edititem(id) {
            var city         = $("#city").val();
            var country      = $("#country").val();
            var post_code    = $("#post_code").val();
+           if(first_name =='' || job_title =='' || email =='' || phone_number ==''){
            if(first_name ==''){
               $('#error_name').html('Name Required!');
           }
+          else{ $('#error_name').html('');}
+          
           if(job_title ==''){
               $('#error_job').html('Job Title Required!');
           }
+          else{$('#error_job').html('');}
           if(email ==''){
               $('#error_email').html('Email Required!');
           }
+          else{$('#error_email').html('');}
           if(phone_number ==''){
               $('#error_phone').html('Phone Required!');
           }
+          else{$('#error_phone').html('');}
+           }
           else{
            $("#btn").html('Please Wait...');
            $("#btn"). attr("disabled", true);

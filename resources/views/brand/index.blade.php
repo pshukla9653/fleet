@@ -54,17 +54,18 @@
   
     @foreach ($brand as $key => $brands)
     <tr>
-      <td style="width: 5%">
+      <td style="width: 15%">
         @can('brand-edit')
         <a onclick="edititem({{ $brands->id }},{{$brands->brand_name}},{{$brands->file_name}})">
           <img src="{{ asset('assets/images/icon/edit.png') }}" alt="delete"/>
         </a>
-           
         @endcan
+        &nbsp;
+        {{ $brands->brand_name }}
       </td>
-        <td>{{ $brands->brand_name }}</td>
-         <td>
-		<img src="{{asset('upload/'.$brands->file_name)}}" width="100" height="100" style="border-radius:50%"/>
+        
+      <td style="width: 80%">
+		<img src="{{asset('upload/'.$brands->file_name)}}" width="50" height="50" style="border-radius:50%"/>
 		</td>
           
     <td style="width: 5%">

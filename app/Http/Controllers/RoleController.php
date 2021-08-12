@@ -33,9 +33,18 @@ class RoleController extends Controller
     { 
         $permission = Permission::get();
        
-		$roles = Role::orderBy('id','DESC')->paginate(5);
+		if($request->input('search')){
+            $query = $request->input('search');
+            $roles = Role::where('name', 'LIKE', '%'. $query. '%')->orderBy('id','DESC')->paginate(10);
+           
+            return view('roles.index', compact('roles','permission'));
+            
+        }
+        else{
+        $roles = Role::orderBy('id','DESC')->paginate(5);
         return view('roles.index',compact('roles','permission'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
+        }
     }
     
     /**

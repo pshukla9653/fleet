@@ -30,9 +30,18 @@ class ContactController extends Controller
     public function index(Request $request)
     {
         //
+        if($request->input('search')){
+            $query = $request->input('search');
+            $contacts = Contact::where('first_name', 'LIKE', '%'. $query. '%')->orderBy('id','DESC')->paginate(10);
+           
+            return view('contact.index', compact('contacts'));
+            
+        }
+        else{
 		$contacts = Contact::orderBy('id','DESC')->paginate(5);
         return view('contact.index', compact('contacts'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
+        }
     }
 
    
