@@ -2,6 +2,15 @@
 
 @section('heading','Roles')
 @section('content')
+<div class="page-header">
+	<div class="page-header-content">
+	  <div class="page-title">
+		<h6><i class="icon-home2 position-left"></i> <i class="fa fa-angle-double-right"></i> <span style="color: #3a6d7f;">Configure</span> <i class="fa fa-angle-double-right"></i> @yield('heading')</h6>
+	  </div>
+  <hr>
+	  
+	</div>
+	</div>
 <div class="row">		
   <div class="col-md-8" style="padding: 30px;">
   <a onclick="location.reload();" class="btn btn-primary"><i class="icon-reload-alt position-left"></i> Refresh @yield('heading')</a>

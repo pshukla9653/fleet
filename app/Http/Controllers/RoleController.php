@@ -13,7 +13,7 @@ class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * 
      * @return \Illuminate\Http\Response
      */
     function __construct()
@@ -30,10 +30,11 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-        //var_dump(Auth()->user()->company_id); exit;
+    { 
+        $permission = Permission::get();
+       
 		$roles = Role::orderBy('id','DESC')->paginate(5);
-        return view('roles.index',compact('roles'))
+        return view('roles.index',compact('roles','permission'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
     
@@ -56,32 +57,45 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|unique:roles,name',
-            'permission' => 'required',
-        ]);
-        
+        //echo 'hello'; die;
+        $name=$request->name;
+        if(empty($name))
+        {
+            $result['status']=0;
+            $result['message']='The name field is required';
+            echo json_encode($result);die;
+        }
+        $permission=$request->permission;
+        if(empty($permission))
+        {
+            $result['status']=0;
+            $result['message']='The permission field is required';  
+            echo json_encode($result);die;
+        }
+        if(DB::table('roles')->where('name', $name)->exists())
+        {
+            $result['status']=0;
+            $result['message']='The name field already exist';
+            echo json_encode($result);die;
+        }
         $role = Role::create(['name' => $request->input('name'),'company_id'=>Auth()->user()->company_id]);
         $role->syncPermissions($request->input('permission'));
-    
-        return redirect()->route('roles.index')
-                        ->with('success','Role created successfully');
+        if($role)
+        {
+            $result['status']=1;
+            $result['message']='Role created successfully';
+            echo json_encode($result);die;
+        }else{
+            $result['status']=0;
+            $result['message']='Role created faild';
+            echo json_encode($result);die;
+        }
+        //return redirect()->route('roles.index')->with('success','Role created successfully');
     }
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $role = Role::find($id);
-        $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
-            ->where("role_has_permissions.role_id",$id)
-            ->get();
+
+
     
-        return view('roles.show',compact('role','rolePermissions'));
-    }
+    
     
     /**
      * Show the form for editing the specified resource.
@@ -129,10 +143,14 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+        $id = $request->id;
         DB::table("roles")->where('id',$id)->delete();
-        return redirect()->route('roles.index')
-                        ->with('success','Role deleted successfully');
+        $result['status']=1;
+        $result['message']='Role deleted successfully';
+        echo json_encode($result);die;
+        // return redirect()->route('roles.index')
+        //                 ->with('success','Role deleted successfully');
     }
 }

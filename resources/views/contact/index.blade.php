@@ -2,21 +2,31 @@
 
 @section('heading','Contacts')
 @section('content')
-<div class="row">		
-  <div class="col-md-8" style="padding: 30px;">
-  <a onclick="location.reload();" class="btn btn-primary"><i class="icon-reload-alt position-left"></i> Refresh @yield('heading')</a>
-  @can('contact-create')	
-  <a id="additem" class="btn btn-primary"><i class="icon-plus-circle2 position-left"></i> Add New Item</a>
-  @endcan
-  </div>
-  <div class="col-md-4" style="padding: 30px;">
-  <form class="example" action="#">
-    <input type="text" placeholder="Search.." name="search">
-    <button type="submit"><i class="fa fa-search"></i></button>
-    </form>		
-  </div>
+<div class="page-header">
+	<div class="page-header-content">
+	  <div class="page-title" style="margin: 0px 20px;">
+		<h6><i class="icon-home2 position-left"></i> <i class="fa fa-angle-double-right"></i> <span style="color: #3a6d7f;">Configure</span> <i class="fa fa-angle-double-right"></i> @yield('heading')</h6>
+	  </div>
   
-  </div>	
+	  
+	</div>
+	</div>
+  <hr style="margin: 0px 20px;">
+  <div class="row">		
+    <div class="col-md-8" style="padding: 15px 30px;">
+    <a href="{{ route('contacts.index')}}" class="btn btn-primary"><img src="{{ asset('assets/images/icon/refresh.png') }}" alt="refresh" style="width: 20px;margin-left: -8px;"/>&nbsp;  Refresh @yield('heading')</a>
+    @can('contact-create')	
+    <a id="additem" class="btn btn-primary" style="margin-left: 20px;"><img src="{{ asset('assets/images/icon/add.png') }}" alt="add" style="width: 21px;margin-left: -8px;"/>&nbsp;  Add New Item</a>
+    @endcan
+    </div>
+    <div class="col-md-4" style="padding: 15px 30px;">
+    <form class="example" action="">
+      <input type="text" placeholder="Search" name="search">
+      <button type="submit"><img src="{{ asset('assets/images/icon/search.png') }}" alt="search"/></button>
+      </form>		
+    </div>
+    
+    </div>	
 
 <div class="content"> 
   
@@ -26,13 +36,24 @@
   <!-- /quick stats boxes --> 
   <!-- /main charts -->
   <div class="panel panel-flat">
-    <div class="panel-heading">
-      <h5 class="panel-title">@yield('heading')</h5>
-      <div class="heading-elements"></div>
-      
-    </div>
-    <div class="panel-body">
-      <div class="row"> 
+    <div class="panel-heading" style="padding: 0px;">
+        <h5 class="panel-title">
+          <table width="100%" style="font-size: small; font-weight: 700; text-align: left; margin: 7px;">
+            <tr>
+                <td style="width: 20%;">Name</td>
+                <td style="width: 25%;">Surname</td>
+                <td style="width: 25%;">Email</td>
+                <td style="width: 25%;">Phone</td>
+                <td style="width: 5%;">&nbsp;&nbsp;</td>
+            </tr>
+        </table>
+        </h5>
+        <div class="heading-elements">
+          </div>
+        
+      </div>
+    
+        <div class="panel-body" style="padding: 0px 0px 10px 0px;">
       @if ($message = Session::get('success'))
     <div class="alert alert-success">
         <p>{{ $message }}</p>
@@ -40,16 +61,22 @@
 @endif
 
         
-          <table class="table table-bordered">
+<table class="table table-bordered table-responsive">
   
     @foreach ($contacts as $key => $contact)
     <tr>
-        <td style="width: 5%">
+        <td style="width: 20%">
           @can('contact-edit')
-          <a onclick="edititem({{ $contact->id }})"><i class="icon-pencil7"></i></a>
+          <a onclick="edititem({{ $contact->id }})">
+            <img src="{{ asset('assets/images/icon/edit.png') }}" alt="edit"/>
+        </a>
           @endcan
+          &nbsp;
+          {{$contact->first_name}}
         </td>
-        <td style="width: 90%">{{ $contact->first_name.' '.$contact->last_name }}</td>
+        <td style="width: 25%">{{ $contact->last_name }}</td>
+        <td style="width: 25%">{{ $contact->email }}</td>
+        <td style="width: 25%">{{ $contact->phone_number }}</td>
        
          
            
@@ -57,28 +84,33 @@
            
             
             @can('contact-delete')
-            <a onclick="deleteitem({{ $contact->id }})"><i class="icon-trash"></i></a>
+            <a onclick="deleteitem({{ $contact->id }})">
+                <img src="{{ asset('assets/images/icon/delete.png') }}" alt="delete"/>
+            </a>
             @endcan
         </td>
     </tr>
     @endforeach
 </table>
 
-
+<br>
 {!! $contacts->render() !!}
       </div>
     </div>
   </div>
 </div>
 <div id="popup_model" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-primary">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h6 class="modal-title" id="form_heading"></h6>
-      </div>
-
-      <div class="modal-body">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" style="background-color: #f2f2f2;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><i class="icon-cancel-circle2"></i></button>
+          
+        </div>
+        <h6 class="modal-title md-heading-custom" id="form_heading"></h6>
+        <div class="modal-body md-body-custom">
+          <div class="alert alert-danger print-error-msg" style="display:none">
+            <ul></ul>
+        </div>
         <form action="javascript:void(0)" id="itemform" class="form-horizontal" method="POST">
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -87,70 +119,29 @@
             <input type="hidden" id="item_id" name="id">
             <div class="col-md-6">
               <div class="form-group row">
-                  <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
-
-                  <div class="col-md-6">
-                      <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
-
-                      @error('first_name')
-                          <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                          </span>
-                      @enderror
-                  </div>
+                      <input id="first_name" type="text" placeholder="First Name" class="form-control custom-modal-textbox @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" autofocus/>
+                      <div class="text-danger" id="error_name"></div>
               </div>
               <div class="form-group row">
-                  <label for="last_name" class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
 
-                  <div class="col-md-6">
-                      <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" >
-
-                      @error('last_name')
-                          <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                          </span>
-                      @enderror
-                  </div>
+                      <input id="last_name" type="text" placeholder="Last Name" class="form-control custom-modal-textbox @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" />
+                     
               </div>
   
               <div class="form-group row">
-                  <label for="job_title" class="col-md-4 col-form-label text-md-right">{{ __('Job Title') }}</label>
 
-                  <div class="col-md-6">
-                      <input id="job_title" type="text" class="form-control @error('job_title') is-invalid @enderror" name="job_title" value="{{ old('job_title') }}" required autocomplete="job_title" >
-
-                      @error('job_title')
-                          <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                          </span>
-                      @enderror
-                  </div>
+                      <input id="job_title" type="text" placeholder="Job Title" class="form-control custom-modal-textbox @error('job_title') is-invalid @enderror" name="job_title" value="{{ old('job_title') }}" />
+                      <div class="text-danger" id="error_job"></div>
               </div>
               <div class="form-group row">
-                  <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
-                  <div class="col-md-6">
-                      <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                      @error('email')
-                          <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                          </span>
-                      @enderror
-                  </div>
+                      <input id="email" type="email" placeholder="E-Mail Address" class="form-control custom-modal-textbox @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" />
+                      <div class="text-danger" id="error_email"></div>
               </div>
    <div class="form-group row">
-                  <label for="phone_number" class="col-md-4 col-form-label text-md-right">{{ __('Phone Number') }}</label>
 
-                  <div class="col-md-6">
-                      <input id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number" value="{{ old('phone_number') }}" required autocomplete="phone_number">
-
-                      @error('phone_number')
-                          <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                          </span>
-                      @enderror
-                  </div>
+                      <input id="phone_number" type="text" placeholder="Phone Number" class="form-control custom-modal-textbox @error('phone_number') is-invalid @enderror" name="phone_number" value="{{ old('phone_number') }}"/>
+                      <div class="text-danger" id="error_phone"></div>
               </div>
               
 
@@ -158,85 +149,34 @@
 </div>
           <div class="col-md-6">
            <div class="form-group row">
-                  <label for="address1" class="col-md-4 col-form-label text-md-right">{{ __('Address1') }}</label>
 
-                  <div class="col-md-6">
-                      <input id="address1" type="text" class="form-control @error('address1') is-invalid @enderror" name="address1" value="{{ old('address1') }}" required autocomplete="address1" autofocus>
+                      <input id="address1" type="text" placeholder="Address1" class="form-control custom-modal-textbox @error('address1') is-invalid @enderror" name="address1" value="{{ old('address1') }}"/>
 
-                      @error('address1')
-                          <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                          </span>
-                      @enderror
-                  </div>
+                     
               </div>
               <div class="form-group row">
-                  <label for="address2" class="col-md-4 col-form-label text-md-right">{{ __('Address2') }}</label>
 
-                  <div class="col-md-6">
-                      <input id="address2" type="text" class="form-control @error('address2') is-invalid @enderror" name="address2" value="{{ old('address2') }}" required autocomplete="address2" autofocus>
+                      <input id="address2" type="text" placeholder="Address2" class="form-control custom-modal-textbox @error('address2') is-invalid @enderror" name="address2" value="{{ old('address2') }}" />
 
-                      @error('address2')
-                          <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                          </span>
-                      @enderror
-                  </div>
               </div>
               <div class="form-group row">
-                  <label for="address3" class="col-md-4 col-form-label text-md-right">{{ __('Address3') }}</label>
 
-                  <div class="col-md-6">
-                      <input id="address3" type="text" class="form-control @error('address3') is-invalid @enderror" name="address3" value="{{ old('address3') }}" required autocomplete="address3" autofocus>
+                      <input id="address3" type="text" placeholder="Address3" class="form-control custom-modal-textbox @error('address3') is-invalid @enderror" name="address3" value="{{ old('address3') }}"/>
 
-                      @error('address3')
-                          <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                          </span>
-                      @enderror
-                  </div>
               </div>
-  <div class="form-group row">
-                  <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('Town/City') }}</label>
+                <div class="form-group">
 
-                  <div class="col-md-6">
-                      <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" required autocomplete="city" >
+                      <input id="city" type="text" placeholder="Town/City" class="form-control custom-modal-textbox @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}"/>
 
-                      @error('city')
-                          <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                          </span>
-                      @enderror
-                  </div>
               </div>
-              <div class="form-group row">
-                  <label for="country" class="col-md-4 col-form-label text-md-right">{{ __('Country') }}</label>
+              <div class="form-group">
+                      <input id="country" type="text" placeholder="Country" class="form-control custom-modal-textbox @error('country') is-invalid @enderror" name="country" value="{{ old('country') }}"/>
 
-                  <div class="col-md-6">
-                      <input id="country" type="text" class="form-control @error('country') is-invalid @enderror" name="country" value="{{ old('country') }}" required autocomplete="country">
-
-                      @error('country')
-                          <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                          </span>
-                      @enderror
-                  </div>
               </div>
-<div class="form-group row">
-                  <label for="post_code" class="col-md-4 col-form-label text-md-right">{{ __('Post Code') }}</label>
+                    <div class="form-group">
+                      <input id="post_code" type="text" placeholder="Post Code" class="form-control custom-modal-textbox @error('post_code') is-invalid @enderror" name="post_code" value="{{ old('post_code') }}"/>
 
-                  <div class="col-md-6">
-                      <input id="post_code" type="text" class="form-control @error('post_code') is-invalid @enderror" name="post_code" value="{{ old('post_code') }}" required autocomplete="post_code">
-
-                      @error('post_code')
-                          <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                          </span>
-                      @enderror
-                  </div>
-              </div>
-              
-             
+                    </div>
              
           </div>
         </div>
@@ -246,9 +186,11 @@
 
       </div>
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" id="btn"></button>
+      <div class="modal-footer md-footer-custom">
+        <hr style="margin-top: 0px;">
+        <button type="submit" class="btn custom-modal-btn btn-success" id="btn"></button>
+        <button type="button" class="btn custom-modal-btn btn-danger" data-dismiss="modal">Cancel</button>
+        
       </div>
 {!! Form::close() !!}      
     </div>
@@ -269,8 +211,8 @@ function edititem(id) {
             data: { id: id },
             dataType: 'json',
             success: function(res){
-             $('#form_heading').html("Update Contact");
-             $('#btn').html('Update');
+              $('#form_heading').html("Edit Contact");
+              $('#btn').html('Update');
               $('#item_id').val(res.id);
               $('#first_name').val(res.first_name);
               $('#last_name').val(res.last_name);
@@ -339,7 +281,19 @@ function edititem(id) {
            var city         = $("#city").val();
            var country      = $("#country").val();
            var post_code    = $("#post_code").val();
-         
+           if(first_name ==''){
+              $('#error_name').html('Name Required!');
+          }
+          if(job_title ==''){
+              $('#error_job').html('Job Title Required!');
+          }
+          if(email ==''){
+              $('#error_email').html('Email Required!');
+          }
+          if(phone_number ==''){
+              $('#error_phone').html('Phone Required!');
+          }
+          else{
            $("#btn").html('Please Wait...');
            $("#btn"). attr("disabled", true);
            
@@ -369,6 +323,7 @@ function edititem(id) {
              $("#btn"). attr("disabled", false);
             }
          });
+          }
      });
  });
  </script>

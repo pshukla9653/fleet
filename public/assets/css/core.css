@@ -229,9 +229,7 @@ mark,
 a.text-muted:hover {
   color: #333333;
 }
-svg {
-  display: block;
-}
+
 .svg-inline svg {
   display: inline-block;
 }
@@ -6961,13 +6959,13 @@ h6.panel-title,
   margin: auto;
   color: white;
   height: 80px;
-  width: 80px;
+  width: 57px;
   display: flex;
   fill: rgba(255, 255, 255, 1);
   justify-content: center;
   align-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 0px;
 }
 .bg-login-f {
   background-image: url('bg.jpg');
@@ -6980,4 +6978,84 @@ h6.panel-title,
   /*width: 393px;*/
   border-radius: 34px;
   background: linear-gradient(#243374, transparent);
+  width: 350px !important;
+}
+.icon-pencil7{
+  color : #aaa !important;
+}
+
+.icon-trash{
+  color : #aaa !important;
+}
+.icon-cancel-circle2{
+  color: #3a6d7f;
+}
+.icon-home2{
+  color: #3a6d7f;
+}
+.textbox-extra-effect{
+  font-style: italic;
+    color: #fff !important;
+    border: 1px solid #6883af;
+    background-color: #6883af;
+    border-radius: 15px;
+    padding-left: 40px !important;
+    width: 85%;
+    margin-left: 23px;
+    
+}
+
+.btn-login-effect{
+  background-color: #4e8fff;
+  color: #fff;
+  text-transform: uppercase !important;
+  font-weight: 800;
+  font-size: initial;
+  padding: 8px;
+  border-radius: 15px;
+  width: 63%;
+}
+
+.md-heading-custom{
+    padding: 18px 18px 18px 28px;
+    background-color: #3a6d7f;
+    height: 53px;
+    margin: 20px 20px 0px 20px;
+    color: #fff;
+    text-transform: uppercase;
+}
+.md-body-custom{
+  margin: 0px 20px;
+  padding: 0px 20px;
+  background-color: #fff;
+}
+.md-footer-custom{
+  margin: 0px 20px 20px 20px;
+  background-color: #fff;
+  text-align: left;
+}
+#Group_3503 {
+    position: absolute;
+    width: 21.838px;
+    height: 26.986px;
+    left: 795.513px;
+    top: 525.64px;
+    overflow: visible;
+}
+.custom-modal-btn{
+  padding: 2px 10px!important;
+}
+.custom-modal-textbox{
+  
+    color: #000 !important;
+    border: 1px solid #bbb8b8;
+    background-color: #f2f2f2;
+    padding-left: 15px !important;
+    width: 50%;
+    margin: 20px 20px 20px 0px;
+    
+}
+.modal-lg{
+  width: 55%!important;
+  margin: 12% auto !important;
 }

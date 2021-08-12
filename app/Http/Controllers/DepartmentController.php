@@ -23,9 +23,17 @@ class DepartmentController extends Controller
     public function index(Request $request)
     {
         //
-		$departments = Department::orderBy('id','DESC')->paginate(5);
+		if($request->input('search')){
+            $query = $request->input('search');
+            $departments = Department::where('department_name', 'LIKE', '%'. $query. '%')->orderBy('id','DESC')->paginate(10);
+            return view('department.index', compact('departments'));
+            
+        }
+        else{
+        $departments = Department::orderBy('id','DESC')->paginate(5);
         return view('department.index', compact('departments'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
+        }
     }
 
     /**

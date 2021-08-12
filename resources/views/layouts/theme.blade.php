@@ -10,7 +10,7 @@
 	<!-- Global stylesheets -->
 	
 	
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
 	<link href="{{ asset('assets/css/icons/icomoon/styles.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('assets/css/icons/fontawesome/styles.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
@@ -50,7 +50,7 @@
 	<style>
 		body{
 			font-family: 'Montserrat', sans-serif !important;
-			font-weight: 400 !important;
+			font-weight: 500 !important;
 		}
 		.btn{
 
@@ -188,7 +188,7 @@
 			<!-- Main content -->
 			<div class="content-wrapper">
 <!-- Main navbar -->
-<div class="navbar navbar-default header-highlight" style="margin: 20px; border-radius: 3px; box-shadow:rgb(99 99 99 / 20%) 0px 2px 8px 0px; height: 30px !important;">
+<div class="navbar navbar-default header-highlight" style="margin: 20px 20px 5px 20px; border-radius: 3px; box-shadow:rgb(99 99 99 / 20%) 0px 2px 8px 0px; height: 30px !important;">
 	<div class="nav navbar-nav visible-xs-block">
 		<div style="text-align: right; margin: 15px; padding: 5px;"><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a>
 		<a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></div>
@@ -196,16 +196,18 @@
 
 	<div class="navbar-collapse collapse" id="navbar-mobile">
 		
-		<div class="nav navbar-nav"><h2 style="margin-top: 10px; text-transform: uppercase;">@yield('heading')</h2></div>
+		<div class="nav navbar-nav"><h6 style="margin-top: 16px; text-transform: uppercase;"><strong>@yield('heading')</strong></h6></div>
 		<ul class="nav navbar-nav navbar-right">
 				
 
 				
-
+			<li style="padding-top: 10px;"><img src="{{ asset('assets/images/icon/bell.png') }}" alt="bell" style="width: 17px;"/>
+				<span>{{ Auth::user()->first_name }}</span>
+				<img style="max-width: 40px" src="{{ asset('assets/images/icon/oval.png') }}" alt="">
+			</li>
 			<li class="dropdown dropdown-user">
-				<a class="dropdown-toggle" data-toggle="dropdown">
-					<img src="{{ asset('assets/images/placeholder.jpg') }}" alt="">
-					<span>{{ Auth::user()->first_name.' '.Auth::user()->last_name }}</span>
+				<a class="dropdown-toggle" data-toggle="dropdown" style="padding-top: 18px; padding-left:0px;">
+					
 					<i class="caret"></i>
 				</a>
 
@@ -223,16 +225,7 @@
 		
 	</div>
 </div>
-<div class="page-header">
-	<div class="page-header-content">
-	  <div class="page-title">
-		<h6><i class="icon-home2 position-left"></i> <i class="fa fa-angle-double-right"></i> @yield('heading')</h6>
-	  </div>
-  <hr>
-	  
-	</div>
-	</div>
-<!-- /main navbar -->
+
 			<!-- Page header -->
 			@yield('content')
 			<!-- /main content -->
@@ -243,6 +236,7 @@
 	</div>
 	<!-- /page container -->
 	<script>
+		
 		window.setTimeout(function () {
 			$(".alert-success").fadeTo(300, 0).slideUp(300, function () {
 				$(this).remove();

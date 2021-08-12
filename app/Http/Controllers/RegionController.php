@@ -23,9 +23,18 @@ class RegionController extends Controller
     public function index(Request $request)
     {
         //
+        if($request->input('search')){
+            $query = $request->input('search');
+            $regions = Region::where('region_name', 'LIKE', '%'. $query. '%')->orderBy('id','DESC')->paginate(10);
+           
+            return view('region.index', compact('regions'));
+            
+        }
+        else{
 		$regions = Region::orderBy('id','DESC')->paginate(5);
         return view('region.index', compact('regions'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
+        }
     }
 
    

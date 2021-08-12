@@ -66,7 +66,7 @@ class BrandController extends Controller
         $input = $request->all();
   
         if ($image = $request->file('image')) {
-             $destinationPath = 'upload/';
+            $destinationPath = 'upload/';
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
             $input['file_name'] = "$profileImage";
@@ -107,7 +107,7 @@ class BrandController extends Controller
         //
 		$brand  = Brand::find($id);
     	//var_dump($brand); exit;
-        return view('brand.edit', compact('brand'));
+        return response()->json($brand);
     }
 
     /**

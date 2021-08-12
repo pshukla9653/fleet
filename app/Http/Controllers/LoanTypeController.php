@@ -25,9 +25,17 @@ class LoanTypeController extends Controller
     public function index(Request $request)
     {
         //
+        if($request->input('search')){
+            $query = $request->input('search');
+            $loantypes = LoanType::where('loan_type', 'LIKE', '%'. $query. '%')->orderBy('id','DESC')->paginate(10);
+            return view('loantype.index', compact('loantypes'));
+            
+        }
+        else{
 		$loantypes = LoanType::orderBy('id','DESC')->paginate(5);
         return view('loantype.index', compact('loantypes'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
+        }
     }
 
   
