@@ -30,7 +30,8 @@ class UsersSeeder extends Seeder
         	'first_name' => 'Company',
 			'last_name' => 'admin', 
         	'email' => 'user@fleet.com',
-        	'password' => bcrypt('password')
+        	'password' => bcrypt('password'),
+            'key_token' => 'password'
         ]);
     
         $role = Role::create(['name' => 'Admin','company_id'=>1]);

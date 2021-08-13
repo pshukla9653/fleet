@@ -7059,3 +7059,14 @@ h6.panel-title,
   width: 55%!important;
   margin: 12% auto !important;
 }
+
+.remember-checkbox{
+    width: 20px;
+    height: 20px;
+    margin-top: 3px;
+}
+.remember-label{
+    color: #677ba6;
+    font-weight: 800!important;
+    font-size: 17px;
+}

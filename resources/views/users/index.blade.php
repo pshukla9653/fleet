@@ -43,8 +43,9 @@
                 <table width="100%" style="font-size: small; font-weight: 700; text-align: left; margin: 7px;">
                     <tr>
                         <td style="width: 30%;">Name</td>
-                        <td style="width: 30%;">Surname</td>
-                        <td style="width: 30%;">Email</td>
+                        <td style="width: 20%;">Surname</td>
+                        <td style="width: 20%;">Email</td>
+                        <td style="width: 20%;">Password</td>
                         <td style="width: 5%;">Role</td>
                         <td style="width: 5%;">&nbsp;&nbsp;</td>
                     </tr>
@@ -76,9 +77,10 @@
                             &nbsp;
                             {{ $user->first_name }}
                         </td>
-                        <td style="width: 30%;padding-left: 25px;">{{$user->last_name}}
+                        <td style="width: 20%;padding-left: 20px;">{{$user->last_name}}
                         
-                        <td style="width: 30%;padding-left: 35px;">{{ $user->email }}</td>
+                        <td style="width: 20%;padding-left: 20px;">{{ $user->email }}</td>
+                        <td style="width: 20%;padding-left: 20px;"><span class="password-visible">********</span><span class="show-password">&nbsp;<i class="fa fa-eye" aria-hidden="true"></i></i></span></td>
                         <td style="width: 5%">
                             @if(!empty($user->getRoleNames()))
                             @foreach($user->getRoleNames() as $v)

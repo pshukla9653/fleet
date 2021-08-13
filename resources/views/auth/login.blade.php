@@ -47,14 +47,15 @@
   <div class="form-group login-options">
     <div class="row">
       <div class="col-md-12" style="padding-left: 35px;">
-        <label class="checkbox-inline" style="color: #fff;">
-          <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+        <label class="checkbox-inline remember-label">
+          <input type="checkbox" name="remember" class="checkbox remember-checkbox" id="remember" {{ old('remember') ? 'checked' : '' }}>
           {{ __('Remember me') }}
         </label>
       </div>
 
     </div>
   </div>
+  
 
   <div class="form-group" style="text-align: -webkit-center;">
     <button type="submit" class="btn btn-login-effect btn-block">{{ __('Login') }}
@@ -63,7 +64,7 @@
 </form>
   <div class="row">
     <div class="col-md-12 text-center">
-      <a href="{{ route('password.request') }}" style="color:#fff; font-size:14px;"> {{ __('Forgot Your Password?') }}</a>
+      <a href="{{ route('password.request') }}" style="color:#677ba6; font-size:14px; font-weight:800;"> {{ __('Forgot Your Password?') }}</a>
     </div>
   </div>
 

@@ -25,17 +25,17 @@
 		}
 		
 		input[type="email"]::placeholder { /* Firefox, Chrome, Opera */
-    	color: rgb(255, 255, 255);
+    	color:#abb5ce;
+		font-weight: 800;
 		}
 		input[type="password"]::placeholder { /* Firefox, Chrome, Opera */
-    	color: rgb(255, 255, 255);
+    	color: #abb5ce;
+		font-weight: 800;
 		}
-		input[type=checkbox]:before {
-			color: #fff !important;
-    		border: 1px solid #6883af !important;
-    		background-color: #6883af !important;
-    		border-radius: 15px;
+		input[type="checkbox"] { /* change "blue" browser chrome to yellow */
+		filter: invert(26%) sepia(13%) saturate(582%) hue-rotate(180deg) brightness(97%) contrast(85%) grayscale(100%);
 		}
+		
 		
 	</style>	
 </head>
