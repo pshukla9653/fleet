@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use App\Scopes\CompanyScope;
+use App\Models\Company;
 
 class User extends Authenticatable
 {
@@ -50,5 +51,15 @@ class User extends Authenticatable
     protected static function booted()
     {
         static::addGlobalScope(new CompanyScope);
+    }
+
+    /**
+     * Returns the user's avatar image.
+     *
+     * @return HasOne
+     */
+    public function company()
+    {
+        return $this->hasOne(Company::class, 'id', 'company_id');
     }
 }

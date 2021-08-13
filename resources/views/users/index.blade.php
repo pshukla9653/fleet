@@ -46,7 +46,7 @@
                         <td style="width: 20%;">Surname</td>
                         <td style="width: 20%;">Email</td>
                         <td style="width: 20%;">Password</td>
-                        <td style="width: 5%;">Role</td>
+                        <td style="width: 5%;">Company</td>
                         <td style="width: 5%;">&nbsp;&nbsp;</td>
                     </tr>
                 </table>
@@ -87,11 +87,7 @@
                             </a>
                         </td>
                         <td style="width: 5%">
-                            @if(!empty($user->getRoleNames()))
-                            @foreach($user->getRoleNames() as $v)
-                            <label class="badge badge-success">{{ $v }}</label>
-                            @endforeach
-                            @endif
+                            {{$user->company->company_name}}
                         </td>
                         <td style="width: 5%">
 
