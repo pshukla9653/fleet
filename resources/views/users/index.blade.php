@@ -80,7 +80,12 @@
                         <td style="width: 20%;padding-left: 20px;">{{$user->last_name}}
                         
                         <td style="width: 20%;padding-left: 20px;">{{ $user->email }}</td>
-                        <td style="width: 20%;padding-left: 20px;"><span class="password-visible">********</span><span class="show-password">&nbsp;<i class="fa fa-eye" aria-hidden="true"></i></i></span></td>
+                        <td style="width: 20%;padding-left: 20px;">
+                            <span class="password-visible-{{ $user->id }}">xxxxxxxxxx</span>
+                            <a onclick="showpassword({{ $user->id }})">
+                                <img src="{{ asset('assets/images/icon/view.png') }}" style="margin-left: 20px" alt="view"/>
+                            </a>
+                        </td>
                         <td style="width: 5%">
                             @if(!empty($user->getRoleNames()))
                             @foreach($user->getRoleNames() as $v)
@@ -243,6 +248,27 @@ function deleteitem(id) {
             }
         });
     }
+}
+function showpassword(id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $('.password-visible').html('xxxxxxxxxxx');
+    
+    $.ajax({
+        type: "POST",
+        url: "{{ url('edit-user') }}",
+        data: {
+            id: id
+        },
+        dataType: 'json',
+        success: function(res) {
+            $('.password-visible-'+id).html(res.user.key_token);
+
+        }
+    });
 }
 $(document).ready(function($) {
     $.ajaxSetup({

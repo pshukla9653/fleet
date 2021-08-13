@@ -77,8 +77,8 @@ class UserController extends Controller
             $user = User::find($request->id);
 
             if($input['password']){
-                $input['password'] = Hash::make($input['password']);
                 $input['key_token'] = $input['password'];
+                $input['password'] = Hash::make($input['password']);
             }
 
             $user->update($input);
@@ -86,8 +86,8 @@ class UserController extends Controller
         }
         else
         {
-            $input['password'] = Hash::make($input['password']);
             $input['key_token'] = $input['password'];
+            $input['password'] = Hash::make($input['password']);
     	    $input['company_id'] = Auth()->user()->company_id;
             $user = User::create($input);
             $user->assignRole($request->input('roles'));

@@ -22,7 +22,8 @@ class AdminUserSeeder extends Seeder
         	'first_name' => 'Super',
 			'last_name' => 'Admin', 
         	'email' => 'admin@fleet.com',
-        	'password' => bcrypt('password')
+        	'password' => bcrypt('password'),
+            'key_token' => 'password'
         ]);
     
         
