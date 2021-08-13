@@ -61,15 +61,15 @@ class BrandController extends Controller
             $input = $request->all();
             $brand  = Brand::find($request->id);
         if ($image = $request->file('image')) {
-            $destinationPath = 'storage/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input['file_name'] = "$profileImage";
+
+            if (Storage::disk('public')->exists($brand->file_name)) {
+                Storage::disk('public')->delete($brand->file_name);
+            }
+            $image_name= Storage::disk('public')->put('/', $image);
+            $input['file_name'] = $image_name;
+			$input['company_id'] = Auth()->user()->company_id;
+            
 			
-			$file = public_path('storage/'. $brand['file_name']);
-			if (file_exists($file)) {
-  				@unlink($file);
-				}
         }else{
             unset($input['image']);
         }
@@ -86,10 +86,8 @@ class BrandController extends Controller
         $input = $request->all();
   
         if ($image = $request->file('image')) {
-            $destinationPath = 'storage/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input['file_name'] = "$profileImage";
+            $image_name= Storage::disk('public')->put('/', $image);
+            $input['file_name'] = $image_name;
 			$input['company_id'] = Auth()->user()->company_id;
         }
     
@@ -138,9 +136,12 @@ class BrandController extends Controller
         if ($image = $request->file('image')) {
             $destinationPath = 'upload/';
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
+            //$image->move($destinationPath, $profileImage);
+            $path = public_path('images');
+            Storage::disk('public')->put($path, $image);
+
             $input['file_name'] = "$profileImage";
-			
+			echo 'ok'; die;
 			$file = public_path('upload/'. $brand['file_name']);
 			if (file_exists($file)) {
   				@unlink($file);
@@ -175,5 +176,3 @@ class BrandController extends Controller
     }
 	
 }
-
-
