@@ -6,8 +6,7 @@
 	<div class="page-header-content">
 	  <div class="page-title" style="margin: 0px 20px;">
 		<h6><i class="icon-home2 position-left"></i> <i class="fa fa-angle-double-right"></i> <span style="color: #3a6d7f;">Configure</span> <i class="fa fa-angle-double-right"></i> @yield('heading')</h6>
-	  </div>
-  
+	  </div>  
 	  
 	</div>
 	</div>
