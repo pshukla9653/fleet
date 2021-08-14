@@ -58,6 +58,13 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         if($request->id){
+            $validation = ['brand_name' => 'required|unique:brands,brand_name,'.$request->id];
+        }else{
+            $validation = ['brand_name' => 'required|unique:brands,brand_name'];
+        }
+		$this->validate($request, $validation);
+
+        if($request->id){
             $input = $request->all();
             $brand  = Brand::find($request->id);
         if ($image = $request->file('image')) {
@@ -123,38 +130,7 @@ class BrandController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Brand $brand)
-    {
-        //
-		$this->validate($request, [
-            'brand_name' => 'required',
-            
-        ]);
-    	
-         $input = $request->all();
-  
-        if ($image = $request->file('image')) {
-            $destinationPath = 'upload/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            //$image->move($destinationPath, $profileImage);
-            $path = public_path('images');
-            Storage::disk('public')->put($path, $image);
-
-            $input['file_name'] = "$profileImage";
-			echo 'ok'; die;
-			$file = public_path('upload/'. $brand['file_name']);
-			if (file_exists($file)) {
-  				@unlink($file);
-				}
-        }else{
-            unset($input['image']);
-        }
-        $brand = Brand::find($request->id);  
-        $brand->update($input);
     
-        return redirect()->route('brands.index')
-                        ->with('success','Brand updated successfully');
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -175,4 +151,6 @@ class BrandController extends Controller
         return response()->json(['success' => true]);
     }
 	
+
+    
 }

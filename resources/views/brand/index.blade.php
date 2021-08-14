@@ -42,13 +42,19 @@
         </div>
       
     </div>
-    <div class="panel-body" style="padding: 0px 10px 10px 10px;">
-      <div class="row"> 
-      @if ($message = Session::get('success'))
+    @if ($message = Session::get('success'))
     <div class="alert alert-success">
         <p>{{ $message }}</p>
     </div>
-@endif
+    @endif
+    @error('brand_name')
+    <div class="alert alert-danger">
+         <strong>{{ $message }}</strong>
+        </div>
+    @enderror
+    <div class="panel-body" style="padding: 0px 10px 10px 10px;">
+      <div class="row"> 
+    
 
           <table class="table table-bordered">
   
@@ -100,14 +106,15 @@
         <div class="alert alert-danger print-error-msg" style="display:none">
           <ul></ul>
       </div>
-      {!! Form::open(array('route' => 'brands.store','method'=>'POST', 'enctype'=>'multipart/form-data')) !!}
+      {!! Form::open(array('route' => 'brands.store','method'=>'POST', 'enctype'=>'multipart/form-data','id'=>'itemform')) !!}
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
           
           <input type="hidden" id="item_id" name="id">
             <div class="form-group"> <strong>{{ __('Brand Name') }}:</strong> {!! Form::text('brand_name', null, array('placeholder' => 'Brand Name','class' => 'form-control custom-modal-textbox', 'id' => 'brand_name')) !!} </div>
-        </div>
+            <div class="text-danger" id="error_name"></div>
+          </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
       <div class="form-group">
@@ -142,6 +149,7 @@
   </div>
 </div>
 <script type="text/javascript">
+
 function edititem(id) {
   $.ajaxSetup({
          headers: {
@@ -202,10 +210,14 @@ function edititem(id) {
          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          }
      });
+
+     
+
      $('#additem').click(function () {
        
         $('#itemform').trigger("reset");
         $('#form_heading').html("Add Brand");
+        $('#brand_name').val();
         $('#btn').html('Submit');
         $('#popup_model').modal('show');
      });
