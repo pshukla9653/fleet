@@ -64,12 +64,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'first_name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|same:confirm-password',
-            'roles' => 'required'
-        ]);
+        if($request->id){
+            $validation = [
+                'first_name' => 'required',
+                'email' => 'required|email|unique:users,email,'.$request->id,
+                'password' => 'required|same:confirm-password',
+                'roles' => 'required'
+            ];
+        }else{
+            $validation = [
+                'first_name' => 'required',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|same:confirm-password',
+                'roles' => 'required'
+            ];
+        }
+		$this->validate($request, $validation);
     
         $input = $request->all();
 
