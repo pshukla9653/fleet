@@ -28,12 +28,16 @@ class BrandController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {        
-        if($request->input('search')){
+    {
+		
+        //
+		if($request->input('search')){
             $query = $request->input('search');
             $brand = Brand::where('brand_name', 'LIKE', '%'. $query. '%')->orderBy('id','DESC')->paginate(10);
-            return view('brand.index', compact('brand'));            
-        }else{
+            return view('brand.index', compact('brand'));
+            
+        }
+        else{
             $brand = Brand::orderBy('id','DESC')->paginate(5);
             return view('brand.index', compact('brand'))
                 ->with('i', ($request->input('page', 1) - 1) * 5);
@@ -147,10 +151,9 @@ class BrandController extends Controller
     {
         //
 		$brand = Brand::Find($request->id);
-		$file = public_path('upload/'. $brand['file_name']);
-		if (file_exists($file)) {
-  			@unlink($file);
-		}
+		if (Storage::disk('public')->exists($brand->file_name)) {
+            Storage::disk('public')->delete($brand->file_name);
+        }
 		Brand::find($request->id)->delete();
 		
         return response()->json(['success' => true]);
