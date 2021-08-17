@@ -54,30 +54,52 @@ class VehicleController extends Controller
     public function store(Request $request)
     {
         if($request->id){
-            $validation = ['registration_number' => 'unique:vehicles,registration_number,'.$request->id];
+            $validation = ['registration_number' => 'unique:vehicles,registration_number,'.$request->id,
+                            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                            'model' => 'required',
+                            'derivative' => 'required',
+                            'vin' => 'required',
+                            'adoption_date' => 'required',
+                            'projected_defleet_date' => 'required',
+                            'spec_sheet.*' => 'mimes:pdf|max:10000',                
+            ];
         }else{
             $validation = ['registration_number' => 'required|unique:vehicles,registration_number',
-                            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'];
+                            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                            'model' => 'required',
+                            'derivative' => 'required',
+                            'vin' => 'required',
+                            'adoption_date' => 'required',
+                            'projected_defleet_date' => 'required',
+                            'spec_sheet.*' => 'mimes:pdf|max:10000',
+                        ];
         }
 		$this->validate($request, $validation);
-
+        $path = 'vehicle/';
         if($request->id){
             $input = $request->all();
-            $brand  = Vehicle::find($request->id);
-        if ($image = $request->file('image')) {
+            $vehicle  = Vehicle::find($request->id);
+        if ($image = $request->hasfile('image')) {
 
-            if (Storage::disk('public')->exists($brand->file_name)) {
-                Storage::disk('public')->delete($brand->file_name);
+            if (Storage::disk('public')->exists($path, $vehicle->image)) {
+                Storage::disk('public')->delete($path, $vehicle->image);
             }
-            $image_name= Storage::disk('public')->put('vehicle/', $image);
-            $input['file_name'] = $image_name;
+            $image_name= Storage::disk('public')->put($path, $image);
+            $input['image'] = $image_name;
 			$input['company_id'] = Auth()->user()->company_id;
             
 			
         }else{
             unset($input['image']);
         }
-          
+        if($spec_sheet = $request->hasfile('spec_sheet')){
+            foreach($spec_sheet as $spec){
+                $file_name= Storage::disk('public')->put($path, $spec);
+			    $vehicle_specs['vehicle_id'] = $request->id;
+                $vehicle_specs['file_name'] = $file_name;
+                DB::table('vehicle_specs')->insert($vehicle_specs);
+            }
+        }  
         $brand->update($input);
         }
         else{
@@ -86,13 +108,22 @@ class VehicleController extends Controller
   
         $input = $request->all();
   
-        if ($image = $request->file('image')) {
-            $image_name= Storage::disk('public')->put('vehicle/', $image);
+        if ($image = $request->hasfile('image')) {
+            $image_name= Storage::disk('public')->put($path, $image);
             $input['image'] = $image_name;
 			$input['company_id'] = Auth()->user()->company_id;
         }
+        
     
-        Vehicle::create($input);
+        $vahicle = Vehicle::create($input);
+        if($spec_sheet = $request->hasfile('spec_sheet')){
+            foreach($spec_sheet as $spec){
+                $file_name= Storage::disk('public')->put($path, $spec);
+			    $vehicle_specs['vehicle_id'] = $vahicle['id'];
+                $vehicle_specs['file_name'] = $file_name;
+                DB::table('vehicle_specs')->insert($vehicle_specs);
+            }
+        }
      
         }
         return redirect()->route('vehicle.index')

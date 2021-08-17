@@ -38,29 +38,29 @@ class CreateVehiclesTable extends Migration
             $table->string('model');
             $table->string('derivative');
             $table->string('registration_number');
-            $table->float('loan_cost', 10, 2);
+            $table->float('loan_cost', 10, 2)->nullable();
             $table->string('registration_plate_colour');
             $table->string('vin');
             $table->date('adoption_date');
             $table->date('projected_defleet_date');
-            $table->string('lead_time');
-            $table->string('lag_time');
-            $table->string('engine');
-            $table->string('colour');
-            $table->string('mileage');
-            $table->float('value', 10, 2);
-            $table->string('order_number');
-            $table->text('other_details');
-            $table->text('notes');
+            $table->string('lead_time')->nullable();
+            $table->string('lag_time')->nullable();
+            $table->string('engine')->nullable();
+            $table->string('colour')->nullable();
+            $table->string('mileage')->nullable();
+            $table->float('value', 10, 2)->nullable();
+            $table->string('order_number')->nullable();
+            $table->text('other_details')->nullable();
+            $table->text('notes')->nullable();
             $table->string('image');
             $table->timestamps();
         });
     
 
-        Schema::create('vechile_specs', function (Blueprint $table) {
+        Schema::create('vehicle_specs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('vachile_id')->index();
-			$table->foreign('vachile_id')
+            $table->unsignedBigInteger('vehicle_id')->index();
+			$table->foreign('vehicle_id')
                 ->references('id')
                 ->on('vehicles')
                 ->onDelete('cascade');

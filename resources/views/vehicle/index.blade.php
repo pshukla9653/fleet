@@ -43,22 +43,47 @@
                 <table width="100%" style="font-size: small; font-weight: 700; text-align: left;">
                     <tr>
                         <td style="width: 15%;">Vehicles Images</td>
-                        <td style="width: 11%;">Registration No.</td>
+                        <td style="width: 9%;">Registration No.</td>
                         <td style="width: 6%;">Brand</td>
                         <td style="width: 8%;">Model</td>
                         <td style="width: 10%;">Derivative</td>
-                        <td style="width: 11%;">Region</td>
+                        <td style="width: 10%;">Region</td>
                         <td style="width: 10%;">Department</td>
-                        <td style="width: 6%;">Vin</td>
-                        <td style="width: 10%;">Adoption Date</td>
+                        <td style="width: 8%;">Vin</td>
+                        <td style="width: 8%;">Adoption Date</td>
                         <td style="width: 8%;">Projected Defleet Date</td>
-                        <td style="width: 5%;">&nbsp;&nbsp;</td>
+                        <td style="width: 4%;">&nbsp;&nbsp;</td>
                     </tr>
                 </table>
             </h5>
             <div class="heading-elements">
               </div>
-              @error('brand_name')
+              @error('registration_number')
+              <div class="alert alert-danger">
+                   <strong>{{ $message }}</strong>
+                  </div>
+              @enderror
+              @error('model')
+              <div class="alert alert-danger">
+                   <strong>{{ $message }}</strong>
+                  </div>
+              @enderror
+              @error('derivative')
+              <div class="alert alert-danger">
+                   <strong>{{ $message }}</strong>
+                  </div>
+              @enderror
+              @error('vin')
+              <div class="alert alert-danger">
+                   <strong>{{ $message }}</strong>
+                  </div>
+              @enderror
+              @error('adoption_date')
+              <div class="alert alert-danger">
+                   <strong>{{ $message }}</strong>
+                  </div>
+              @enderror
+              @error('projected_defleet_date')
               <div class="alert alert-danger">
                    <strong>{{ $message }}</strong>
                   </div>
@@ -77,7 +102,7 @@
 
                     @foreach ($vehicles as $key => $vehicle)
                     <tr>
-                        <td style="width: 15%;">
+                        <td style="width: 15%; padding: 0px 5px;">
                             @can('vehicle-edit')
                             <a onclick="edititem({{ $vehicle->id }})">
                                 <img src="{{ asset('assets/images/icon/edit.png') }}" alt="edit"/>
@@ -86,16 +111,17 @@
                             &nbsp;
                             <img src="{{ asset('storage/vehicle/'.$vehicle->image) }}" alt="{{$vehicle->registration_number}}" style="width: 100px; height:auto;"/>
                         </td>
-                        <td style="width: 11%;">{{$vehicle->registration_number}}
+                        <td style="width: 11%; padding: 0px 5px;text-align: center;"><span style="padding: 5px;border-radius: 5px;background-color:{{$vehicle->registration_plate_colour}}">{{$vehicle->registration_number}}</span>
                         
-                        <td style="width:6%;">{{ $vehicle->brand->brand_name }}</td>
-                        <td style="width:8%;">{{ $vehicle->model }}</td>
-                        <td style="width:10%;">{{ $vehicle->derivative }}</td>
-                        <td style="width:11%;">{{ $vehicle->region->region_name }}</td>
-                        <td style="width:10%;">{{ $vehicle->department->department_name }}</td>
-                        <td style="width:6%;">{{ $vehicle->vin }}</td>
-                        <td style="width:10%;">{{ $vehicle->adoption_date }}</td>
-                        <td style="width:8%;">{{ $vehicle->projected_defleet_date }}</td>
+                        <td style="width:6%; padding: 0px 5px;">{{ $vehicle->brand->brand_name }}</td>
+                        <td style="width:8%; padding: 0px 5px;">{{ $vehicle->model }}</td>
+                        <td style="width:10%; padding: 0px 5px;">{{ $vehicle->derivative }}</td>
+                        <td style="width:11%; padding: 0px 5px;">{{ $vehicle->region->region_name }}</td>
+                        <td style="width:10%; padding: 0px 5px;">{{ $vehicle->department->department_name }}</td>
+                        <td style="width:6%; padding: 0px 5px;">{{ $vehicle->vin }}</td>
+                        <td style="width:10%; padding: 0px 5px;">{{ $vehicle->adoption_date }}</td>
+                        
+                        <td style="width:8%; padding: 0px 5px;">{{ $vehicle->projected_defleet_date }}</td>
                         <td style="width: 5%">
 
 
@@ -166,7 +192,7 @@
                     <div class="form-group">
                       <strong>Brand:</strong>
                           <select name="brand_id" class="form-control custom-modal-textbox">
-                            <option value="">Select</option>
+                           
                             @foreach ($brands as $key=>$brand)
                             <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
                             @endforeach
@@ -192,7 +218,7 @@
                     <div class="form-group">
                       <strong>Region:</strong>
                         <select name="region_id" class="form-control custom-modal-textbox">
-                            <option value="">Select</option>
+                           
                             @foreach ($regions as $key=>$region)
                             <option value="{{$region->id}}">{{$region->region_name}}</option>
                             @endforeach
@@ -204,7 +230,7 @@
                     <div class="form-group">
                       <strong>Department:</strong>
                       <select name="department_id" class="form-control custom-modal-textbox">
-                        <option value="">Select</option>
+                        
                             @foreach ($departments as $key=>$department)
                             <option value="{{$department->id}}">{{$department->department_name}}</option>
                             @endforeach
