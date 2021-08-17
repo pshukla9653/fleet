@@ -11,6 +11,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\LoanTypeController;
+use App\Http\Controllers\VehicleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('loantypes', LoanTypeController::class);
     Route::post('edit-loantype', [LoanTypeController::class, 'edit']);
     Route::post('delete-loantype', [LoanTypeController::class, 'destroy']);
+    Route::resource('vehicles', VehicleController::class);
+    Route::post('edit-vehicle', [VehicleController::class, 'edit']);
+    Route::post('delete-vehicle', [VehicleController::class, 'destroy']);
     
 	
 });

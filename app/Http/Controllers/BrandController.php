@@ -67,9 +67,9 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         if($request->id){
-            $validation = ['brand_name' => 'unique:brands,brand_name,'.$request->id];
+            $validation = ['brand_name' => 'unique:brands,brand_name,'.$request->id,'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'];
         }else{
-            $validation = ['brand_name' => 'required|unique:brands,brand_name'];
+            $validation = ['brand_name' => 'required|unique:brands,brand_name','image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'];
         }
 		$this->validate($request, $validation);
 
@@ -94,11 +94,7 @@ class BrandController extends Controller
         }
         else{
         //
-		$this->validate($request, [
-            'brand_name' => 'required',
-             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-  
+		
         $input = $request->all();
   
         if ($image = $request->file('image')) {

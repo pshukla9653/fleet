@@ -122,7 +122,7 @@
 										<li style="margin-left:12px;" class="{{ (request()->segment(1) == 'roles') ? 'active' : '' }}"><a href="{{ route('roles.index') }}">Roles</a></li>
 										@endcan
 										@can('vehicle-list')
-										<li class="{{ (request()->segment(1) == 'vehicle') ? 'active' : '' }}"><a href="#">Vehicles</a></li>
+										<li class="{{ (request()->segment(1) == 'vehicles') ? 'active' : '' }}"><a href="{{ route('vehicles.index') }}">Vehicles</a></li>
 										@endcan
 										@can('region-list')
 										<li class="{{ (request()->segment(1) == 'regions') ? 'active' : '' }}"><a href="{{ route('regions.index') }}">Regions</a></li>
@@ -196,7 +196,7 @@
 
 	<div class="navbar-collapse collapse" id="navbar-mobile">
 		
-		<div class="nav navbar-nav"><h6 style="margin-top: 16px; text-transform: uppercase;"><strong>@yield('heading')</strong></h6></div>
+		<div class="nav navbar-nav"><h6 style="margin-top: 16px; text-transform: uppercase;"><strong>@yield('heading-pre')@yield('heading')</strong></h6></div>
 		<ul class="nav navbar-nav navbar-right">
 				
 

@@ -52,6 +52,11 @@
          <strong>{{ $message }}</strong>
         </div>
     @enderror
+    @error('image')
+    <div class="alert alert-danger">
+         <strong>{{ $message }}</strong>
+        </div>
+    @enderror
     <div class="panel-body" style="padding: 0px 10px 10px 10px;">
       <div class="row"> 
     

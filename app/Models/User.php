@@ -54,7 +54,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Returns the user's avatar image.
+     * Returns the company name.
      *
      * @return HasOne
      */

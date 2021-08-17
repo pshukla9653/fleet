@@ -45,6 +45,10 @@ class PermissionTableSeeder extends Seeder
            'loantype-create',
            'loantype-edit',
            'loantype-delete',
+           'vehicle-list',
+           'vehicle-create',
+           'vehicle-edit',
+           'vehicle-delete'
         ];
      
         foreach ($permissions as $permission) {
