@@ -67,7 +67,7 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         if($request->id){
-            $validation = ['brand_name' => 'required|unique:brands,brand_name,'.$request->id];
+            $validation = ['brand_name' => 'unique:brands,brand_name,'.$request->id];
         }else{
             $validation = ['brand_name' => 'required|unique:brands,brand_name'];
         }

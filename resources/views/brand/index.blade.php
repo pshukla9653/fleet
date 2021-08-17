@@ -121,7 +121,7 @@
         
          
           <div class="form-group"> <strong>{{ __('Brand Logo') }}:</strong>
-            <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" required autocomplete="image" >
+            <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" autocomplete="image" id="image" >
 
                                 @error('filenames[]')
                                     <span class="invalid-feedback" role="alert">
@@ -168,6 +168,7 @@ function edititem(id) {
               $('#item_id').val(res.id);
               $('#brand_name').val(res.brand_name);
               $('#popup_model').modal('show');
+              $('#image').removeAttr('required','required');
               
              
               
@@ -219,6 +220,8 @@ function edititem(id) {
         $('#form_heading').html("Add Brand");
         $('#brand_name').val();
         $('#btn').html('Submit');
+        $('#image').removeAttr('required','required');
+        $('#image').attr('required','required');
         $('#popup_model').modal('show');
      });
   
