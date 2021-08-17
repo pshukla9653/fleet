@@ -131,7 +131,7 @@
                               </div>
       </div>
   </div>
-  <div id="img-review"></div>
+  <div id="img-review" style="padding: 10px;"></div>
   
 </div>
 
@@ -156,7 +156,7 @@ function edititem(id) {
          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          }
      });
-        
+        var filepath = "{{asset('storage')}}";
      $.ajax({
             type:"POST",
             url: "{{ url('edit-brand') }}",
@@ -167,9 +167,10 @@ function edititem(id) {
              $('#btn').html('Update');
               $('#item_id').val(res.id);
               $('#brand_name').val(res.brand_name);
+              var filesrc = filepath+'/'+res.file_name;
               $('#popup_model').modal('show');
               $('#image').removeAttr('required','required');
-              
+              $('#img-review').html('<img src="'+filesrc+'" width="50" height="50"/>');
              
               
            }
@@ -222,6 +223,8 @@ function edititem(id) {
         $('#btn').html('Submit');
         $('#image').removeAttr('required','required');
         $('#image').attr('required','required');
+        $('#img-review').html('');
+        $('#item_id').val('');
         $('#popup_model').modal('show');
      });
   
