@@ -109,7 +109,7 @@
                             </a>
                             @endcan
                             &nbsp;
-                            <img src="{{ asset('storage/vehicle/'.$vehicle->image) }}" alt="{{$vehicle->registration_number}}" style="width: 100px; height:auto;"/>
+                            <img src="{{ asset('storage/'.$vehicle->image) }}" alt="{{$vehicle->registration_number}}" style="width: 100px; height:auto;"/>
                         </td>
                         <td style="width: 11%; padding: 0px 5px;text-align: center;"><span style="padding: 5px;border-radius: 5px;background-color:{{$vehicle->registration_plate_colour}}">{{$vehicle->registration_number}}</span>
                         
@@ -181,8 +181,8 @@
                   </div>
                   <div class="form-group">
                     <strong>Vehicle Spec Sheets:</strong>
-                    {!! Form::file('spec_sheet[]', null, array('class' =>
-                    'form-control custom-modal-textbox','style'=>'padding:10px!important;','multiple'=>'multiple')) !!}
+                    
+                    <input type="file" name="spec_sheet[]" class="form-control custom-modal-textbox" style="padding:10px!important;" multiple/>
                     <div class="text-info">Can be upload multiple files (Only PDF)</div>
                     <div class="text-danger" id="spec_sheet[]"></div>
                   </div>

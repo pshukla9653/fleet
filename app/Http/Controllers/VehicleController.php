@@ -75,14 +75,14 @@ class VehicleController extends Controller
                         ];
         }
 		$this->validate($request, $validation);
-        $path = 'vehicle/';
+        $path = '/';
         if($request->id){
             $input = $request->all();
             $vehicle  = Vehicle::find($request->id);
-        if ($image = $request->hasfile('image')) {
+        if ($image = $request->file('image')) {
 
-            if (Storage::disk('public')->exists($path, $vehicle->image)) {
-                Storage::disk('public')->delete($path, $vehicle->image);
+            if (Storage::disk('public')->exists($path, $image)) {
+                Storage::disk('public')->delete($path, $image);
             }
             $image_name= Storage::disk('public')->put($path, $image);
             $input['image'] = $image_name;
@@ -92,8 +92,8 @@ class VehicleController extends Controller
         }else{
             unset($input['image']);
         }
-        if($spec_sheet = $request->hasfile('spec_sheet')){
-            foreach($spec_sheet as $spec){
+        if($spec_sheet = $request->file('spec_sheet')){
+            foreach($spec_sheet as $key=>$spec){
                 $file_name= Storage::disk('public')->put($path, $spec);
 			    $vehicle_specs['vehicle_id'] = $request->id;
                 $vehicle_specs['file_name'] = $file_name;
@@ -108,7 +108,7 @@ class VehicleController extends Controller
   
         $input = $request->all();
   
-        if ($image = $request->hasfile('image')) {
+        if ($image = $request->file('image')) {
             $image_name= Storage::disk('public')->put($path, $image);
             $input['image'] = $image_name;
 			$input['company_id'] = Auth()->user()->company_id;
@@ -116,8 +116,8 @@ class VehicleController extends Controller
         
     
         $vahicle = Vehicle::create($input);
-        if($spec_sheet = $request->hasfile('spec_sheet')){
-            foreach($spec_sheet as $spec){
+        if($spec_sheet = $request->file('spec_sheet')){
+            foreach($spec_sheet as $key=>$spec){
                 $file_name= Storage::disk('public')->put($path, $spec);
 			    $vehicle_specs['vehicle_id'] = $vahicle['id'];
                 $vehicle_specs['file_name'] = $file_name;
@@ -126,7 +126,7 @@ class VehicleController extends Controller
         }
      
         }
-        return redirect()->route('vehicle.index')
+        return redirect()->route('vehicles.index')
                         ->with('success','Vehicle created successfully');
 						
     
