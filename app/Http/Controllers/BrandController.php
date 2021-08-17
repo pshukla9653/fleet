@@ -28,11 +28,16 @@ class BrandController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-        //
-		$brand = Brand::orderBy('id','DESC')->paginate(5);
-        return view('brand.index', compact('brand'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+    {        
+        if($request->input('search')){
+            $query = $request->input('search');
+            $brand = Brand::where('brand_name', 'LIKE', '%'. $query. '%')->orderBy('id','DESC')->paginate(10);
+            return view('brand.index', compact('brand'));            
+        }else{
+            $brand = Brand::orderBy('id','DESC')->paginate(5);
+            return view('brand.index', compact('brand'))
+                ->with('i', ($request->input('page', 1) - 1) * 5);
+        }
     }
 
     /**

@@ -130,13 +130,15 @@
                                         <strong>First Name:</strong>
                                         {!! Form::text('first_name', null, array('placeholder' => 'First Name','class'
                                         => 'form-control custom-modal-textbox', 'id' =>'first_name')) !!}
-                                    </div>
+                                        <div class="text-danger" id="first_name_msg"></div>
+                                    </div>                                    
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>Last Name:</strong>
                                         {!! Form::text('last_name', null, array('placeholder' => 'Last Name','class' =>
                                         'form-control custom-modal-textbox', 'id' =>'last_name')) !!}
+                                        <div class="text-danger" id="last_name_msg"></div>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -144,6 +146,7 @@
                                         <strong>Email:</strong>
                                         {!! Form::text('email', null, array('placeholder' => 'Email','class' =>
                                         'form-control custom-modal-textbox', 'id' =>'email')) !!}
+                                        <div class="text-danger" id="email_msg"></div>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -151,6 +154,7 @@
                                         <strong>Password:</strong>
                                         {!! Form::password('password', array('placeholder' => 'Password','class' =>
                                         'form-control custom-modal-textbox', 'id' =>'password')) !!}
+                                        <div class="text-danger" id="password_msg"></div>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -311,7 +315,16 @@ $(document).ready(function($) {
                 window.location.reload();
                 //$("#btn").html('Submit');
                 $("#btn").attr("disabled", false);
+            },
+            error: function(xhr, status, error) {
+              var err = JSON.parse(xhr.responseText);
+              $("#first_name_msg").html(err.errors.first_name);
+              $("#email_msg").html(err.errors.email);
+              $("#password_msg").html(err.errors.password);
+              $("#btn").html('Submit');
+              $("#btn"). attr("disabled", false);
             }
+
         });
     });
 });
