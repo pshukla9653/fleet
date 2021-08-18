@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Storage;
 
 class VehicleController extends Controller
 {
+    
+    function __construct()
+    {
+         $this->middleware('permission:vehicle-list|vehicle-create|vehicle-edit|vehicle-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:vehicle-create', ['only' => ['create','store']]);
+         $this->middleware('permission:vehicle-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:vehicle-delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -79,10 +88,11 @@ class VehicleController extends Controller
         if($request->id){
             $input = $request->all();
             $vehicle  = Vehicle::find($request->id);
-        if ($image = $request->file('image')) {
+            if ($request->hasfile('image')) {
+                $image = $request->file('image');
 
-            if (Storage::disk('public')->exists($path, $image)) {
-                Storage::disk('public')->delete($path, $image);
+            if (Storage::disk('public')->exists($path, $vehicle->image)) {
+                Storage::disk('public')->delete($path, $vehicle->image);
             }
             $image_name= Storage::disk('public')->put($path, $image);
             $input['image'] = $image_name;
@@ -92,15 +102,19 @@ class VehicleController extends Controller
         }else{
             unset($input['image']);
         }
-        if($spec_sheet = $request->file('spec_sheet')){
+        if($request->hasfile('spec_sheet')){
+            $spec_sheet = $request->file('spec_sheet');
             foreach($spec_sheet as $key=>$spec){
                 $file_name= Storage::disk('public')->put($path, $spec);
 			    $vehicle_specs['vehicle_id'] = $request->id;
                 $vehicle_specs['file_name'] = $file_name;
                 DB::table('vehicle_specs')->insert($vehicle_specs);
             }
-        }  
-        $brand->update($input);
+        }
+        else{
+            unset($input['spec_sheet']);
+        } 
+        $vehicle->update($input);
         }
         else{
         //
@@ -108,7 +122,8 @@ class VehicleController extends Controller
   
         $input = $request->all();
   
-        if ($image = $request->file('image')) {
+        if ($request->hasfile('image')) {
+            $image = $request->file('image');
             $image_name= Storage::disk('public')->put($path, $image);
             $input['image'] = $image_name;
 			$input['company_id'] = Auth()->user()->company_id;
@@ -116,7 +131,8 @@ class VehicleController extends Controller
         
     
         $vahicle = Vehicle::create($input);
-        if($spec_sheet = $request->file('spec_sheet')){
+        if($request->hasfile('spec_sheet')){
+            $spec_sheet = $request->file('spec_sheet');
             foreach($spec_sheet as $key=>$spec){
                 $file_name= Storage::disk('public')->put($path, $spec);
 			    $vehicle_specs['vehicle_id'] = $vahicle['id'];
@@ -147,9 +163,14 @@ class VehicleController extends Controller
      * @param  \App\Models\Vehicle  $vehicle
      * @return \Illuminate\Http\Response
      */
-    public function edit(Vehicle $vehicle)
+    public function edit(Request $request)
     {
         //
+        $vehicle  = Vehicle::find($request->id);
+        $vehicle->specs = DB::table('vehicle_specs')->where('vehicle_id', $request->id)->get();
+    	//var_dump($brand); exit;
+        return response()->json($vehicle);
+
     }
 
     /**

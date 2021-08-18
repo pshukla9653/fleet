@@ -141,6 +141,14 @@
         </div>
     </div>
 </div>
+<style>
+ #uploaded_spec p{
+  cursor: pointer;
+ }
+ #uploaded_spec p:hover{
+  background:#3a6d7f;
+ }
+</style> 
 <div id="popup_model" class="modal fade">
     <div class="modal-dialog modal-full">
       <div class="modal-content" style="background-color: #f2f2f2;">
@@ -150,9 +158,7 @@
         </div>
         <h6 class="modal-title md-heading-custom" id="form_heading"></h6>
         <div class="modal-body md-body-custom">
-          <div class="alert alert-danger print-error-msg" style="display:none">
-            <ul></ul>
-        </div>
+         
         <form action="{{route('vehicles.store')}}" id="itemform" class="form-horizontal" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
@@ -160,7 +166,9 @@
                 <div class="col-md-6">
                   <div id="image-review" style="height: 220px; border: 1px solid #bbb8b8;
                   background-color: #f2f2f2; width:75%; margin:20px 20px 20px 0px;">
+                  
                   </div>
+                  <div id="image-text" style="position: relative;bottom: 65px;left: 21px;width: fit-content;padding: 5px;border-radius: 5px;"></div>
                   <div class="form-group">
                     <strong>Upload Image:</strong>
                     {!! Form::file('image', null, array('placeholder' => 'Registration No.','class' =>
@@ -179,8 +187,12 @@
                     'form-control custom-modal-textbox', 'id' =>'notes','rows'=>'2','style'=>'width:75%;')) !!}
                     <div class="text-danger" id="notes"></div>
                   </div>
+                  <strong>Vehicle Spec Sheets:</strong>
+                  <div style="height: 220px; border: 1px solid #bbb8b8;
+                  background-color: #f2f2f2; width:75%; margin:20px 20px 20px 0px; padding:5px;" id="uploaded_spec">
+                  </div>
                   <div class="form-group">
-                    <strong>Vehicle Spec Sheets:</strong>
+                    
                     
                     <input type="file" name="spec_sheet[]" class="form-control custom-modal-textbox" style="padding:10px!important;" multiple/>
                     <div class="text-info">Can be upload multiple files (Only PDF)</div>
@@ -191,7 +203,7 @@
                   <input type="hidden" id="item_id" name="id">
                     <div class="form-group">
                       <strong>Brand:</strong>
-                          <select name="brand_id" class="form-control custom-modal-textbox">
+                          <select name="brand_id" id="brand_id" class="form-control custom-modal-textbox">
                            
                             @foreach ($brands as $key=>$brand)
                             <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
@@ -217,7 +229,7 @@
                             
                     <div class="form-group">
                       <strong>Region:</strong>
-                        <select name="region_id" class="form-control custom-modal-textbox">
+                        <select name="region_id" id="region_id" class="form-control custom-modal-textbox">
                            
                             @foreach ($regions as $key=>$region)
                             <option value="{{$region->id}}">{{$region->region_name}}</option>
@@ -229,7 +241,7 @@
                             
                     <div class="form-group">
                       <strong>Department:</strong>
-                      <select name="department_id" class="form-control custom-modal-textbox">
+                      <select name="department_id" id="department_id" class="form-control custom-modal-textbox">
                         
                             @foreach ($departments as $key=>$department)
                             <option value="{{$department->id}}">{{$department->department_name}}</option>
@@ -350,31 +362,39 @@ function edititem(id) {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
+    var filepath = "{{asset('storage')}}";
     // ajax
     $.ajax({
         type: "POST",
-        url: "{{ url('edit-user') }}",
+        url: "{{ url('edit-vehicle') }}",
         data: {
             id: id
         },
         dataType: 'json',
         success: function(res) {
-            $('#form_heading').html("Update User");
+            $('#form_heading').html("Configure Vehicle");
             $('#btn').html('Update');
-            $('#item_id').val(res.user.id);
-            $('#first_name').val(res.user.first_name);
-            $('#last_name').val(res.user.last_name);
-            $('#email').val(res.user.email);
+            $('#item_id').val(res.id);
+            $.each(res, function(key, value) {
+              $('#'+key).val(value);
+            });
+            
+            var specs = res.specs;
+            $.each(specs, function(key, value) {
+              console.log(value.file_name);
+              $('#uploaded_spec').append('<p>'+value.file_name+'</p>');
+            });
+            
+            
+            var filesrc = filepath+'/'+res.image;
+            $('#image-review').html('<img src="'+filesrc+'" style="width:100%;height:100%"/>');
+            $('#image-text').html(res.registration_number);
+            $('#image-text').css('background-color', res.registration_plate_colour);
             $('#popup_model').modal('show');
+            //console.log(res.specs);
+//uploaded_spec
 
-
-        //     var first_name = $("#first_name").val();
-        // var last_name = $("#last_name").val();
-        // var email = $("#email").val();
-        // var password = $("#password").val();
-        // var confirmpassword = $("#confirm-password").val();
-        // var roles = $("#roles").val();
+       
 
         }
     });
@@ -414,7 +434,7 @@ $(document).ready(function($) {
     $('#additem').click(function() {
 
         $('#itemform').trigger("reset");
-        $('#form_heading').html("Add User");
+        $('#form_heading').html("Configure Vehicle");
         $('#btn').html('Submit');
         $('#popup_model').modal('show');
     });
