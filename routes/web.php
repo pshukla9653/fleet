@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('vehicles', VehicleController::class);
     Route::post('edit-vehicle', [VehicleController::class, 'edit']);
     Route::post('delete-vehicle', [VehicleController::class, 'destroy']);
+    Route::post('deletespec-vehicle', [VehicleController::class, 'delete']);
     
 	
 });

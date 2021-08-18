@@ -33,13 +33,13 @@ class VehicleController extends Controller
 
         if($request->input('search')){
             $query = $request->input('search');
-            $vehicles = Vehicle::where('registration_number', 'LIKE', '%'. $query. '%')->orderBy('id','ASC')->paginate(10);
+            $vehicles = Vehicle::where('registration_number', 'LIKE', '%'. $query. '%')->orderBy('order_number','ASC')->paginate(10);
            
-            return view('vehicle.index', compact('vehicles'));
+            return view('vehicle.index', compact('vehicles','brands','regions','departments'));
             
         }
         else{
-        $vehicles = Vehicle::orderBy('id','ASC')->paginate(5);
+        $vehicles = Vehicle::orderBy('order_number','ASC')->paginate(5);
         
         //var_dump($brands); exit;
         return view('vehicle.index', compact('vehicles','brands','regions','departments'))
@@ -173,17 +173,7 @@ class VehicleController extends Controller
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Vehicle  $vehicle
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Vehicle $vehicle)
-    {
-        //
-    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -191,8 +181,30 @@ class VehicleController extends Controller
      * @param  \App\Models\Vehicle  $vehicle
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Vehicle $vehicle)
+    public function destroy(Request $request)
     {
         //
+		$vehicle = Vehicle::Find($request->id);
+		if (Storage::disk('public')->exists($vehicle->image)) {
+            Storage::disk('public')->delete($vehicle->image);
+        }
+        
+		Vehicle::find($request->id)->delete();
+		
+        return response()->json(['success' => true]);
+    }
+
+    public function delete(Request $request)
+    {
+        //
+		$vehicle = DB::table('vehicle_specs')->where('id', $request->id)->get();
+        //var_dump($vehicle[0]->file_name); exit;
+		if (Storage::disk('public')->exists($vehicle[0]->file_name)) {
+            Storage::disk('public')->delete($vehicle[0]->file_name);
+        }
+        
+		DB::table('vehicle_specs')->where('id', $request->id)->delete();
+		
+        return response()->json(['success' => true]);
     }
 }

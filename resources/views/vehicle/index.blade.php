@@ -39,23 +39,7 @@
     <!-- /main charts -->
     <div class="panel panel-flat">
         <div class="panel-heading" style="padding: 0px;">
-            <h5 class="panel-title">
-                <table width="100%" style="font-size: small; font-weight: 700; text-align: left;">
-                    <tr>
-                        <td style="width: 15%;">Vehicles Images</td>
-                        <td style="width: 9%;">Registration No.</td>
-                        <td style="width: 6%;">Brand</td>
-                        <td style="width: 8%;">Model</td>
-                        <td style="width: 10%;">Derivative</td>
-                        <td style="width: 10%;">Region</td>
-                        <td style="width: 10%;">Department</td>
-                        <td style="width: 8%;">Vin</td>
-                        <td style="width: 8%;">Adoption Date</td>
-                        <td style="width: 8%;">Projected Defleet Date</td>
-                        <td style="width: 4%;">&nbsp;&nbsp;</td>
-                    </tr>
-                </table>
-            </h5>
+            
             <div class="heading-elements">
               </div>
               @error('registration_number')
@@ -99,7 +83,21 @@
 
 
                 <table class="table table-bordered table-responsive">
-
+                  <thead>
+                  <tr>
+                    <th style="border-top: none;padding: 0px;font-weight: 600;text-align: center;">Vehicles Images</th>
+                    <th style="border-top: none;padding: 0px;font-weight: 600;text-align: center;">Registration No.</th>
+                    <th style="border-top: none;padding: 0px;font-weight: 600;text-align: center;">Brand</th>
+                    <th style="border-top: none;padding: 0px;font-weight: 600;text-align: center;">Model</th>
+                    <th style="border-top: none;padding: 0px;font-weight: 600;text-align: center;">Derivative</th>
+                    <th style="border-top: none;padding: 0px;font-weight: 600;text-align: center;">Region</th>
+                    <th style="border-top: none;padding: 0px;font-weight: 600;text-align: center;">Department</th>
+                    <th style="border-top: none;padding: 0px;font-weight: 600;text-align: center;">Vin</th>
+                    <th style="border-top: none;padding: 0px;font-weight: 600;text-align: center;">Adoption Date</th>
+                    <th style="border-top: none;padding: 0px 0px 0px 10px;font-weight: 600;" colspan="2">Projected Defleet Date</th>
+                    
+                </tr>
+                  </thead>
                     @foreach ($vehicles as $key => $vehicle)
                     <tr>
                         <td style="width: 15%; padding: 0px 5px;">
@@ -111,17 +109,16 @@
                             &nbsp;
                             <img src="{{ asset('storage/'.$vehicle->image) }}" alt="{{$vehicle->registration_number}}" style="width: 100px; height:auto;"/>
                         </td>
-                        <td style="width: 11%; padding: 0px 5px;text-align: center;"><span style="padding: 5px;border-radius: 5px;background-color:{{$vehicle->registration_plate_colour}}">{{$vehicle->registration_number}}</span>
+                        <td style="text-align: center;"><span style="padding: 5px;border-radius: 5px;background-color:{{$vehicle->registration_plate_colour}}">{{$vehicle->registration_number}}</span>
                         
-                        <td style="width:6%; padding: 0px 5px;">{{ $vehicle->brand->brand_name }}</td>
-                        <td style="width:8%; padding: 0px 5px;">{{ $vehicle->model }}</td>
-                        <td style="width:10%; padding: 0px 5px;">{{ $vehicle->derivative }}</td>
-                        <td style="width:11%; padding: 0px 5px;">{{ $vehicle->region->region_name }}</td>
-                        <td style="width:10%; padding: 0px 5px;">{{ $vehicle->department->department_name }}</td>
-                        <td style="width:6%; padding: 0px 5px;">{{ $vehicle->vin }}</td>
-                        <td style="width:10%; padding: 0px 5px;">{{ $vehicle->adoption_date }}</td>
-                        
-                        <td style="width:8%; padding: 0px 5px;">{{ $vehicle->projected_defleet_date }}</td>
+                        <td style="text-align: center;">{{ $vehicle->brand->brand_name }}</td>
+                        <td style="text-align: center;">{{ $vehicle->model }}</td>
+                        <td style="text-align: center;">{{ $vehicle->derivative }}</td>
+                        <td style="text-align: center;">{{ $vehicle->region->region_name }}</td>
+                        <td style="text-align: center;">{{ $vehicle->department->department_name }}</td>
+                        <td style="text-align: center;">{{ $vehicle->vin }}</td>
+                        <td style="">{{ $vehicle->adoption_date }}</td>
+                        <td style="">{{ $vehicle->projected_defleet_date }}</td>
                         <td style="width: 5%">
 
 
@@ -141,14 +138,7 @@
         </div>
     </div>
 </div>
-<style>
- #uploaded_spec p{
-  cursor: pointer;
- }
- #uploaded_spec p:hover{
-  background:#3a6d7f;
- }
-</style> 
+
 <div id="popup_model" class="modal fade">
     <div class="modal-dialog modal-full">
       <div class="modal-content" style="background-color: #f2f2f2;">
@@ -188,8 +178,12 @@
                     <div class="text-danger" id="notes"></div>
                   </div>
                   <strong>Vehicle Spec Sheets:</strong>
-                  <div style="height: 220px; border: 1px solid #bbb8b8;
+                  <select size="8" style="border: 1px solid #bbb8b8;
                   background-color: #f2f2f2; width:75%; margin:20px 20px 20px 0px; padding:5px;" id="uploaded_spec">
+                  </select>
+                  <div class="form-group" style="text-align:right;width:75%;">
+                  <button type="button" id="view_specs" class="btn custom-modal-btn btn-info">View</button>
+                <button type="button" id="delete_specs" class="btn custom-modal-btn btn-danger">Delete</button>
                   </div>
                   <div class="form-group">
                     
@@ -363,6 +357,7 @@ function edititem(id) {
         }
     });
     var filepath = "{{asset('storage')}}";
+    $('#itemform').trigger("reset");
     // ajax
     $.ajax({
         type: "POST",
@@ -381,8 +376,8 @@ function edititem(id) {
             
             var specs = res.specs;
             $.each(specs, function(key, value) {
-              console.log(value.file_name);
-              $('#uploaded_spec').append('<p>'+value.file_name+'</p>');
+             
+              $('#uploaded_spec').append('<option value="'+value.id+'">'+value.file_name+'</option>');
             });
             
             
@@ -413,7 +408,7 @@ function deleteitem(id) {
         // ajax
         $.ajax({
             type: "POST",
-            url: "{{ url('delete-user') }}",
+            url: "{{ url('delete-vehicle') }}",
             data: {
                 id: id
             },
@@ -438,6 +433,33 @@ $(document).ready(function($) {
         $('#btn').html('Submit');
         $('#popup_model').modal('show');
     });
+    $('#view_specs').click(function() {
+      
+      var filepath = "{{asset('storage')}}/";
+      var filename = $('#uploaded_spec option:selected').text();
+      window.open(filepath+filename, '_blank');
+
+    });
+    $('#delete_specs').click(function() {
+
+      if (confirm("Delete Vehicle Spec?") == true) {
+        var id = $('#uploaded_spec').val();
+          $.ajax({
+              type: "POST",
+              url: "{{ url('deletespec-vehicle') }}",
+              data: {
+                  id: id
+              },
+              dataType: 'json',
+              success: function(res) {
+                  window.location.reload();
+              }
+          });
+  }
+        
+    });
+
+    //view_specs
 
 
 
