@@ -140,7 +140,7 @@
 </div>
 
 <div id="popup_model" class="modal fade">
-    <div class="modal-dialog modal-full">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content" style="background-color: #f2f2f2;">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><i class="icon-cancel-circle2"></i></button>
@@ -154,32 +154,31 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="col-md-6">
-                  <div id="image-review" style="height: 220px; border: 1px solid #bbb8b8;
-                  background-color: #f2f2f2; width:75%; margin:20px 20px 20px 0px;">
+                  <div id="image-review" style="height: 130px; border: 1px solid #bbb8b8;
+                  background-color: #f2f2f2; width:80%; margin:20px 20px 20px 0px;">
                   
                   </div>
                   <div id="image-text" style="position: relative;bottom: 65px;left: 21px;width: fit-content;padding: 5px;border-radius: 5px;"></div>
                   <div class="form-group">
                     <strong>Upload Image:</strong>
-                    {!! Form::file('image', null, array('placeholder' => 'Registration No.','class' =>
-                    'form-control custom-modal-textbox', 'id' =>'image','style'=>'padding:10px!important;')) !!}
+                    <input type="file" class="file-styled" name="image">
                     <div class="text-danger" id="image"></div>
                   </div>
                   <div class="form-group">
-                    <strong>Other Details:</strong>
+                    <strong style="padding: 0px 0px 0px 10px;">Other Details:</strong>
                     {!! Form::textarea('other_details', null, array('class' =>
-                    'form-control custom-modal-textbox', 'id' =>'other_details','rows'=>'2','style'=>'width:75%;')) !!}
+                    'form-control custom-modal-textbox', 'id' =>'other_details','rows'=>'2','style'=>'margin-bottom: 0px;margin-left: 10px;width:75%;')) !!}
                     <div class="text-danger" id="other_details"></div>
                   </div>
                   <div class="form-group">
-                    <strong>Notes:</strong>
+                    <strong style="padding: 0px 0px 0px 10px;">Notes:</strong>
                     {!! Form::textarea('notes', null, array('class' =>
-                    'form-control custom-modal-textbox', 'id' =>'notes','rows'=>'2','style'=>'width:75%;')) !!}
+                    'form-control custom-modal-textbox', 'id' =>'notes','rows'=>'2','style'=>'margin-bottom: 0px;margin-left: 10px;width:75%;')) !!}
                     <div class="text-danger" id="notes"></div>
                   </div>
                   <strong>Vehicle Spec Sheets:</strong>
-                  <select size="8" style="border: 1px solid #bbb8b8;
-                  background-color: #f2f2f2; width:75%; margin:20px 20px 20px 0px; padding:5px;" id="uploaded_spec">
+                  <select size="4" style="border: 1px solid #bbb8b8;
+                  background-color: #f2f2f2; width:80%; margin:20px 20px 20px 0px; padding:5px;" id="uploaded_spec">
                   </select>
                   <div class="form-group" style="text-align:right;width:75%;">
                   <button type="button" id="view_specs" class="btn custom-modal-btn btn-info">View</button>
@@ -195,7 +194,7 @@
                 </div> 
                 <div class="col-md-3">
                   <input type="hidden" id="item_id" name="id">
-                    <div class="form-group">
+                    <div class="form-group" style="margin-top: 15px;">
                       <strong>Brand:</strong>
                           <select name="brand_id" id="brand_id" class="form-control custom-modal-textbox">
                            
@@ -271,7 +270,7 @@
                     </div>
                   </div> 
                   <div class="col-md-3">
-                      <div class="form-group">
+                      <div class="form-group" style="margin-top: 15px;">
                         <strong>Adoption Date:</strong>
                         {!! Form::date('adoption_date', null, array('class' =>
                         'form-control custom-modal-textbox', 'id' =>'adoption_date','style' =>'padding:0px!important;')) !!}
