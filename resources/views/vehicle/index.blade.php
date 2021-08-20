@@ -376,19 +376,19 @@
                       </div>
                       <div class="form-group">
                         <strong>Mileage:</strong>
-                        {!! Form::text('mileage', null, array('placeholder' => 'Mileage','class' =>
+                        {!! Form::number('mileage', null, array('placeholder' => 'Mileage','class' =>
                         'form-control custom-modal-textbox', 'id' =>'mileage')) !!}
                         <div class="text-danger" id="mileage"></div>
                       </div>
                       <div class="form-group">
                         <strong>Value:</strong>
-                        {!! Form::text('value', null, array('placeholder' => 'Value','class' =>
+                        {!! Form::number('value', null, array('placeholder' => 'Value','class' =>
                         'form-control custom-modal-textbox', 'id' =>'value')) !!}
                         <div class="text-danger" id="value"></div>
                       </div>
                       <div class="form-group">
                         <strong>Order No.:</strong>
-                        {!! Form::text('order_number', null, array('placeholder' => 'Order No','class' =>
+                        {!! Form::number('order_number', null, array('placeholder' => 'Order No','class' =>
                         'form-control custom-modal-textbox', 'id' =>'order_number')) !!}
                         <div class="text-danger" id="order_number"></div>
                       </div>
