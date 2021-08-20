@@ -72,6 +72,21 @@
                    <strong>{{ $message }}</strong>
                   </div>
               @enderror
+              @error('loan_cost')
+              <div class="alert alert-danger">
+                   <strong>{{ $message }}</strong>
+                  </div>
+              @enderror
+              @error('value')
+              <div class="alert alert-danger">
+                   <strong>{{ $message }}</strong>
+                  </div>
+              @enderror
+              @error('order_number')
+              <div class="alert alert-danger">
+                   <strong>{{ $message }}</strong>
+                  </div>
+              @enderror
           </div>
           <div class="panel-body" style="padding: 0px 10px 10px 10px;">
             <div class="row">
@@ -184,7 +199,14 @@
   top: 0;
   opacity: 0;
   }
- 
+ input[type="date"]::-webkit-calendar-picker-indicator{
+    position: absolute;
+    margin: 125px;
+    background-color: #f2f2f2;
+    padding: 7px;
+    border: 1px solid #bbb8b8;
+    border-radius: 2px;
+}
 </style>
 <div id="popup_model" class="modal fade">
     <div class="modal-dialog modal-lg">
@@ -201,14 +223,15 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="col-md-6">
+                  <div id="image-text" style="position: relative;bottom: -140px;left: 15px;width: fit-content;padding: 5px;border-radius: 5px;"></div>
                   <div id="image-review" style="height: 130px; border: 1px solid #bbb8b8;
                   background-color: #f2f2f2; width:80%; margin:20px 20px 0px 0px;">
                   
                   </div>
-                  <div id="image-text" style="position: relative;bottom: 40px;left: 15px;width: fit-content;padding: 5px;border-radius: 5px;"></div>
+                  
                   <div class="form-group">
                   <div style="text-align: right; padding-right:75px">
-                    <div class="upload-btn-wrapper" style="margin-top: 5px;">
+                    <div class="upload-btn-wrapper" style="margin-top: 4px;margin-right: -3px;">
                        <button class="btnsss">Upload Image</button>
                        <input type="file" name="image" onchange="loadFile(event)">
                     </div>
@@ -351,13 +374,13 @@
                       </div> 
                       <div class="form-group">
                           <strong>Lead Time:</strong>
-                          {!! Form::time('lead_time', null, array('class' =>
+                          {!! Form::text('lead_time', 0, array('class' =>
                           'form-control custom-modal-textbox', 'id' =>'lead_time')) !!}
                           <div class="text-danger" id="lead_time"></div>
                       </div>
                       <div class="form-group">
                         <strong>Lag Time:</strong>
-                        {!! Form::time('lag_time', null, array('class' =>
+                        {!! Form::text('lag_time', 0, array('class' =>
                         'form-control custom-modal-textbox', 'id' =>'lag_time')) !!}
                         <div class="text-danger" id="lag_time"></div>
                       </div>

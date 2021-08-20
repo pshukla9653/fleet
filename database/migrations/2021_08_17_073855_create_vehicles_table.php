@@ -49,7 +49,7 @@ class CreateVehiclesTable extends Migration
             $table->string('colour')->nullable();
             $table->string('mileage')->nullable();
             $table->float('value', 10, 2)->nullable();
-            $table->string('order_number')->nullable();
+            $table->unsignedInteger('order_number')->nullable();
             $table->text('other_details')->nullable();
             $table->text('notes')->nullable();
             $table->string('image');
