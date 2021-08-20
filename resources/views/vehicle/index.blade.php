@@ -138,7 +138,54 @@
         </div>
     </div>
 </div>
-
+<style type="text/css">
+  .upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  }
+  .btnsss{
+  border: 2px solid #0f91fb;
+  background-color: white;
+  padding: 2px 10px;
+  font-size: 10px;
+  background: #0f91fb;
+  color: white;
+  font-weight: 500;
+  }
+  .btnssss{
+  border: 2px solid #f90909;
+  background-color: white;
+  padding: 2px 10px;
+  font-size: 10px;
+  background: #f90909;
+  color: white;
+  margin-top: 10px;
+  }
+  .imgbtn {
+   position: absolute;
+   top: 76%;
+   left: 18%;
+   transform: translate(-50%, -50%);
+   -ms-transform: translate(-50%, -50%);
+   background-color: #555;
+   color: white;
+   font-size: 11px;
+   padding: 3px 16px;
+   border: none;
+   cursor: pointer;
+   border-radius: 0px;
+   text-align: center;
+  }
+  .upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  }
+ 
+</style>
 <div id="popup_model" class="modal fade">
     <div class="modal-dialog modal-lg">
       <div class="modal-content" style="background-color: #f2f2f2;">
@@ -155,15 +202,29 @@
               <div class="col-md-12">
                 <div class="col-md-6">
                   <div id="image-review" style="height: 130px; border: 1px solid #bbb8b8;
-                  background-color: #f2f2f2; width:80%; margin:20px 20px 20px 0px;">
+                  background-color: #f2f2f2; width:80%; margin:20px 20px 0px 0px;">
                   
                   </div>
-                  <div id="image-text" style="position: relative;bottom: 65px;left: 21px;width: fit-content;padding: 5px;border-radius: 5px;"></div>
+                  <div id="image-text" style="position: relative;bottom: 40px;left: 15px;width: fit-content;padding: 5px;border-radius: 5px;"></div>
                   <div class="form-group">
-                    <strong>Upload Image:</strong>
-                    <input type="file" class="file-styled" name="image">
-                    <div class="text-danger" id="image"></div>
-                  </div>
+                  <div style="text-align: right; padding-right:75px">
+                    <div class="upload-btn-wrapper" style="margin-top: 5px;">
+                       <button class="btnsss">Upload Image</button>
+                       <input type="file" name="image" onchange="loadFile(event)">
+                    </div>
+                    
+                 </div>
+                 <script>
+                    var loadFile = function(event) {
+                      var output = document.getElementById('output');
+                      output.src = URL.createObjectURL(event.target.files[0]);
+                      output.onload = function() {
+                        URL.revokeObjectURL(output.src) // free memory
+                      }
+                    };
+                 </script>
+                 
+                 </div>
                   <div class="form-group">
                     <strong style="padding: 0px 0px 0px 10px;">Other Details:</strong>
                     {!! Form::textarea('other_details', null, array('class' =>
@@ -177,17 +238,22 @@
                     <div class="text-danger" id="notes"></div>
                   </div>
                   <strong>Vehicle Spec Sheets:</strong>
-                  <select size="4" style="border: 1px solid #bbb8b8;
+                  <select name="sp" size="4" style="border: 1px solid #bbb8b8;
                   background-color: #f2f2f2; width:80%; margin:20px 20px 20px 0px; padding:5px;" id="uploaded_spec">
                   </select>
-                  <div class="form-group" style="text-align:right;width:75%;">
+                  <div class="form-group" style="text-align:right;width:83%;">
                   <button type="button" id="view_specs" class="btn custom-modal-btn btn-info">View</button>
                 <button type="button" id="delete_specs" class="btn custom-modal-btn btn-danger">Delete</button>
                   </div>
                   <div class="form-group">
-                    
-                    
-                    <input type="file" name="spec_sheet[]" class="form-control custom-modal-textbox" style="padding:10px!important;" multiple/>
+                   
+                    <div style="text-align:right;margin-right: 75px;">
+                     
+                      <div class="upload-btn-wrapper">
+                         <button class="btnsss" >Upload </button>
+                         <input  type="file" name="spec_sheet[]" multiple>
+                      </div>
+                   </div>
                     <div class="text-info">Can be upload multiple files (Only PDF)</div>
                     <div class="text-danger" id="spec_sheet[]"></div>
                   </div>
@@ -430,6 +496,10 @@ $(document).ready(function($) {
         $('#itemform').trigger("reset");
         $('#form_heading').html("Configure Vehicle");
         $('#btn').html('Submit');
+        $('#uploaded_spec').html('');
+        $('#image-review').html('');
+        $('#image-text').html('');
+        $('#image-text').css('background-color','');
         $('#popup_model').modal('show');
     });
     $('#view_specs').click(function() {
