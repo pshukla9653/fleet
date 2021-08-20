@@ -317,7 +317,7 @@
                               
                     <div class="form-group">
                       <strong>Loan Cost:</strong>
-                      {!! Form::text('loan_cost', null, array('placeholder' => '0.00','class' =>
+                      {!! Form::number('loan_cost', null, array('placeholder' => '0.00','class' =>
                       'form-control custom-modal-textbox', 'id' =>'loan_cost')) !!}
                       <div class="text-danger" id="loan_cost"></div>
                     </div>

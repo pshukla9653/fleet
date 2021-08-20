@@ -33,13 +33,13 @@ class VehicleController extends Controller
 
         if($request->input('search')){
             $query = $request->input('search');
-            $vehicles = Vehicle::where('registration_number', 'LIKE', '%'. $query. '%')->orderBy('order_number','ASC')->paginate(10);
+            $vehicles = Vehicle::where('registration_number', 'LIKE', '%'. $query. '%')->orderByRaw("CAST(order_number as UNSIGNED) ASC")->paginate(10);
            
             return view('vehicle.index', compact('vehicles','brands','regions','departments'));
             
         }
         else{
-        $vehicles = Vehicle::orderBy('order_number','ASC')->paginate(5);
+        $vehicles = Vehicle::orderByRaw("CAST(order_number as UNSIGNED) ASC")->paginate(5);
         
         //var_dump($brands); exit;
         return view('vehicle.index', compact('vehicles','brands','regions','departments'))
@@ -67,6 +67,7 @@ class VehicleController extends Controller
                             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
                             'model' => 'required',
                             'derivative' => 'required',
+                            'loan_cost' => 'required|numeric',
                             'vin' => 'required',
                             'adoption_date' => 'required',
                             'projected_defleet_date' => 'required',
@@ -77,6 +78,7 @@ class VehicleController extends Controller
                             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
                             'model' => 'required',
                             'derivative' => 'required',
+                            'loan_cost' => 'required|numeric',
                             'vin' => 'required',
                             'adoption_date' => 'required',
                             'projected_defleet_date' => 'required',
