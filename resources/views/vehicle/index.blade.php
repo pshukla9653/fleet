@@ -100,15 +100,15 @@
                 <table class="table table-bordered table-responsive">
                   <thead>
                   <tr>
-                    <th style="border-top: none;padding: 0px;font-weight: 600;text-align: center;">Vehicles Images</th>
-                    <th style="border-top: none;padding: 0px;font-weight: 600;text-align: center;">Registration No.</th>
-                    <th style="border-top: none;padding: 0px;font-weight: 600;text-align: center;">Brand</th>
-                    <th style="border-top: none;padding: 0px;font-weight: 600;text-align: center;">Model</th>
-                    <th style="border-top: none;padding: 0px;font-weight: 600;text-align: center;">Derivative</th>
-                    <th style="border-top: none;padding: 0px;font-weight: 600;text-align: center;">Region</th>
-                    <th style="border-top: none;padding: 0px;font-weight: 600;text-align: center;">Department</th>
-                    <th style="border-top: none;padding: 0px;font-weight: 600;text-align: center;">Vin</th>
-                    <th style="border-top: none;padding: 0px;font-weight: 600;text-align: center;">Adoption Date</th>
+                    <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Vehicles Images</th>
+                    <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Registration No.</th>
+                    <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Brand</th>
+                    <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Model</th>
+                    <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Derivative</th>
+                    <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Region</th>
+                    <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Department</th>
+                    <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Vin</th>
+                    <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Adoption Date</th>
                     <th style="border-top: none;padding: 0px 0px 0px 10px;font-weight: 600;" colspan="2">Projected Defleet Date</th>
                     
                 </tr>
@@ -201,7 +201,7 @@
   }
  input[type="date"]::-webkit-calendar-picker-indicator{
     position: absolute;
-    margin: 125px;
+    margin-left: 72%;
     background-color: #f2f2f2;
     padding: 7px;
     border: 1px solid #bbb8b8;
