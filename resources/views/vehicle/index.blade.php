@@ -230,7 +230,7 @@
                   </div>
                   
                   <div class="form-group">
-                  <div style="text-align: right; padding-right:75px">
+                  <div style="text-align: right; width: 78%;">
                     <div class="upload-btn-wrapper" style="margin-top: 4px;margin-right: -3px;">
                        <button class="btnsss">Upload Image</button>
                        <input type="file" name="image" onchange="loadFile(event)">
@@ -251,26 +251,26 @@
                   <div class="form-group">
                     <strong style="padding: 0px 0px 0px 10px;">Other Details:</strong>
                     {!! Form::textarea('other_details', null, array('class' =>
-                    'form-control custom-modal-textbox', 'id' =>'other_details','rows'=>'2','style'=>'margin-bottom: 0px;margin-left: 10px;width:75%;')) !!}
+                    'form-control custom-modal-textbox', 'id' =>'other_details','rows'=>'2','style'=>'margin-bottom: 0px;margin-left: 10px;width:76%;')) !!}
                     <div class="text-danger" id="other_details"></div>
                   </div>
                   <div class="form-group">
                     <strong style="padding: 0px 0px 0px 10px;">Notes:</strong>
                     {!! Form::textarea('notes', null, array('class' =>
-                    'form-control custom-modal-textbox', 'id' =>'notes','rows'=>'2','style'=>'margin-bottom: 0px;margin-left: 10px;width:75%;')) !!}
+                    'form-control custom-modal-textbox', 'id' =>'notes','rows'=>'2','style'=>'margin-bottom: 0px;margin-left: 10px;width:76%;')) !!}
                     <div class="text-danger" id="notes"></div>
                   </div>
                   <strong>Vehicle Spec Sheets:</strong>
                   <select name="sp" size="4" style="border: 1px solid #bbb8b8;
                   background-color: #f2f2f2; width:80%; margin:20px 20px 20px 0px; padding:5px;" id="uploaded_spec">
                   </select>
-                  <div class="form-group" style="text-align:right;width:83%;">
+                  <div class="form-group" style="text-align:right;width:82%;">
                   <button type="button" id="view_specs" class="btn custom-modal-btn btn-info">View</button>
                 <button type="button" id="delete_specs" class="btn custom-modal-btn btn-danger">Delete</button>
                   </div>
                   <div class="form-group">
                    
-                    <div style="text-align:right;margin-right: 75px;">
+                    <div style="text-align:right;width: 78%;">
                      
                       <div class="upload-btn-wrapper">
                          <button class="btnsss" >Upload </button>
