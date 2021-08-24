@@ -99,7 +99,7 @@
 
 								<!-- Main -->
 								<li class="navigation-header"><span>Menu</span> <i class="icon-menu" title="Main pages"></i></li>
-								<li class="{{ (request()->segment(1) == '') ? 'active' : '' }}"><a href="{{ url('/') }}"><i class="icon-home4"></i> <span>DASHBOARD</span></a><span class="sidebar-control sidebar-main-toggle hidden-xs"><i class="fa fa-angle-double-left pull-right" style="position: absolute;
+								<li class=""><a href="#"><i class="icon-home4"></i> <span>DASHBOARD</span></a><span class="sidebar-control sidebar-main-toggle hidden-xs"><i class="fa fa-angle-double-left pull-right" style="position: absolute;
 									margin-top: -6.5em;
 									margin-left: 18.2em;"></i></span></li>
 								@if(session()->get('company_id') == null)	
@@ -108,12 +108,12 @@
 									
 								</li>
 								@endif
-								@can('overview')	
-								<li class="{{ (request()->segment(1) == 'overview') ? 'active' : '' }}">
-									<a href="#"><i class="icon-stack2"></i> <span>OVERVIEW</span></a>
+									
+								<li class="{{ (request()->segment(1) == '') ? 'active' : '' }}">
+									<a href="{{ url('/') }}"><i class="icon-stack2"></i> <span>OVERVIEW</span></a>
 									
 								</li>
-								@endcan
+								
 								@can('configure')
 								<li>
 									<a href="#"><i class="icon-car"></i> <span>CONFIGURE</span></a>

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use App\Models\Vehicle;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $brands = DB::table('brands')->where('company_id', Auth()->user()->company_id)->get();
+        $regions = DB::table('regions')->where('company_id', Auth()->user()->company_id)->get();
+        $departments = DB::table('departments')->where('company_id', Auth()->user()->company_id)->get();
+        $vehicles = Vehicle::orderByRaw("CAST(order_number as UNSIGNED) ASC")->get();
+        return view('home', compact('brands','regions','departments','vehicles'));
     }
 }
