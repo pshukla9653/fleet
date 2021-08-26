@@ -4,7 +4,7 @@
 <style>
   input[type="date"]::-webkit-calendar-picker-indicator{
     position: absolute;
-    margin-left: 72%;
+    margin-left: 35%;
     background-color: #f2f2f2;
     padding: 7px;
     border: 1px solid #bbb8b8;
@@ -50,19 +50,29 @@
   <!-- Quick stats boxes --> 
   <div class="panel panel-flat">
     <div class="panel-body" style="padding:10px 10px 0px 10px;">
+      
       <div class="row"> 
-      <div class="col-md-2">
-        <div class="form-group">
+      <div class="col-md-2" style="width: 28.56%">
+        <div class="form-group" style="margin-bottom: -10px;">
           <strong>Start Date</strong>
           {!! Form::date('start_date', null, array('class' =>
-          'form-control custom-modal-textbox', 'id' =>'start_date','style' =>'padding:0px!important;','autofocus'=>'autofocus')) !!}
-          <div class="text-danger" id="start_date"></div>
+          'form-control custom-modal-textbox', 'id' =>'start_date','style' =>'padding:0px!important;width:150px;','autofocus'=>'autofocus')) !!}
+          
+          <button class="btn btn-outline-success" style="width: 143px;left: 250px;
+          bottom: 40px;">
+            <i class="fa fa-fast-backward"></i>
+            <i class="fa fa-step-backward"></i>
+            <span class="day-filter">Today</span>
+            <i class="fa fa-step-forward"></i>
+            <i class="fa fa-fast-forward"></i>
+          </button>
         </div> 
+       
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2" style="width: 14.28%">
         <div class="form-group">
           <strong>Date Range</strong>
-              <select name="date_range" id="date_range" style="width:90%;padding:5px;" class="form-control custom-modal-textbox">
+              <select name="date_range" id="date_range" style="padding:5px;" class="form-control custom-modal-textbox">
                 <option value="1">1 weeks</option>
                 <option value="2">2 weeks</option>
                 <option value="3">3 weeks</option>
@@ -71,41 +81,46 @@
               <div class="text-danger" id="date_range"></div>
         </div>  
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2" style="width: 14.28%">
         <div class="form-group">
           <strong>Brand</strong>
-              <select name="brand_id" id="brand_id" style="width:90%;padding:5px;" class="form-control custom-modal-textbox">
+          <form action="#">
+              <select name="brand_id" id="brand_id" onchange="submit();" style="padding:5px;" class="form-control custom-modal-textbox">
                 <option value="">All Brands</option>
                 @foreach ($brands as $key=>$brand)
                 <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
                 @endforeach
               </select>  
-              <div class="text-danger" id="brand_id"></div>
+          </form> 
         </div>  
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2" style="width: 14.28%">
         <div class="form-group">
           <strong>Department</strong>
-            <select name="department_id" style="width:90%;padding:5px;" id="department_id" class="form-control custom-modal-textbox">
+          <form action="#">
+            <select name="department_id" style="padding:5px;" onchange="submit();" id="department_id" class="form-control custom-modal-textbox">
                 <option value="">All Departments</option>
                   @foreach ($departments as $key=>$department)
                   <option value="{{$department->id}}">{{$department->department_name}}</option>
                   @endforeach
-            </select>  
+            </select> 
+          </form> 
         </div>  
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2" style="width: 14.28%">
         <div class="form-group">
           <strong>Region</strong>
-            <select name="region_id" style="width:90%;padding:5px;" id="region_id" class="form-control custom-modal-textbox">
+          <form action="#">
+            <select name="region_id" style="padding:5px;" onchange="submit();" id="region_id" class="form-control custom-modal-textbox">
               <option value="">All Regions</option>
                 @foreach ($regions as $key=>$region)
                 <option value="{{$region->id}}">{{$region->region_name}}</option>
                 @endforeach
             </select> 
+          </form>
         </div>  
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2" style="width: 14.28%">
         <div class="form-group">
           <strong>Vehicles</strong>
           <br>
@@ -204,5 +219,5 @@
     </div>
   </div>
 </div>
-
+ 
 @endsection
