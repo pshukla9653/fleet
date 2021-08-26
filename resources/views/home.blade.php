@@ -56,7 +56,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
       
       <div class="row"> 
       <div class="col-md-2" style="width: 28.56%">
-        <form action="#">
+        <form action="#" id="search_form">
         <div class="form-group" style="margin-bottom: -10px;">
           <strong>Start Date</strong>
           
@@ -65,11 +65,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
           margin-left: 161px;"/>
           <button class="btn btn-outline-success" style="width: 143px;left: 66px;
           bottom: 40px;">
+          <span id="custom_input"></span>
             <i class="fa fa-fast-backward" onclick="step_fast_backward_date();"></i>
             <i class="fa fa-step-backward" onclick="step_backward_date();"></i>
             <span class="day-filter">{{date('Y-m-d')==$start_date?'Today':$start_date}}</span>
-            <i class="fa fa-step-forward" onclick="step_forword_date();"></i>
-            <i class="fa fa-fast-forward" onclick="step_fast_forword_date();"></i>
+            <i class="fa fa-step-forward" onclick="step_forward_date();"></i>
+            <i class="fa fa-fast-forward" onclick="step_fast_forward_date();"></i>
           </button>
         </div> 
        
@@ -80,10 +81,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
           
               <select name="date_range" id="date_range" onchange="submit();" style="padding:5px;" class="form-control custom-modal-textbox">
                
-                <option value="1" {{$date_range=='1'?'selected':''}}>1 weeks</option>
-                <option value="2" {{$date_range=='2'?'selected':''}}>2 weeks</option>
-                <option value="3" {{$date_range=='3'?'selected':''}}>3 weeks</option>
-                <option value="4" {{$date_range=='4'?'selected':''}}>4 weeks</option>
+                <option value="1" {{($date_range=='1')?'selected':''}}>1 weeks</option>
+                <option value="2" {{($date_range=='2')?'selected':''}}>2 weeks</option>
+                <option value="3" {{($date_range=='3')?'selected':''}}>3 weeks</option>
+                <option value="4" {{($date_range=='4')?'selected':''}}>4 weeks</option>
               </select>  
               
             </form> 
@@ -227,15 +228,35 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     </div>
   </div>
 </div>
+
  <script>
-   function step_forword_date(){
+   function step_fast_backward_date(){
      
-     //preventdefault();
-     var start_date = $('#start_date').val();
-     var date_range = $('#date_range').val();
-     var mode = 'forward';
-     var url = "{{url()->current()}}?start_date="+start_date+"&date_range="+date_range+"&mode="+mode;
-     window.location.href =url;
+    $('#date_range').val(4);
+     $('#custom_input').html('<input type="hidden" name="mode" value="backward"/>');
+     
+     $('#search_form').submit();
+   }
+   function step_backward_date(){
+     
+     
+     $('#custom_input').html('<input type="hidden" name="mode" value="backward"/>');
+     
+     $('#search_form').submit();
+   }
+   function step_forward_date(){
+     
+     
+     $('#custom_input').html('<input type="hidden" name="mode" value="forward"/>');
+     
+     $('#search_form').submit();
+   }
+   function step_fast_forward_date(){
+     
+     $('#date_range').val(4);
+     $('#custom_input').html('<input type="hidden" name="mode" value="forward"/>');
+     
+     $('#search_form').submit();
    }
  </script>  
 @endsection

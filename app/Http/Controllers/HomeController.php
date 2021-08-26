@@ -48,13 +48,28 @@ class HomeController extends Controller
         else{
         $vehicles = Vehicle::orderByRaw("CAST(order_number as UNSIGNED) ASC")->get();
         }
-        if($request->input('start_date')){
+        if($request->input('mode')=='forward'){
+            $start_date  =  $request->input('start_date');
+            $date_range  =  $request->input('date_range');
+            $end_date = date("Y-m-d", strtotime($start_date . "+".$date_range." week"));
+            $diff=date_diff(date_create($start_date), date_create($end_date));
+            $days = $diff->days;
+            }
+        elseif($request->input('mode')=='backward'){
+            $end_date  =  $request->input('start_date');
+            $date_range  =  $request->input('date_range');
+            $start_date = date("Y-m-d", strtotime($end_date . "-".$date_range." week"));
+            $diff=date_diff(date_create($start_date), date_create($end_date));
+            $days = $diff->days;
+            }
+        elseif($request->input('start_date') && $request->input('mode')==''){
         $start_date  =  $request->input('start_date');
         $date_range  =  $request->input('date_range');
         $end_date = date("Y-m-d", strtotime($start_date . "+".$date_range." week"));
         $diff=date_diff(date_create($start_date), date_create($end_date));
         $days = $diff->days;
         }
+        
         else{
         $start_date  =  date('Y-m-d');
         $date_range  =  4;
