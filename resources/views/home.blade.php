@@ -2,20 +2,23 @@
 
 @section('heading','Booking Overview')
 <style>
-  input[type="date"]::-webkit-calendar-picker-indicator{
-    position: absolute;
-    margin-left: 35%;
-    background-color: #f2f2f2;
-    padding: 7px;
-    border: 1px solid #bbb8b8;
-    border-radius: 2px;
-    display: block;
-}
+  
 .tooltip-inner{
   
   background-color: #fff !important;
   padding:0px !important;
   
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
 }
 </style>
 @section('content')
@@ -53,18 +56,20 @@
       
       <div class="row"> 
       <div class="col-md-2" style="width: 28.56%">
+        <form action="#">
         <div class="form-group" style="margin-bottom: -10px;">
           <strong>Start Date</strong>
-          {!! Form::date('start_date', null, array('class' =>
-          'form-control custom-modal-textbox', 'id' =>'start_date','style' =>'padding:0px!important;width:150px;','autofocus'=>'autofocus')) !!}
           
-          <button class="btn btn-outline-success" style="width: 143px;left: 250px;
+          <input type="date" onchange="submit();" value="{{$start_date}}" id="start_date" class="form-control custom-modal-textbox" style="padding:0px!important;width:150px;" name="start_date"/>
+          <img src="{{ asset('assets/images/icon/calendar.png') }}" onclick="$('#start_date').focus();" alt="bell" style="width: 17px;margin-top: -80px;
+          margin-left: 161px;"/>
+          <button class="btn btn-outline-success" style="width: 143px;left: 66px;
           bottom: 40px;">
-            <i class="fa fa-fast-backward"></i>
-            <i class="fa fa-step-backward"></i>
-            <span class="day-filter">Today</span>
-            <i class="fa fa-step-forward"></i>
-            <i class="fa fa-fast-forward"></i>
+            <i class="fa fa-fast-backward" onclick="step_fast_backward_date();"></i>
+            <i class="fa fa-step-backward" onclick="step_backward_date();"></i>
+            <span class="day-filter">{{date('Y-m-d')==$start_date?'Today':$start_date}}</span>
+            <i class="fa fa-step-forward" onclick="step_forword_date();"></i>
+            <i class="fa fa-fast-forward" onclick="step_fast_forword_date();"></i>
           </button>
         </div> 
        
@@ -72,13 +77,16 @@
       <div class="col-md-2" style="width: 14.28%">
         <div class="form-group">
           <strong>Date Range</strong>
-              <select name="date_range" id="date_range" style="padding:5px;" class="form-control custom-modal-textbox">
-                <option value="1">1 weeks</option>
-                <option value="2">2 weeks</option>
-                <option value="3">3 weeks</option>
-                <option value="4">4 weeks</option>
+          
+              <select name="date_range" id="date_range" onchange="submit();" style="padding:5px;" class="form-control custom-modal-textbox">
+               
+                <option value="1" {{$date_range=='1'?'selected':''}}>1 weeks</option>
+                <option value="2" {{$date_range=='2'?'selected':''}}>2 weeks</option>
+                <option value="3" {{$date_range=='3'?'selected':''}}>3 weeks</option>
+                <option value="4" {{$date_range=='4'?'selected':''}}>4 weeks</option>
               </select>  
-              <div class="text-danger" id="date_range"></div>
+              
+            </form> 
         </div>  
       </div>
       <div class="col-md-2" style="width: 14.28%">
@@ -146,8 +154,8 @@
           <thead>
             <tr>
               <th style="width: 7%; font-weight: 600;">VEHICLES</th>
-              @for($i=1; $i< 32; $i++)
-                <th style="width:3% !impotant;padding:10px; font-size:8px;font-weight: 600;">{{$i}}.07.<br>2021</th>
+              @for($i=0; $i< $days; $i++)
+                <th style="width:3% !impotant;padding:10px; font-size:8px;font-weight: 600;">{{date("d-m-Y", strtotime($start_date . "+".$i." day"))}}</th>
               @endfor
             </tr>
           </thead>
@@ -205,7 +213,7 @@
                 " data-html="true" data-placement="right" style="font-weight: 600; font-size:12px; padding: 5px;border-radius: 5px;background-color:{{$vehicle->registration_plate_colour}}">{{$vehicle->registration_number}}</span>
               <br><span style="font-size:9px;position: absolute;margin-top: 7px;">{{$vehicle->vin}}</span>
               <br><span style="font-size:9px;position: absolute;margin-top: -4px;">Newspress {{$vehicle->model}}</span></td>
-              @for($i=1; $i< 32; $i++)
+              @for($i=0; $i< $days; $i++)
                 <td></td>
               @endfor
             </tr>
@@ -219,5 +227,15 @@
     </div>
   </div>
 </div>
- 
+ <script>
+   function step_forword_date(){
+     
+     //preventdefault();
+     var start_date = $('#start_date').val();
+     var date_range = $('#date_range').val();
+     var mode = 'forward';
+     var url = "{{url()->current()}}?start_date="+start_date+"&date_range="+date_range+"&mode="+mode;
+     window.location.href =url;
+   }
+ </script>  
 @endsection
