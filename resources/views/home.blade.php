@@ -166,7 +166,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
               <td style="width:7%;"><span data-popup="tooltip" title="
                 <div style='background-color:#fff;width:800px;height:auto;padding:10px;border: 1px solid #bbb8b8;'>
                   <table cellpadding = '10' cellspacing = '10'>
-                    <tr><td colspan='3' style='text-align:center;color:#376473;font-weight:600;'>Vehicle Information</td></tr>
+                    <tr></tr>
                     <tr>
                       <td style='width:33.33%;padding:10px;'>
                         <table style='width:100%'>
@@ -174,15 +174,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
                           <tr><td colspan='2'>&nbsp;</td></tr>
                           <tr><td colspan='2' style='text-align:center;'><span style='font-size:18px;color:black;padding:5px;border-radius: 5px;background-color:{{$vehicle->registration_plate_colour}}'>{{$vehicle->registration_number}}</span></td></tr>
                           <tr><td colspan='2'>&nbsp;</td></tr>
-                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
-                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
-                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
+                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
+                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
+                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
                           
                           
                         </table>
                       </td>
                       <td style='width:33.33%;padding:10px;'>
-                        <table style='width:100%;'>
+                        <table style='width:100%;margin-top:-80px;'>
+                          <tr><td style='color:#376473;font-weight:600;'>Vehicle Information<br>&nbsp;<br></td><td></td></tr>
                           <tr style='font-size:12px; background-color:{{$vehicle->registration_plate_colour}}'><td style='padding:2px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
                           <tr style='font-size:12px; background-color:{{$vehicle->registration_plate_colour}}'><td style='padding:2px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
                           <tr style='font-size:12px; background-color:{{$vehicle->registration_plate_colour}}'><td style='padding:2px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
@@ -194,7 +195,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
                         </table>
                       </td>
                       <td style='width:33.33%;padding:10px;'>
-                        <table style='width:100%'>
+                        <table style='width:100%;margin-top:-35px;'>
                           
                           <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Regions:</b></td><td>{{ $vehicle->region->region_name }}</td></tr>
                           <tr style='font-size:12px;'><td style='padding:2px;'><b>Other Details:</b></td><td>{{$vehicle->other_details}}</td></tr>
