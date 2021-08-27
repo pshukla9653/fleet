@@ -46,7 +46,11 @@
 
 	<script type="text/javascript" src="{{ asset('assets/js/plugins/ui/ripple.min.js') }}"></script>
 	<!-- /theme JS files -->
-
+    <!-- calender -->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<style>
 		body{
 			font-family: 'Montserrat', sans-serif !important;
@@ -56,8 +60,56 @@
 
 			text-transform: initial !important;
 		}
-		
+		/*img*/
+  .logo-img {
+    width: 132px;
+    margin: 0 auto;
+    object-fit: cover;
+}
+img.img-responsive {
+    width: 100%;
+    height: 100%;
+}
+.dashboard{
+	position: absolute;
+	margin-top: -6.5em;
+	margin-left: 18.2em;"
+}
+i.fa.fa-angle-double-left.pull-right.dashboard {
+    margin-top: 14px;
+    font-size: 17px;
+    margin-left: 48px;
+}
+.dashboard2 {
+	
+   border-radius: 3px;
+    width: 260px;
+    padding: 0 13px;
+}
+li.dashboard2 {
+    background-color: #eeeded;
+    margin-left: 13px;
+    width: 236px;
+}
+.navigation li + li {
+    width: 236px;
+    margin-top: 6px;
+    margin-left: 12px;
+    border-radius: 5px;
+}
+.menu-dash {
+    margin-top: 1px;
+    padding: 11px 12px 0 10px;
+    border-radius: 5px;
+}
+span.menu {
+    padding: 0px 9px 4px 16px;
+}
+.sidebar-category.sidebar-category-visible {
+    margin-top: -12px;
+}
 	</style>	
+
 
 </head>
 
@@ -77,10 +129,10 @@
 				<div class="sidebar-content">
 
 					<!-- User menu -->
-					<div class="sidebar-user-material">
-						<div class="category-content">
-							<div class="sidebar-user-material-content">
-								<a href="{{ url('/') }}"><img src="{{ asset('assets/images/Bentley-symbol-black-1920x1080_ba@2x.png') }}" class="img-responsive" alt=""></a>
+					<div class="">
+						<div class="">
+							<div class="logo-img">
+								<a href="{{ url('/') }}"><img src="{{ asset('assets/images/logo1.png') }}" class="img-responsive" alt=""></a>
 								
 							</div>
 														
@@ -98,19 +150,28 @@
 							<ul class="navigation navigation-main navigation-accordion">
 
 								<!-- Main -->
-								<li class="navigation-header"><span>Menu</span> <i class="icon-menu" title="Main pages"></i></li>
-								<li class=""><a href="#"><i class="icon-home4"></i> <span>DASHBOARD</span></a><span class="sidebar-control sidebar-main-toggle hidden-xs"><i class="fa fa-angle-double-left pull-right" style="position: absolute;
-									margin-top: -6.5em;
-									margin-left: 18.2em;"></i></span></li>
+								
+								
+								<li class="{{ (request()->segment(1) == '') ? 'dashboard2' : '' }}">
+
+									<a href="{{ url('/') }}"><i class="icon-home4"></i><span>DASHBOARD</span><i class="fa fa-angle-double-left pull-right dashboard"></i></a>
+									
+								</li>
+                                
+                                 
+                                 
+
 								@if(session()->get('company_id') == null)	
 								<li class="{{ (request()->segment(1) == 'companies') ? 'active' : '' }}">
 									<a href="{{ route('companies.index') }}"><i class="icon-stack2"></i> <span>Companies</span></a>
 									
 								</li>
 								@endif
-									
+										<li class="menu-dash">
+											<span class="menu">Menu</span>
+										</li>
 								<li class="{{ (request()->segment(1) == '') ? 'active' : '' }}">
-									<a href="{{ url('/') }}"><i class="icon-stack2"></i> <span>OVERVIEW</span></a>
+									<a href="{{ url('/') }}"><span>OVERVIEW</span></a>
 									
 								</li>
 								

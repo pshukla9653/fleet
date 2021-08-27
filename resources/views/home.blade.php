@@ -17,34 +17,163 @@
   padding:0px !important;
   
 }
+/*date*/
+input#feRouteDate {
+    border: 1px solid #bbb8b8;
+    width: 143px;
+    border-radius: 3px;
+    height: 32px;
+    background-color: #eeeded;
+}
+span.calender-icon {
+  
+    font-size: 25px;
+    background: #eeeded; 
+}
+i.fa.fa-calendar {
+    margin-top: 7px;
+    font-size: 25px;
+}
+.music-icon {
+  border: 1px solid #bbb8b8;
+   border-radius: 3px;
+    width: 143px;
+    left: 177px;
+    bottom: 40px;
+    height: 32px;
+    margin-top: 6px;
+}
+.weeks-icon{
+padding:5px;
+height: 32px;
+}
+button.btn.btn-outline-success.music-icon {
+    border: 1px solid #bbb8b8;
+        margin-left: 3px;
+    margin-top: 7px;
+}
+span.show-off {
+    padding: 1px;
+    font-size: 11px;
+}
+select#date_range {
+    margin-top: -1px;
+    background-color: #eeeded;
+     border: 1px solid #bbb8b8;
+   border-radius: 3px;
+    width: 140px;
+}
+.all-brand{
+ padding:5px; 
+}
+select#brand_id {
+       margin-top: -1px;
+      background-color: #eeeded;
+     border: 1px solid #bbb8b8;
+   border-radius: 3px;
+   height: 32px;
+width: 140px;
+}
+.department-1{
+  width: 140px;
+ background-color: #eeeded;
+     border: 1px solid #bbb8b8;
+   border-radius: 3px;
+   height: 32px; 
+}
+select#department_id {
+   margin-top: -1px;
+    width: 153px;
+}
+select#region_id {
+    margin-top: -1px;
+    width: 140px;
+}
+.page-title {
+    border-bottom: 1px solid #bbb8b8;
+}
+.filter-text{
+  background: transparent;
+  width:6%;
+}
+select.form-control.border-0.filter-text {
+    width: 73px;
+}
+.col-md-3.texts-filter {
+    margin-top: 23px;
+}
+.row.gg {
+    margin-top: 0px;
+}
+.form-control {
+    height: 28px;
+    padding: 0;
+    }
+/*calender*/
+img.fa.fa-calendar {
+    
+    padding: 5px 4px 4px 6px;
+    margin-top: -4px;
+   background-color: #eeeded;
+     border: 1px solid #bbb8b8;
+   border-radius: 3px;
+}
+.fleets{
+      margin-top: -3px;
+}
+/*checkbox*/
+   @media screen and (min-width: 1920px) {
+select.form-control.border-0.filter-text {
+    margin-left: -202px;
+}
+.row.gg {
+    width: 118%;
+}
+.form-group.range-date {
+    margin-left: -38px;
+}
+.form-group.brand {
+    margin-left: -26px;
+}
+.form-group.departments {
+    margin-left: -17px;
+}
+}
 </style>
 @section('content')
 <div class="page-header">
 	<div class="page-header-content">
 	  <div class="page-title">
 		<h6><i class="icon-home2 position-left"></i> <i class="fa fa-angle-double-right"></i>  Overview</h6>
+   
 	  </div>
-  <hr>
+  
 	  
 	</div>
 	</div>
-<div class="row">		
-<div class="col-md-8" style="padding: 30px;">
-  <select class="form-control border-0" style="background: transparent;width:6%;">
+
+  <div class="container">
+<div class="row gg">		
+<div class="col-md-3 texts-filter">
+  <select class="form-control border-0 filter-text">
     <option>Filter</option>
  </select>
-
+</div>
+<div class="col-md-6">
+ 
 </div>
 
-<div class="col-md-4" style="padding: 30px;">
-<form class="example" action="#">
+<div class="col-md-3" style="padding:20px 0 0 0;">
+<form class="example" action="#" style="margin-bottom: 0px;">
   <input type="text" placeholder="Search.." name="search" style="height:33px;">
   <button type="submit"><i class="fa fa-search"></i></button>
   </form>		
 </div>
-
 </div>	
+</div>
+
 <div class="content"> 
+  <!-- calender -->
   
   <!-- Main charts --> 
   <!-- Quick stats boxes --> 
@@ -54,12 +183,31 @@
       <div class="row"> 
       <div class="col-md-2" style="width: 28.56%">
         <div class="form-group" style="margin-bottom: -10px;">
-          <strong>Start Date</strong>
-          {!! Form::date('start_date', null, array('class' =>
-          'form-control custom-modal-textbox', 'id' =>'start_date','style' =>'padding:0px!important;width:150px;','autofocus'=>'autofocus')) !!}
+          <strong>Start Date</strong><br>
+        <span class="datepicker"><input type="text" id="feRouteDate" />
+      
+      <!--    <i class="fa fa-calendar" aria-hidden="true"></i> -->
+        
+           <img class="fa fa-calendar" src="{{ asset('assets/images/icon/calendar.png') }}" alt="">
+        
           
-          <button class="btn btn-outline-success" style="width: 143px;left: 250px;
-          bottom: 40px;">
+          
+        </span><br>
+<script type="text/javascript">
+
+  $("#feRouteDate,#feRouteDate2").datepicker({
+        dateFormat: 'dd/mm/yy',
+        maxDate: 0
+    });
+    
+   
+//You can show datepicker on click on the calendar icon
+$(".fa-calendar").on("click", function(){
+        $(this).siblings("input").datepicker("show");    
+    }); 
+</script>
+          
+          <button class="btn btn-outline-success music-icon" >
             <i class="fa fa-fast-backward"></i>
             <i class="fa fa-step-backward"></i>
             <span class="day-filter">Today</span>
@@ -70,9 +218,9 @@
        
       </div>
       <div class="col-md-2" style="width: 14.28%">
-        <div class="form-group">
+        <div class="form-group range-date">
           <strong>Date Range</strong>
-              <select name="date_range" id="date_range" style="padding:5px;" class="form-control custom-modal-textbox">
+              <select name="date_range" id="date_range" class="form-control custom-modal-textbox weeks-icon">
                 <option value="1">1 weeks</option>
                 <option value="2">2 weeks</option>
                 <option value="3">3 weeks</option>
@@ -82,10 +230,10 @@
         </div>  
       </div>
       <div class="col-md-2" style="width: 14.28%">
-        <div class="form-group">
+        <div class="form-group brand">
           <strong>Brand</strong>
           <form action="#">
-              <select name="brand_id" id="brand_id" onchange="submit();" style="padding:5px;" class="form-control custom-modal-textbox">
+              <select name="brand_id" id="brand_id" onchange="submit();" class="form-control custom-modal-textbox all-brand">
                 <option value="">All Brands</option>
                 @foreach ($brands as $key=>$brand)
                 <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
@@ -95,10 +243,10 @@
         </div>  
       </div>
       <div class="col-md-2" style="width: 14.28%">
-        <div class="form-group">
+        <div class="form-group departments">
           <strong>Department</strong>
           <form action="#">
-            <select name="department_id" style="padding:5px;" onchange="submit();" id="department_id" class="form-control custom-modal-textbox">
+            <select name="department_id"  onchange="submit();" id="department_id" class="form-control custom-modal-textbox department-1">
                 <option value="">All Departments</option>
                   @foreach ($departments as $key=>$department)
                   <option value="{{$department->id}}">{{$department->department_name}}</option>
@@ -111,7 +259,7 @@
         <div class="form-group">
           <strong>Region</strong>
           <form action="#">
-            <select name="region_id" style="padding:5px;" onchange="submit();" id="region_id" class="form-control custom-modal-textbox">
+            <select name="region_id" onchange="submit();" id="region_id" class="form-control custom-modal-textbox department-1">
               <option value="">All Regions</option>
                 @foreach ($regions as $key=>$region)
                 <option value="{{$region->id}}">{{$region->region_name}}</option>
@@ -121,12 +269,13 @@
         </div>  
       </div>
       <div class="col-md-2" style="width: 14.28%">
-        <div class="form-group">
+        <div class="form-group fleets">
           <strong>Vehicles</strong>
           <br>
-          <input type="checkbox" name="" id=""/> Show off fleet vehicles?<br>
-          <input type="checkbox" name="" id=""/> On fleet within 2 weeks
-        </div>  
+          <input type="checkbox" name="" id=""/ class="checkit"><span class="show-off">Show off fleet vehicles?</span><br> 
+          <input type="checkbox" name="" id=""/><span class="show-off">On fleet within 2 weeks</span> 
+        </div> 
+  
       </div>
       </div>
     </div>
@@ -147,7 +296,7 @@
             <tr>
               <th style="width: 7%; font-weight: 600;">VEHICLES</th>
               @for($i=1; $i< 32; $i++)
-                <th style="width:3% !impotant;padding:10px; font-size:8px;font-weight: 600;">{{$i}}.07.<br>2021</th>
+                <th style="width:3% !impotant;padding:10px; font-size:5px;font-weight: 600;">{{$i}}.07.<br>2021</th>
               @endfor
             </tr>
           </thead>

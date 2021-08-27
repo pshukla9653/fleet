@@ -346,11 +346,11 @@ a.badge,
 .navigation li {
   position: relative;
 }
-.navigation li + li {
+/*.navigation li + li {
   margin-top: 1px;
   padding:12px;
   border-radius:5px;
-}
+}*/
 .navigation li + .navigation-header {
   margin-top: 10px;
 }
@@ -361,11 +361,11 @@ a.badge,
   -o-transition: background 0.15s linear, color 0.15s linear;
   transition: background 0.15s linear, color 0.15s linear;
 }
-.navigation li a:hover,
+/*.navigation li a:hover,
 .navigation li a:focus {
   background-color: rgba(0, 0, 0, 0.1);
   color: #000;
-}
+}*/
 .navigation li a > i {
   float: left;
   top: 0;
