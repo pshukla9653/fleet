@@ -40,14 +40,17 @@ class HomeController extends Controller
         if($request->input('brand_id')){
             $find['brand_id'] = $request->input('brand_id');
             $brand_id = $request->input('brand_id');
+            $seach_by_find = true;
         }
         if($request->input('region_id')){
             $find['region_id'] = $request->input('region_id');
             $region_id = $request->input('region_id');
+            $seach_by_find = true;
         }
         if($request->input('department_id')){
             $find['department_id'] = $request->input('department_id');
             $department_id = $request->input('department_id');
+            $seach_by_find = true;
             
         }
         else{
@@ -82,7 +85,9 @@ class HomeController extends Controller
         $diff=date_diff(date_create($start_date), date_create($end_date));
         $days = $diff->days;
         }
+        if($seach_by_find == true){
         $vehicles = Vehicle::where($find)->orderByRaw("CAST(order_number as UNSIGNED) ASC")->get();
+        }
         
         return view('home', compact('brands','regions','departments','vehicles','start_date','end_date','days','date_range','brand_id','region_id','department_id'));
     }
