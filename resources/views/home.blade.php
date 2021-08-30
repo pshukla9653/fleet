@@ -1,6 +1,7 @@
 @extends('layouts.theme')
 
 @section('heading','Booking Overview')
+
 <style>
   input[type="date"]::-webkit-calendar-picker-indicator{
     position: absolute;
@@ -140,6 +141,11 @@ select.form-control.border-0.filter-text {
 }
 }
 </style>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 @section('content')
 <div class="page-header">
 	<div class="page-header-content">
@@ -184,14 +190,9 @@ select.form-control.border-0.filter-text {
       <div class="col-md-2" style="width: 28.56%">
         <div class="form-group" style="margin-bottom: -10px;">
           <strong>Start Date</strong><br>
-        <span class="datepicker"><input type="text" id="feRouteDate" />
-      
-      <!--    <i class="fa fa-calendar" aria-hidden="true"></i> -->
-        
+        <span class="datepicker"><input type="text" id="feRouteDate" />  
+      <!--    <i class="fa fa-calendar" aria-hidden="true"></i> -->  
            <img class="fa fa-calendar" src="{{ asset('assets/images/icon/calendar.png') }}" alt="">
-        
-          
-          
         </span><br>
 <script type="text/javascript">
 
