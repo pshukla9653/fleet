@@ -41,7 +41,6 @@ class CreateEmailTemplatesTable extends Migration
                 ->on('email_templates')
                 ->onDelete('cascade');
             $table->string('file_name');
-            $table->text('email_body');     
             $table->timestamps();
         });
     }
@@ -54,5 +53,6 @@ class CreateEmailTemplatesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('email_templates');
+        Schema::dropIfExists('email_file');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\EmailTemplate;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Storage;
 
 class EmailTemplateController extends Controller
 {
@@ -59,14 +60,14 @@ class EmailTemplateController extends Controller
         $path = '/';
         if($request->id){
             $input = $request->all();
-            
+        $emailTemplate =  EmailTemplate::find($request->id);
         if($request->hasfile('spec_sheet')){
             $spec_sheet = $request->file('spec_sheet');
             foreach($spec_sheet as $key=>$spec){
                 $file_name= Storage::disk('public')->put($path, $spec);
-			    $vehicle_specs['template_id'] = $request->id;
-                $vehicle_specs['file_name'] = $file_name;
-                DB::table('email_file')->insert($vehicle_specs);
+			    $email_file['template_id'] = $request->id;
+                $email_file['file_name'] = $file_name;
+                DB::table('email_file')->insert($email_file);
             }
         }
         else{
@@ -79,23 +80,23 @@ class EmailTemplateController extends Controller
 		
   
         $input = $request->all();
-  
+        $input['company_id'] = Auth()->user()->company_id;
         
         
-    
-        $vahicle = EmailTemplate::create($input);
+            
+        $emailTemplate = EmailTemplate::create($input);
         if($request->hasfile('spec_sheet')){
             $spec_sheet = $request->file('spec_sheet');
             foreach($spec_sheet as $key=>$spec){
                 $file_name= Storage::disk('public')->put($path, $spec);
-			    $vehicle_specs['template_id'] = $request->id;
-                $vehicle_specs['file_name'] = $file_name;
-                DB::table('email_file')->insert($vehicle_specs);
+			    $email_file['template_id'] = $emailTemplate->id;
+                $email_file['file_name'] = $file_name;
+                DB::table('email_file')->insert($email_file);
             }
         }
      
         }
-        return redirect()->route('email_template.index')
+        return redirect()->route('email_template')
                         ->with('success','Email Template created successfully');
 						
     
@@ -110,12 +111,13 @@ class EmailTemplateController extends Controller
      * @param  \App\Models\EmailTemplate  $emailTemplate
      * @return \Illuminate\Http\Response
      */
-    public function edit(EmailTemplate $emailTemplate)
+    public function edit(Request $request)
     {
         //
         $emailTemplate  = EmailTemplate::find($request->id);
         $emailTemplate->specs = DB::table('email_file')->where('template_id', $request->id)->get();
         return response()->json($emailTemplate);
+        
     }
 
     
@@ -126,7 +128,7 @@ class EmailTemplateController extends Controller
      * @param  \App\Models\EmailTemplate  $emailTemplate
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EmailTemplate $emailTemplate)
+    public function destroy(Request $request)
     {
         //
         $emailTemplate = EmailTemplate::Find($request->id);

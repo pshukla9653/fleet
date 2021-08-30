@@ -13,7 +13,7 @@
   <hr style="margin: 0px 20px;">
   <div class="row">		
     <div class="col-md-8" style="padding: 15px 30px;">
-    <a href="{{ route('vehicles.index')}}" class="btn btn-primary"><img src="{{ asset('assets/images/icon/refresh.png') }}" alt="refresh" style="width: 20px;margin-left: -8px;"/>&nbsp;  Refresh @yield('heading')</a>
+    <a href="{{ route('email-template.index')}}" class="btn btn-primary"><img src="{{ asset('assets/images/icon/refresh.png') }}" alt="refresh" style="width: 20px;margin-left: -8px;"/>&nbsp;  Refresh @yield('heading')</a>
     @can('user-create')	
     <a id="additem" class="btn btn-primary" style="margin-left: 20px;"><img src="{{ asset('assets/images/icon/add.png') }}" alt="add" style="width: 21px;margin-left: -8px;"/>&nbsp;  Add New Item</a>
     @endcan
@@ -117,13 +117,11 @@
                             </a>
                             @endcan
                             &nbsp;
-                            <img src="{{ asset('storage/'.$email->image) }}" alt="{{$email->registration_number}}" style="width: 100px; height:auto;"/>
+                            {{ $email->description }}
                         </td>
-                        <td style="text-align: center;"><span style="padding: 5px;border-radius: 5px;background-color:{{$email->registration_plate_colour}}">{{$email->registration_number}}</span>
                         
-                        <td style="text-align: center;">{{ $email->descrition->brand_name }}</td>
                         <td style="text-align: center;">{{ $email->subject }}</td>
-                        <td style="text-align: center;">{{ $email->Status }}</td>
+                        <td style="text-align: center;">{{ $email->status=='1'?'Active':'Inactive' }}</td>
                         <td style="text-align: center;"></td>
                        
                         <td style="width: 5%">
@@ -225,25 +223,30 @@
                       <strong>Description:</strong>
                         {!! Form::text('description', null, array('placeholder' => 'Description','class' =>
                         'form-control custom-modal-textbox', 'id' =>'description')) !!}
-                      <div class="text-danger" id="description"></div>
+                      
                     </div>
                     <div class="form-group">
                       <strong>From Name:</strong>
                         {!! Form::text('from_name', null, array('placeholder' => 'From Name','class' =>
                         'form-control custom-modal-textbox', 'id' =>'from_name')) !!}
-                      <div class="text-danger" id="from_name"></div>
+                     
                     </div>
                     <div class="form-group">
                       <strong>From Email:</strong>
                         {!! Form::text('from_email', null, array('placeholder' => 'From Email','class' =>
                         'form-control custom-modal-textbox', 'id' =>'from_email')) !!}
-                      <div class="text-danger" id="from_email"></div>
+                     
                     </div>
                     <div class="form-group">
                       <strong>CC Email:</strong>
                         {!! Form::text('cc_email', null, array('placeholder' => 'CC Email','class' =>
                         'form-control custom-modal-textbox', 'id' =>'cc_email')) !!}
-                      <div class="text-danger" id="cc_email"></div>
+                      
+                    </div>
+                    <div class="form-group">
+                      <strong>Status:</strong>
+                        <input type="radio" name="status" id="status_active" value="1"/>Active
+                        <input type="radio" name="status" id="status_inactive" value="0"/>Inactive
                     </div>
                   </div>
                   <div class="col-md-6" style="margin-top: 10px;">
@@ -251,47 +254,49 @@
                       <strong>Subject:</strong>
                         {!! Form::text('subject', null, array('placeholder' => 'Subject','class' =>
                         'form-control custom-modal-textbox', 'id' =>'subject')) !!}
-                      <div class="text-danger" id="subject"></div>
+                      
                     </div>
                     <div class="form-group">
                       <strong>Reply To Email:</strong>
-                        {!! Form::text('reply_to_email', null, array('placeholder' => 'Derivative','class' =>
+                        {!! Form::text('reply_to_email', null, array('placeholder' => 'Reply To Email','class' =>
                         'form-control custom-modal-textbox', 'id' =>'reply_to_email')) !!}
-                      <div class="text-danger" id="reply_to_email"></div>
+                      
                     </div>
                     <div class="form-group">
                       <strong>To Email:</strong>
                         {!! Form::text('to_email', null, array('placeholder' => 'To Email','class' =>
                         'form-control custom-modal-textbox', 'id' =>'to_email')) !!}
-                      <div class="text-danger" id="to_email"></div>
+                      
                     </div>
                     <div class="form-group">
                       <strong>BCC Email:</strong>
                         {!! Form::text('bcc_email', null, array('placeholder' => 'BCC Email','class' =>
                         'form-control custom-modal-textbox', 'id' =>'bcc_email')) !!}
-                      <div class="text-danger" id="bcc_email"></div>
+                      
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <div><strong >Email Body:</strong><span style="padding-left: 60%;" data-popup="tooltip" title="%%FirstName%% = First name of contact<br> 
+                        %%LastName%% = Last name of contact<br>
+                        %%BookingData%% = Booking Date<br>
+                        %%InboundAdd%% = Inblund Address<br>
+                        %%OutboundAdd%% = Outbound Address<br>
+                        %%PlateNumber%% = Vehicle Plate Number<br>
+                        %%VehicleModel%% = Vehicle Model<br>
+                        %%VehicleBrand%% = Vehicle Brand" data-html="true">&quest;</span></div>
+                      {!! Form::textarea('email_body', null, array('class' =>
+                      'form-control custom-modal-textbox', 'id' =>'email_body','rows'=>'5','style'=>'margin-bottom: 0px;width:85%;')) !!}
+                      
+                      <div class="form-group" style="text-align:center;width:82%;margin-top:5px;margin-left:28px;font-size: 12px !important;">
+                      <button type="button" id="view_specs" class="btn custom-modal-btn" style="background-color: #486288;color:#fff;"><i class="icon-pencil3"></i> Design</button>
+                      <button type="button" id="delete_specs" class="btn custom-modal-btn btn-warning">&lt;&sol;&gt;&nbsp; HTML</button>
+                      <button type="button" id="view_specs" class="btn custom-modal-btn bg-blue-800"><i class="icon-eye"></i> Priview</button>
+                        </div>
+                      
                     </div>
                   </div>
                   
-                  <div class="form-group">
-                    <strong style="padding: 0px 0px 0px 10px;">Email Body:<span style="padding-left: 60%;" data-popup="tooltip" title="%%FirstName%% = First name of contact<br> 
-%%LastName%% = Last name of contact<br>
-%%BookingData%% = Booking Date<br>
-%%InboundAdd%% = Inblund Address<br>
-%%OutboundAdd%% = Outbound Address<br>
-%%PlateNumber%% = Vehicle Plate Number<br>
-%%VehicleModel%% = Vehicle Model<br>
-%%VehicleBrand%% = Vehicle Brand" data-html="true">&quest;</span></strong>
-                    {!! Form::textarea('email_body', null, array('class' =>
-                    'form-control custom-modal-textbox', 'id' =>'email_body','rows'=>'5','style'=>'margin-bottom: 0px;margin-left: 10px;width:76%;')) !!}
-                    
-                    <div class="form-group" style="text-align:center;width:82%;margin-top:5px;margin-left:22px;font-size: 12px !important;">
-                    <button type="button" id="view_specs" class="btn custom-modal-btn" style="background-color: #486288;color:#fff;"><i class="icon-pencil3"></i> Design</button>
-                    <button type="button" id="delete_specs" class="btn custom-modal-btn btn-warning">&lt;&sol;&gt;&nbsp; HTML</button>
-                    <button type="button" id="view_specs" class="btn custom-modal-btn bg-blue-800"><i class="icon-eye"></i> Priview</button>
-                      </div>
-                    <div class="text-danger" id="email_body"></div>
-                  </div>
                   
                   
                 </div> 
@@ -315,7 +320,7 @@
                       </div>
                    </div>
                     
-                    <div class="text-danger" id="spec_sheet[]"></div>
+                   
                   </div>                                   
                             
                               
@@ -351,32 +356,33 @@ function edititem(id) {
     var filepath = "{{asset('storage')}}";
     $('#itemform').trigger("reset");
     // ajax
+    
     $.ajax({
         type: "POST",
-        url: "{{ url('edit-vehicle') }}",
+        url: "{{ url('edit-email-template') }}",
         data: {
             id: id
         },
         dataType: 'json',
         success: function(res) {
+         
             $('#form_heading').html("Configure Email Template");
             $('#btn').html('Update');
             $('#item_id').val(res.id);
             $.each(res, function(key, value) {
               $('#'+key).val(value);
             });
-            
+            if(res.status == '1'){
+              $('#status_active').prop("checked", true);
+            }
+            else{
+              $('#status_inactive').prop("checked", true);
+            }
             var specs = res.specs;
             $.each(specs, function(key, value) {
              
               $('#uploaded_spec').append('<option value="'+value.id+'">'+value.file_name+'</option>');
             });
-            
-            
-            var filesrc = filepath+'/'+res.image;
-            $('#image-review').html('<img src="'+filesrc+'" style="width:100%;height:100%"/>');
-            $('#image-text').html(res.registration_number);
-            $('#image-text').css('background-color', res.registration_plate_colour);
             $('#popup_model').modal('show');
             //console.log(res.specs);
 //uploaded_spec
@@ -400,7 +406,7 @@ function deleteitem(id) {
         // ajax
         $.ajax({
             type: "POST",
-            url: "{{ url('delete-vehicle') }}",
+            url: "{{ url('delete-email-template') }}",
             data: {
                 id: id
             },
@@ -424,9 +430,6 @@ $(document).ready(function($) {
         $('#form_heading').html("Configure Email Template");
         $('#btn').html('Submit');
         $('#uploaded_spec').html('');
-        $('#image-review').html('');
-        $('#image-text').html('');
-        $('#image-text').css('background-color','');
         $('#popup_model').modal('show');
     });
     $('#view_specs').click(function() {
@@ -436,24 +439,7 @@ $(document).ready(function($) {
       window.open(filepath+filename, '_blank');
 
     });
-    $('#delete_specs').click(function() {
-
-      if (confirm("Delete Vehicle Spec?") == true) {
-        var id = $('#uploaded_spec').val();
-          $.ajax({
-              type: "POST",
-              url: "{{ url('deletespec-vehicle') }}",
-              data: {
-                  id: id
-              },
-              dataType: 'json',
-              success: function(res) {
-                  window.location.reload();
-              }
-          });
-  }
-        
-    });
+    
 
     //view_specs
 

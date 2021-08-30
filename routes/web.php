@@ -60,6 +60,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('delete-vehicle', [VehicleController::class, 'destroy']);
     Route::post('deletespec-vehicle', [VehicleController::class, 'delete']);
     Route::resource('email-template', EmailTemplateController::class);
+    Route::post('edit-email-template', [EmailTemplateController::class, 'edit']);
+    Route::post('delete-email-template', [EmailTemplateController::class, 'destroy']);
     
     
 	
