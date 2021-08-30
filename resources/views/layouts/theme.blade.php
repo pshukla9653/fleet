@@ -136,8 +136,9 @@
 										@can('loantype-list')
 										<li class="{{ (request()->segment(1) == 'loantypes') ? 'active' : '' }}"><a href="{{ route('loantypes.index') }}">Loan Type</a></li>
 										@endcan
-										@can('email_template-list')
-										<li><a href="#">Email Templates</a></li>
+										
+										<li><a href="{{ route('email-template.index')}}">Email Templates</a></li>
+										@can('email-template-list')
 										@endcan
 										@can('history-list')
 										<li><a href="#">History</a></li>

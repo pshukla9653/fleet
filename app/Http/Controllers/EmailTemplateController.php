@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\EmailTemplate;
 use Illuminate\Http\Request;
+use DB;
 
 class EmailTemplateController extends Controller
 {
@@ -12,19 +13,23 @@ class EmailTemplateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    
+    public function index(Request $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        
+        
+        if($request->input('search')){
+            $query = $request->input('search');
+            $emailTemplate = EmailTemplate::where('subject', 'LIKE', '%'. $query. '%')->orderBy('id','DESC')->paginate(10);
+           
+            return view('email_template.index', compact('emailTemplate'));
+            
+        }
+        else{
+        $emailTemplate = EmailTemplate::orderBy('id','DESC')->paginate(5);
+        return view('email_template.index', compact('emailTemplate'))
+            ->with('i', ($request->input('page', 1) - 1) * 5);
+        }
     }
 
     /**

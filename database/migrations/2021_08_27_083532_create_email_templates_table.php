@@ -20,7 +20,16 @@ class CreateEmailTemplatesTable extends Migration
                 ->references('id')
                 ->on('companies')
                 ->onDelete('cascade');
-            $table->string('description');    
+            $table->string('description');
+            $table->string('subject');
+            $table->string('from_name'); 
+            $table->string('reply_to_email'); 
+            $table->string('from_email');
+            $table->string('to_email');
+            $table->string('cc_email');
+            $table->string('bcc_email'); 
+            $table->string('status');
+            $table->text('email_body');     
             $table->timestamps();
         });
     }

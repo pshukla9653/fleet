@@ -12,6 +12,7 @@ use App\Http\Controllers\RegionController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\LoanTypeController;
 use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\EmailTemplateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('edit-vehicle', [VehicleController::class, 'edit']);
     Route::post('delete-vehicle', [VehicleController::class, 'destroy']);
     Route::post('deletespec-vehicle', [VehicleController::class, 'delete']);
+    Route::resource('email-template', EmailTemplateController::class);
+    
     
 	
 });
