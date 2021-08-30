@@ -32,6 +32,18 @@ class CreateEmailTemplatesTable extends Migration
             $table->text('email_body');     
             $table->timestamps();
         });
+
+        Schema::create('email_file', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('template_id')->index();
+			$table->foreign('template_id')
+                ->references('id')
+                ->on('email_templates')
+                ->onDelete('cascade');
+            $table->string('file_name');
+            $table->text('email_body');     
+            $table->timestamps();
+        });
     }
 
     /**
