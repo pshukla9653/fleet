@@ -29,21 +29,26 @@ class HomeController extends Controller
         $brands = DB::table('brands')->where('company_id', Auth()->user()->company_id)->get();
         $regions = DB::table('regions')->where('company_id', Auth()->user()->company_id)->get();
         $departments = DB::table('departments')->where('company_id', Auth()->user()->company_id)->get();
+        $brand_id ='';
+        $region_id = '';
+        $department_id = '';
+        $seach_by_find = false;
         if($request->input('search')){
             $query = $request->input('search');
             $vehicles = Vehicle::where('registration_number', 'LIKE', '%'. $query. '%')->orderByRaw("CAST(order_number as UNSIGNED) ASC")->get();
         }
         if($request->input('brand_id')){
+            $find['brand_id'] = $request->input('brand_id');
             $brand_id = $request->input('brand_id');
-            $vehicles = Vehicle::where('brand_id', $brand_id)->orderByRaw("CAST(order_number as UNSIGNED) ASC")->get();
         }
-        elseif($request->input('region_id')){
+        if($request->input('region_id')){
+            $find['region_id'] = $request->input('region_id');
             $region_id = $request->input('region_id');
-            $vehicles = Vehicle::where('region_id', $region_id)->orderByRaw("CAST(order_number as UNSIGNED) ASC")->get();
         }
-        elseif($request->input('department_id')){
+        if($request->input('department_id')){
+            $find['department_id'] = $request->input('department_id');
             $department_id = $request->input('department_id');
-            $vehicles = Vehicle::where('department_id', $department_id)->orderByRaw("CAST(order_number as UNSIGNED) ASC")->get();
+            
         }
         else{
         $vehicles = Vehicle::orderByRaw("CAST(order_number as UNSIGNED) ASC")->get();
@@ -77,7 +82,8 @@ class HomeController extends Controller
         $diff=date_diff(date_create($start_date), date_create($end_date));
         $days = $diff->days;
         }
-       
-        return view('home', compact('brands','regions','departments','vehicles','start_date','end_date','days','date_range'));
+        $vehicles = Vehicle::where($find)->orderByRaw("CAST(order_number as UNSIGNED) ASC")->get();
+        
+        return view('home', compact('brands','regions','departments','vehicles','start_date','end_date','days','date_range','brand_id','region_id','department_id'));
     }
 }

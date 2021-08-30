@@ -62,6 +62,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('email-template', EmailTemplateController::class);
     Route::post('edit-email-template', [EmailTemplateController::class, 'edit']);
     Route::post('delete-email-template', [EmailTemplateController::class, 'destroy']);
+    Route::post('deletefile-email-template', [EmailTemplateController::class, 'delete']);
     
     
 	

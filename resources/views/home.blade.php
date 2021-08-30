@@ -55,8 +55,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     <div class="panel-body" style="padding:10px 10px 0px 10px;">
       
       <div class="row"> 
-      <div class="col-md-2" style="width: 28.56%">
         <form action="#" id="search_form">
+      <div class="col-md-2" style="width: 28.56%">
+        
         <div class="form-group" style="margin-bottom: -10px;">
           <strong>Start Date</strong>
           
@@ -79,7 +80,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         <div class="form-group">
           <strong>Date Range</strong>
           
-              <select name="date_range" id="date_range" onchange="submit();" style="padding:5px;" class="form-control custom-modal-textbox">
+              <select name="date_range" id="date_range" onchange="custom_search();" style="padding:5px;" class="form-control custom-modal-textbox">
                
                 <option value="1" {{($date_range=='1')?'selected':''}}>1 weeks</option>
                 <option value="2" {{($date_range=='2')?'selected':''}}>2 weeks</option>
@@ -87,46 +88,47 @@ input[type="date"]::-webkit-calendar-picker-indicator {
                 <option value="4" {{($date_range=='4')?'selected':''}}>4 weeks</option>
               </select>  
               
-            </form> 
+            
         </div>  
       </div>
+     
       <div class="col-md-2" style="width: 14.28%">
         <div class="form-group">
           <strong>Brand</strong>
-          <form action="#">
-              <select name="brand_id" id="brand_id" onchange="submit();" style="padding:5px;" class="form-control custom-modal-textbox">
-                <option value="">All Brands</option>
+          
+              <select name="brand_id" id="brand_id" onchange="custom_search();" style="padding:5px;" class="form-control custom-modal-textbox">
+                <option value="" >All Brands</option>
                 @foreach ($brands as $key=>$brand)
-                <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
+                <option value="{{$brand->id}}" {{$brand_id==$brand->id?'selected':''}}>{{$brand->brand_name}}</option>
                 @endforeach
               </select>  
-          </form> 
+            
         </div>  
       </div>
       <div class="col-md-2" style="width: 14.28%">
         <div class="form-group">
           <strong>Department</strong>
-          <form action="#">
-            <select name="department_id" style="padding:5px;" onchange="submit();" id="department_id" class="form-control custom-modal-textbox">
+         
+            <select name="department_id" style="padding:5px;" onchange="custom_search();" id="department_id" class="form-control custom-modal-textbox">
                 <option value="">All Departments</option>
                   @foreach ($departments as $key=>$department)
-                  <option value="{{$department->id}}">{{$department->department_name}}</option>
+                  <option value="{{$department->id}}" {{$department_id==$department->id?'selected':''}}>{{$department->department_name}}</option>
                   @endforeach
             </select> 
-          </form> 
+          
         </div>  
       </div>
       <div class="col-md-2" style="width: 14.28%">
         <div class="form-group">
           <strong>Region</strong>
-          <form action="#">
-            <select name="region_id" style="padding:5px;" onchange="submit();" id="region_id" class="form-control custom-modal-textbox">
+         
+            <select name="region_id" style="padding:5px;" onchange="custom_search();" id="region_id" class="form-control custom-modal-textbox">
               <option value="">All Regions</option>
                 @foreach ($regions as $key=>$region)
-                <option value="{{$region->id}}">{{$region->region_name}}</option>
+                <option value="{{$region->id}}" {{$region_id==$region->id?'selected':''}}>{{$region->region_name}}</option>
                 @endforeach
             </select> 
-          </form>
+          
         </div>  
       </div>
       <div class="col-md-2" style="width: 14.28%">
@@ -137,6 +139,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
           <input type="checkbox" name="" id=""/> On fleet within 2 weeks
         </div>  
       </div>
+    </form> 
       </div>
     </div>
   </div>
@@ -258,6 +261,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
      $('#custom_input').html('<input type="hidden" name="mode" value="forward"/>');
      
      $('#search_form').submit();
+   }
+   function custom_search(){
+    $('#search_form').submit();
    }
  </script>  
 @endsection

@@ -25,10 +25,7 @@
 	<script type="text/javascript" src="{{ asset('assets/js/core/libraries/bootstrap.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/plugins/loaders/blockui.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/plugins/forms/selects/select2.min.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('assets/js/plugins/tables/datatables/datatables.min.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('assets/js/plugins/tables/datatables/extensions/responsive.min.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('assets/js/pages/datatables_responsive.js') }}"></script>
-
+	<script type="text/javascript" src="{{ asset('assets/js/ckeditor/ckeditor.js')}}"></script>
 	<!-- /core JS files -->
 
 	<!-- Theme JS files -->
@@ -137,7 +134,7 @@
 										<li class="{{ (request()->segment(1) == 'loantypes') ? 'active' : '' }}"><a href="{{ route('loantypes.index') }}">Loan Type</a></li>
 										@endcan
 										
-										<li><a href="{{ route('email-template.index')}}">Email Templates</a></li>
+										<li class="{{ (request()->segment(1) == 'email-template') ? 'active' : '' }}"><a href="{{ route('email-template.index')}}">Email Templates</a></li>
 										@can('email-template-list')
 										@endcan
 										@can('history-list')

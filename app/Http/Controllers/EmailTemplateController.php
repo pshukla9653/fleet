@@ -140,4 +140,18 @@ class EmailTemplateController extends Controller
 		
         return response()->json(['success' => true]);
     }
+
+    public function delete(Request $request)
+    {
+        //
+		$email_file = DB::table('email_file')->where('id', $request->id)->get();
+       
+		if (Storage::disk('public')->exists($email_file[0]->file_name)) {
+            Storage::disk('public')->delete($email_file[0]->file_name);
+        }
+        
+		DB::table('email_file')->where('id', $request->id)->delete();
+		
+        return response()->json(['success' => true]);
+    }
 }
