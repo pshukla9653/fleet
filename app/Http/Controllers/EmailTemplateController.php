@@ -41,6 +41,7 @@ class EmailTemplateController extends Controller
      */
     public function store(Request $request)
     {
+        
         if($request->id){
             $validation = [
                             'description' => 'required',
@@ -96,7 +97,7 @@ class EmailTemplateController extends Controller
         }
      
         }
-        return redirect()->route('email_template')
+        return redirect()->route('email-template.index')
                         ->with('success','Email Template created successfully');
 						
     

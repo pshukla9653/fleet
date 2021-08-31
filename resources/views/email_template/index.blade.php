@@ -332,7 +332,7 @@
                                 <div class="col-md-5" style="margin-top: 10px;">
                                     <input type="hidden" id="item_id" name="id">
                                     <strong>Attachment:</strong>
-                                    <select name="sp" size="4" style="border: 1px solid #bbb8b8;
+                                    <select size="4" style="border: 1px solid #bbb8b8;
                           background-color: #f2f2f2; width:100%; margin:5px 20px 20px 0px; padding:5px;"
                                         id="uploaded_spec">
                                     </select>
@@ -345,7 +345,7 @@
                                     </div>
                                     <div class="form-group">
 
-                                        <div style="text-align:right;width: 78%;">
+                                        <div style="text-align:right;width: 96%;">
 
                                             <div class="upload-btn-wrapper">
                                                 <button class="btnsss">Upload </button>
@@ -354,6 +354,9 @@
                                         </div>
 
 
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="checkbox" name="is_spec" id="is_spec" value="1"/> Include Vehicle spec sheets?
                                     </div>
 
 
@@ -440,13 +443,20 @@
                             $('#btn').html('Update');
                             $('#item_id').val(res.id);
                             $.each(res, function(key, value) {
+                                if(key !='is_spec'){
                                 $('#' + key).val(value);
+                                }
                             });
                             if (res.status == '1') {
                                 $('#status_active').prop("checked", true);
                             } else {
                                 $('#status_inactive').prop("checked", true);
                             }
+                            
+                            if(res.is_spec ==1){
+                                $('#is_spec').prop("checked");
+                            }
+                            
                             var specs = res.specs;
                             $.each(specs, function(key, value) {
 
