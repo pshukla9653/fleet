@@ -20,7 +20,8 @@ class EmailTemplate extends Model
         'cc_email',
         'bcc_email',
         'status',
-        'email_body'
+        'email_body',
+        'is_spec'
 
     ];
 

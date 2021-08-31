@@ -30,7 +30,7 @@ class CreateEmailTemplatesTable extends Migration
             $table->string('bcc_email'); 
             $table->string('status');
             $table->text('email_body');
-            $table->tinyInteger('is_spec')->default('0');     
+            $table->string('is_spec');     
             $table->timestamps();
         });
 

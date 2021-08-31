@@ -59,8 +59,17 @@ class EmailTemplateController extends Controller
         }
 		$this->validate($request, $validation);
         $path = '/';
+        
+        
         if($request->id){
+            
             $input = $request->all();
+            if($request->has('is_spec')){
+                $input['is_spec'] = 1;
+            }
+            else{
+                $input['is_spec'] = 0;
+            }    
         $emailTemplate =  EmailTemplate::find($request->id);
         if($request->hasfile('spec_sheet')){
             $spec_sheet = $request->file('spec_sheet');
@@ -74,7 +83,10 @@ class EmailTemplateController extends Controller
         else{
             unset($input['spec_sheet']);
         } 
+        
         $emailTemplate->update($input);
+        return redirect()->route('email-template.index')
+                        ->with('success','Email Template Updated successfully');
         }
         else{
         //
@@ -82,7 +94,12 @@ class EmailTemplateController extends Controller
   
         $input = $request->all();
         $input['company_id'] = Auth()->user()->company_id;
-        
+        if($request->has('is_spec')){
+            $input['is_spec'] = 1;
+        }
+        else{
+            $input['is_spec'] = 0;
+        }
         
             
         $emailTemplate = EmailTemplate::create($input);
@@ -95,10 +112,10 @@ class EmailTemplateController extends Controller
                 DB::table('email_file')->insert($email_file);
             }
         }
-     
-        }
         return redirect()->route('email-template.index')
-                        ->with('success','Email Template created successfully');
+        ->with('success','Email Template created successfully');
+        }
+        
 						
     
         

@@ -356,7 +356,7 @@
 
                                     </div>
                                     <div class="form-group">
-                                        <input type="checkbox" name="is_spec" id="is_spec" value="1"/> Include Vehicle spec sheets?
+                                        <input type="checkbox" name="is_spec" id="is_spec" value='1' /> Include Vehicle spec sheets?
                                     </div>
 
 
@@ -452,9 +452,9 @@
                             } else {
                                 $('#status_inactive').prop("checked", true);
                             }
-                            
-                            if(res.is_spec ==1){
-                                $('#is_spec').prop("checked");
+                           
+                            if(res.is_spec =='1'){
+                                $('#is_spec').prop("checked", true);
                             }
                             
                             var specs = res.specs;
