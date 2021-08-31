@@ -229,7 +229,9 @@
             color: #000;
 
         }
-
+        .custom-modal-textbox{
+            width:80%;
+        }
     </style>
     <div id="popup_model" class="modal fade">
         <div class="modal-dialog modal-lg">
@@ -271,8 +273,8 @@
                                         </div>
                                         <div class="form-group">
                                             <strong>Status:</strong><br>
-                                            <input type="radio" name="status" id="status_active" value="1" />Active
-                                            <input type="radio" name="status" id="status_inactive" value="0" />Inactive
+                                            <input type="radio" name="status" id="status_active" value="1" /> Active
+                                            <input type="radio" name="status" id="status_inactive" value="0" /> Inactive
                                         </div>
                                     </div>
                                     <div class="col-md-6" style="margin-top: 10px;">
@@ -299,7 +301,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <div><strong>Email Body:</strong><span style="padding-left: 68%;"
+                                            <div><strong>Email Body:</strong><span style="padding-left: 73%;"
                                                     data-popup="tooltip" title="%%FirstName%% = First name of contact<br> 
                                 %%LastName%% = Last name of contact<br>
                                 %%BookingData%% = Booking Date<br>
@@ -308,10 +310,10 @@
                                 %%PlateNumber%% = Vehicle Plate Number<br>
                                 %%VehicleModel%% = Vehicle Model<br>
                                 %%VehicleBrand%% = Vehicle Brand" data-html="true">&quest;</span></div>
-                                            {!! Form::textarea('email_body', null, ['class' => 'form-control custom-modal-textbox', 'id' => 'email_body', 'rows' => '5', 'style' => 'margin-bottom: 0px;width:85%;']) !!}
+                                            {!! Form::textarea('email_body', null, ['class' => 'form-control custom-modal-textbox', 'id' => 'email_body', 'rows' => '8', 'style' => 'margin-bottom: 0px;width:90%;']) !!}
 
                                             <div class="form-group"
-                                                style="text-align:right;width:82%;margin-top:5px;margin-left:15px;font-size: 12px !important;">
+                                                style="text-align:right;width:87%;margin-top:5px;margin-left:15px;font-size: 12px !important;">
                                                 <button type="button" id="insert_design" class="btn custom-modal-btn"
                                                     style="background-color: #486288;color:#fff;"><i
                                                         class="icon-pencil3"></i> Design</button>
@@ -355,7 +357,7 @@
 
 
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-left:0px;">
                                         <input type="checkbox" name="is_spec" id="is_spec" value='1' /> Include Vehicle spec sheets?
                                     </div>
 
