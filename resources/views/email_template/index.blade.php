@@ -313,7 +313,7 @@
                                             {!! Form::textarea('email_body', null, ['class' => 'form-control custom-modal-textbox', 'id' => 'email_body', 'rows' => '8', 'style' => 'margin-bottom: 0px;width:90%;']) !!}
 
                                             <div class="form-group"
-                                                style="text-align:right;width:87%;margin-top:5px;margin-left:15px;font-size: 12px !important;">
+                                                style="text-align:right;width:87%;margin-top:5px;margin-left:20px;font-size: 12px !important;">
                                                 <button type="button" id="insert_design" class="btn custom-modal-btn"
                                                     style="background-color: #486288;color:#fff;"><i
                                                         class="icon-pencil3"></i> Design</button>
@@ -334,8 +334,8 @@
                                 <div class="col-md-5" style="margin-top: 10px;">
                                     <input type="hidden" id="item_id" name="id">
                                     <strong>Attachment:</strong>
-                                    <select size="4" style="border: 1px solid #bbb8b8;
-                          background-color: #f2f2f2; width:100%; margin:5px 20px 20px 0px; padding:5px;"
+                                    <select size="8" style="border: 1px solid #bbb8b8;
+                          background-color: #f2f2f2; width:100%; margin:10px 20px 20px 0px; padding:5px;height: 248px;"
                                         id="uploaded_spec">
                                     </select>
                                     <div class="form-group"
@@ -347,10 +347,10 @@
                                     </div>
                                     <div class="form-group">
 
-                                        <div style="text-align:right;width: 96%;">
+                                        <div style="text-align:right;width: 97.5%;margin-top:7px">
 
                                             <div class="upload-btn-wrapper">
-                                                <button class="btnsss">Upload </button>
+                                                <button class="btnsss">&nbsp; Upload &nbsp; </button>
                                                 <input type="file" name="spec_sheet[]" multiple>
                                             </div>
                                         </div>
