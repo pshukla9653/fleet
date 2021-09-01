@@ -251,13 +251,13 @@
                   <div class="form-group">
                     <strong style="padding: 0px 0px 0px 10px;">Other Details:</strong>
                     {!! Form::textarea('other_details', null, array('class' =>
-                    'form-control custom-modal-textbox', 'id' =>'other_details','rows'=>'2','style'=>'margin-bottom: 0px;margin-left: 10px;width:76%;')) !!}
+                    'form-control custom-modal-textbox', 'id' =>'other_details','rows'=>'2','style'=>'margin-bottom: 0px;margin-left: 10px !important;width:77%;')) !!}
                     <div class="text-danger" id="other_details"></div>
                   </div>
                   <div class="form-group">
                     <strong style="padding: 0px 0px 0px 10px;">Notes:</strong>
                     {!! Form::textarea('notes', null, array('class' =>
-                    'form-control custom-modal-textbox', 'id' =>'notes','rows'=>'2','style'=>'margin-bottom: 0px;margin-left: 10px;width:76%;')) !!}
+                    'form-control custom-modal-textbox', 'id' =>'notes','rows'=>'2','style'=>'margin-bottom: 0px;margin-left: 10px!important;width:77%;')) !!}
                     <div class="text-danger" id="notes"></div>
                   </div>
                   <strong>Vehicle Spec Sheets:</strong>

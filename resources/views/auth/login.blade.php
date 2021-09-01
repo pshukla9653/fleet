@@ -12,7 +12,7 @@
   <form method="POST" action="{{ route('login') }}">
     @csrf
   <div class="form-group has-feedback has-feedback-left">
-    <input type="email" style="text-align: left;font: italic normal normal 18px/22px Montserrat;letter-spacing: 0px;opacity: 1;" class="form-control textbox-extra-effect @error('email') is-invalid @enderror" value="{{ old('email') }}" name="email" required autocomplete="email" autofocus placeholder="Username">
+    <input type="email" style="text-align: left;font: italic normal normal 18px/22px Montserrat;letter-spacing: 0px;opacity: 1;margin: 20px;" class="form-control textbox-extra-effect @error('email') is-invalid @enderror" value="{{ old('email') }}" name="email" required autocomplete="email" autofocus placeholder="Username">
     <div class="form-control-feedback" style="padding-top: 3px;margin-left: 35px;">
       
       <svg class="text-muted" viewBox="1550.233 878.818 22.891 21.088">
@@ -23,7 +23,7 @@
   </div>
 
   <div class="form-group has-feedback has-feedback-left">
-    <input type="password" style="text-align: left;font: italic normal normal 18px/22px Montserrat;letter-spacing: 0px;opacity: 1;" id="password" class="form-control textbox-extra-effect @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
+    <input type="password" style="text-align: left;font: italic normal normal 18px/22px Montserrat;letter-spacing: 0px;opacity: 1;margin: 20px 19px;" id="password" class="form-control textbox-extra-effect @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
     <div class="form-control-feedback" style="padding-top: 5px; margin-left: 35px;">
     
       <svg class="text-muted" viewBox="1553.89 1042.526 21.838 26.986">
@@ -46,7 +46,7 @@
 
   <div class="form-group login-options">
     <div class="row">
-      <div class="col-md-12" style="padding-left: 35px;">
+      <div class="col-md-12" style="padding-left: 35px;margin: 18px 0px;">
         <label class="checkbox-inline remember-label">
           <input type="checkbox" name="remember" class="checkbox remember-checkbox" id="remember" {{ old('remember') ? 'checked' : '' }}>
           {{ __('Remember me') }}
@@ -63,7 +63,7 @@
   </div>
 </form>
   <div class="row">
-    <div class="col-md-12 text-center">
+    <div class="col-md-12 text-center" style="margin: 20px 0px;">
       <a href="{{ route('password.request') }}" style="color:#677ba6; font-size:14px; font-weight:800;"> {{ __('Forgot Your Password?') }}</a>
     </div>
   </div>

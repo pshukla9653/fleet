@@ -116,16 +116,14 @@
         </div>
         <h6 class="modal-title md-heading-custom" id="form_heading"></h6>
         <div class="modal-body md-body-custom">
-          <div class="alert alert-danger print-error-msg" style="display:none">
-            <ul></ul>
-        </div>
+          
                 <form action="javascript:void(0)" id="itemform" class="form-horizontal" method="POST">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
 
                                 <input type="hidden" id="item_id" name="id">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 10px;">
                                     <div class="form-group">
                                         <strong>First Name:</strong>
                                         {!! Form::text('first_name', null, array('placeholder' => 'First Name','class'
