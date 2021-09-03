@@ -402,11 +402,19 @@ input:checked + .slidera:before {
     margin-left: 10px;
 }
 
-button.editss {
+/*button.editss {
   font-size: 12px;
       margin-top: 10px;
     background: #2b80ff;
     color: #fff;
+}*/
+button.editss {
+    font-size: 12px;
+    margin-top: 10px;
+    background: #2b80ff;
+    color: #fff;
+    border-radius: 3px;
+    border-color: #2b80ff;
 }
 div#form_heading {
     margin: 20px;
@@ -478,7 +486,7 @@ button#imagecolor {
         <div class="form-group" style="width: 81%;">
           <strong>Start Date</strong>
           
-          <input type="text" onchange="submit();" value="{{$start_date}}" id="start_date" class="form-control custom-modal-textbox" style="padding:0px!important;width:90px;" name="start_date"/>
+          <input type="text" onchange="submit();" value="{{$start_date}}" id="start_date" class="form-control custom-modal-textbox form-control custom-modal-textbox" style="padding:0px!important;width:90px;" name="start_date"/>
         </div>
       </div>
 
@@ -659,6 +667,55 @@ button#imagecolor {
     </div>
   </div>
 </div>
+<style type="text/css">
+  .custom-modal-textbox1 {
+    color: #000 !important;
+    border: 1px solid #bbb8b8;
+    background-color: #f2f2f2;
+    padding-left: 15px !important;
+    width: 70%;
+    height: 26px;
+    border-radius: 2px;
+  }
+  .custom-modal-textbox2 {
+    color: #000 !important;
+    border: 1px solid #bbb8b8;
+    background-color: #f2f2f2;
+    padding-left: 15px !important;
+    width: 298px;
+    height: 26px;
+    border-radius: 2px;
+  }
+  .custom-modal-textbox3 {
+    color: #000 !important;
+    border: 1px solid #bbb8b8;
+    background-color: #f2f2f2;
+    padding-left: 15px !important;
+    width: 363px;
+    height: 26px;
+    border-radius: 2px;
+  }
+  .custom-modal-textbox4 {
+    color: #000 !important;
+    border: 1px solid #bbb8b8;
+    background-color: #f2f2f2;
+    padding-left: 15px !important;
+    width: 363px;
+    height: 26px;
+    border-radius: 2px;
+  }
+  
+  .anchor-btn {
+    background-color: #2b80ff;
+    padding: 3px;
+    height: 23px;
+    margin-top: 9px;
+    color: white;
+    font-size: 12px;
+    font-weight: 300;
+  }
+  
+</style>
 <div id="popup_model1" class="modal fade">
     <div class="modal-dialog modal-lg">
       <div class="modal-content" style="background-color: #f2f2f2;">
@@ -699,10 +756,13 @@ button#imagecolor {
                 <div class="col-md-12 main">
                   <div class="col-md-3">
                      <div class="car-img">
-                        <img class="image-1" src="{{ asset('assets/images/logo1.png') }}">                   
+                        <img class="image-1" src="{{ asset('assets/images/logo1.png') }}">
                       </div>
                       <div class="sides-1">
-                        <button class="rt-number">9867RT</button><br>
+                        <button class="rt-number" style="border-radius: 7px;
+    border-color: #eecc00;
+    margin-top: 10px;
+    width: 90px;">9867RT</button><br>
                         <span>Brand:</span><br>
                         <span>Model:</span><br>
                         <span>Derivative:</span>
@@ -714,12 +774,12 @@ button#imagecolor {
                         <span class="enddate">End Date</span>
                         <div class="form-groupdate">
                           <span class="datepicker">
-                            <input type="text" name="start_date" id="feRouteDate" />  
-                            <img class="fa fa-calendar ass" src="{{ asset('assets/images/icon/calendar.png') }}" alt="">
+                            <input type="text" name="start_date" id="feRouteDate"  class="form-control custom-modal-textbox1"/>  
+                            <img class="fa fa-calendar ass" src="{{ asset('assets/images/icon/calendar.png') }}" alt=""  class="" style="margin-left: 90px;margin-top: -28px;color: #000 !important; border-radius: 5px; background-color: #f2f2f2;padding: 5px;height: 28px;">
                           </span> 
                           <span class="datepickers">
-                            <input type="text" name="end_date" id="feRouteDate" />  
-                            <img class="fa fa-calendar as" src="{{ asset('assets/images/icon/calendar.png') }}" alt="">
+                            <input type="text" name="end_date" id="feRouteDate" class="form-control custom-modal-textbox1" style=" margin-top: -25px;margin-left: 134px;" />
+                            <img class="fa fa-calendar as" src="{{ asset('assets/images/icon/calendar.png') }}" alt="" class="form-control custom-modal-textbox1" style="margin-left: 251px;margin-top: -28px;color: #000 !important;border-radius: 5px;background-color: #f2f2f2;padding: 5px;height: 28px;">
                           </span> 
                         </div>
                      </div>
@@ -729,33 +789,33 @@ button#imagecolor {
                         <span class="booknowaa">Purpose of Loan</span>
                      </div>
                      <div class="book-loan">
-                        <input type="text" name="booking_reference" class="ref-name">&nbsp&nbsp           
-                        <input type="text" name="purpose_of_lone" class="loan-name">
+                        <input type="text" name="booking_reference" class="ref-name form-control custom-modal-textbox1" style="width: 140px;">&nbsp&nbsp           
+                        <input type="text" name="purpose_of_lone" class="loan-name form-control custom-modal-textbox1"  style="width: 140px;margin-left: 14px;">
                      </div>
                      <br>
                      <div class="">
                         <span class="loan1">Loan Type:</span><br>
-                        <select id="cars" name="loan_type">
+                        <select id="cars" name="loan_type" class="form-control custom-modal-textbox2" style="height: 26px;padding: 0px;width: 298px">
                            <option value="volvo">Volvo</option>
                            <option value="saab">Saab</option>
                         </select>
                      </div>
                      <br>
                      <span class="loan1">Booking Notes:</span>
-                     <textarea id="w3review" name="booking_notes" rows="4" cols="38"></textarea>
+                     <textarea id="w3review" name="booking_notes" rows="4" cols="38" class="form-control custom-modal-textbox2" ></textarea>
                      <div class="booking-set">
                         <span class="booknow">Lag time (days)</span>
                         <span class="booknowa1">Lead time (days)</span>
                      </div>
                      <div class="book-loan">
-                        <input type="text" name="lag_time" class="ref-name">&nbsp&nbsp           
-                        <input type="text" name="lead_time" class="loan-name">
+                        <input type="text" name="lag_time" class="ref-name form-control custom-modal-textbox1">&nbsp&nbsp           
+                        <input type="text" name="lead_time" class="loan-name form-control custom-modal-textbox1">
                      </div>
                      <br>
                      <span class="loan1">Lead time Notes:</span>
-                     <textarea id="w3review" name="lag_notes" rows="4" cols="38"></textarea>
+                     <textarea id="w3review" name="lag_notes" rows="4" cols="38" class="form-control custom-modal-textbox2"></textarea>
                      <span class="loan1">Load time Note:</span>
-                     <textarea id="w3review" name="lead_notes" rows="4" cols="38"></textarea>
+                     <textarea id="w3review" name="lead_notes" rows="4" cols="38" class="form-control custom-modal-textbox2"></textarea>
                   </div>
                   <div class="col-md-5">
                      <div class="checking-box">
@@ -769,35 +829,37 @@ button#imagecolor {
                            <label class="form-check-label" for="show_collectioin_day">
                            Show collection day
                            </label>
-                           <input class="form-check-input-reverse" type="checkbox" name="show_collectioin_day" value="Show Collection Day" id="show_collectioin_day">
+                           <input class="form-check-input-reverse " type="checkbox" name="show_collectioin_day" value="Show Collection Day" id="show_collectioin_day">
                         </div>
                      </div>
                      <label for="w3review">Contacts:</label>
-                     <textarea id="" name="contacts" rows="5" cols="47"> </textarea>
+                     <textarea id="" name="contacts" rows="5" cols="47" class="form-control custom-modal-textbox3"> </textarea>
                      <!-- button -->
                      <div class="button1">
-                        <button class="editss">Edit</button>&nbsp 
-                        <button class="editss">Mark as primary</button>&nbsp 
-                        <button class="editss" style="background-color:#ff4e4e">Delete</button>
+                      <a href="javascript:void(0)" class="anchor-btn" style="margin-right: 10px;">Edit</a>&nbsp
+                      <a href="javascript:void(0)" class="anchor-btn" style="margin-right: 10px;">Mark as primary</a>&nbsp
+                      <a href="javascript:void(0)" class="anchor-btn" style="background-color:#ff4e4e;border-color: #ff4e4e;">Delete</a>
+                        
+                        
                      </div>
                      
                      <div class="button2">
-                        <button class="editss">Select from existing contact</button>&nbsp 
-                        <button class="editss">Select from existing list</button>
+                        <a href="javascript:void(0)" class="anchor-btn" style="margin-left: 31px;">Select from existing contact</a>&nbsp
+                        <a href="javascript:void(0)" class="anchor-btn" >Select from existing list</a>
                      </div>
                     
                      <div class="button3">
-                        <a href="{{ route('contacts.index') }}" class="editss"><button  >Add New Contact</button></a>&nbsp 
-                        <a href="{{ route('lists.index') }}"><button  class="editss">Add New List</button></a>
+                      <a href="{{ route('contacts.index') }}" class="anchor-btn" style="margin-right: 10px;">Add New Contact</a>&nbsp 
+                      <a href="{{ route('lists.index') }}" class="anchor-btn">Add New List</a>
+
                      </div>
                      <label for="vehicle">Vehicle:</label>
-                     <textarea id="vehicle" name="vehicle" rows="5" cols="47">
-                          </textarea>
+                     <textarea id="vehicle" name="vehicle" rows="5" cols="47" class="form-control custom-modal-textbox3"> </textarea>
                      <div class="text-edit">
-                        <button>Edit</button>
+                        <button class="editss">Edit</button>
                      </div>
                      <span>Select Email Tampalet for Booking</span>
-                     <div class="checkings">
+                     <div class="checkings form-control custom-modal-textbox3" style="height: 152px;">
                         <div class="checkin-box11" style="margin-left:10px">
                           <input type="checkbox" value="1" name="email_temeplete[]" /> This is checkbox <br />
                           <input type="checkbox" value="2" name="email_temeplete[]" /> This is checkbox <br />
@@ -815,17 +877,7 @@ button#imagecolor {
                   </div>
                 </div>
 
-                <div class="createby">
-                    <span>createbysonsoncheckit@gmail.com on 12/02/2022</span><br>
-                    <span>createbysonsoncheckit@gmail.com on 12/02/2022</span>
-                </div>
-                <div class="modal-footer md-footer-custom">
-                    <!-- <hr style="margin-top: 0px;">
-                    <button type="submit" class="btn custom-modal-btn btn-success" id="btn">Save change</button>
-                    <button type="button" class="btn custom-modal-btn btn-danger" data-dismiss="modal">Cancel</button> 
-                    <div class="delete-booking">
-                       <button type="button" class="btn custom-modal-btn btn-danger" data-dismiss="modal">Delete Booking</button>
-                    </div>  -->             
+                <div class="modal-footer md-footer-custom">            
                 </div>
     
               </div>
@@ -876,7 +928,7 @@ button#imagecolor {
             </div>
             <div class="notes">
                <span class="loan1">Notes:</span><br>
-              <textarea id="w3review" name="ob_pick_from_notes" rows="4" cols="45"> </textarea>
+              <textarea id="w3review" name="ob_pick_from_notes" rows="4" cols="45" class="form-control custom-modal-textbox3"> </textarea>
             </div>
         </div>
       </div>
@@ -894,51 +946,43 @@ button#imagecolor {
             <div class="main-address">        
               <div class="address">
                 <span class="address1">Address1</span><br>
-                <input type="text" name="ob_deliver_to_address_1" class="address2">
+                <input type="text" name="ob_deliver_to_address_1" class="address2 form-control custom-modal-textbox4" style="height: 26px;padding: 0px;width: 216px">
               </div>
               <div class="address">
                 <span class="address1">Address2</span><br>
-                <input type="text" name="ob_deliver_to_address_2" class="address2">
+                <input type="text" name="ob_deliver_to_address_2"  class="address2 form-control custom-modal-textbox4" style="height: 26px;padding: 0px;width: 216px" >
               </div>
             </div>
           <div class="main-address">        
             <div class="address">
               <span class="address1">Twon/City</span><br>
-              <input type="text" name="ob_deliver_to_town_city" class="address2">
+              <input type="text" name="ob_deliver_to_town_city"  class="address2 form-control custom-modal-textbox4" style="height: 26px;padding: 0px;width: 216px">
             </div>
             <div class="address">
               <span class="address1">County</span><br>
-              <input type="text" name="ob_deliver_to_county" class="address2">
+              <input type="text" name="ob_deliver_to_county"  class="address2 form-control custom-modal-textbox4" style="height: 26px;padding: 0px;width: 216px">
             </div>
           </div>
           <div class="main-address">        
             <div class="address">
               <span class="address1">Postcode</span><br>
-              <input type="text" name="ob_deliver_to_post_code" class="address2">
+              <input type="text" name="ob_deliver_to_post_code"  class="address2 form-control custom-modal-textbox4" style="height: 26px;padding: 0px;width: 216px">
             </div>
             <div class="address">
               <span class="address1">Country</span><br>
-              <input type="text" name="ob_deliver_to_country" class="address2">
+              <input type="text" name="ob_deliver_to_country"  class="address2 form-control custom-modal-textbox4" style="height: 26px;padding: 0px;width: 216px">
             </div>
           </div>
           <div class="notes-all">
             <span class="loan11">Notes:</span><br>
-            <textarea id="notes1" name="ob_deliver_to_deliver_notes" rows="4" cols="58"> </textarea>
+            <textarea id="notes1" name="ob_deliver_to_deliver_notes" rows="4" cols="58" class="form-control custom-modal-textbox3" style="width: 441px;"> </textarea>
           </div>
         </div>
    </div>
 </div>
-<div class="createby1">
-    <span>createbysonsoncheckit@gmail.com on 12/02/2022</span><br>
-    <span>createbysonsoncheckit@gmail.com on 12/02/2022</span>
-  
-</div>
   </div>
               <div class="modal-footer md-footer-custom foot">
-                <!-- <hr style="margin-top: 0px;">
-                <button type="submit" class="btn custom-modal-btn btn-success" id="btn">Save change</button>
-                <button type="button" class="btn custom-modal-btn btn-danger" data-dismiss="modal">Cancel</button>  -->
-                             
+                                     
               </div>
                 
                 <!-- end -->
@@ -975,7 +1019,7 @@ $(document).ready(function(){
           <div class="row">
    <div class="col-md-12 main">
   
-      <div class="col-md-7">
+      <div class="col-md-5">
 
          <div class="main-for-checking11">
             <div class="for-checking11">
@@ -990,54 +1034,54 @@ $(document).ready(function(){
         <div class="main-address">        
         <div class="address">
           <span class="address1">Address1</span><br>
-          <input type="text" name="ib_pick_from_address_1" class="address2">
+          <input type="text" name="ib_pick_from_address_1" class="address2 form-control custom-modal-textbox4" style="height: 26px;padding: 0px;width: 180px">
         </div>
         <div class="address">
           <span class="address1">Address2</span><br>
-          <input type="text" name="ib_pick_from_address_2" class="address2">
+          <input type="text" name="ib_pick_from_address_2" class="address2 form-control custom-modal-textbox4" style="height: 26px;padding: 0px;width: 180px">
         </div>
         </div>
           <div class="main-address">        
         <div class="address">
           <span class="address1">Twon/City</span><br>
-          <input type="text" name="ib_pick_from_town_city" class="address2">
+          <input type="text" name="ib_pick_from_town_city" class="address2 form-control custom-modal-textbox4" style="height: 26px;padding: 0px;width: 180px">
         </div>
         <div class="address">
           <span class="address1">County</span><br>
-          <input type="text" name="ib_pick_from_county" class="address2">
+          <input type="text" name="ib_pick_from_county" class="address2 form-control custom-modal-textbox4" style="height: 26px;padding: 0px;width: 180px">
         </div>
         </div>
           <div class="main-address">        
         <div class="address">
           <span class="address1">Postcode</span><br>
-          <input type="text" name="ib_pick_from_post_code" class="address2">
+          <input type="text" name="ib_pick_from_post_code" class="address2 form-control custom-modal-textbox4" style="height: 26px;padding: 0px;width: 180px">
         </div>
         <div class="address">
           <span class="address1">Country</span><br>
-          <input type="text" name="ib_pick_from_country" class="address2">
+          <input type="text" name="ib_pick_from_country" class="address2 form-control custom-modal-textbox4" style="height: 26px;padding: 0px;width: 180px">
         </div>
         </div>
          <div class="notes-all">
            <span class="loan11">Notes:</span><br>
-         <textarea id="notes1" name="ib_pick_from_notes" rows="4" cols="58">
+         <textarea id="notes1" name="ib_pick_from_notes" rows="4" cols="58"  class="form-control custom-modal-textbox3" style="width: 368px;">
             </textarea>
         </div>
         </div>
    </div>
-       <div class="col-md-5">
-        <div class="main-for-checking1">
+       <div class="col-md-7">
+        <div class="main-for-checking1" style="    margin-left: 88px;">
                
         <div class="for-checking">
             <span>Deliver To</span><br>
        <label class="switcha">
-  <input type="checkbox" checked name="ib_deliver_to">
+  <input type="checkbox" checked name="ib_deliver_to" >
   <span class="slidera rounda"></span>
 </label>
         </div>
 
         <div class="notes">
            <span class="loan1">Notes:</span><br>
-         <textarea id="w3review" name="ib_deliver_to_notes" rows="4" cols="45" > </textarea>
+         <textarea id="w3review" name="ib_deliver_to_notes" rows="4" cols="45" class="form-control custom-modal-textbox3" style="width: 441px"> </textarea>
         </div>
     </div>
       </div>
