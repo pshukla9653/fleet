@@ -158,7 +158,27 @@ class ContactController extends Controller
         $contactlist = Contact::all();
         $html='';
         foreach ($contactlist as $key => $value) {
-            $html.='<p><input type="checkbox" id="'.$value->id.'" value="'.$value->id.'" name="contacts[]" /> &nbsp;&nbsp;&nbsp;<lable for="'.$value->id.'">'.$value->last_name.'</lable></p>';
+            $html.='<p><input type="checkbox" id="'.$value->id.'" value="'.$value->id.'" name="contacts[]" /> &nbsp;&nbsp;&nbsp;<lable for="'.$value->id.'">'.$value->first_name.' '.$value->last_name.'</lable></p>';
+        }
+        echo $html;
+    }
+    public function get_existing_list_booking()
+    {
+        $lists = DB::table("lists")->get();
+        $html='';
+        foreach ($lists as $key => $value) {
+            $list_contact = DB::table('list_contacts')->where('list_id', '=', $value->id)->get();
+            $html.='
+                <h5> '.$value->list_name.' </h5>
+                
+              <div class="toggle-div">';
+              foreach ($list_contact as $key => $val) {
+                $contact = DB::table('contacts')->where('id', '=', $val->contact_id)->first();
+                $html.='<p><input type="checkbox" id="'.$contact->id.'" value="'.$contact->id.'" name="contacts[]" /> &nbsp;&nbsp;&nbsp;<lable for="'.$contact->id.'">'.$contact->first_name.' '.$contact->last_name.'</lable></p>';
+                //print_r($contact);die;
+                 
+              }
+              $html.="</div>";
         }
         echo $html;
     }

@@ -848,7 +848,7 @@ button#imagecolor {
                      
                      <div class="button2">
                         <a href="javascript:void(0)" onclick="getExistingContact()" class="anchor-btn" style="margin-left: 31px;">Select from existing contact</a>&nbsp
-                        <a href="javascript:void(0)" class="anchor-btn" >Select from existing list</a>
+                        <a href="javascript:void(0)" class="anchor-btn" onclick="getExistingList()" >Select from existing list</a>
                      </div>
                     
                      <div class="button3">
@@ -994,6 +994,12 @@ $(document).ready(function(){
     $(this).find("i").toggleClass("fa-angle-down fa-angle-up");
   });
 });
+$(document).ready(function(){
+  $(".toggle-btn").click(function(){
+  $(".toggle-class").toggle();
+    $(this).find("i").toggleClass("fa-angle-down fa-angle-up");
+  });
+});
 </script>
             <!--  <h6 class="modal-title md-heading-custom" style="background-color:#30a02c;" id="form_heading">Booking Overview</h6> -->
 
@@ -1107,7 +1113,7 @@ $(document).ready(function(){
             <div class="modal-header">
                 <button type="button" class="close" onclick="$('#popup_model_editor').modal('hide')"><i class="icon-cancel-circle2"></i></button>
             </div>
-            <h6 class="modal-title md-heading-custom" id="form_heading"></h6>
+            <h6 class="modal-title md-heading-custom" id="form_heading">Contact Lists</h6>
             <div class="modal-body md-body-custom">
 
                 <div class="row"> 
@@ -1147,6 +1153,17 @@ $(document).ready(function(){
     $.ajax({
     type:"GET",
       url: "{{ url('get-contact-lists-booking') }}",
+      data: {},
+      success: function(res){
+        $('#mytable').html(res);
+        $('#popup_model_editor').modal('show');
+      }
+    });
+  }
+  function getExistingList() {
+    $.ajax({
+    type:"GET",
+      url: "{{ url('get-lists-booking') }}",
       data: {},
       success: function(res){
         $('#mytable').html(res);
