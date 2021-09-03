@@ -67,14 +67,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   top: 0;
   opacity: 0;
   }
- input[type="date"]::-webkit-calendar-picker-indicator{
-    position: absolute;
-    margin-left: 72%;
-    background-color: #f2f2f2;
-    padding: 7px;
-    border: 1px solid #bbb8b8;
-    border-radius: 2px;
-}
+ 
 /*css*/
 input#feRouteDate {
     margin-left: -27px;
@@ -486,7 +479,7 @@ button#imagecolor {
         <div class="form-group" style="width: 81%;">
           <strong>Start Date</strong>
           
-          <input type="text" onchange="submit();" value="{{$start_date}}" id="start_date" class="form-control custom-modal-textbox form-control custom-modal-textbox" style="padding:0px!important;width:90px;" name="start_date"/>
+          <input type="date" onchange="submit();" value="{{$start_date}}" id="start_date" class="form-control custom-modal-textbox" style="padding:0px!important;width:90px;" name="start_date"/>
         </div>
       </div>
 
@@ -715,7 +708,11 @@ button#imagecolor {
     font-size: 12px;
     font-weight: 300;
   }
-  
+  .anchor-btn:hover {
+    
+    color: white;
+    
+  }
 </style>
 <div id="popup_model1" class="modal fade">
     <div class="modal-dialog modal-lg">
@@ -773,12 +770,12 @@ button#imagecolor {
                         <div class="form-groupdate">
                           <span class="datepicker">
 
-                            <input type="text" name="start_date" id="feRouteDate"  class="form-control custom-modal-textbox1 start_date"/>
+                            <input type="date" name="start_date" id="feRouteDate"  class="form-control custom-modal-textbox1 start_date"/>
 
                             <img class="fa fa-calendar ass" src="{{ asset('assets/images/icon/calendar.png') }}" alt="" style="margin-left: 90px;margin-top: -28px;color: #000 !important; border-radius: 5px; background-color: #f2f2f2;padding: 5px;height: 28px;">
                           </span> 
                           <span class="datepickers">
-                            <input type="text" name="end_date" id="feRouteDate" class="form-control custom-modal-textbox1" style=" margin-top: -25px;margin-left: 134px;" />
+                            <input type="date" name="end_date" id="feRouteDate" class="form-control custom-modal-textbox1" style=" margin-top: -25px;margin-left: 134px;" />
 
                             <img class="fa fa-calendar as " src="{{ asset('assets/images/icon/calendar.png') }}" alt="" style="margin-left: 251px;margin-top: -28px;color: #000 !important;border-radius: 5px;background-color: #f2f2f2;padding: 5px;height: 28px;">
                           </span> 
@@ -1104,9 +1101,9 @@ $(document).ready(function(){
     </div>
 </div>
 <!-- end -->
-<div id="popup_model_editor" class="modal fade second_model">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content" style="background-color: #f2f2f2;">
+<div id="popup_model_editor" class="modal fade second_model" style="margin-top:20%;margin-right:10%;">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background-color: #f2f2f2;width: 100%;">
             <div class="modal-header">
                 <button type="button" class="close" onclick="$('#popup_model_editor').modal('hide')"><i class="icon-cancel-circle2"></i></button>
             </div>
@@ -1114,16 +1111,16 @@ $(document).ready(function(){
             <div class="modal-body md-body-custom">
 
                 <div class="row"> 
-                  <div class="col-12">
-                    <div class="checkings form-control custom-modal-textbox3" id="for-insert-list" style="height: auto;">
-                        <div class="checkin-box11" style="margin-left:10px" id="mytable">
+                  <div class="col-md-6">
+                    <div class="checkings form-control custom-modal-textbox3" id="for-insert-list" style="height: auto;margin-top: 15px;">
+                        <div class="checkin-box11" style="margin:10px 0px;" id="mytable">
                          
                         </div>
                       </div>
                   </div>
                 </div>
 
-                <div class="modal-footer md-footer-custom">
+                <div class="modal-footer md-footer-custom" style="margin: 0px 20px 20px -20px;">
                     <hr style="margin-top: 0px;">
                     <button type="button" class="btn custom-modal-btn btn-success"
                         id="insert_list">Insert</button>
