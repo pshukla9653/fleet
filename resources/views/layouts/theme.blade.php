@@ -156,9 +156,9 @@
 										
 										<li class="{{ (request()->segment(1) == 'users') ? 'active' : '' }}"><a href="{{ route('users.index') }}">Users</a></li>
 										
-										@can('lists-list')
+										
 										<li class="{{ (request()->segment(1) == 'lists') ? 'active' : '' }}"><a href="{{ route('lists.index') }}">Lists</a></li>
-										@endcan
+										
 										@can('system-configuration')
 										<li><a href="#">System Configuration</a></li>
 										@endcan
