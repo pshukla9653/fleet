@@ -70,6 +70,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('edit-lists', [ListsController::class, 'edit']);
     Route::post('delete-lists', [ListsController::class, 'destroy']);
     Route::get('get-contact-lists', [ContactController::class, 'get_contact_list']);
+    Route::get('get-contact-lists-booking', [ContactController::class, 'get_existing_contact_list_booking']);
     Route::post('get-lists-contact-list', [ListsController::class, 'get_lists_contact_list']);
     Route::post('delete-contact', [ListsController::class, 'delete_contact']);
     
