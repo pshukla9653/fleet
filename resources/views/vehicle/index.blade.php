@@ -270,7 +270,7 @@
                   </div>
                   <div class="form-group">
                    
-                    <div style="text-align:right;width: 78%;">
+                    <div style="text-align:right;width: 79%;margin-top:10px;">
                      
                       <div class="upload-btn-wrapper">
                          <button class="btnsss" >Upload </button>

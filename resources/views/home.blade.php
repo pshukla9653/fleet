@@ -67,14 +67,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   top: 0;
   opacity: 0;
   }
- input[type="date"]::-webkit-calendar-picker-indicator{
-    position: absolute;
-    margin-left: 72%;
-    background-color: #f2f2f2;
-    padding: 7px;
-    border: 1px solid #bbb8b8;
-    border-radius: 2px;
-}
+ 
 /*css*/
 input#feRouteDate {
     margin-left: -27px;
@@ -486,7 +479,7 @@ button#imagecolor {
         <div class="form-group" style="width: 81%;">
           <strong>Start Date</strong>
           
-          <input type="text" onchange="submit();" value="{{$start_date}}" id="start_date" class="form-control custom-modal-textbox form-control custom-modal-textbox" style="padding:0px!important;width:90px;" name="start_date"/>
+          <input type="date" onchange="submit();" value="{{$start_date}}" id="start_date" class="form-control custom-modal-textbox" style="padding:0px!important;width:90px;" name="start_date"/>
         </div>
       </div>
 
@@ -773,12 +766,12 @@ button#imagecolor {
                         <div class="form-groupdate">
                           <span class="datepicker">
 
-                            <input type="text" name="start_date" id="feRouteDate"  class="form-control custom-modal-textbox1"/>
+                            <input type="date" name="start_date" id="feRouteDate"  class="form-control custom-modal-textbox1"/>
 
                             <img class="fa fa-calendar ass" src="{{ asset('assets/images/icon/calendar.png') }}" alt="" style="margin-left: 90px;margin-top: -28px;color: #000 !important; border-radius: 5px; background-color: #f2f2f2;padding: 5px;height: 28px;">
                           </span> 
                           <span class="datepickers">
-                            <input type="text" name="end_date" id="feRouteDate" class="form-control custom-modal-textbox1" style=" margin-top: -25px;margin-left: 134px;" />
+                            <input type="date" name="end_date" id="feRouteDate" class="form-control custom-modal-textbox1" style=" margin-top: -25px;margin-left: 134px;" />
 
                             <img class="fa fa-calendar as " src="{{ asset('assets/images/icon/calendar.png') }}" alt="" style="margin-left: 251px;margin-top: -28px;color: #000 !important;border-radius: 5px;background-color: #f2f2f2;padding: 5px;height: 28px;">
                           </span> 
