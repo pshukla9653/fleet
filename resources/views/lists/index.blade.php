@@ -16,9 +16,9 @@
 <div class="row">		
 <div class="col-md-8" style="padding: 15px 30px;">
 <a href="{{ route('lists.index')}}" class="btn btn-primary"><img src="{{ asset('assets/images/icon/refresh.png') }}" alt="refresh" style="width: 20px;margin-left: -8px;"/>&nbsp;  Refresh @yield('heading')</a>
-@can('lists-create')	
+
 <a id="additem" class="btn btn-primary" style="margin-left: 20px;"><img src="{{ asset('assets/images/icon/add.png') }}" alt="add" style="width: 21px;margin-left: -8px;"/>&nbsp;  Add New Item</a>
-@endcan
+
 </div>
 <div class="col-md-4" style="padding: 15px 30px;">
 <form class="example" action="">
@@ -63,11 +63,11 @@
             @foreach ($lists as $key => $list)
             <tr>
               <td style="width: 15%">
-                @can('lists-edit')
+                
                 <a onclick="edititem({{ $list->id }})">
                   <img src="{{ asset('assets/images/icon/edit.png') }}" alt="edit"/>
                 </a>
-                @endcan
+               
                 &nbsp;
                 {{ $list->list_name }}
               </td>
@@ -76,11 +76,11 @@
                 <td style="width: 80%"></td>
                 <td style="width: 4%">
                     
-                  @can('lists-delete')
+                 
                     <a onclick="deleteitem({{ $list->id }})">
                       <img src="{{ asset('assets/images/icon/delete.png') }}" alt="delete"/>
                     </a>
-                  @endcan  
+                  
                   
                    
                 </td>
