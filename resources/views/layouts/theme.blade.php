@@ -146,16 +146,16 @@
 										@endcan
 										
 										
-										@can('email-template-list')
+										
 										<li class="{{ (request()->segment(1) == 'email-template') ? 'active' : '' }}"><a href="{{ route('email-template.index')}}">Email Templates</a></li>
-										@endcan
+										
 
 										@can('history-list')
 										<li><a href="#">History</a></li>
 										@endcan
-										@can('user-list')
+										
 										<li class="{{ (request()->segment(1) == 'users') ? 'active' : '' }}"><a href="{{ route('users.index') }}">Users</a></li>
-										@endcan
+										
 										@can('lists-list')
 										<li class="{{ (request()->segment(1) == 'lists') ? 'active' : '' }}"><a href="{{ route('lists.index') }}">Lists</a></li>
 										@endcan

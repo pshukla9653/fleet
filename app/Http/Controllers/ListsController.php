@@ -11,10 +11,10 @@ class ListsController extends Controller
 {
     function __construct()
     {
-         $this->middleware('permission:lists-list|lists-create|lists-edit|lists-delete', ['only' => ['index','store']]);
-         $this->middleware('permission:lists-create', ['only' => ['create','store']]);
-         $this->middleware('permission:lists-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:lists-delete', ['only' => ['destroy']]);
+         //$this->middleware('permission:lists-list|lists-create|lists-edit|lists-delete', ['only' => ['index','store']]);
+         //$this->middleware('permission:lists-create', ['only' => ['create','store']]);
+         //$this->middleware('permission:lists-edit', ['only' => ['edit','update']]);
+         //$this->middleware('permission:lists-delete', ['only' => ['destroy']]);
     }
 
     public function index(Request $request)
