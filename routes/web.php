@@ -13,6 +13,8 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\LoanTypeController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\EmailTemplateController;
+use App\Http\Controllers\ListsController;
+use App\Http\Controllers\BookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,7 +65,18 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('edit-email-template', [EmailTemplateController::class, 'edit']);
     Route::post('delete-email-template', [EmailTemplateController::class, 'destroy']);
     Route::post('deletefile-email-template', [EmailTemplateController::class, 'delete']);
+
+    Route::resource('lists', ListsController::class);
+    Route::post('edit-lists', [ListsController::class, 'edit']);
+    Route::post('delete-lists', [ListsController::class, 'destroy']);
+    Route::get('get-contact-lists', [ContactController::class, 'get_contact_list']);
+    Route::post('get-lists-contact-list', [ListsController::class, 'get_lists_contact_list']);
+    Route::post('delete-contact', [ListsController::class, 'delete_contact']);
     
+    Route::resource('booking', BookingController::class);
+    Route::post('edit-booking', [BookingController::class, 'edit']);
+    Route::post('store-booking', [BookingController::class, 'store']);
+    Route::post('delete-booking', [BookingController::class, 'destroy']);
     
 	
 });

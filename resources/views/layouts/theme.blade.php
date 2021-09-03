@@ -53,6 +53,7 @@
 
 			text-transform: initial !important;
 		}
+
 		
 	</style>	
 
@@ -77,7 +78,7 @@
 					<div class="sidebar-user-material">
 						<div class="category-content">
 							<div class="sidebar-user-material-content">
-								<a href="{{ url('/') }}"><img src="{{ asset('assets/images/Bentley-symbol-black-1920x1080_ba@2x.png') }}" class="img-responsive" alt=""></a>
+								<a href="{{ url('/') }}"><img src="{{ asset('assets/images/new_fleet_logo.png') }}" class="img-responsive" alt=""></a>
 								
 							</div>
 														
@@ -95,17 +96,27 @@
 							<ul class="navigation navigation-main navigation-accordion">
 
 								<!-- Main -->
+								
+								<!-- <li class=""><a href="#"><i class="icon-home4"></i> <span>DASHBOARD</span></a><span class="sidebar-control sidebar-main-toggle "><i class="fa fa-angle-double-left pull-right" style="position: absolute;margin-top: -6.5em;margin-left: 18.2em;"></i></span></li>
 								<li class="navigation-header"><span>Menu</span> <i class="icon-menu" title="Main pages"></i></li>
-								<li class=""><a href="#"><i class="icon-home4"></i> <span>DASHBOARD</span></a><span class="sidebar-control sidebar-main-toggle hidden-xs"><i class="fa fa-angle-double-left pull-right" style="position: absolute;
-									margin-top: -6.5em;
-									margin-left: 18.2em;"></i></span></li>
+								@if(session()->get('company_id') == null)	
+								<li class="{{ (request()->segment(1) == 'companies') ? 'active' : '' }}">
+									<a href="{{ route('companies.index') }}"><i class="icon-stack2"></i> <span>Companies</span></a>
+									
+								</li>
+								@endif -->
+								<li style="padding: 12px;margin-top: -35px;"><a href="{{ url('/') }}"  style="background-color: #eeeded;border-radius: 5px;"> <i class="icon-home4"></i><span>DASHBOARD</span> <i class="icon-menu" title="Main pages"></i></a><span class="sidebar-control sidebar-main-toggle hidden-xs"><i class="fa fa-angle-double-left pull-right" style="position: absolute;
+    margin-top: -1.3em;
+    margin-left: 6.5em;
+    font-size: 30px;"></i></span></li>
+    							<li style="margin-bottom: -20px;margin-left: 10px;">Menu</li>
+								<!-- <li class="{{ (request()->segment(1) == '') ? 'active' : '' }}"><a href="{{ url('/') }}"><i class="icon-home4"></i> <span>DASHBOARD</span></a><span class="sidebar-control sidebar-main-toggle hidden-xs"><i class="fa fa-angle-double-left pull-right" style="position: absolute; margin-top: -6.5em; margin-left: 16.2em;"></i></span></li> -->
 								@if(session()->get('company_id') == null)	
 								<li class="{{ (request()->segment(1) == 'companies') ? 'active' : '' }}">
 									<a href="{{ route('companies.index') }}"><i class="icon-stack2"></i> <span>Companies</span></a>
 									
 								</li>
 								@endif
-									
 								<li class="{{ (request()->segment(1) == '') ? 'active' : '' }}">
 									<a href="{{ url('/') }}"><i class="icon-stack2"></i> <span>OVERVIEW</span></a>
 									
@@ -124,7 +135,7 @@
 										@can('region-list')
 										<li class="{{ (request()->segment(1) == 'regions') ? 'active' : '' }}"><a href="{{ route('regions.index') }}">Regions</a></li>
 										@endcan
-										@can('department-list')
+										@can('department-list')        
 										<li class="{{ (request()->segment(1) == 'departments') ? 'active' : '' }}"><a href="{{ route('departments.index') }}">Department</a></li>
 										@endcan
 										@can('brand-list')
@@ -134,17 +145,19 @@
 										<li class="{{ (request()->segment(1) == 'loantypes') ? 'active' : '' }}"><a href="{{ route('loantypes.index') }}">Loan Type</a></li>
 										@endcan
 										
-										<li class="{{ (request()->segment(1) == 'email-template') ? 'active' : '' }}"><a href="{{ route('email-template.index')}}">Email Templates</a></li>
+										
 										@can('email-template-list')
+										<li class="{{ (request()->segment(1) == 'email-template') ? 'active' : '' }}"><a href="{{ route('email-template.index')}}">Email Templates</a></li>
 										@endcan
+
 										@can('history-list')
 										<li><a href="#">History</a></li>
 										@endcan
 										@can('user-list')
 										<li class="{{ (request()->segment(1) == 'users') ? 'active' : '' }}"><a href="{{ route('users.index') }}">Users</a></li>
 										@endcan
-										@can('list')
-										<li><a href="#">Lists</a></li>
+										@can('lists-list')
+										<li class="{{ (request()->segment(1) == 'lists') ? 'active' : '' }}"><a href="{{ route('lists.index') }}">Lists</a></li>
 										@endcan
 										@can('system-configuration')
 										<li><a href="#">System Configuration</a></li>

@@ -424,11 +424,9 @@ button#imagecolor {
     width: 80px;
     margin-top: -73px;
 }
-.custom-modal-textbox {
-    width: 100% !important;
-}
 </style>
 
+</style>
 @section('content')
 <div class="page-header">
 	<div class="page-header-content">
@@ -439,14 +437,8 @@ button#imagecolor {
 	  
 	</div>
 	</div>
-<div class="row">	
-<div class="col-md-8" style="padding: 0px 30px 0px 30px;display: inline-flex;">
-  <select class="form-control border-0" style="background: transparent;width:12%;">
-      <option>Filter</option>
-   </select>
-  <a id="additem" class="btn btn-primary" style="margin-left: 20px;"><img src="{{ asset('assets/images/icon/add.png') }}" alt="add" style="width: 21px;margin-left: -8px;"/>&nbsp;  Add New Item</a>
-  </div>	
-  <!-- <div class="col-md-4" style="padding: 30px;">
+<div class="row">		
+  <div class="col-md-4" style="padding: 30px;">
     <select class="form-control border-0" style="background: transparent;width:6%;">
       <option>Filter</option>
    </select>
@@ -455,8 +447,8 @@ button#imagecolor {
   <div class="col-md-4" style="">
     <a id="additem" class="btn btn-primary" style="margin-left: 20px;"><img src="{{ asset('assets/images/icon/add.png') }}" alt="add" style="width: 21px;margin-left: -8px;"/>&nbsp;  Add New Item</a>
 
-  </div> -->
-  <div class="col-md-4" style="padding: 0px 30px 0px 30px;">
+  </div>
+  <div class="col-md-4" style="padding: 30px;">
     <form class="example" action="#">
       <input type="text" placeholder="Search.." name="search" style="height:33px;">
       <button type="submit"><i class="fa fa-search"></i></button>
@@ -473,24 +465,16 @@ button#imagecolor {
       
       <div class="row"> 
         <form action="#" id="search_form">
-      <div class="col-md-2" style="width: 14.28%">
+      <div class="col-md-2" style="width: 28.56%">
         
-        <div class="form-group" style="width: 81%;">
+        <div class="form-group" style="margin-bottom: -10px;">
           <strong>Start Date</strong>
           
-          <input type="text" onchange="submit();" value="{{$start_date}}" id="start_date" class="form-control custom-modal-textbox" style="padding:0px!important;width:90px;" name="start_date"/>
-        </div>
-      </div>
-
-        <div class="col-md-2" style="width: 14.28%">
-          <div class="form-group">
-          <img src="{{ asset('assets/images/icon/calendar.png') }}" onclick="$('#start_date').focus();" alt="bell" style="width: 17px;
-    margin-left: -25px;
-    margin-top: 35px;"/>
-          <button class="btn btn-outline-success" style="   width: 126px;
-    left: 20px;
-    bottom: -19px;
-    height: 35px;">
+          <input type="text" onchange="submit();" value="{{$start_date}}" id="start_date" class="form-control custom-modal-textbox" style="padding:0px!important;width:150px;" name="start_date"/>
+          <img src="{{ asset('assets/images/icon/calendar.png') }}" onclick="$('#start_date').focus();" alt="bell" style="width: 17px;margin-top: -80px;
+          margin-left: 161px;"/>
+          <button class="btn btn-outline-success" style="width: 143px;left: 66px;
+          bottom: 40px;">
           <span id="custom_input"></span>
             <i class="fa fa-fast-backward" onclick="step_fast_backward_date();"></i>
             <i class="fa fa-step-backward" onclick="step_backward_date();"></i>
@@ -498,11 +482,9 @@ button#imagecolor {
             <i class="fa fa-step-forward" onclick="step_forward_date();"></i>
             <i class="fa fa-fast-forward" onclick="step_fast_forward_date();"></i>
           </button>
-        </div>
-      </div>
-         
+        </div> 
        
-     
+      </div>
       <div class="col-md-2" style="width: 14.28%">
         <div class="form-group">
           <strong>Date Range</strong>

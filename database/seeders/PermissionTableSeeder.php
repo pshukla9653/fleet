@@ -48,7 +48,20 @@ class PermissionTableSeeder extends Seeder
            'vehicle-list',
            'vehicle-create',
            'vehicle-edit',
-           'vehicle-delete'
+           'vehicle-delete',
+           'email-template-list',
+           'email-template-create',
+           'email-template-edit',
+           'email-template-delete',
+           'lists-list',
+           'lists-create',
+           'lists-edit',
+           'lists-delete',
+
+           'booking-list',
+           'booking-create',
+           'booking-edit',
+           'booking-delete'
         ];
      
         foreach ($permissions as $permission) {
