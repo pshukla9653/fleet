@@ -67,7 +67,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   top: 0;
   opacity: 0;
   }
- 
+ input[type="date"]::-webkit-calendar-picker-indicator{
+    position: absolute;
+    margin-left: 72%;
+    background-color: #f2f2f2;
+    padding: 7px;
+    border: 1px solid #bbb8b8;
+    border-radius: 2px;
+}
 /*css*/
 input#feRouteDate {
     margin-left: -27px;
@@ -479,7 +486,7 @@ button#imagecolor {
         <div class="form-group" style="width: 81%;">
           <strong>Start Date</strong>
           
-          <input type="date" onchange="submit();" value="{{$start_date}}" id="start_date" class="form-control custom-modal-textbox" style="padding:0px!important;width:90px;" name="start_date"/>
+          <input type="text" onchange="submit();" value="{{$start_date}}" id="start_date" class="form-control custom-modal-textbox form-control custom-modal-textbox" style="padding:0px!important;width:90px;" name="start_date"/>
         </div>
       </div>
 
@@ -766,12 +773,12 @@ button#imagecolor {
                         <div class="form-groupdate">
                           <span class="datepicker">
 
-                            <input type="date" name="start_date" id="feRouteDate"  class="form-control custom-modal-textbox1"/>
+                            <input type="text" name="start_date" id="feRouteDate"  class="form-control custom-modal-textbox1 start_date"/>
 
                             <img class="fa fa-calendar ass" src="{{ asset('assets/images/icon/calendar.png') }}" alt="" style="margin-left: 90px;margin-top: -28px;color: #000 !important; border-radius: 5px; background-color: #f2f2f2;padding: 5px;height: 28px;">
                           </span> 
                           <span class="datepickers">
-                            <input type="date" name="end_date" id="feRouteDate" class="form-control custom-modal-textbox1" style=" margin-top: -25px;margin-left: 134px;" />
+                            <input type="text" name="end_date" id="feRouteDate" class="form-control custom-modal-textbox1" style=" margin-top: -25px;margin-left: 134px;" />
 
                             <img class="fa fa-calendar as " src="{{ asset('assets/images/icon/calendar.png') }}" alt="" style="margin-left: 251px;margin-top: -28px;color: #000 !important;border-radius: 5px;background-color: #f2f2f2;padding: 5px;height: 28px;">
                           </span> 
@@ -827,18 +834,23 @@ button#imagecolor {
                         </div>
                      </div>
                      <label for="w3review">Contacts:</label>
-                     <textarea id="" name="contacts" rows="5" cols="47" class="form-control custom-modal-textbox3"> </textarea>
+                     <div class="checkings form-control custom-modal-textbox3" style="height: 152px;">
+                        <div class="checkin-box11" id="inserted-list" style="margin-left:10px">
+                          
+                        </div>
+                      </div>
+                     <!-- <textarea id="" name="contacts" rows="5" cols="47" class="form-control custom-modal-textbox3"> </textarea> -->
                      <!-- button -->
                      <div class="button1">
                       <a href="javascript:void(0)" class="anchor-btn" style="margin-right: 10px;">Edit</a>&nbsp
                       <a href="javascript:void(0)" class="anchor-btn" style="margin-right: 10px;">Mark as primary</a>&nbsp
-                      <a href="javascript:void(0)" class="anchor-btn" style="background-color:#ff4e4e;border-color: #ff4e4e;">Delete</a>
+                      <a href="javascript:void(0)" class="anchor-btn" id="delete_list" style="background-color:#ff4e4e;border-color: #ff4e4e;">Delete</a>
                         
                         
                      </div>
                      
                      <div class="button2">
-                        <a href="javascript:void(0)" class="anchor-btn" style="margin-left: 31px;">Select from existing contact</a>&nbsp
+                        <a href="javascript:void(0)" onclick="getExistingContact()" class="anchor-btn" style="margin-left: 31px;">Select from existing contact</a>&nbsp
                         <a href="javascript:void(0)" class="anchor-btn" >Select from existing list</a>
                      </div>
                     
@@ -1092,10 +1104,83 @@ $(document).ready(function(){
     </div>
 </div>
 <!-- end -->
+<div id="popup_model_editor" class="modal fade second_model">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="background-color: #f2f2f2;">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="$('#popup_model_editor').modal('hide')"><i class="icon-cancel-circle2"></i></button>
+            </div>
+            <h6 class="modal-title md-heading-custom" id="form_heading"></h6>
+            <div class="modal-body md-body-custom">
+
+                <div class="row"> 
+                  <div class="col-12">
+                    <div class="checkings form-control custom-modal-textbox3" id="for-insert-list" style="height: auto;">
+                        <div class="checkin-box11" style="margin-left:10px" id="mytable">
+                         
+                        </div>
+                      </div>
+                  </div>
+                </div>
+
+                <div class="modal-footer md-footer-custom">
+                    <hr style="margin-top: 0px;">
+                    <button type="button" class="btn custom-modal-btn btn-success"
+                        id="insert_list">Insert</button>
+                    <button type="button" class="btn custom-modal-btn btn-danger"
+                        onclick="$('#popup_model_editor').modal('hide')">Cancel</button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+  </div>
  <script>
   function myckick(date, registration_number) {
     console.log(date, registration_number);
   }
+  $('#insert_design').click(function() {
+      //var data = $('#email_body').val();
+
+      //$('#editor_area').val('some text');
+
+  });
+  function getExistingContact() {
+    $.ajax({
+    type:"GET",
+      url: "{{ url('get-contact-lists-booking') }}",
+      data: {},
+      success: function(res){
+        $('#mytable').html(res);
+        $('#popup_model_editor').modal('show');
+      }
+    });
+  }
+  $('#insert_list').click(function () {
+    $('#mytable').find('p').each(function () {
+        var row = $(this);
+        //console.log(row);
+        if (row.find('input[type="checkbox"]').is(':checked')) {
+          //console.log("checked = "+row);
+            //row.children(".check-box").html('<button type="button" class="btn btn-danger delete" onclick="removethis(this)">Delete</button>');
+            $("#inserted-list").append(row);
+        }
+    });
+    $('#popup_model_editor').modal('hide');
+  });
+  $('#delete_list').click(function () {
+    $('#inserted-list').find('p').each(function () {
+        var row = $(this);
+        //console.log(row);
+        if (row.find('input[type="checkbox"]').is(':checked')) {
+          //console.log("checked = "+row);
+            //row.children(".check-box").html('<button type="button" class="btn btn-danger delete" onclick="removethis(this)">Delete</button>');
+            row.hide();
+        }
+    });
+    $('#popup_model_editor').modal('hide');
+  });
    function step_fast_backward_date(){
      
     $('#date_range').val(4);

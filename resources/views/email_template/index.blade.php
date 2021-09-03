@@ -314,9 +314,7 @@
 
                                             <div class="form-group"
                                                 style="text-align:right;width:87%;margin-top:5px;margin-left:20px;font-size: 12px !important;">
-                                                <button type="button" id="insert_design" class="btn custom-modal-btn"
-                                                    style="background-color: #486288;color:#fff;"><i
-                                                        class="icon-pencil3"></i> Design</button>
+                                                <button type="button" id="insert_design" class="btn custom-modal-btn" style="background-color: #486288;color:#fff;"><i class="icon-pencil3"></i> Design</button>
                                                 <button type="button" id="insert_html"
                                                     class="btn custom-modal-btn btn-warning">&lt;&sol;&gt;&nbsp;
                                                     HTML</button>

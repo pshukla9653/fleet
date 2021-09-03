@@ -131,4 +131,35 @@ class ContactController extends Controller
         //print_r($contactlist);die;
         
     }
+    public function get_existing_contact_list()
+    {
+        $contactlist = Contact::all();
+        //print_r($contactlist);die;
+        $html='<tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>Action</th>
+              </tr>';
+        foreach ($contactlist as $key => $value) {
+            //echo $value->first_name."<br>";
+            $html.='<tr class="contact-row">
+                    <td><input type="hidden" name="contacts[]" value="'.$value->id.'"> '.$value->first_name.'</td>
+                    <td>'.$value->last_name.'</td>
+                    <td>'.$value->email.'</td>
+                    <td class="check-box"><input type="checkbox" class="form-control checked" id="row-id-'.$value->id.'" style="width: 20px"></td>
+                  </tr>';
+        }
+        echo $html;
+        //print_r($contactlist);die;
+    }
+    public function get_existing_contact_list_booking()
+    {
+        $contactlist = Contact::all();
+        $html='';
+        foreach ($contactlist as $key => $value) {
+            $html.='<p><input type="checkbox" id="'.$value->id.'" value="'.$value->id.'" name="contacts[]" /> &nbsp;&nbsp;&nbsp;<lable for="'.$value->id.'">'.$value->last_name.'</lable></p>';
+        }
+        echo $html;
+    }
 }
