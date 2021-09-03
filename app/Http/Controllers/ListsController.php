@@ -116,7 +116,6 @@ class ListsController extends Controller
                 <th>Name</th>
                 <th>Surname</th>
                 <th>Email</th>
-                <th>Phone</th>
                 <th>Action</th>
               </tr>';
         foreach ($contactlist as $key => $value) {
@@ -125,7 +124,6 @@ class ListsController extends Controller
                     <td><input type="hidden" name="contacts[]" value="'.$value->id.'"> '.$value->first_name.'</td>
                     <td>'.$value->last_name.'</td>
                     <td>'.$value->email.'</td>
-                    <td>'.$value->phone_number.'</td>
                     <td class="check-box"><button type="button" class="btn btn-danger delete" onclick="deleteContact(this, '.$value->id.')">Delete</button></td>
                   </tr>';
         }

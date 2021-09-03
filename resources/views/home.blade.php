@@ -654,7 +654,7 @@ button#imagecolor {
               <br><span style="font-size:9px;position: absolute;margin-top: 7px;">{{$vehicle->vin}}</span>
               <br><span style="font-size:9px;position: absolute;margin-top: -4px;">Newspress {{$vehicle->model}}</span></td>
               @for($i=0; $i< $days; $i++)
-                <td></td>
+                <td ondrag ="myckick({{date("dmY", strtotime($start_date . "+".$i." day"))}}, {{$vehicle->registration_number}})" ></td>
               @endfor
             </tr>
             @endforeach
@@ -667,6 +667,7 @@ button#imagecolor {
     </div>
   </div>
 </div>
+
 <style type="text/css">
   .custom-modal-textbox1 {
     color: #000 !important;
@@ -730,7 +731,7 @@ button#imagecolor {
           </h5>
           <div class="side-header">
             <span class="checkboxs">
-              <img class="check-mark" src="{{ asset('assets/images/check.png') }}">
+              <img class="check-mark" src="">
             </span>
             <span class="completed">Completed</span>
             <span id="chekckk"><i class="fa fa-angle-down"></i></span>
@@ -756,13 +757,10 @@ button#imagecolor {
                 <div class="col-md-12 main">
                   <div class="col-md-3">
                      <div class="car-img">
-                        <img class="image-1" src="{{ asset('assets/images/logo1.png') }}">
+                        <img class="image-1" src="{{ asset('assets/images/car.jpeg') }}">
                       </div>
                       <div class="sides-1">
-                        <button class="rt-number" style="border-radius: 7px;
-    border-color: #eecc00;
-    margin-top: 10px;
-    width: 90px;">9867RT</button><br>
+                        <button class="rt-number" style="border-radius: 7px; border-color: #eecc00; margin-top: 10px;  width: 90px;">9867RT</button><br>
                         <span>Brand:</span><br>
                         <span>Model:</span><br>
                         <span>Derivative:</span>
@@ -770,16 +768,19 @@ button#imagecolor {
                   </div>
                   <div class="col-md-4">
                      <div class="main-date">
-                        <span class="stratdate">Start Date</span>
+                        <span class="startdate">Start Date</span>
                         <span class="enddate">End Date</span>
                         <div class="form-groupdate">
                           <span class="datepicker">
-                            <input type="text" name="start_date" id="feRouteDate"  class="form-control custom-modal-textbox1"/>  
-                            <img class="fa fa-calendar ass" src="{{ asset('assets/images/icon/calendar.png') }}" alt=""  class="" style="margin-left: 90px;margin-top: -28px;color: #000 !important; border-radius: 5px; background-color: #f2f2f2;padding: 5px;height: 28px;">
+
+                            <input type="text" name="start_date" id="feRouteDate"  class="form-control custom-modal-textbox1"/>
+
+                            <img class="fa fa-calendar ass" src="{{ asset('assets/images/icon/calendar.png') }}" alt="" style="margin-left: 90px;margin-top: -28px;color: #000 !important; border-radius: 5px; background-color: #f2f2f2;padding: 5px;height: 28px;">
                           </span> 
                           <span class="datepickers">
                             <input type="text" name="end_date" id="feRouteDate" class="form-control custom-modal-textbox1" style=" margin-top: -25px;margin-left: 134px;" />
-                            <img class="fa fa-calendar as" src="{{ asset('assets/images/icon/calendar.png') }}" alt="" class="form-control custom-modal-textbox1" style="margin-left: 251px;margin-top: -28px;color: #000 !important;border-radius: 5px;background-color: #f2f2f2;padding: 5px;height: 28px;">
+
+                            <img class="fa fa-calendar as " src="{{ asset('assets/images/icon/calendar.png') }}" alt="" style="margin-left: 251px;margin-top: -28px;color: #000 !important;border-radius: 5px;background-color: #f2f2f2;padding: 5px;height: 28px;">
                           </span> 
                         </div>
                      </div>
@@ -861,16 +862,10 @@ button#imagecolor {
                      <span>Select Email Tampalet for Booking</span>
                      <div class="checkings form-control custom-modal-textbox3" style="height: 152px;">
                         <div class="checkin-box11" style="margin-left:10px">
-                          <input type="checkbox" value="1" name="email_temeplete[]" /> This is checkbox <br />
-                          <input type="checkbox" value="2" name="email_temeplete[]" /> This is checkbox <br />
-                          <input type="checkbox" value="3" name="email_temeplete[]" /> This is checkbox <br />
-                          <input type="checkbox" value="4" name="email_temeplete[]" /> This is checkbox <br />
-                          <input type="checkbox" value="5" name="email_temeplete[]" /> This is checkbox <br />
-                          <input type="checkbox" value="6" name="email_temeplete[]" /> This is checkbox <br />
-                          <input type="checkbox" value="7" name="email_temeplete[]" /> This is checkbox <br />
-                          <input type="checkbox" value="8" name="email_temeplete[]" /> This is checkbox <br />
-                          <input type="checkbox" value="9" name="email_temeplete[]" /> This is checkbox <br />
-                          <input type="checkbox" value="10" name="email_temeplete[]" /> This is checkbox <br />
+                          @foreach ($email_templates as $key=>$value)
+                          <input type="checkbox" value="{{$value->id}}" name="email_temeplete[]" /> {{$value->description}} <br />
+                      
+                          @endforeach
                         </div>
                       </div>
                      <!--  -->
@@ -1104,163 +1099,10 @@ $(document).ready(function(){
     </div>
 </div>
 <!-- end -->
-<!-- <div id="popup_model" class="modal fade">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content" style="background-color: #f2f2f2;">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><i class="icon-cancel-circle2"></i></button>
-          
-        </div>
-        <h6 class="modal-title md-heading-custom" id="form_heading"></h6>
-        <div class="modal-body md-body-custom">
-         
-          <form action="{{route('vehicles.store')}}" id="itemform" class="form-horizontal" method="POST" enctype="multipart/form-data">
-              @csrf
-              <div class="row">
-                <div class="col-md-12 main">
-                  <div class="col-md-3">
-                     <div class="car-img">
-                        <img class="image-1" src="{{ asset('assets/images/logo1.png') }}">               
-                      </div>
-                      <div class="sides-1">
-                        <button class="rt-number">9867RT</button><br>
-                        <span>Brand:</span><br>
-                        <span>Model:</span><br>
-                        <span>Derivative:</span>
-                      </div>
-                  </div>
-                  <div class="col-md-4">
-                     <div class="main-date">
-                        <span class="stratdate">Start Date</span>
-                        <span class="enddate">End Date</span>
-                        <div class="form-groupdate">
-                           <span class="datepicker"><input type="text" id="feRouteDate" />  
-                           <img class="fa fa-calendar ass" src="{{ asset('assets/images/icon/calendar.png') }}" alt="">
-                           </span> 
-                           <span class="datepickers"><input type="text" id="feRouteDate" />  
-                           <img class="fa fa-calendar as" src="{{ asset('assets/images/icon/calendar.png') }}" alt="">
-                           </span> 
-                        </div>
-                     </div>
-                     <br>
-                     <div class="booking-set">
-                        <span class="booknow">Booking Reference</span>
-                        <span class="booknowaa">purpose of loan</span>
-                     </div>
-                     <div class="book-loan">
-                        <input type="" name="" class="ref-name">&nbsp&nbsp           
-                        <input type="" name="" class="loan-name">
-                     </div>
-                     <br>
-                     <div class="">
-                        <span class="loan1">Loan Type:</span><br>
-                        <select id="cars" name="cars">
-                           <option value="volvo">Volvo</option>
-                           <option value="saab">Saab</option>
-                        </select>
-                     </div>
-                     <br>
-                     <span class="loan1">Review of W3Schools:</span>
-                     <textarea id="w3review" name="w3review" rows="4" cols="38"></textarea>
-                     <div class="booking-set">
-                        <span class="booknow">Lag time (days)</span>
-                        <span class="booknowa1">Lead time (days)</span>
-                     </div>
-                     <div class="book-loan">
-                        <input type="" name="" class="ref-name">&nbsp;&nbsp;           
-                        <input type="" name="" class="loan-name">
-                     </div>
-                     <br>
-                     <span class="loan1">Lead Time Notes:</span>
-                     <textarea id="w3review" name="w3review" rows="4" cols="38"></textarea>
-                     <span class="loan1">Load Time Note:</span>
-                     <textarea id="w3review" name="w3review" rows="4" cols="38"></textarea>
-                  </div>
-                  <div class="col-md-5">
-                     <div class="checking-box">
-                        <div class="form-check">
-                           <label class="form-check-label" for="defaultCheck1">
-                           Show delivery day
-                           </label>
-                           <input class="form-check-input-reverse" type="checkbox" value="" id="defaultCheck1">
-                        </div>&nbsp  &nbsp  &nbsp  
-                        <div class="form-check">
-                           <label class="form-check-label" for="defaultCheck1">
-                           Show collection day
-                           </label>
-                           <input class="form-check-input-reverse" type="checkbox" value="" id="defaultCheck1">
-                        </div>
-                     </div>
-                     <label for="w3review">Contacts:</label>
-                     <textarea id="" name="w3review" rows="5" cols="47">
-                          </textarea>
-                     
-                     <div class="button1">
-                        <button class="editss">Edit</button>&nbsp 
-                        <button class="editss">Mark as primary</button>&nbsp 
-                        <button class="editss" style="background-color:#ff4e4e">Delete</button>
-                     </div>
-                     
-                     <div class="button2">
-                        <button class="editss">Select from existing contact</button>&nbsp 
-                        <button class="editss">Select from existing list</button>
-                     </div>
-                    
-                     <div class="button3">
-                        <button  class="editss">Add new contact</button>&nbsp 
-                        <button class="editss">Add new list</button>
-                     </div>
-                     <label for="w3review">Vehicle:</label>
-                     <textarea id="" name="w3review" rows="5" cols="47">
-                          </textarea>
-                     <div class="text-edit">
-                        <button>Edit</button>
-                     </div>
-                     <span>Select Email Tampalet for Booking</span>
-                     <div class="checkings">
-                        <div class="checkin-box11" style="margin-left:10px">
-                          <input type="checkbox" /> This is checkbox <br />
-                          <input type="checkbox" /> This is checkbox <br />
-                          <input type="checkbox" /> This is checkbox <br />
-                          <input type="checkbox" /> This is checkbox <br />
-                          <input type="checkbox" /> This is checkbox <br />
-                          <input type="checkbox" /> This is checkbox <br />
-                          <input type="checkbox" /> This is checkbox <br />
-                          <input type="checkbox" /> This is checkbox <br />
-                          <input type="checkbox" /> This is checkbox <br />
-                          <input type="checkbox" /> This is checkbox <br />
-                        </div>
-                      </div>
-                     
-                  </div>
-                </div>
-                <div class="createby">
-                    <span>createbysonsoncheckit@gmail.com on 12/02/2022</span><br>
-                    <span>createbysonsoncheckit@gmail.com on 12/02/2022</span>
-                </div>
-                <div class="modal-footer md-footer-custom">
-                    <hr style="margin-top: 0px;">
-                    <button type="submit" class="btn custom-modal-btn btn-success" id="btn">Save change</button>
-                    <button type="button" class="btn custom-modal-btn btn-danger" data-dismiss="modal">Cancel</button> 
-                    <div class="delete-booking">
-                       <button type="button" class="btn custom-modal-btn btn-danger" data-dismiss="modal">Delete Booking</button>
-                    </div>              
-                </div>
-              </div>
-
-              <div class="modal-footer md-footer-custom">
-                  <hr style="margin-top: 0px;">
-                  <button type="submit" class="btn custom-modal-btn btn-success" id="btn"></button>
-                  <button type="button" class="btn custom-modal-btn btn-danger" data-dismiss="modal">Cancel</button>
-                  
-              </div>
-            </form>
-            </div>
-        </div>
-        
-    </div>
-</div> -->
  <script>
+  function myckick(date, registration_number) {
+    console.log(date, registration_number);
+  }
    function step_fast_backward_date(){
      
     $('#date_range').val(4);

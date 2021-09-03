@@ -133,58 +133,16 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
               <hr>
               <h4>List of Contacts</h4>
-              <div style="overflow: auto;height:200px;">
+              <div style="">
                 
                 <table class="table table-bordered table-responsive" id="mytable">
                   <tr>
                     <th>Name</th>
                     <th>Surname</th>
                     <th>Email</th>
-                    <th>Phone</th>
                     <th>Action</th>
                   </tr>
-                  <!-- <tr class="contact-row">
-                    <td><input type="hidden" name="contacts[]"> Ravindra</td>
-                    <td>Kumar</td>
-                    <td>admin@gmail.com</td>
-                    <td class="after-delete">4586451646</td>
-                    <td class="check-box"><input type="checkbox" class="form-control checked" id="row-id-1" style="width: 20px"></td>
-                  </tr>
-                  <tr class="contact-row">
-                    <td>Ravindra</td>
-                    <td>Kumar</td>
-                    <td>admin@gmail.com</td>
-                    <td class="after-delete">4586451646</td>
-                    <td class="check-box"><input type="checkbox" class="form-control checked" id="row-id-2" style="width: 20px"></td>
-                  </tr>
-                  <tr class="contact-row">
-                    <td>Ravindra</td>
-                    <td>Kumar</td>
-                    <td>admin@gmail.com</td>
-                    <td class="after-delete">4586451646</td>
-                    <td class="check-box"><input type="checkbox" class="form-control checked" id="row-id-3" style="width: 20px"></td>
-                  </tr>
-                  <tr class="contact-row">
-                    <td>Ravindra</td>
-                    <td>Kumar</td>
-                    <td>admin@gmail.com</td>
-                    <td class="after-delete">4586451646</td>
-                    <td class="check-box"><input type="checkbox" class="form-control checked" id="row-id-4" style="width: 20px"></td>
-                  </tr>
-                  <tr class="contact-row">
-                    <td>Ravindra</td>
-                    <td>Kumar</td>
-                    <td>admin@gmail.com</td>
-                    <td class="after-delete">4586451646</td>
-                    <td class="check-box"><input type="checkbox" class="form-control checked" id="row-id-5" style="width: 20px"></td>
-                  </tr>
-                  <tr class="contact-row">
-                    <td>Ravindra</td>
-                    <td>Kumar</td>
-                    <td>admin@gmail.com</td>
-                    <td class="after-delete">4586451646</td>
-                    <td class="check-box"><input type="checkbox" class="form-control checked" id="row-id-" style="width: 20px"></td>
-                  </tr> -->
+                  
                 </table>
               </div>
               <button type="button" class="btn btn-primary text-end" style="margin-top: 30px;font-size: 10px;float: right;" id="add-rows">Add</button>
@@ -194,14 +152,13 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
               <h4>Added List of Contact</h4>
                 <form action="javascript:void(0)" id="itemform" class="form-horizontal" style="padding: 20px 20px;" method="POST">
-                  <div style="overflow: auto;height:200px;">
+                  <div style="">
                     <input type="hidden" id="item_id" name="id">
                     <table class="table table-bordered table-responsive" id="final-contact">
                       <tr>
                         <th>Name</th>
                         <th>Surname</th>
                         <th>Email</th>
-                        <th>Phone</th>
                         <th>Action</th>
                       </tr>
                     </table>
@@ -381,7 +338,7 @@ $("#itemform").submit(function(event) {
         $("#btn"). attr("disabled", false);
         $('#item_id').val('');
         $('.text-danger').html('');
-        $('#final-contact').html('<tr> <th>Name</th> <th>Surname</th> <th>Email</th> <th>Phone</th> <th>Action</th> </tr>');
+        $('#final-contact').html('<tr> <th>Name</th> <th>Surname</th> <th>Email</th> <th>Action</th> </tr>');
         $('#mytable').html('');
         $('#popup_model').modal('show');
      });

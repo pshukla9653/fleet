@@ -26,6 +26,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        $email_templates = DB::table('email_templates')->where('company_id', Auth()->user()->company_id)->get();
         $brands = DB::table('brands')->where('company_id', Auth()->user()->company_id)->get();
         $regions = DB::table('regions')->where('company_id', Auth()->user()->company_id)->get();
         $departments = DB::table('departments')->where('company_id', Auth()->user()->company_id)->get();
@@ -89,6 +90,6 @@ class HomeController extends Controller
         $vehicles = Vehicle::where($find)->orderByRaw("CAST(order_number as UNSIGNED) ASC")->get();
         }
         
-        return view('home', compact('brands','regions','departments','vehicles','start_date','end_date','days','date_range','brand_id','region_id','department_id'));
+        return view('home', compact('email_templates','brands','regions','departments','vehicles','start_date','end_date','days','date_range','brand_id','region_id','department_id'));
     }
 }
