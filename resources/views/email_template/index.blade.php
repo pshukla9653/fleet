@@ -232,6 +232,9 @@
         .custom-modal-textbox{
             width:80%;
         }
+        .fade.in {
+            overflow-y: auto;
+        }
     </style>
     <div id="popup_model" class="modal fade">
         <div class="modal-dialog modal-lg">
