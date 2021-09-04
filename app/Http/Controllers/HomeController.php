@@ -27,6 +27,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $email_templates = DB::table('email_templates')->where('company_id', Auth()->user()->company_id)->get();
+        //dd($email_templates);
         $brands = DB::table('brands')->where('company_id', Auth()->user()->company_id)->get();
         $regions = DB::table('regions')->where('company_id', Auth()->user()->company_id)->get();
         $departments = DB::table('departments')->where('company_id', Auth()->user()->company_id)->get();

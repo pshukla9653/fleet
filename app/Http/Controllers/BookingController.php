@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use DB;
 
 class BookingController extends Controller
 {
@@ -60,6 +61,7 @@ class BookingController extends Controller
             
             $booking   =   Booking::Create( [
                         'company_id' => Auth()->user()->company_id,
+                        'vehicle_id'=> $request->vehicle_id,
                         'start_date'=> $request->start_date,
                         'end_date'=> $request->end_date,
                         'booking_reference'=> $request->booking_reference,
