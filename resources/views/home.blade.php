@@ -839,8 +839,9 @@ button#imagecolor {
                      <!-- <textarea id="" name="contacts" rows="5" cols="47" class="form-control custom-modal-textbox3"> </textarea> -->
                      <!-- button -->
                      <div class="button1">
-                      <a href="javascript:void(0)" class="anchor-btn" style="margin-right: 10px;">Edit</a>&nbsp
-                      <a href="javascript:void(0)" class="anchor-btn" style="margin-right: 10px;">Mark as primary</a>&nbsp
+                      <a href="javascript:void(0)" class="anchor-btn" id="edit_contact" style="margin-right: 10px;">Edit</a>&nbsp
+                      <a href="javascript:void(0)" class="anchor-btn" id="mark_as_primary" style="margin-right: 10px;">Mark as primary</a>&nbsp
+                      <input type="hidden" name="primary_contact" id="primary_contact" value="0">
                       <a href="javascript:void(0)" class="anchor-btn" id="delete_list" style="background-color:#ff4e4e;border-color: #ff4e4e;">Delete</a>
                         
                         
@@ -857,7 +858,7 @@ button#imagecolor {
 
                      </div>
                      <label for="vehicle">Vehicle:</label>
-                     <textarea id="vehicle" name="vehicle" rows="5" cols="47" class="form-control custom-modal-textbox3"> </textarea>
+                     <textarea id="vehicle" name="vehicle" rows="5" cols="47" class="form-control custom-modal-textbox3"></textarea>
                      <div class="text-edit">
                         <button class="editss">Edit</button>
                      </div>
@@ -925,7 +926,7 @@ button#imagecolor {
             </div>
             <div class="notes">
                <span class="loan1">Notes:</span><br>
-              <textarea id="w3review" name="ob_pick_from_notes" rows="4" cols="45" class="form-control custom-modal-textbox3"> </textarea>
+              <textarea id="w3review" name="ob_pick_from_notes" rows="4" cols="45" class="form-control custom-modal-textbox3"></textarea>
             </div>
         </div>
       </div>
@@ -972,7 +973,7 @@ button#imagecolor {
           </div>
           <div class="notes-all">
             <span class="loan11">Notes:</span><br>
-            <textarea id="notes1" name="ob_deliver_to_deliver_notes" rows="4" cols="58" class="form-control custom-modal-textbox3" style="width: 441px;"> </textarea>
+            <textarea id="notes1" name="ob_deliver_to_deliver_notes" rows="4" cols="58" class="form-control custom-modal-textbox3" style="width: 441px;"></textarea>
           </div>
         </div>
    </div>
@@ -1143,12 +1144,6 @@ $(document).ready(function(){
   function myckick(date, registration_number) {
     console.log(date, registration_number);
   }
-  $('#insert_design').click(function() {
-      //var data = $('#email_body').val();
-
-      //$('#editor_area').val('some text');
-
-  });
   function getExistingContact() {
     $.ajax({
     type:"GET",
@@ -1174,26 +1169,57 @@ $(document).ready(function(){
   $('#insert_list').click(function () {
     $('#mytable').find('p').each(function () {
         var row = $(this);
-        //console.log(row);
         if (row.find('input[type="checkbox"]').is(':checked')) {
-          //console.log("checked = "+row);
-            //row.children(".check-box").html('<button type="button" class="btn btn-danger delete" onclick="removethis(this)">Delete</button>');
-            $("#inserted-list").append(row);
+            var current_id = row.find('input').val();
+            var contact = [];
+            $('#inserted-list').find('p').each(function () {
+                var row = $(this);
+                var ids = row.find('input[type="checkbox"]').val();
+                contact.push(ids);
+            });
+            if(contact.indexOf(current_id)==-1){
+              $("#inserted-list").append(row);
+            }
         }
     });
+    
     $('#popup_model_editor').modal('hide');
   });
   $('#delete_list').click(function () {
     $('#inserted-list').find('p').each(function () {
         var row = $(this);
-        //console.log(row);
         if (row.find('input[type="checkbox"]').is(':checked')) {
-          //console.log("checked = "+row);
-            //row.children(".check-box").html('<button type="button" class="btn btn-danger delete" onclick="removethis(this)">Delete</button>');
             row.hide();
         }
     });
     $('#popup_model_editor').modal('hide');
+    $('#popup_model1').modal('show');
+  });
+  $('#mark_as_primary').click(function () {
+    var id = 0;
+    var counter = 0;
+    $('#inserted-list').find('p').each(function () {
+        var row = $(this);
+        if (row.find('input[type="checkbox"]').is(':checked')) {
+          id = row.find('input[type="checkbox"]').val();
+          counter++;
+        }
+    });
+    if(counter==0){
+      alert("Please Select a Contact to make Mark as Primary");
+    }else if(counter>1){
+      alert("Please Select a Single Contact to make Mark as Primary");
+    }else{
+      if(counter==1){
+        $('#primary_contact').val(id);
+        alert("Mark as Primary Successful");
+      }
+    }
+  });
+  $('#edit_contact').click(function () {
+    $('#inserted-list').find('p').each(function () {
+      $(this).find('input[type="checkbox"]').attr('checked','checked');
+    });
   });
    function step_fast_backward_date(){
      
@@ -1244,10 +1270,11 @@ $(document).ready(function(){
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
        }
       });
-    /*console.log(new FormData(this));
-    console.log($("#itemform").serialize());*/
     $("#btn").html('Please Wait...');
-      $.ajax({
+    $('#inserted-list').find('p').each(function () {
+      $(this).find('input[type="checkbox"]').attr('checked','checked');
+    });
+      /*$.ajax({
           type:"POST",
           url: "{{ url('store-booking') }}",
           // data: $("#itemform").serialize(),
@@ -1266,7 +1293,7 @@ $(document).ready(function(){
               $("#btn"). attr("disabled", false);
             } 
          }
-      });
+      });*/
   });
  </script>  
 @endsection

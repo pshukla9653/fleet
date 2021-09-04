@@ -73,6 +73,7 @@ class BookingController extends Controller
                         'show_delivery_day'=> $request->show_delivery_day,
                         'show_collectioin_day'=> $request->show_collectioin_day,
                         'contacts'=> !empty($request->contacts)? implode(",", $request->contacts):'',
+                        'primary_contact'=> $request->primary_contact,
                         'vehicle'=> $request->vehicle,
                         'email_temeplete'=> !empty($request->email_temeplete)? implode(",", $request->email_temeplete):'',
 

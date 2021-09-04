@@ -19,11 +19,11 @@ class CreateBookingsTable extends Migration
                 ->references('id')
                 ->on('companies')
                 ->onDelete('cascade');
-            $table->string('start_date');
-            $table->string('end_date');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->string('booking_reference'); 
             $table->string('purpose_of_lone'); 
-            $table->string('loan_type'); 
+            $table->string('loan_type')->nullable(); 
             $table->string('booking_notes'); 
             $table->string('lag_time'); 
             $table->string('lag_notes'); 
@@ -31,9 +31,10 @@ class CreateBookingsTable extends Migration
             $table->string('lead_notes'); 
             $table->string('show_delivery_day'); 
             $table->string('show_collectioin_day'); 
-            $table->string('contacts'); 
-            $table->string('vehicle'); 
-            $table->string('email_temeplete'); 
+            $table->string('contacts');
+            $table->string('primary_contact');
+            $table->string('vehicle');
+            $table->string('email_temeplete');
 
             $table->string('ob_pick_from'); 
             $table->string('ob_pick_from_notes'); 
