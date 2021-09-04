@@ -15,12 +15,16 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->string('company_id')
+            $table->unsignedBigInteger('company_id')
                 ->references('id')
                 ->on('companies')
                 ->onDelete('cascade');
-            $table->string('start_date');
-            $table->string('end_date');
+            $table->unsignedBigInteger('vehicle_id')
+                ->references('id')
+                ->on('vehicles')
+                ->onDelete('cascade');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->string('booking_reference'); 
             $table->string('purpose_of_lone'); 
             $table->string('loan_type'); 

@@ -445,7 +445,6 @@ button#imagecolor {
   <select class="form-control border-0" style="background: transparent;width:12%;">
       <option>Filter</option>
    </select>
-  <a id="additem" class="btn btn-primary" style="margin-left: 20px;"><img src="{{ asset('assets/images/icon/add.png') }}" alt="add" style="width: 21px;margin-left: -8px;"/>&nbsp;  Add New Item</a>
   </div>	
   <!-- <div class="col-md-4" style="padding: 30px;">
     <select class="form-control border-0" style="background: transparent;width:6%;">
@@ -647,7 +646,28 @@ button#imagecolor {
               <br><span style="font-size:9px;position: absolute;margin-top: 7px;">{{$vehicle->vin}}</span>
               <br><span style="font-size:9px;position: absolute;margin-top: -4px;">Newspress {{$vehicle->model}}</span></td>
               @for($i=0; $i< $days; $i++)
-                <td ondrag ="myckick({{date("dmY", strtotime($start_date . "+".$i." day"))}}, {{$vehicle->registration_number}})" ></td>
+              @php
+              $thisdate = date("Y-m-d", strtotime($start_date . "+".$i." day"));
+              $img_path = asset("storage/".$vehicle->image);
+              
+              @endphp
+               
+                <td
+                @php
+                  $booking = DB::table('bookings')->where('company_id', Auth()->user()->company_id)
+              ->where('vehicle_id', $vehicle->id)
+              ->whereDate('start_date', '<=', $thisdate)
+              ->whereDate('end_date', '>=', $thisdate)
+              ->get();
+              foreach($booking as $key=> $value){
+                if($value->id){
+                  echo 'style="background-color:#0f91fb;';
+                }
+              }
+                @endphp
+                onclick="makebooking('{{$vehicle->id}}','{{$thisdate}}','{{$img_path}}','{{$vehicle->registration_number}}','{{ $vehicle->brand->brand_name }}','{{ $vehicle->model }}','{{ $vehicle->derivative }}');">
+                  
+                </td>
               @endfor
             </tr>
             @endforeach
@@ -754,17 +774,18 @@ button#imagecolor {
                 <div class="col-md-12 main">
                   <div class="col-md-3">
                      <div class="car-img">
-                        <img class="image-1" src="{{ asset('assets/images/car.jpeg') }}">
+                        <img class="image-1" id="vahicle_img" src="">
                       </div>
                       <div class="sides-1">
-                        <button class="rt-number" style="border-radius: 7px; border-color: #eecc00; margin-top: 10px;  width: 90px;">9867RT</button><br>
-                        <span>Brand:</span><br>
-                        <span>Model:</span><br>
-                        <span>Derivative:</span>
+                        <button class="rt-number" id="rt-number" style="border-radius: 7px; border-color: #eecc00; margin-top: 10px;  width: 90px;">9867RT</button><br>
+                        <span id="brand_name" style="font-weight: 600"></span><br>
+                        <span id="model_number" style="font-weight: 600"></span><br>
+                        <span id="derivative" style="font-weight: 600"></span>
                       </div>
                   </div>
                   <div class="col-md-4">
                      <div class="main-date">
+                       <input type="hidden" name="vehicle_id" id="vehicle_id" />
                         <span class="startdate">Start Date</span>
                         <span class="enddate">End Date</span>
                         <div class="form-groupdate">
@@ -952,7 +973,7 @@ button#imagecolor {
             </div>
           <div class="main-address">        
             <div class="address">
-              <span class="address1">Twon/City</span><br>
+              <span class="address1">Town/City</span><br>
               <input type="text" name="ob_deliver_to_town_city"  class="address2 form-control custom-modal-textbox4" style="height: 26px;padding: 0px;width: 216px">
             </div>
             <div class="address">
@@ -1046,7 +1067,7 @@ $(document).ready(function(){
         </div>
           <div class="main-address">        
         <div class="address">
-          <span class="address1">Twon/City</span><br>
+          <span class="address1">Town/City</span><br>
           <input type="text" name="ib_pick_from_town_city" class="address2 form-control custom-modal-textbox4" style="height: 26px;padding: 0px;width: 180px">
         </div>
         <div class="address">
@@ -1140,9 +1161,7 @@ $(document).ready(function(){
     </div>
   </div>
  <script>
-  function myckick(date, registration_number) {
-    console.log(date, registration_number);
-  }
+  
   $('#insert_design').click(function() {
       //var data = $('#email_body').val();
 
@@ -1226,17 +1245,21 @@ $(document).ready(function(){
    function custom_search(){
     $('#search_form').submit();
    }
-  $('#additem').click(function() {
+  
+  function makebooking(id, date, img, reg_number, brand, model, derivative){
+      console.log(date, img, reg_number, brand, model, derivative);
       $('#itemform').trigger("reset");
       $('#form_heading').html("Booking Overview");
       $('#btn').html('Submit');
-      $('#uploaded_spec').html('');
-      $('#image-review').html('');
-      $('#image-text').html('');
-      $('#image-text').css('background-color','');
+      $('#vehicle_id').val(id);
+      $('.start_date').val(date);
+      $('#vahicle_img').attr('src', img);
+      $('#rt-number').html(reg_number);
+      $('#brand_name').html('Brand: '+brand);
+      $('#model_number').html('Model: '+model);
+      $('#derivative').html('Derivative: '+derivative);
       $('#popup_model1').modal('show');
-  });
-
+  }
   $("#itemform").submit(function(event) {
       event.preventDefault();
        $.ajaxSetup({
