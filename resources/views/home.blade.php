@@ -729,12 +729,19 @@ button#imagecolor {
     font-weight: 300;
   }
   .anchor-btn:hover {
-    
     color: white;
-    
+  }
+  table#final-contact {
+    width: 1000px;
+    margin-left: -21px;
+    font-size: 12px;
+  }
+  table#list-mytable {
+    width: 1000px;
+    font-size: 12px;
   }
 </style>
-<div id="popup_model1" class="modal fade">
+<div id="popup_model1" class="modal fade" style="overflow-y: auto;">
     <div class="modal-dialog modal-lg">
       <div class="modal-content" style="background-color: #f2f2f2;">
         <div class="modal-header">
@@ -874,8 +881,8 @@ button#imagecolor {
                      </div>
                     
                      <div class="button3">
-                      <a href="{{ route('contacts.index') }}" class="anchor-btn" style="margin-right: 10px;">Add New Contact</a>&nbsp 
-                      <a href="{{ route('lists.index') }}" class="anchor-btn">Add New List</a>
+                      <a href="javascript:void(0)" id="addcontact" class="anchor-btn" style="margin-right: 10px;">Add New Contact</a>&nbsp 
+                      <a href="javascript:void(0)" class="anchor-btn" id="add-list-contact">Add New List</a>
 
                      </div>
                      <label for="vehicle">Vehicle:</label>
@@ -1161,20 +1168,150 @@ $(document).ready(function(){
         </div>
     </div>
   </div>
+
+  <div id="popup_model" class="modal fade second_model">
+   <div class="modal-dialog modal-lg">
+      <div class="modal-content" style="background-color: #f2f2f2;width: auto;">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><i class="icon-cancel-circle2"></i></button>
+         </div>
+         <h6 class="modal-title md-heading-custom" >Add Contact</h6>
+        <form action="javascript:void(0)" id="contactform" class="form-horizontal" method="POST">
+         <div class="modal-body md-body-custom">
+            <div class="alert alert-danger print-error-msg" style="display:none">
+               <ul></ul>
+            </div>
+            <div class="row">
+               <div class="col-xs-12 col-sm-12 col-md-12">
+                  <div class="form-group">
+                     <div class="col-md-6">
+                        <div class="form-group row">
+                           <input id="first_name" type="text" placeholder="First Name" class="form-control custom-modal-textbox @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" autofocus/>
+                           <div class="text-danger" id="error_name"></div>
+                        </div>
+                        <div class="form-group row">
+                           <input id="last_name" type="text" placeholder="Last Name" class="form-control custom-modal-textbox @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" />
+                        </div>
+                        <div class="form-group row">
+                           <input id="job_title" type="text" placeholder="Job Title" class="form-control custom-modal-textbox @error('job_title') is-invalid @enderror" name="job_title" value="{{ old('job_title') }}" />
+                           <div class="text-danger" id="error_job"></div>
+                        </div>
+                        <div class="form-group row">
+                           <input id="email" type="email" placeholder="E-Mail Address" class="form-control custom-modal-textbox @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" />
+                           <div class="text-danger" id="error_email"></div>
+                        </div>
+                        <div class="form-group row">
+                           <input id="phone_number" type="text" placeholder="Phone Number" class="form-control custom-modal-textbox @error('phone_number') is-invalid @enderror" name="phone_number" value="{{ old('phone_number') }}"/>
+                           <div class="text-danger" id="error_phone"></div>
+                        </div>
+                     </div>
+                     <div class="col-md-6">
+                        <div class="form-group row">
+                           <input id="address1" type="text" placeholder="Address1" class="form-control custom-modal-textbox @error('address1') is-invalid @enderror" name="address1" value="{{ old('address1') }}"/>
+                        </div>
+                        <div class="form-group row">
+                           <input id="address2" type="text" placeholder="Address2" class="form-control custom-modal-textbox @error('address2') is-invalid @enderror" name="address2" value="{{ old('address2') }}" />
+                        </div>
+                        <div class="form-group row">
+                           <input id="address3" type="text" placeholder="Address3" class="form-control custom-modal-textbox @error('address3') is-invalid @enderror" name="address3" value="{{ old('address3') }}"/>
+                        </div>
+                        <div class="form-group">
+                           <input id="city" type="text" placeholder="Town/City" class="form-control custom-modal-textbox @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}"/>
+                        </div>
+                        <div class="form-group">
+                           <input id="country" type="text" placeholder="Country" class="form-control custom-modal-textbox @error('country') is-invalid @enderror" name="country" value="{{ old('country') }}"/>
+                        </div>
+                        <div class="form-group">
+                           <input id="post_code" type="text" placeholder="Post Code" class="form-control custom-modal-textbox @error('post_code') is-invalid @enderror" name="post_code" value="{{ old('post_code') }}"/>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer md-footer-custom">
+            <hr style="margin-top: 0px;">
+            <button type="submit" class="btn custom-modal-btn btn-success" id="contact-submit-btn">Submit</button>
+            <button type="button" class="btn custom-modal-btn btn-danger" onclick="$('#popup_model').modal('hide');">Cancel</button>
+         </div>
+         {!! Form::close() !!}      
+      </div>
+   </div>
+</div>
+
+<div id="list_popup_model" class="modal fade" style="width: 1200px;">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="background-color: #f2f2f2;width: auto;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><i class="icon-cancel-circle2"></i></button>
+        
+      </div>
+      <h6 class="modal-title md-heading-custom">Add List</h6>
+      <div class="modal-body md-body-custom">
+        <div class="alert alert-danger print-error-msg" style="display:none">
+          <ul></ul>
+        </div>
+          <div class="row">
+              <div class="col-xs-6 col-sm-6 col-md-6">
+                  <div class="form-group" style="margin-bottom: 0px;">
+                      <div class="form-group" style="margin-bottom: 0px;"> <strong>List Name:</strong> 
+                        <input type="text" form="list-form" name="list_name" id="list_name" placeholder="List" class="form-control custom-modal-textbox">
+                      </div>
+                      <div class="text-danger"></div>
+                  </div>
+              </div>
+              <div class="col-xs-6 col-sm-6 col-md-6">
+                  <button type="button" class="btn btn-primary" style="margin-top: 30px;font-size: 10px;" onclick="getContactList()">Add Existing Contact</button>
+              </div>
+          </div>
+          <div class="row contact-list-row" style="display: none">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+              <hr>
+              <h4>List of Contacts</h4>
+              
+                
+                <table class="table table-bordered table-responsive" id="list-mytable">
+                  <tr>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                  </tr>
+                  
+                </table>
+              <button type="button" class="btn btn-primary text-end" style="margin-top: 30px;font-size: 10px;float: right;" id="add-rows">Add</button>
+            </div>
+          </div>
+          <div class="row" style="">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+              <h4>Added List of Contact</h4>
+                <form action="javascript:void(0)" id="list-form" class="form-horizontal" style="padding: 20px" method="POST">
+                  
+                    <table class="table table-bordered table-responsive" id="final-contact">
+                      <tr>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                      </tr>
+                    </table>
+                  
+                </form>
+            </div>
+          </div>
+          
+      </div>
+
+      <div class="modal-footer md-footer-custom">
+        <hr style="margin-top: 0px;">
+        <button type="submit" class="btn custom-modal-btn btn-success" id="listbtn">Add List</button>
+        <button type="button" class="btn custom-modal-btn btn-danger" onclick="$('#list_popup_model').modal('hide');">Cancel</button>
+        
+      </div>    
+    </div>
+  </div>
+</div>
  <script>
-<<<<<<< HEAD
-  function myckick(date, registration_number) {
-    console.log(date, registration_number);
-  }
-=======
-  
-  $('#insert_design').click(function() {
-      //var data = $('#email_body').val();
-
-      //$('#editor_area').val('some text');
-
-  });
->>>>>>> c5ace80c8569c423ac230b622003a187affa78c0
   function getExistingContact() {
     $.ajax({
     type:"GET",
@@ -1247,11 +1384,13 @@ $(document).ready(function(){
       }
     }
   });
-  $('#edit_contact').click(function () {
+  /*$('#edit_contact').click(function () {
     $('#inserted-list').find('p').each(function () {
-      $(this).find('input[type="checkbox"]').attr('checked','checked');
-    });
-  });
+          var row = $(this);
+          var id = row.find('input[type="checkbox"]').click();
+          
+      });
+  });*/
    function step_fast_backward_date(){
      
     $('#date_range').val(4);
@@ -1306,10 +1445,8 @@ $(document).ready(function(){
        }
       });
     $("#btn").html('Please Wait...');
-    $('#inserted-list').find('p').each(function () {
-      $(this).find('input[type="checkbox"]').attr('checked','checked');
-    });
-      /*$.ajax({
+    
+      $.ajax({
           type:"POST",
           url: "{{ url('store-booking') }}",
           // data: $("#itemform").serialize(),
@@ -1328,7 +1465,166 @@ $(document).ready(function(){
               $("#btn"). attr("disabled", false);
             } 
          }
-      });*/
+      });
+  });
+//add contact
+  $(document).ready(function($){
+     $.ajaxSetup({
+         headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         }
+     });
+     $('#addcontact').click(function () {
+        $('#contactform').trigger("reset");
+        $('#popup_model').modal('show');
+     });
+
+      $('#contact-submit-btn').click(function () {
+           var id           = '';
+           var first_name   = $("#first_name").val();
+           var last_name    = $("#last_name").val();
+           var job_title    = $("#job_title").val();
+           var email        = $("#email").val();
+           var phone_number = $("#phone_number").val();
+           var address1     = $("#address1").val();
+           var address2     = $("#address2").val();
+           var address3     = $("#address3").val();
+           var city         = $("#city").val();
+           var country      = $("#country").val();
+           var post_code    = $("#post_code").val();
+           if(first_name =='' || job_title =='' || email =='' || phone_number ==''){
+           if(first_name ==''){
+              $('#error_name').html('Name Required!');
+          }
+          else{ $('#error_name').html('');}
+          
+          if(job_title ==''){
+              $('#error_job').html('Job Title Required!');
+          }
+          else{$('#error_job').html('');}
+          if(email ==''){
+              $('#error_email').html('Email Required!');
+          }
+          else{$('#error_email').html('');}
+          if(phone_number ==''){
+              $('#error_phone').html('Phone Required!');
+          }
+          else{$('#error_phone').html('');}
+           }
+          else{
+           $("#contact-submit-btn").html('Please Wait...');
+           $("#contact-submit-btn"). attr("disabled", true);
+           
+         // ajax
+         $.ajax({
+             type:"POST",
+             url: "{{ route('contacts.store') }}",
+             data: {
+               id:id,
+               first_name:first_name,
+               last_name:last_name,
+               job_title:job_title,
+               email:email,
+               phone_number:phone_number,
+               address1:address1,
+               address2:address2,
+               address3:address3,
+               city:city,
+               country:country,
+               post_code:post_code,
+               
+             },
+             dataType: 'json',
+             success: function(res){
+              $('#popup_model').modal('hide');
+              alert("Contact Added Successful");
+              $("#contact-submit-btn"). attr("disabled", false);
+            }
+         });
+      }
+    });
+ });
+//add list
+  $("#list-form").submit(function(event) {
+    event.preventDefault();
+     $.ajaxSetup({
+     headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+     }
+  });
+    $("#listbtn").html('Please Wait...');
+      $.ajax({
+          type:"POST",
+          url: "{{ route('lists.store') }}",
+          data: new FormData(this),
+          contentType: false,       
+          cache: false,             
+          processData:false, 
+          dataType: 'json',
+          success: function(res){
+            if(res.success == true){
+              $('#list_popup_model').modal('hide');
+            } else{
+              $('.text-danger').html(res.error-msg);
+              $("#listbtn").html(btn);
+              $("#listbtn"). attr("disabled", false);
+            } 
+         }
+      });
+  });
+  $(document).ready(function($){
+     $.ajaxSetup({
+         headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         }
+     });
+     $('#add-list-contact').click(function () {
+       
+        $('#list-form').trigger("reset");
+        $("#listbtn"). attr("disabled", false);
+        $('.text-danger').html('');
+        $('#final-contact').html('<tr> <th>Name</th> <th>Surname</th> <th>Email</th> <th>Action</th> </tr>');
+        $('#list-mytable').html('');
+        $('#list_popup_model').modal('show');
+     });
+       
+      $('#listbtn').click(function (event) {
+        $("#list-form").submit();
+      });
+ });
+function getContactList(){
+  $.ajax({
+    type:"GET",
+    url: "{{ url('get-contact-lists') }}",
+    data: {},
+    success: function(res){
+      $('#list-mytable').html(res);
+      $('.contact-list-row').css('display', 'block');
+    }
+  });
+}
+function removethis(_this){
+  $(_this).parents(".contact-row").remove();
+}
+ $('#add-rows').click(function () {
+    $('#list-mytable').find('tr').each(function () {
+        var row = $(this);
+        if (row.find('input[type="checkbox"]').is(':checked') ) {
+            row.children(".check-box").html('<button type="button" class="btn btn-danger delete" onclick="removethis(this)">Delete</button>');
+
+            var current_id = row.find('input[type="hidden"]').val();
+            var contact = [];
+            $('#final-contact').find('tr').each(function () {
+                var ids = $(this).find('input[type="hidden"]').val();
+                contact.push(ids);
+            });
+            if(contact.indexOf(current_id)==-1){
+              $("#final-contact").append(row);
+              row.children(".contact-row").hide();
+            }
+        }
+    });
+    $('.contact-list-row').css('display', 'none');
   });
  </script>  
 @endsection

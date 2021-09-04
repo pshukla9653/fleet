@@ -38,7 +38,7 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        //print_r(implode(",", $request->email_temeplete));die;
+        //print_r($request->primary_contact);die;
         if($request->id){
             $validation = [
                     'start_date' => 'required|unique:bookings,start_date,'.$request->id,

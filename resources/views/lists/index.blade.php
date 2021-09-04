@@ -184,9 +184,17 @@
         var row = $(this);
         if (row.find('input[type="checkbox"]').is(':checked') ) {
             row.children(".check-box").html('<button type="button" class="btn btn-danger delete" onclick="removethis(this)">Delete</button>');
-            
-            $("#final-contact").append(row);
-            row.children(".contact-row").hide();
+
+            var current_id = row.find('input[type="hidden"]').val();
+            var contact = [];
+            $('#final-contact').find('tr').each(function () {
+                var ids = $(this).find('input[type="hidden"]').val();
+                contact.push(ids);
+            });
+            if(contact.indexOf(current_id)==-1){
+              $("#final-contact").append(row);
+              row.children(".contact-row").hide();
+            }
         }
     });
     $('.contact-list-row').css('display', 'none');
@@ -301,13 +309,10 @@ $("#itemform").submit(function(event) {
      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
      }
   });
-    /*console.log(new FormData(this));
-    console.log($("#itemform").serialize());*/
     $("#btn").html('Please Wait...');
       $.ajax({
           type:"POST",
           url: "{{ route('lists.store') }}",
-          // data: $("#itemform").serialize(),
           data: new FormData(this),
           contentType: false,       
           cache: false,             

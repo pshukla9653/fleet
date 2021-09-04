@@ -247,7 +247,8 @@ function edititem(id) {
              data: { id: id },
              dataType: 'json',
              success: function(res){
-               window.location.reload();
+              console.log(res);
+               //window.location.reload();
             }
          });
         }

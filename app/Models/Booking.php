@@ -26,6 +26,7 @@ class Booking extends Model
         'show_delivery_day',
         'show_collectioin_day',
         'contacts',
+        'primary_contact',
         'vehicle',
         'email_temeplete',
 

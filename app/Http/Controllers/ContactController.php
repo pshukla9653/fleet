@@ -104,7 +104,7 @@ class ContactController extends Controller
     public function destroy(Request $request)
     {
         //
-		Contact::find($request->id)->delete();
+		    Contact::find($request->id)->delete();
         return response()->json(['success' => true]);
     }
 
@@ -174,8 +174,9 @@ class ContactController extends Controller
               <div class="toggle-div">';
               foreach ($list_contact as $key => $val) {
                 $contact = DB::table('contacts')->where('id', '=', $val->contact_id)->first();
-                $html.='<p id="'.$contact->id.'"><input type="checkbox" id="'.$contact->id.'" value="'.$contact->id.'" name="contacts[]" /> &nbsp;&nbsp;&nbsp;<lable for="'.$contact->id.'">'.$contact->first_name.' '.$contact->last_name.'</lable></p>';
-                //print_r($contact);die;
+                if(!empty($contact)){
+                  $html.='<p id="'.$contact->id.'"><input type="checkbox" id="'.$contact->id.'" value="'.$contact->id.'" name="contacts[]" /> &nbsp;&nbsp;&nbsp;<lable for="'.$contact->id.'">'.$contact->first_name.' '.$contact->last_name.'</lable></p>';
+                }
                  
               }
               $html.="</div>";
