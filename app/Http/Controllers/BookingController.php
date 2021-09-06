@@ -41,8 +41,8 @@ class BookingController extends Controller
         //print_r($request->primary_contact);die;
         if($request->id){
             $validation = [
-                    'start_date' => 'required|unique:bookings,start_date,'.$request->id,
-                    'end_date' => 'required|unique:bookings,end_date,'.$request->id
+                    'start_date' => 'required',
+                    'end_date' => 'required'
                 ];
         }else{
             $validation = [
@@ -53,9 +53,7 @@ class BookingController extends Controller
         $this->validate($request, $validation);
         //print_r($request->contacts);die;
         if($request->id){
-            $booking   =   Booking::Create( [
-                'company_id' => Auth()->user()->company_id,
-                'vehicle_id'=> $request->vehicle_id,
+            $data   =   array(
                 'start_date'=> $request->start_date,
                 'end_date'=> $request->end_date,
                 'booking_reference'=> $request->booking_reference,
@@ -94,9 +92,9 @@ class BookingController extends Controller
                 'ib_pick_from_notes'=> $request->ib_pick_from_notes,
                 'ib_deliver_to'=> $request->ib_deliver_to,
                 'ib_deliver_to_notes'=> $request->ib_deliver_to_notes
-            ]);
+            );
             $booking = Booking::find($request->id);
-            $booking->update($booking);
+            $booking->update($data);
            
         } else{
             
