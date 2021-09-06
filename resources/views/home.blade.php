@@ -797,6 +797,7 @@ button#imagecolor {
                   </div>
                   <div class="col-md-4">
                      <div class="main-date">
+                       <input type="hidden" name="id" id="id" />
                        <input type="hidden" name="vehicle_id" id="vehicle_id" />
                         <span class="startdate">Start Date</span>
                         <span class="enddate">End Date</span>
@@ -1430,16 +1431,48 @@ $(document).ready(function(){
   
   function makebooking(vehicle_id, date, img, reg_number, brand, model, derivative){
       console.log(date, img, reg_number, brand, model, derivative);
+      $.ajaxSetup({
+       headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+       }
+      });
       $('#itemform').trigger("reset");
       $('#form_heading').html("Booking Overview");
       $('#btn').html('Submit');
       $('#vehicle_id').val(vehicle_id);
+      $('#id').val('');
       $('.start_date').val(date);
       $('#vahicle_img').attr('src', img);
       $('#rt-number').html(reg_number);
       $('#brand_name').html('Brand: '+brand);
       $('#model_number').html('Model: '+model);
       $('#derivative').html('Derivative: '+derivative);
+      
+      $.ajax({
+          type:"POST",
+          url: "{{ url('edit-booking') }}",
+          data: {
+                  vehicle_id: vehicle_id,
+                  date: date
+                },
+          
+          dataType: 'json',
+          success: function(res){
+            
+            if(res.length != 0){
+              console.log(res);
+            $.each(res[0], function(key, value) {
+              if(key =='booking_notes' || key == 'lag_notes' || key == 'lead_notes' || key == 'ob_pick_from_notes' || key  == 'ib_deliver_to_notes' || key =='ib_pick_from_notes' || key =='vehicle'){
+                $("textarea[name='"+ key+ "']").val(value);
+                $('#btn').html('Update');
+              }
+              else{
+                $("input[name='"+ key+ "']").val(value);
+              }
+            });
+          }
+         }
+      });
       $('#popup_model1').modal('show');
   }
   $("#itemform").submit(function(event) {
@@ -1454,7 +1487,6 @@ $(document).ready(function(){
       $.ajax({
           type:"POST",
           url: "{{ url('store-booking') }}",
-          // data: $("#itemform").serialize(),
           data: new FormData(this),
           contentType: false,       
           cache: false,             
