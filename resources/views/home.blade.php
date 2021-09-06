@@ -902,9 +902,9 @@ button#imagecolor {
                      </div>
                      <br>
                      <span class="loan1">Lead time Notes:</span>
-                     <textarea id="w3review" name="lag_notes" rows="4" cols="38" class="form-control custom-modal-textbox2"></textarea>
-                     <span class="loan1">Load time Note:</span>
                      <textarea id="w3review" name="lead_notes" rows="4" cols="38" class="form-control custom-modal-textbox2"></textarea>
+                     <span class="loan1">Lag time Notes:</span>
+                     <textarea id="w3review" name="lag_notes" rows="4" cols="38" class="form-control custom-modal-textbox2"></textarea>
                   </div>
                   <div class="col-md-5">
                      <div class="checking-box">
