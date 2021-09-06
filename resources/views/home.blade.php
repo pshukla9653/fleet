@@ -670,8 +670,65 @@ button#imagecolor {
               }
                 @endphp
                 >
+                @foreach ($booking as $key=> $value)
                   
                 
+                @if($value->id)
+                <span data-popup="tooltip" title="
+                <div style='background-color:#fff;width:800px;height:auto;padding:10px;border: 1px solid #bbb8b8;'>
+                  <table cellpadding = '10' cellspacing = '10'>
+                    <tr></tr>
+                    <tr>
+                      <td style='width:33.33%;padding:10px;'>
+                        <table style='width:100%'>
+                          <tr><td colspan='2'><img src='{{ asset("storage/".$vehicle->image) }}' alt='{{$vehicle->registration_number}}' style='width: 100%; height:auto;padding:10px;'/></td></tr>
+                          <tr><td colspan='2'>&nbsp;</td></tr>
+                          <tr><td colspan='2' style='text-align:center;'><span style='font-size:18px;color:black;padding:5px;border-radius: 5px;background-color:{{$vehicle->registration_plate_colour}}'>{{$vehicle->registration_number}}</span></td></tr>
+                          <tr><td colspan='2'>&nbsp;</td></tr>
+                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
+                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
+                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
+                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->start_date),"d-M-Y") }}</td></tr>
+                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->end_date),"d-M-Y") }}</td></tr>
+                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Primary Contact:</b></td><td></td></tr>
+                          
+                          
+                        </table>
+                      </td>
+                      <td style='width:33.33%;padding:10px;'>
+                        <table style='width:100%;margin-top:-80px;'>
+                          <tr><td style='color:#376473;font-weight:600;' colspan='2'>Vehicle Information<br>&nbsp;<br></td></tr>
+                          <tr style='font-size:12px; background-color:{{$vehicle->registration_plate_colour}}'><td style='padding:2px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->start_date),"d-M-Y") }}</td></tr>
+                          <tr style='font-size:12px; background-color:{{$vehicle->registration_plate_colour}}'><td style='padding:2px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->end_date),"d-M-Y") }}</td></tr>
+                          <tr style='font-size:12px; background-color:{{$vehicle->registration_plate_colour}}'><td style='padding:2px;'><b>Primary Contact:</b></td><td>  </td></tr>
+                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Company:</b></td><td></td></tr>
+                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Loan Type:</b></td><td></td></tr>
+                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Purpose of Loan:</b></td><td>{{$value->purpose_of_lone}}</td></tr>
+                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Booking Reference:</b></td><td>{{$value->booking_reference}}</td></tr>
+                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Booking Notes:</b></td><td>{{$value->booking_notes}}</td></tr>
+                        </table>
+                      </td>
+                      <td style='width:33.33%;padding:10px;'>
+                        <table style='width:100%;margin-top:-35px;'>
+                          
+                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Outbound Collection Notes:</b></td><td>{{ $value->ob_pick_from_notes }}</td></tr>
+                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Collection Notes:</b></td><td>{{$value->ib_pick_from_notes}}</td></tr>
+                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Lead Time Notes:</b></td><td>{{$value->lead_notes}}</td></tr>
+                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Lag Time Notes:</b></td><td>{{$value->lag_notes}}</td></tr>
+                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Outbound Delivery Notes:</b></td><td>{{$value->ob_pick_from_notes}}</td></tr>
+                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Delivery Notes:</b></td><td>{{$value->ib_pick_from_notes}}</td></tr>
+                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Outbound Details Address:</b></td><td>{{$value->ob_deliver_to_address_1}}</td></tr>
+                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Details Address:</b></td><td>{{$value->ib_pick_from_address_1}}</td></tr>
+                          
+                        </table>
+                      </td>
+                    </tr>
+
+                  </table>
+                </div>
+                " data-html="true" data-placement="right" style="font-weight: 600; font-size:12px; padding: 5px;border-radius: 5px;"></span>  
+                @endif
+                @endforeach
                 </td>
               @endfor
             </tr>
