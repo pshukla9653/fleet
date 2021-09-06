@@ -653,6 +653,7 @@ button#imagecolor {
               @endphp
                
                 <td
+                onclick="makebooking('{{$vehicle->id}}','{{$thisdate}}','{{$img_path}}','{{$vehicle->registration_number}}','{{ $vehicle->brand->brand_name }}','{{ $vehicle->model }}','{{ $vehicle->derivative }}');"
                 @php
                   $booking = DB::table('bookings')->where('company_id', Auth()->user()->company_id)
               ->where('vehicle_id', $vehicle->id)
@@ -661,12 +662,16 @@ button#imagecolor {
               ->get();
               foreach($booking as $key=> $value){
                 if($value->id){
-                  echo 'style="background-color:#0f91fb;';
+                  
+                  echo 'style="background-color:#0f91fb;"';
                 }
+                
+                
               }
                 @endphp
-                onclick="makebooking('{{$vehicle->id}}','{{$thisdate}}','{{$img_path}}','{{$vehicle->registration_number}}','{{ $vehicle->brand->brand_name }}','{{ $vehicle->model }}','{{ $vehicle->derivative }}');">
+                >
                   
+                
                 </td>
               @endfor
             </tr>
@@ -1423,12 +1428,12 @@ $(document).ready(function(){
     $('#search_form').submit();
    }
   
-  function makebooking(id, date, img, reg_number, brand, model, derivative){
+  function makebooking(vehicle_id, date, img, reg_number, brand, model, derivative){
       console.log(date, img, reg_number, brand, model, derivative);
       $('#itemform').trigger("reset");
       $('#form_heading').html("Booking Overview");
       $('#btn').html('Submit');
-      $('#vehicle_id').val(id);
+      $('#vehicle_id').val(vehicle_id);
       $('.start_date').val(date);
       $('#vahicle_img').attr('src', img);
       $('#rt-number').html(reg_number);
