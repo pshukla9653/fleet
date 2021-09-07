@@ -47,51 +47,22 @@
 
                 <div class="heading-elements">
                 </div>
-                @error('registration_number')
+                @error('description')
                     <div class="alert alert-danger">
                         <strong>{{ $message }}</strong>
                     </div>
                 @enderror
-                @error('model')
+                @error('subject')
                     <div class="alert alert-danger">
                         <strong>{{ $message }}</strong>
                     </div>
                 @enderror
-                @error('derivative')
+                @error('email_body')
                     <div class="alert alert-danger">
                         <strong>{{ $message }}</strong>
                     </div>
                 @enderror
-                @error('vin')
-                    <div class="alert alert-danger">
-                        <strong>{{ $message }}</strong>
-                    </div>
-                @enderror
-                @error('adoption_date')
-                    <div class="alert alert-danger">
-                        <strong>{{ $message }}</strong>
-                    </div>
-                @enderror
-                @error('projected_defleet_date')
-                    <div class="alert alert-danger">
-                        <strong>{{ $message }}</strong>
-                    </div>
-                @enderror
-                @error('loan_cost')
-                    <div class="alert alert-danger">
-                        <strong>{{ $message }}</strong>
-                    </div>
-                @enderror
-                @error('value')
-                    <div class="alert alert-danger">
-                        <strong>{{ $message }}</strong>
-                    </div>
-                @enderror
-                @error('order_number')
-                    <div class="alert alert-danger">
-                        <strong>{{ $message }}</strong>
-                    </div>
-                @enderror
+                
             </div>
             <div class="panel-body" style="padding: 0px 10px 10px 10px;">
                 <div class="row">
@@ -137,13 +108,9 @@
                                 <td style="text-align: center;"></td>
 
                                 <td style="text-align: right;">
-
-
-
                                     <a onclick="edititem({{ $email->id }})">
                                         <i class="icon-eye" style="color: #b1b1b1;"></i>
                                     </a>
-
                                 </td>
                                 <td>
 
@@ -266,12 +233,12 @@
                                         </div>
                                         <div class="form-group">
                                             <strong>From Email:</strong>
-                                            {!! Form::text('from_email', null, ['placeholder' => 'From Email', 'class' => 'form-control custom-modal-textbox', 'id' => 'from_email']) !!}
+                                            {!! Form::email('from_email', null, ['placeholder' => 'From Email', 'class' => 'form-control custom-modal-textbox', 'id' => 'from_email']) !!}
 
                                         </div>
                                         <div class="form-group">
                                             <strong>CC Email:</strong>
-                                            {!! Form::text('cc_email', null, ['placeholder' => 'CC Email', 'class' => 'form-control custom-modal-textbox', 'id' => 'cc_email']) !!}
+                                            {!! Form::email('cc_email', null, ['placeholder' => 'CC Email', 'class' => 'form-control custom-modal-textbox', 'id' => 'cc_email']) !!}
 
                                         </div>
                                         <div class="form-group">
@@ -288,17 +255,17 @@
                                         </div>
                                         <div class="form-group">
                                             <strong>Reply To Email:</strong>
-                                            {!! Form::text('reply_to_email', null, ['placeholder' => 'Reply To Email', 'class' => 'form-control custom-modal-textbox', 'id' => 'reply_to_email']) !!}
+                                            {!! Form::email('reply_to_email', null, ['placeholder' => 'Reply To Email', 'class' => 'form-control custom-modal-textbox', 'id' => 'reply_to_email']) !!}
 
                                         </div>
                                         <div class="form-group">
                                             <strong>To Email:</strong>
-                                            {!! Form::text('to_email', null, ['placeholder' => 'To Email', 'class' => 'form-control custom-modal-textbox', 'id' => 'to_email']) !!}
+                                            {!! Form::email('to_email', null, ['placeholder' => 'To Email', 'class' => 'form-control custom-modal-textbox', 'id' => 'to_email']) !!}
 
                                         </div>
                                         <div class="form-group">
                                             <strong>BCC Email:</strong>
-                                            {!! Form::text('bcc_email', null, ['placeholder' => 'BCC Email', 'class' => 'form-control custom-modal-textbox', 'id' => 'bcc_email']) !!}
+                                            {!! Form::email('bcc_email', null, ['placeholder' => 'BCC Email', 'class' => 'form-control custom-modal-textbox', 'id' => 'bcc_email']) !!}
 
                                         </div>
                                     </div>
@@ -349,8 +316,9 @@
                                     <div class="form-group">
 
                                         <div style="text-align:right;width: 97.5%;margin-top:7px">
-
+                                        
                                             <div class="upload-btn-wrapper">
+                                                
                                                 <button class="btnsss">&nbsp; Upload &nbsp; </button>
                                                 <input type="file" name="spec_sheet[]" multiple>
                                             </div>
