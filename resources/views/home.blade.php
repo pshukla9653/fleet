@@ -727,7 +727,7 @@
                                             
                                         @endphp
 
-                                        <td onclick="makebooking('{{ $vehicle->id }}','{{ $thisdate }}','{{ $img_path }}','{{ $vehicle->registration_number }}','{{ $vehicle->brand->brand_name }}','{{ $vehicle->model }}','{{ $vehicle->derivative }}');"
+                                        <td onclick="addupdate('{{ $vehicle->id }}','{{ $thisdate }}','{{ $img_path }}','{{ $vehicle->registration_number }}','{{ $vehicle->registration_plate_colour }}','{{ $vehicle->brand->brand_name }}','{{ $vehicle->model }}','{{ $vehicle->derivative }}');"
                                             @php
                                                 $booking = DB::table('bookings')
                                                     ->where('company_id', Auth()->user()->company_id)
@@ -899,8 +899,9 @@
                         <span class="checkboxs">
                             <img class="check-mark" src="">
                         </span>
-                        <span class="completed">Completed</span>
-                        <span id="chekckk"><i class="fa fa-angle-down"></i></span>
+                        
+                        
+                        <span id="chekckk1"><i class="fa fa-angle-down"></i></span>
                     </div>
                 </div>
 
@@ -926,8 +927,9 @@
                                                 <img class="image-1" id="vahicle_img" src="">
                                             </div>
                                             <div class="sides-1">
-                                                <button class="rt-number" id="rt-number"
-                                                    style="border-radius: 7px; border-color: #eecc00; margin-top: 10px;  width: 90px;">9867RT</button><br>
+                                                <span id="rt-number" style="border-radius: 7px;border-color: #eecc00;margin: 5px;width: 110px;padding: 3px; 
+                                                font-weight: 600;"></span>
+                                                <br>
                                                 <span id="brand_name" style="font-weight: 600"></span><br>
                                                 <span id="model_number" style="font-weight: 600"></span><br>
                                                 <span id="derivative" style="font-weight: 600"></span>
@@ -1062,7 +1064,7 @@
                                                     id="add-list-contact">Add New List</a>
 
                                             </div>
-                                            <label for="vehicle">Vehicle:</label>
+                                            <label for="vehicle">Vehicle(s):</label>
                                             <textarea id="vehicle" name="vehicle" rows="5" cols="47"
                                                 class="form-control custom-modal-textbox3"></textarea>
                                             <div class="text-edit">
@@ -1104,7 +1106,7 @@
                         });
                     </script>
 
-                    <div class="modal-title md-heading-custom" style="background-color:#ff4e4e;" id="form_heading">
+                    <div class="modal-title md-heading-custom" style="background-color:#30a02c;" id="form_heading">
                         <h5>
                             OUTBOUND DETAILS
                         </h5>
@@ -1112,7 +1114,7 @@
                             <span class="checkboxs">
                                 <img class="check-mark" src="{{ asset('assets/images/check.png') }}">
                             </span>
-                            <span class="completed">Non Compeleted</span>
+                            
                             <span id="chekckk1"><i class="fa fa-angle-down"></i></span>
                         </div>
                     </div>
@@ -1235,7 +1237,7 @@
                             <span class="checkboxs">
                                 <img class="check-mark" src="{{ asset('assets/images/check.png') }}">
                             </span>
-                            <span class="completed">Completed</span>
+                            
                             <span id="chekckk2"><i class="fa fa-angle-down"></i></span>
                         </div>
                     </div>
@@ -1393,25 +1395,36 @@
                 <div class="modal-body md-body-custom">
 
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="checkings form-control custom-modal-textbox3" id="for-insert-list"
-                                style="height: auto;margin-top: 15px;">
-                                <div class="checkin-box11" style="margin:10px 0px;">
-                                 @foreach ($vehicles as $key=>$value)
-                                 <p>
-                                     <input type="radio" id="1" value="1" name="vehi"> 
-                                     &nbsp;&nbsp;&nbsp;
-                                     <lable for="{{$value->id}}">{{$value->registration_number}}</lable>
-                                </p>   
-                                 @endforeach   
-                                </div>
-                            </div>
+                        <div class="col-md-12">
+                            <table class="table table-bordered" style="font-size: 12px;">
+                                <tr>
+                                    <th>Registration Number</th>
+                                    <th>Brand</th>
+                                    <th>Model</th>
+                                    <th>Derivative</th>
+                                </tr>
+                            
+                            @foreach ($vehicles as $key=>$value)
+                            <tr>
+                                <td><input type="radio" value="{{$value->id}}" name="vehi">
+                                    <img src='{{ asset('storage/' . $vehicle->image) }}' alt='{{ $vehicle->registration_number }}' style='width: 40%; height:auto;'/>
+                                    <span id="img_n_{{$value->id}}" style="display: none;">{{$vehicle->image }}</span> 
+                                    <span id="col_n_{{$value->id}}" style="display: none;">{{ $vehicle->registration_plate_colour }}</span>  
+                                    <span id="reg_no_{{$value->id}}" style="padding: 5px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}">{{$value->registration_number}}</span>
+                                </td>
+                                <td id="br_n_{{$value->id}}">{{ $vehicle->brand->brand_name }}</td>
+                                <td id="mo_n_{{$value->id}}">{{ $vehicle->model }}</td>
+                                <td id="de_n_{{$value->id}}">{{ $vehicle->derivative }}</td>
+                            </tr>
+                                   
+                            @endforeach
+                            </table>
                         </div>
                     </div>
 
                     <div class="modal-footer md-footer-custom" style="margin: 0px 20px 20px -20px;">
                         <hr style="margin-top: 0px;">
-                        <button type="button" class="btn custom-modal-btn btn-success" id="insert_list">Insert</button>
+                        <button type="button" class="btn custom-modal-btn btn-success" onclick="insert_vehicle()">Insert</button>
                         <button type="button" class="btn custom-modal-btn btn-danger"
                             onclick="$('#popup_model_vehicle').modal('hide')">Cancel</button>
 
@@ -1599,6 +1612,31 @@
         function getVehicleList(){
             $('#popup_model_vehicle').modal('show');
         }
+
+        function insert_vehicle(){
+            var vehicle_id = $("input[name='vehi']:checked").val();
+            var date = $('.start_date').val();
+            var path = '{{asset('storage/')}}';
+            var img = path+'/'+$('#img_n_'+vehicle_id).html();
+            var reg_number = $('#reg_no_'+vehicle_id).html();
+            var plate_colour = $('#col_n_'+vehicle_id).html();
+            var brand = $('#br_n_'+vehicle_id).html();
+            var model = $('#mo_n_'+vehicle_id).html();
+            var derivative = $('#de_n_'+vehicle_id).html();
+            $('#popup_model_vehicle').modal('hide');
+            makebooking(vehicle_id, date, img, reg_number, plate_colour, brand, model, derivative);
+            setTimeout(function () {
+    
+            var is_edit = $("input[name='booking_reference']").val();
+            
+            if(is_edit !=''){
+                alert('Booking Already Exists with selected date range');
+            }
+        }, 2000);
+
+            
+        }
+        
         function getExistingContact() {
             $.ajax({
                 type: "GET",
@@ -1714,9 +1752,12 @@
         function custom_search() {
             $('#search_form').submit();
         }
-
-        function makebooking(vehicle_id, date, img, reg_number, brand, model, derivative) {
-            console.log(date, img, reg_number, brand, model, derivative);
+        function addupdate(vehicle_id, date, img, reg_number, plate_colour, brand, model, derivative){
+            makebooking(vehicle_id, date, img, reg_number, plate_colour, brand, model, derivative);
+            $('#popup_model1').modal('show');
+        }
+        function makebooking(vehicle_id, date, img, reg_number, plate_colour, brand, model, derivative) {
+            
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1729,10 +1770,14 @@
             $('#id').val('');
             $('.start_date').val(date);
             $('#vahicle_img').attr('src', img);
+            $('#inserted-list').html('');
+            $('input[name="vehi"][value="' + vehicle_id.toString() + '"]').prop("checked", true);
             $('#rt-number').html(reg_number);
+            $('#rt-number').css('background-color', plate_colour);
             $('#brand_name').html('Brand: ' + brand);
             $('#model_number').html('Model: ' + model);
             $('#derivative').html('Derivative: ' + derivative);
+            $('#vehicle').html(reg_number);
 
             $.ajax({
                 type: "POST",
@@ -1786,9 +1831,10 @@
                             }
                         });
                     }
+                    
                 }
             });
-            $('#popup_model1').modal('show');
+            
         }
         $("#itemform").submit(function(event) {
             event.preventDefault();
