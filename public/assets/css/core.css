@@ -7059,7 +7059,7 @@ h6.panel-title,
 }
 
 .modal-lg{
-  width: 55%!important;
+ /* width: 55%!important;*/
   margin: 12% auto !important;
 }
 

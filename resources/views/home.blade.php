@@ -740,6 +740,10 @@ button#imagecolor {
     width: 1000px;
     font-size: 12px;
   }
+  .form-control {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+}
 </style>
 <div id="popup_model1" class="modal fade" style="overflow-y: auto;">
     <div class="modal-dialog modal-lg">
@@ -791,25 +795,27 @@ button#imagecolor {
                       </div>
                   </div>
                   <div class="col-md-4">
-                     <div class="main-date">
+                     <div class="main-date" style="margin-top: 6px;">
                        <input type="hidden" name="vehicle_id" id="vehicle_id" />
                         <span class="startdate">Start Date</span>
                         <span class="enddate">End Date</span>
-                        <div class="form-groupdate">
+                        <div class="form-groupdate" style="display: inline-flex;">
                           <span class="datepicker">
 
                             <input type="date" name="start_date" id="feRouteDate"  class="form-control custom-modal-textbox1 start_date"/>
 
-                            <img class="fa fa-calendar ass" src="{{ asset('assets/images/icon/calendar.png') }}" alt="" style="margin-left: 90px;margin-top: -28px;color: #000 !important; border-radius: 5px; background-color: #f2f2f2;padding: 5px;height: 28px;">
+                            <img class="fa fa-calendar ass" src="{{ asset('assets/images/icon/calendar.png') }}" alt="" style="margin-left: 90px;margin-top: -32px;color: #000 !important; border-radius: 5px; background-color: #f2f2f2;padding: 5px;height: 26px;">
                           </span> 
-                          <span class="datepickers">
-                            <input type="date" name="end_date" id="feRouteDate" class="form-control custom-modal-textbox1" style=" margin-top: -25px;margin-left: 134px;" />
 
-                            <img class="fa fa-calendar as " src="{{ asset('assets/images/icon/calendar.png') }}" alt="" style="margin-left: 251px;margin-top: -28px;color: #000 !important;border-radius: 5px;background-color: #f2f2f2;padding: 5px;height: 28px;">
+
+                          <span class="datepickers">
+                            <input type="date" name="end_date" id="feRouteDate" class="form-control custom-modal-textbox1" style=" margin-top: -25px;" />
+
+                            <img class="fa fa-calendar as " src="{{ asset('assets/images/icon/calendar.png') }}" alt="" style="margin-left: 90px;margin-top: -32px;color: #000 !important;border-radius: 5px;background-color: #f2f2f2;padding: 5px;height: 26px;">
                           </span> 
                         </div>
                      </div>
-                     <br>
+                    
                      <div class="booking-set">
                         <span class="booknow">Booking Reference</span>
                         <span class="booknowaa">Purpose of Loan</span>
@@ -818,7 +824,7 @@ button#imagecolor {
                         <input type="text" name="booking_reference" class="ref-name form-control custom-modal-textbox1" style="width: 140px;">&nbsp&nbsp           
                         <input type="text" name="purpose_of_lone" class="loan-name form-control custom-modal-textbox1"  style="width: 140px;margin-left: 14px;">
                      </div>
-                     <br>
+                   
                      <div class="">
                         <span class="loan1">Loan Type:</span><br>
                         <select id="cars" name="loan_type" class="form-control custom-modal-textbox2" style="height: 26px;padding: 0px;width: 298px">
@@ -826,7 +832,7 @@ button#imagecolor {
                            <option value="saab">Saab</option>
                         </select>
                      </div>
-                     <br>
+                   
                      <span class="loan1">Booking Notes:</span>
                      <textarea id="w3review" name="booking_notes" rows="4" cols="38" class="form-control custom-modal-textbox2" ></textarea>
                      <div class="booking-set">
@@ -837,14 +843,14 @@ button#imagecolor {
                         <input type="text" name="lag_time" class="ref-name form-control custom-modal-textbox1">&nbsp&nbsp           
                         <input type="text" name="lead_time" class="loan-name form-control custom-modal-textbox1">
                      </div>
-                     <br>
+                 
                      <span class="loan1">Lead time Notes:</span>
                      <textarea id="w3review" name="lag_notes" rows="4" cols="38" class="form-control custom-modal-textbox2"></textarea>
                      <span class="loan1">Load time Note:</span>
                      <textarea id="w3review" name="lead_notes" rows="4" cols="38" class="form-control custom-modal-textbox2"></textarea>
                   </div>
                   <div class="col-md-5">
-                     <div class="checking-box">
+                     <div class="checking-box" style="margin-top: 24px;">
                         <div class="form-check">
                            <label class="form-check-label" for="show_delivery_day">
                            Show delivery day
@@ -859,7 +865,7 @@ button#imagecolor {
                         </div>
                      </div>
                      <label for="w3review">Contacts:</label>
-                     <div class="checkings form-control custom-modal-textbox3" style="height: 152px;">
+                     <div class="checkings form-control custom-modal-textbox3" style="height: 141px;">
                         <div class="checkin-box11" id="inserted-list" style="margin-left:10px">
                           
                         </div>
