@@ -147,16 +147,7 @@ class BookingController extends Controller
         return response()->json(['success' => true]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Booking $booking)
-    {
-        //
-    }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -167,14 +158,22 @@ class BookingController extends Controller
     public function edit(Request $request)
     {
         //
-        $data['vehicle_id'] = $request->vehicle_id;
-        $data['date'] = $request->date;
+        
         $booking = DB::table('bookings')->where('company_id', Auth()->user()->company_id)
               ->where('vehicle_id', $request->vehicle_id)
               ->whereDate('start_date', '<=', $request->date)
               ->whereDate('end_date', '>=', $request->date)
               ->get();
-        return response()->json($booking);
+        $data['booking_list']  = $booking[0]; 
+        $contact = explode(',', $booking[0]->contacts);
+        for($i=0; $i < count($contact); $i++){
+            $get_contact = DB::table('contacts')->where('id', $contact[$i])->get();
+            $contact_list[$i]['id'] = $get_contact[0]->id;
+            $contact_list[$i]['name'] = $get_contact[0]->first_name.' '.$get_contact[0]->last_name;
+        } 
+        $data['contact_list']  = $contact_list;     
+           
+        return response()->json($data);
 
     }
 

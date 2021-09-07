@@ -1518,8 +1518,8 @@ $(document).ready(function(){
           success: function(res){
             
             if(res.length != 0){
-              console.log(res);
-            $.each(res[0], function(key, value) {
+              
+            $.each(res.booking_list, function(key, value) {
               if(key =='booking_notes' || key == 'lag_notes' || key == 'lead_notes' || key == 'ob_pick_from_notes' || key  == 'ib_deliver_to_notes' || key =='ib_pick_from_notes' || key =='vehicle'){
                 $("textarea[name='"+ key+ "']").val(value);
                 $('#btn').html('Update');
@@ -1534,6 +1534,22 @@ $(document).ready(function(){
                     $('input[name="email_temeplete[]"][value="' + v.toString() + '"]').prop("checked", true);
                   });
                 }
+                if(key =='contacts'){
+                  var addtext ='';
+                  $.each(res.contact_list, function (index, v) {
+                    if(res.booking_list.primary_contact == v.id){
+                      addtext = ' (Primary)';
+                    }
+                    else{
+                      addtext = '';
+                    }
+                    
+                    $('#inserted-list').append(
+                      '<p><input type="checkbox" checked id="'+v.id+'" value="'+v.id+'" name="contacts[]"> &nbsp;&nbsp;&nbsp;<lable for="'+v.id+'">'+v.name+addtext+'</lable></p>'
+                    );
+                  });
+                }
+                
                 else{
                 $("input[name='"+ key+ "']").val(value);
                 }
