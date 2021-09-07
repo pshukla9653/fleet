@@ -1066,7 +1066,7 @@
                                             <textarea id="vehicle" name="vehicle" rows="5" cols="47"
                                                 class="form-control custom-modal-textbox3"></textarea>
                                             <div class="text-edit">
-                                                <button class="editss">Edit</button>
+                                                <a href="javascript:void(0)" class="anchor-btn" onclick="getVehicleList()">Edit</a>
                                             </div>
                                             <span>Select Email Tampalet for Booking</span>
                                             <div class="checkings form-control custom-modal-textbox3"
@@ -1381,6 +1381,46 @@
             </div>
         </div>
     </div>
+    <!---end --->
+    <div id="popup_model_vehicle" class="modal fade second_model" style="margin-top:20%;margin-right:10%;">
+        <div class="modal-dialog">
+            <div class="modal-content" style="background-color: #f2f2f2;width: 100%;">
+                <div class="modal-header">
+                    <button type="button" class="close" onclick="$('#popup_model_vehicle').modal('hide')"><i
+                            class="icon-cancel-circle2"></i></button>
+                </div>
+                <h6 class="modal-title md-heading-custom" id="form_heading">Vehicle Lists</h6>
+                <div class="modal-body md-body-custom">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="checkings form-control custom-modal-textbox3" id="for-insert-list"
+                                style="height: auto;margin-top: 15px;">
+                                <div class="checkin-box11" style="margin:10px 0px;">
+                                 @foreach ($vehicles as $key=>$value)
+                                 <p>
+                                     <input type="radio" id="1" value="1" name="vehi"> 
+                                     &nbsp;&nbsp;&nbsp;
+                                     <lable for="{{$value->id}}">{{$value->registration_number}}</lable>
+                                </p>   
+                                 @endforeach   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer md-footer-custom" style="margin: 0px 20px 20px -20px;">
+                        <hr style="margin-top: 0px;">
+                        <button type="button" class="btn custom-modal-btn btn-success" id="insert_list">Insert</button>
+                        <button type="button" class="btn custom-modal-btn btn-danger"
+                            onclick="$('#popup_model_vehicle').modal('hide')">Cancel</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div id="popup_model" class="modal fade second_model">
         <div class="modal-dialog modal-lg">
@@ -1556,6 +1596,9 @@
         </div>
     </div>
     <script>
+        function getVehicleList(){
+            $('#popup_model_vehicle').modal('show');
+        }
         function getExistingContact() {
             $.ajax({
                 type: "GET",
