@@ -31,6 +31,8 @@ class HomeController extends Controller
         $brands = DB::table('brands')->where('company_id', Auth()->user()->company_id)->get();
         $regions = DB::table('regions')->where('company_id', Auth()->user()->company_id)->get();
         $departments = DB::table('departments')->where('company_id', Auth()->user()->company_id)->get();
+        $loan_type = DB::table('loan_types')->where('company_id', Auth()->user()->company_id)->get();
+
         $brand_id ='';
         $region_id = '';
         $department_id = '';
@@ -91,6 +93,6 @@ class HomeController extends Controller
         $vehicles = Vehicle::where($find)->orderByRaw("CAST(order_number as UNSIGNED) ASC")->get();
         }
         
-        return view('home', compact('email_templates','brands','regions','departments','vehicles','start_date','end_date','days','date_range','brand_id','region_id','department_id'));
+        return view('home', compact('email_templates','loan_type','brands','regions','departments','vehicles','start_date','end_date','days','date_range','brand_id','region_id','department_id'));
     }
 }

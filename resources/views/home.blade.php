@@ -885,8 +885,9 @@ button#imagecolor {
                      <div class="">
                         <span class="loan1">Loan Type:</span><br>
                         <select id="cars" name="loan_type" class="form-control custom-modal-textbox2" style="height: 26px;padding: 0px;width: 298px">
-                           <option value="volvo">Volvo</option>
-                           <option value="saab">Saab</option>
+                           @foreach($loan_type as $key=>$value)
+                           <option value="{{$value->id}}">{{$value->loan_type}}</option>
+                           @endforeach
                         </select>
                      </div>
                      <br>
@@ -1011,7 +1012,7 @@ button#imagecolor {
             <div class="for-checking">
               <label>Pickup Form</label><br>
               <label class="switch" for="checkbox">
-                <input type="checkbox" id="checkbox" name="ob_pick_from"/>
+                <input type="checkbox" id="checkbox" checked name="ob_pick_from"/>
                 <div class="slider round"></div>
               </label>
             </div>
@@ -1027,7 +1028,7 @@ button#imagecolor {
             <div class="container">
               <span>Deliver To</span><br>
               <label class="switch1" for="checkbox1">
-                <input type="checkbox" id="checkbox1" name="ob_deliver_to" />
+                <input type="checkbox" id="checkbox1" checked name="ob_deliver_to" />
                 <div class="slider1 round1"></div>
               </label>
             </div>
@@ -1524,7 +1525,18 @@ $(document).ready(function(){
                 $('#btn').html('Update');
               }
               else{
+                if(key =='loan_type'){
+                  $("select[name='"+ key+ "']").val(value);
+                }
+                if(key =='email_temeplete'){
+                  var email_tem = value.split(",");
+                  $.each(email_tem, function (index, v) {
+                    $('input[name="email_temeplete[]"][value="' + v.toString() + '"]').prop("checked", true);
+                  });
+                }
+                else{
                 $("input[name='"+ key+ "']").val(value);
+                }
               }
             });
           }
