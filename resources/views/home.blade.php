@@ -727,7 +727,7 @@
                                             
                                         @endphp
 
-                                        <td onclick="addupdate('{{ $vehicle->id }}','{{ $thisdate }}','{{ $img_path }}','{{ $vehicle->registration_number }}','{{ $vehicle->registration_plate_colour }}','{{ $vehicle->brand->brand_name }}','{{ $vehicle->model }}','{{ $vehicle->derivative }}');"
+                                        <td onclick="makebooking('{{ $vehicle->id }}','{{ $thisdate }}','{{ $img_path }}','{{ $vehicle->registration_number }}','{{ $vehicle->registration_plate_colour }}','{{ $vehicle->brand->brand_name }}','{{ $vehicle->model }}','{{ $vehicle->derivative }}');"
                                             @php
                                                 $booking = DB::table('bookings')
                                                     ->where('company_id', Auth()->user()->company_id)
@@ -1407,14 +1407,14 @@
                             @foreach ($vehicles as $key=>$value)
                             <tr>
                                 <td><input type="radio" value="{{$value->id}}" name="vehi">
-                                    <img src='{{ asset('storage/' . $vehicle->image) }}' alt='{{ $vehicle->registration_number }}' style='width: 40%; height:auto;'/>
-                                    <span id="img_n_{{$value->id}}" style="display: none;">{{$vehicle->image }}</span> 
-                                    <span id="col_n_{{$value->id}}" style="display: none;">{{ $vehicle->registration_plate_colour }}</span>  
-                                    <span id="reg_no_{{$value->id}}" style="padding: 5px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}">{{$value->registration_number}}</span>
+                                    <img src='{{ asset('storage/' . $value->image) }}' alt='{{ $value->registration_number }}' style='width: 40%; height:auto;'/>
+                                    <span id="img_n_{{$value->id}}" style="display: none;">{{$value->image }}</span> 
+                                    <span id="col_n_{{$value->id}}" style="display: none;">{{ $value->registration_plate_colour }}</span>  
+                                    <span id="reg_no_{{$value->id}}" style="padding: 5px;border-radius: 5px;background-color:{{ $value->registration_plate_colour }}">{{$value->registration_number}}</span>
                                 </td>
-                                <td id="br_n_{{$value->id}}">{{ $vehicle->brand->brand_name }}</td>
-                                <td id="mo_n_{{$value->id}}">{{ $vehicle->model }}</td>
-                                <td id="de_n_{{$value->id}}">{{ $vehicle->derivative }}</td>
+                                <td id="br_n_{{$value->id}}">{{ $value->brand->brand_name }}</td>
+                                <td id="mo_n_{{$value->id}}">{{ $value->model }}</td>
+                                <td id="de_n_{{$value->id}}">{{ $value->derivative }}</td>
                             </tr>
                                    
                             @endforeach
@@ -1615,6 +1615,7 @@
 
         function insert_vehicle(){
             var vehicle_id = $("input[name='vehi']:checked").val();
+            var old_vehicle_id = $("#vehicle_id").val();
             var date = $('.start_date').val();
             var path = '{{asset('storage/')}}';
             var img = path+'/'+$('#img_n_'+vehicle_id).html();
@@ -1624,15 +1625,97 @@
             var model = $('#mo_n_'+vehicle_id).html();
             var derivative = $('#de_n_'+vehicle_id).html();
             $('#popup_model_vehicle').modal('hide');
-            makebooking(vehicle_id, date, img, reg_number, plate_colour, brand, model, derivative);
-            setTimeout(function () {
-    
-            var is_edit = $("input[name='booking_reference']").val();
-            
-            if(is_edit !=''){
-                alert('Booking Already Exists with selected date range');
+            if(vehicle_id != old_vehicle_id || old_vehicle_id ==''){
+                $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+                });
+                $.ajax({
+                type: "POST",
+                url: "{{ url('edit-booking') }}",
+                data: {
+                    vehicle_id: vehicle_id,
+                    date: date
+                },
+
+                dataType: 'json',
+                success: function(res) {
+                    if(res.status == true){
+                        $('#itemform').trigger("reset");
+                        $('#form_heading').html("Booking Overview");
+                        $('#btn').html('Submit');
+                        $('#vehicle_id').val(vehicle_id);
+                        $('#id').val('');
+                        $('.start_date').val(date);
+                        $('#vahicle_img').attr('src', img);
+                        $('#inserted-list').html('');
+                        $('input[name="vehi"][value="' + vehicle_id.toString() + '"]').prop("checked", true);
+                        $('#rt-number').html(reg_number);
+                        $('#rt-number').css('background-color', plate_colour);
+                        $('#brand_name').html('Brand: ' + brand);
+                        $('#model_number').html('Model: ' + model);
+                        $('#derivative').html('Derivative: ' + derivative);
+                        $('#vehicle').html(reg_number);
+                        $.each(res.booking_list, function(key, value) {
+                            if (key == 'booking_notes' || key == 'lag_notes' || key == 'lead_notes' ||
+                                key == 'ob_pick_from_notes' || key == 'ib_deliver_to_notes' || key ==
+                                'ib_pick_from_notes' || key == 'vehicle') {
+                                $("textarea[name='" + key + "']").val(value);
+                                $('#btn').html('Update');
+                            } else {
+                                if (key == 'loan_type') {
+                                    $("select[name='" + key + "']").val(value);
+                                }
+                                if (key == 'email_temeplete') {
+                                    var email_tem = value.split(",");
+                                    $.each(email_tem, function(index, v) {
+                                        $('input[name="email_temeplete[]"][value="' + v
+                                            .toString() + '"]').prop("checked", true);
+                                    });
+                                }
+                                if (key == 'contacts') {
+                                    var addtext = '';
+                                    $.each(res.contact_list, function(index, v) {
+                                        if (res.booking_list.primary_contact == v.id) {
+                                            addtext = ' (Primary)';
+                                        } else {
+                                            addtext = '';
+                                        }
+
+                                        $('#inserted-list').append(
+                                            '<p><input type="checkbox" checked id="' + v
+                                            .id + '" value="' + v.id +
+                                            '" name="contacts[]"> &nbsp;&nbsp;&nbsp;<lable for="' +
+                                            v.id + '">' + v.name + addtext + '</lable></p>'
+                                        );
+                                        
+                                    });
+                                } else {
+                                    $("input[name='" + key + "']").val(value);
+                                }
+                            }
+                        });
+                        alert('Booking Already Exists with selected date range');
+                    }
+                    else{
+                        $('#vahicle_img').removeAttr('src');
+                        $('#vehicle_id').val(vehicle_id);
+                        $('#vahicle_img').attr('src', img);
+                        $('input[name="vehi"][value="' + vehicle_id.toString() + '"]').prop("checked", true);
+                        $('#rt-number').html(reg_number);
+                        $('#rt-number').css('background-color', plate_colour);
+                        $('#brand_name').html('Brand: ' + brand);
+                        $('#model_number').html('Model: ' + model);
+                        $('#derivative').html('Derivative: ' + derivative);
+                        $('#vehicle').html(reg_number);
+                    }
+                }
+
+                });
             }
-        }, 2000);
+            
+            
 
             
         }
@@ -1752,10 +1835,7 @@
         function custom_search() {
             $('#search_form').submit();
         }
-        function addupdate(vehicle_id, date, img, reg_number, plate_colour, brand, model, derivative){
-            makebooking(vehicle_id, date, img, reg_number, plate_colour, brand, model, derivative);
-            $('#popup_model1').modal('show');
-        }
+        
         function makebooking(vehicle_id, date, img, reg_number, plate_colour, brand, model, derivative) {
             
             $.ajaxSetup({
@@ -1778,7 +1858,7 @@
             $('#model_number').html('Model: ' + model);
             $('#derivative').html('Derivative: ' + derivative);
             $('#vehicle').html(reg_number);
-
+            $('#popup_model1').modal('show');
             $.ajax({
                 type: "POST",
                 url: "{{ url('edit-booking') }}",
@@ -1789,9 +1869,9 @@
 
                 dataType: 'json',
                 success: function(res) {
-
-                    if (res.length != 0) {
-
+                    
+                    if (res.status == true) {
+                        $('#btn').html('Update');
                         $.each(res.booking_list, function(key, value) {
                             if (key == 'booking_notes' || key == 'lag_notes' || key == 'lead_notes' ||
                                 key == 'ob_pick_from_notes' || key == 'ib_deliver_to_notes' || key ==

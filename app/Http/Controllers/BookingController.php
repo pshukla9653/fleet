@@ -54,6 +54,7 @@ class BookingController extends Controller
         //print_r($request->contacts);die;
         if($request->id){
             $data   =   array(
+                'vehicle_id'=> $request->vehicle_id,
                 'start_date'=> $request->start_date,
                 'end_date'=> $request->end_date,
                 'booking_reference'=> $request->booking_reference,
@@ -156,22 +157,30 @@ class BookingController extends Controller
     public function edit(Request $request)
     {
         //
-        
+        $data['status']  = false;
         $booking = DB::table('bookings')->where('company_id', Auth()->user()->company_id)
               ->where('vehicle_id', $request->vehicle_id)
               ->whereDate('start_date', '<=', $request->date)
               ->whereDate('end_date', '>=', $request->date)
-              ->get();
-        $data['booking_list']  = $booking[0]; 
-        $contact = explode(',', $booking[0]->contacts);
+              ->first();
+        if(!empty($booking)){ 
+        $data['status']  = true;    
+        $data['booking_list']  = $booking; 
+        $contact = explode(',', $booking->contacts);
         for($i=0; $i < count($contact); $i++){
-            $get_contact = DB::table('contacts')->where('id', $contact[$i])->get();
-            $contact_list[$i]['id'] = $get_contact[0]->id;
-            $contact_list[$i]['name'] = $get_contact[0]->first_name.' '.$get_contact[0]->last_name;
+            $get_contact = DB::table('contacts')->where('id', $contact[$i])->first();
+            $contact_list[$i]['id'] = $get_contact->id;
+            $contact_list[$i]['name'] = $get_contact->first_name.' '.$get_contact->last_name;
         } 
-        $data['contact_list']  = $contact_list;     
+        $data['contact_list']  = $contact_list;
+
            
         return response()->json($data);
+        }
+        else{
+            return response()->json($data);
+        }
+
 
     }
 
