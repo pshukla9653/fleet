@@ -223,17 +223,17 @@
                                     <div class="col-md-6" style="margin-top: 10px;">
                                         <div class="form-group">
                                             <strong>Description:</strong>
-                                            {!! Form::text('description', null, ['placeholder' => 'Description', 'class' => 'form-control custom-modal-textbox', 'id' => 'description']) !!}
+                                            {!! Form::text('description', null, ['placeholder' => 'Description', 'class' => 'form-control custom-modal-textbox', 'id' => 'description','required' => 'required']) !!}
 
                                         </div>
                                         <div class="form-group">
                                             <strong>From Name:</strong>
-                                            {!! Form::text('from_name', null, ['placeholder' => 'From Name', 'class' => 'form-control custom-modal-textbox', 'id' => 'from_name']) !!}
+                                            {!! Form::text('from_name', null, ['placeholder' => 'From Name', 'class' => 'form-control custom-modal-textbox', 'id' => 'from_name','required' => 'required']) !!}
 
                                         </div>
                                         <div class="form-group">
                                             <strong>From Email:</strong>
-                                            {!! Form::email('from_email', null, ['placeholder' => 'From Email', 'class' => 'form-control custom-modal-textbox', 'id' => 'from_email']) !!}
+                                            {!! Form::email('from_email', null, ['placeholder' => 'From Email', 'class' => 'form-control custom-modal-textbox', 'id' => 'from_email','required' => 'required']) !!}
 
                                         </div>
                                         <div class="form-group">
@@ -244,23 +244,23 @@
                                         <div class="form-group">
                                             <strong>Status:</strong><br>
                                             <input type="radio" name="status" id="status_active" value="1" /> Active
-                                            <input type="radio" name="status" id="status_inactive" value="0" /> Inactive
+                                            <input type="radio" name="status" id="status_inactive" checked value="0" /> Inactive
                                         </div>
                                     </div>
                                     <div class="col-md-6" style="margin-top: 10px;">
                                         <div class="form-group">
                                             <strong>Subject:</strong>
-                                            {!! Form::text('subject', null, ['placeholder' => 'Subject', 'class' => 'form-control custom-modal-textbox', 'id' => 'subject']) !!}
+                                            {!! Form::text('subject', null, ['placeholder' => 'Subject', 'class' => 'form-control custom-modal-textbox', 'id' => 'subject','required' => 'required']) !!}
 
                                         </div>
                                         <div class="form-group">
                                             <strong>Reply To Email:</strong>
-                                            {!! Form::email('reply_to_email', null, ['placeholder' => 'Reply To Email', 'class' => 'form-control custom-modal-textbox', 'id' => 'reply_to_email']) !!}
+                                            {!! Form::email('reply_to_email', null, ['placeholder' => 'Reply To Email', 'class' => 'form-control custom-modal-textbox', 'id' => 'reply_to_email','required' => 'required']) !!}
 
                                         </div>
                                         <div class="form-group">
                                             <strong>To Email:</strong>
-                                            {!! Form::email('to_email', null, ['placeholder' => 'To Email', 'class' => 'form-control custom-modal-textbox', 'id' => 'to_email']) !!}
+                                            {!! Form::email('to_email', null, ['placeholder' => 'To Email', 'class' => 'form-control custom-modal-textbox', 'id' => 'to_email','required' => 'required']) !!}
 
                                         </div>
                                         <div class="form-group">

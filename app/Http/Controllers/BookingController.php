@@ -68,7 +68,6 @@ class BookingController extends Controller
                 'show_collectioin_day'=> $request->show_collectioin_day,
                 'contacts'=> !empty($request->contacts)? implode(",", $request->contacts):'',
                 'primary_contact'=> $request->primary_contact,
-                'vehicle'=> $request->vehicle,
                 'email_temeplete'=> !empty($request->email_temeplete)? implode(",", $request->email_temeplete):'',
 
                 'ob_pick_from'=> $request->ob_pick_from,
@@ -115,7 +114,6 @@ class BookingController extends Controller
                         'show_collectioin_day'=> $request->show_collectioin_day,
                         'contacts'=> !empty($request->contacts)? implode(",", $request->contacts):'',
                         'primary_contact'=> $request->primary_contact,
-                        'vehicle'=> $request->vehicle,
                         'email_temeplete'=> !empty($request->email_temeplete)? implode(",", $request->email_temeplete):'',
 
                         'ob_pick_from'=> $request->ob_pick_from,

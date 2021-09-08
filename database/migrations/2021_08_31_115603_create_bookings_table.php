@@ -27,7 +27,10 @@ class CreateBookingsTable extends Migration
             $table->date('end_date');
             $table->string('booking_reference'); 
             $table->string('purpose_of_lone'); 
-            $table->string('loan_type')->nullable(); 
+            $table->unsignedBigInteger('loan_type')
+                ->references('id')
+                ->on('loan_types')
+                ->onDelete('cascade')->nullable(); 
             $table->string('booking_notes')->nullable(); 
             $table->string('lag_time')->nullable(); 
             $table->string('lag_notes')->nullable(); 
@@ -36,8 +39,10 @@ class CreateBookingsTable extends Migration
             $table->string('show_delivery_day')->nullable(); 
             $table->string('show_collectioin_day')->nullable(); 
             $table->string('contacts')->nullable();
-            $table->string('primary_contact')->nullable();
-            $table->string('vehicle')->nullable();
+            $table->unsignedBigInteger('primary_contact')
+                ->references('id')
+                ->on('contacts')
+                ->onDelete('cascade')->nullable();
             $table->string('email_temeplete')->nullable();
 
             $table->string('ob_pick_from')->nullable(); 
