@@ -29,7 +29,7 @@ class Booking extends Model
         'primary_contact',
         'vehicle',
         'email_temeplete',
-
+        'email_service',
         'ob_pick_from',
         'ob_pick_from_notes',
         'ob_deliver_to',

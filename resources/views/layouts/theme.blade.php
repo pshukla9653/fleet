@@ -17,6 +17,7 @@
 	<link href="{{ asset('assets/css/core.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('assets/css/components.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('assets/css/colors.css') }}" rel="stylesheet" type="text/css">
+	
 	<!-- /global stylesheets -->
 
 	<!-- Core JS files -->
@@ -150,9 +151,9 @@
 										<li class="{{ (request()->segment(1) == 'email-template') ? 'active' : '' }}"><a href="{{ route('email-template.index')}}">Email Templates</a></li>
 										
 
-										@can('history-list')
-										<li><a href="#">History</a></li>
-										@endcan
+										
+										<li class="{{ (request()->segment(1) == 'histories') ? 'active' : '' }}"><a href="{{ route('histories.index') }}">History</a></li>
+										
 										
 										<li class="{{ (request()->segment(1) == 'users') ? 'active' : '' }}"><a href="{{ route('users.index') }}">Users</a></li>
 										
