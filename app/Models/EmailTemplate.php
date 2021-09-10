@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Scopes\CompanyScope;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class EmailTemplate extends Model
 {
@@ -24,6 +25,11 @@ class EmailTemplate extends Model
         'is_spec'
 
     ];
+
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(EmailFile::class, 'template_id');
+    }
 
     protected static function booted()
     {

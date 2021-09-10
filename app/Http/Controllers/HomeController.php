@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
+use App\Services\EmailService;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\Vehicle;
@@ -14,7 +16,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(protected EmailService $emailService)
     {
         $this->middleware('auth');
     }
@@ -26,6 +28,16 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        // dd(
+        //     $this->emailService
+        //         ->setData(
+        //             Booking::with('vehicle', 'emailTemplate.attachments')->first()
+        //         )
+        //         ->from('sendinblue')
+        //         // ->from('sparkpost')
+        //         ->sendEmailTest()
+        // );
+
         $email_templates = DB::table('email_templates')->where('company_id', Auth()->user()->company_id)->get();
         //dd($email_templates);
         $brands = DB::table('brands')->where('company_id', Auth()->user()->company_id)->get();

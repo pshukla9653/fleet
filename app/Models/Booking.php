@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Scopes\CompanyScope;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Booking extends Model
 {
     use HasFactory;
-     
+
     protected $fillable = [
 		'company_id',
         'vehicle_id',
@@ -52,6 +53,16 @@ class Booking extends Model
         'ib_deliver_to',
         'ib_deliver_to_notes'
     ];
+
+    public function vehicle(): BelongsTo
+    {
+        return $this->belongsTo(Vehicle::class);
+    }
+
+    public function emailTemplate(): BelongsTo
+    {
+        return $this->belongsTo(EmailTemplate::class, 'email_temeplete');
+    }
 
     protected static function booted()
     {
