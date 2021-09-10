@@ -16,6 +16,9 @@
         "laravel/tinker": "^2.6",
         "laravel/ui": "^3.0",
         "laravelcollective/html": "^6.2",
+        "phpoffice/phpword": "^0.18.2",
+        "sendinblue/api-v3-sdk": "^7.4",
+        "spatie/data-transfer-object": "^3.7",
         "spatie/laravel-permission": "^4.2"
     },
     "require-dev": {
@@ -37,6 +40,9 @@
         }
     },
     "autoload": {
+        "files": [
+            "app/helpers.php"
+        ],
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
