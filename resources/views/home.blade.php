@@ -727,7 +727,7 @@
                                             
                                         @endphp
 
-                                        <td onclick="addupdate('{{ $vehicle->id }}','{{ $thisdate }}','{{ $img_path }}','{{ $vehicle->registration_number }}','{{ $vehicle->registration_plate_colour }}','{{ $vehicle->brand->brand_name }}','{{ $vehicle->model }}','{{ $vehicle->derivative }}');"
+                                        <td onclick="makebooking('{{ $vehicle->id }}','{{ $thisdate }}','{{ $img_path }}','{{ $vehicle->registration_number }}','{{ $vehicle->registration_plate_colour }}','{{ $vehicle->brand->brand_name }}','{{ $vehicle->model }}','{{ $vehicle->derivative }}');"
                                             @php
                                                 $booking = DB::table('bookings')
                                                     ->where('company_id', Auth()->user()->company_id)
@@ -774,7 +774,7 @@
                               <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Primary Contact:</b></td><td>  </td></tr>
                               <tr style='font-size:12px;'><td style='padding:2px;'><b>Company:</b></td><td></td></tr>
                               <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Loan Type:</b></td><td></td></tr>
-                              <tr style='font-size:12px;'><td style='padding:2px;'><b>Purpose of Loan:</b></td><td>{{ $value->purpose_of_lone }}</td></tr>
+                              <tr style='font-size:12px;'><td style='padding:2px;'><b>Purpose of Loan:</b></td><td>{{ $value->purpose_of_loan }}</td></tr>
                               <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Booking Reference:</b></td><td>{{ $value->booking_reference }}</td></tr>
                               <tr style='font-size:12px;'><td style='padding:2px;'><b>Booking Notes:</b></td><td>{{ $value->booking_notes }}</td></tr>
                             </table>
@@ -971,13 +971,13 @@
                                                 <input type="text" name="booking_reference"
                                                     class="ref-name form-control custom-modal-textbox1"
                                                     style="width: 140px;" required>&nbsp&nbsp
-                                                <input type="text" name="purpose_of_lone"
+                                                <input type="text" name="purpose_of_loan"
                                                     class="loan-name form-control custom-modal-textbox1"
                                                     style="width: 140px;margin-left: 14px;" required>
                                             </div>
                                             <br>
                                             <div class="">
-                        <span class=" loan1">Loan Type:</span><br>
+                                                <span class=" loan1">Loan Type:</span><br>
                                                 <select id="cars" name="loan_type"
                                                     class="form-control custom-modal-textbox2"
                                                     style="height: 26px;padding: 0px;width: 298px">
@@ -1020,12 +1020,12 @@
                                                         id="show_delivery_day">
                                                 </div>&nbsp &nbsp &nbsp
                                                 <div class="form-check">
-                                                    <label class="form-check-label" for="show_collectioin_day">
+                                                    <label class="form-check-label" for="show_collection_day">
                                                         Show collection day
                                                     </label>
                                                     <input class="form-check-input-reverse " type="checkbox"
-                                                        name="show_collectioin_day" value="Show Collection Day"
-                                                        id="show_collectioin_day">
+                                                        name="show_collection_day" value="Show Collection Day"
+                                                        id="show_collection_day">
                                                 </div>
                                             </div>
                                             <label for="w3review">Contacts:</label>
@@ -1070,16 +1070,28 @@
                                             <div class="text-edit">
                                                 <a href="javascript:void(0)" class="anchor-btn" onclick="getVehicleList()">Edit</a>
                                             </div>
-                                            <span>Select Email Tampalet for Booking</span>
+                                            <span>Select Email Templates for Booking:</span>
                                             <div class="checkings form-control custom-modal-textbox3"
                                                 style="height: 152px;">
                                                 <div class="checkin-box11" style="margin-left:10px">
                                                     @foreach ($email_templates as $key => $value)
                                                         <input type="checkbox" value="{{ $value->id }}"
-                                                            name="email_temeplete[]" /> {{ $value->description }} <br />
+                                                            name="email_template[]" /> {{ $value->description }} <br />
 
                                                     @endforeach
                                                 </div>
+                                                
+                                            </div>
+                                            <div class="">
+                                                <span >Email Service:</span><br>
+                                                <select name="email_service"
+                                                    class="form-control custom-modal-textbox2"
+                                                    style="height: 26px;padding: 0px;width: 298px">
+                                                    
+                                                <option value="sendinblue">Sendinblue</option>
+                                                <option value="sparkpost">Sparkpost</option>
+                                                   
+                                                </select>
                                             </div>
                                             <!--  -->
                                         </div>
@@ -1331,8 +1343,8 @@
                                     </div>
                                 </div>
                                 <div class="createby1">
-                                    <span>createbysonsoncheckit@gmail.com on 12/02/2022</span><br>
-                                    <span>createbysonsoncheckit@gmail.com on 12/02/2022</span>
+                                    <span id='booking_created'></span><br>
+                                    <span id="booking_modified"></span>
 
                                 </div>
                             </div>
@@ -1407,14 +1419,14 @@
                             @foreach ($vehicles as $key=>$value)
                             <tr>
                                 <td><input type="radio" value="{{$value->id}}" name="vehi">
-                                    <img src='{{ asset('storage/' . $vehicle->image) }}' alt='{{ $vehicle->registration_number }}' style='width: 40%; height:auto;'/>
-                                    <span id="img_n_{{$value->id}}" style="display: none;">{{$vehicle->image }}</span> 
-                                    <span id="col_n_{{$value->id}}" style="display: none;">{{ $vehicle->registration_plate_colour }}</span>  
-                                    <span id="reg_no_{{$value->id}}" style="padding: 5px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}">{{$value->registration_number}}</span>
+                                    <img src='{{ asset('storage/' . $value->image) }}' alt='{{ $value->registration_number }}' style='width: 40%; height:auto;'/>
+                                    <span id="img_n_{{$value->id}}" style="display: none;">{{$value->image }}</span> 
+                                    <span id="col_n_{{$value->id}}" style="display: none;">{{ $value->registration_plate_colour }}</span>  
+                                    <span id="reg_no_{{$value->id}}" style="padding: 5px;border-radius: 5px;background-color:{{ $value->registration_plate_colour }}">{{$value->registration_number}}</span>
                                 </td>
-                                <td id="br_n_{{$value->id}}">{{ $vehicle->brand->brand_name }}</td>
-                                <td id="mo_n_{{$value->id}}">{{ $vehicle->model }}</td>
-                                <td id="de_n_{{$value->id}}">{{ $vehicle->derivative }}</td>
+                                <td id="br_n_{{$value->id}}">{{ $value->brand->brand_name }}</td>
+                                <td id="mo_n_{{$value->id}}">{{ $value->model }}</td>
+                                <td id="de_n_{{$value->id}}">{{ $value->derivative }}</td>
                             </tr>
                                    
                             @endforeach
@@ -1615,6 +1627,7 @@
 
         function insert_vehicle(){
             var vehicle_id = $("input[name='vehi']:checked").val();
+            var old_vehicle_id = $("#vehicle_id").val();
             var date = $('.start_date').val();
             var path = '{{asset('storage/')}}';
             var img = path+'/'+$('#img_n_'+vehicle_id).html();
@@ -1624,15 +1637,104 @@
             var model = $('#mo_n_'+vehicle_id).html();
             var derivative = $('#de_n_'+vehicle_id).html();
             $('#popup_model_vehicle').modal('hide');
-            makebooking(vehicle_id, date, img, reg_number, plate_colour, brand, model, derivative);
-            setTimeout(function () {
-    
-            var is_edit = $("input[name='booking_reference']").val();
-            
-            if(is_edit !=''){
-                alert('Booking Already Exists with selected date range');
+            if(vehicle_id != old_vehicle_id || old_vehicle_id ==''){
+                $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+                });
+                $.ajax({
+                type: "POST",
+                url: "{{ url('edit-booking') }}",
+                data: {
+                    vehicle_id: vehicle_id,
+                    date: date
+                },
+
+                dataType: 'json',
+                success: function(res) {
+                    if(res.status == true){
+                        $('#itemform').trigger("reset");
+                        $('#form_heading').html("Booking Overview");
+                        $('#btn').html('Submit');
+                        $('#vehicle_id').val(vehicle_id);
+                        $('#id').val('');
+                        $('.start_date').val(date);
+                        $('#vahicle_img').attr('src', img);
+                        $('#inserted-list').html('');
+                        $('input[name="vehi"][value="' + vehicle_id.toString() + '"]').prop("checked", true);
+                        $('#rt-number').html(reg_number);
+                        $('#booking_created').html('');
+                        $('#booking_modified').html('');
+                        $('#rt-number').css('background-color', plate_colour);
+                        $('#brand_name').html('Brand: ' + brand);
+                        $('#model_number').html('Model: ' + model);
+                        $('#derivative').html('Derivative: ' + derivative);
+                        $('#vehicle').html(reg_number);
+                        $.each(res.booking_list, function(key, value) {
+                            if (key == 'booking_notes' || key == 'lag_notes' || key == 'lead_notes' ||
+                                key == 'ob_pick_from_notes' || key == 'ib_deliver_to_notes' || key ==
+                                'ib_pick_from_notes' || key == 'vehicle') {
+                                $("textarea[name='" + key + "']").val(value);
+                                $('#btn').html('Update');
+                            } else {
+                                if (key == 'loan_type') {
+                                    $("select[name='" + key + "']").val(value);
+                                }
+                                if (key == 'email_service') {
+                                    $("select[name='" + key + "']").val(value);
+                                }
+                                if (key == 'email_template') {
+                                    var email_tem = value.split(",");
+                                    $.each(email_tem, function(index, v) {
+                                        $('input[name="email_template[]"][value="' + v
+                                            .toString() + '"]').prop("checked", true);
+                                    });
+                                }
+                                if (key == 'contacts') {
+                                    var addtext = '';
+                                    $.each(res.contact_list, function(index, v) {
+                                        if (res.booking_list.primary_contact == v.id) {
+                                            addtext = ' (Primary)';
+                                        } else {
+                                            addtext = '';
+                                        }
+
+                                        $('#inserted-list').append(
+                                            '<p><input type="checkbox" checked id="' + v
+                                            .id + '" value="' + v.id +
+                                            '" name="contacts[]"> &nbsp;&nbsp;&nbsp;<lable for="' +
+                                            v.id + '">' + v.name + addtext + '</lable></p>'
+                                        );
+                                        
+                                    });
+                                } else {
+                                    $("input[name='" + key + "']").val(value);
+                                }
+                                $('#booking_created').html(res.booking_created.event+' by '+res.booking_created.user_email+' on '+res.booking_created.created_at);
+                                $('#booking_modified').html(res.booking_modified.event+' by '+res.booking_modified.user_email+' on '+res.booking_modified.created_at);
+                            }
+                        });
+                        alert('Booking Already Exists with selected date range');
+                    }
+                    else{
+                        $('#vahicle_img').removeAttr('src');
+                        $('#vehicle_id').val(vehicle_id);
+                        $('#vahicle_img').attr('src', img);
+                        $('input[name="vehi"][value="' + vehicle_id.toString() + '"]').prop("checked", true);
+                        $('#rt-number').html(reg_number);
+                        $('#rt-number').css('background-color', plate_colour);
+                        $('#brand_name').html('Brand: ' + brand);
+                        $('#model_number').html('Model: ' + model);
+                        $('#derivative').html('Derivative: ' + derivative);
+                        $('#vehicle').html(reg_number);
+                    }
+                }
+
+                });
             }
-        }, 2000);
+            
+            
 
             
         }
@@ -1752,10 +1854,7 @@
         function custom_search() {
             $('#search_form').submit();
         }
-        function addupdate(vehicle_id, date, img, reg_number, plate_colour, brand, model, derivative){
-            makebooking(vehicle_id, date, img, reg_number, plate_colour, brand, model, derivative);
-            $('#popup_model1').modal('show');
-        }
+        
         function makebooking(vehicle_id, date, img, reg_number, plate_colour, brand, model, derivative) {
             
             $.ajaxSetup({
@@ -1778,7 +1877,9 @@
             $('#model_number').html('Model: ' + model);
             $('#derivative').html('Derivative: ' + derivative);
             $('#vehicle').html(reg_number);
-
+            $('#booking_created').html('');
+            $('#booking_modified').html('');
+            $('#popup_model1').modal('show');
             $.ajax({
                 type: "POST",
                 url: "{{ url('edit-booking') }}",
@@ -1789,9 +1890,9 @@
 
                 dataType: 'json',
                 success: function(res) {
-
-                    if (res.length != 0) {
-
+                    
+                    if (res.status == true) {
+                        $('#btn').html('Update');
                         $.each(res.booking_list, function(key, value) {
                             if (key == 'booking_notes' || key == 'lag_notes' || key == 'lead_notes' ||
                                 key == 'ob_pick_from_notes' || key == 'ib_deliver_to_notes' || key ==
@@ -1802,10 +1903,13 @@
                                 if (key == 'loan_type') {
                                     $("select[name='" + key + "']").val(value);
                                 }
-                                if (key == 'email_temeplete') {
+                                if (key == 'email_service') {
+                                    $("select[name='" + key + "']").val(value);
+                                }
+                                if (key == 'email_template') {
                                     var email_tem = value.split(",");
                                     $.each(email_tem, function(index, v) {
-                                        $('input[name="email_temeplete[]"][value="' + v
+                                        $('input[name="email_template[]"][value="' + v
                                             .toString() + '"]').prop("checked", true);
                                     });
                                 }
@@ -1828,6 +1932,8 @@
                                 } else {
                                     $("input[name='" + key + "']").val(value);
                                 }
+                                $('#booking_created').html(res.booking_created.event+' by '+res.booking_created.user_email+' on '+res.booking_created.created_at);
+                                $('#booking_modified').html(res.booking_modified.event+' by '+res.booking_modified.user_email+' on '+res.booking_modified.created_at);
                             }
                         });
                     }
@@ -1836,6 +1942,8 @@
             });
             
         }
+
+        
         $("#itemform").submit(function(event) {
             event.preventDefault();
             $.ajaxSetup({

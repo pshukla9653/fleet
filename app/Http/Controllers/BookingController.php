@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\History;
 use Illuminate\Http\Request;
 use DB;
 
@@ -54,10 +55,11 @@ class BookingController extends Controller
         //print_r($request->contacts);die;
         if($request->id){
             $data   =   array(
+                'vehicle_id'=> $request->vehicle_id,
                 'start_date'=> $request->start_date,
                 'end_date'=> $request->end_date,
                 'booking_reference'=> $request->booking_reference,
-                'purpose_of_lone'=> $request->purpose_of_lone,
+                'purpose_of_loan'=> $request->purpose_of_loan,
                 'loan_type'=> $request->loan_type,
                 'booking_notes'=> $request->booking_notes,
                 'lag_time'=> $request->lag_time,
@@ -65,11 +67,11 @@ class BookingController extends Controller
                 'lead_time'=> $request->lead_time,
                 'lead_notes'=> $request->lead_notes,
                 'show_delivery_day'=> $request->show_delivery_day,
-                'show_collectioin_day'=> $request->show_collectioin_day,
+                'show_collection_day'=> $request->show_collection_day,
                 'contacts'=> !empty($request->contacts)? implode(",", $request->contacts):'',
                 'primary_contact'=> $request->primary_contact,
-                'email_temeplete'=> !empty($request->email_temeplete)? implode(",", $request->email_temeplete):'',
-
+                'email_template'=> !empty($request->email_template)? implode(",", $request->email_template):'',
+                'email_service' => $request->email_service,
                 'ob_pick_from'=> $request->ob_pick_from,
                 'ob_pick_from_notes'=> $request->ob_pick_from_notes,
                 'ob_deliver_to'=> $request->ob_deliver_to,
@@ -94,6 +96,13 @@ class BookingController extends Controller
             );
             $booking = Booking::find($request->id);
             $booking->update($data);
+            History::Create( [
+                'company_id' => Auth()->user()->company_id,
+                'user_id' => Auth()->user()->id,
+                'booking_id'=> $request->id,
+                'user_email'=> Auth()->user()->email,
+                'event'=> 'Modified',
+            ]);
            
         } else{
             
@@ -103,7 +112,7 @@ class BookingController extends Controller
                         'start_date'=> $request->start_date,
                         'end_date'=> $request->end_date,
                         'booking_reference'=> $request->booking_reference,
-                        'purpose_of_lone'=> $request->purpose_of_lone,
+                        'purpose_of_loan'=> $request->purpose_of_loan,
                         'loan_type'=> $request->loan_type,
                         'booking_notes'=> $request->booking_notes,
                         'lag_time'=> $request->lag_time,
@@ -111,11 +120,11 @@ class BookingController extends Controller
                         'lead_time'=> $request->lead_time,
                         'lead_notes'=> $request->lead_notes,
                         'show_delivery_day'=> $request->show_delivery_day,
-                        'show_collectioin_day'=> $request->show_collectioin_day,
+                        'show_collection_day'=> $request->show_collection_day,
                         'contacts'=> !empty($request->contacts)? implode(",", $request->contacts):'',
                         'primary_contact'=> $request->primary_contact,
-                        'email_temeplete'=> !empty($request->email_temeplete)? implode(",", $request->email_temeplete):'',
-
+                        'email_template'=> !empty($request->email_template)? implode(",", $request->email_template):'',
+                        'email_service' => $request->email_service,
                         'ob_pick_from'=> $request->ob_pick_from,
                         'ob_pick_from_notes'=> $request->ob_pick_from_notes,
                         'ob_deliver_to'=> $request->ob_deliver_to,
@@ -138,7 +147,13 @@ class BookingController extends Controller
                         'ib_deliver_to'=> $request->ib_deliver_to,
                         'ib_deliver_to_notes'=> $request->ib_deliver_to_notes
                     ]);
-            
+                    History::Create( [
+                        'company_id' => Auth()->user()->company_id,
+                        'user_id' => Auth()->user()->id,
+                        'booking_id'=> $booking->id,
+                        'user_email'=> Auth()->user()->email,
+                        'event'=> 'Created',
+                    ]);
             //print_r($lists->id);die;
 
         }
@@ -156,22 +171,43 @@ class BookingController extends Controller
     public function edit(Request $request)
     {
         //
-        
+        $data['status']  = false;
         $booking = DB::table('bookings')->where('company_id', Auth()->user()->company_id)
               ->where('vehicle_id', $request->vehicle_id)
               ->whereDate('start_date', '<=', $request->date)
               ->whereDate('end_date', '>=', $request->date)
-              ->get();
-        $data['booking_list']  = $booking[0]; 
-        $contact = explode(',', $booking[0]->contacts);
+              ->first();
+        if(!empty($booking)){ 
+        $data['status']  = true;    
+        $data['booking_list']  = $booking; 
+        $contact = explode(',', $booking->contacts);
         for($i=0; $i < count($contact); $i++){
-            $get_contact = DB::table('contacts')->where('id', $contact[$i])->get();
-            $contact_list[$i]['id'] = $get_contact[0]->id;
-            $contact_list[$i]['name'] = $get_contact[0]->first_name.' '.$get_contact[0]->last_name;
+            $get_contact = DB::table('contacts')->where('id', $contact[$i])->first();
+            $contact_list[$i]['id'] = $get_contact->id;
+            $contact_list[$i]['name'] = $get_contact->first_name.' '.$get_contact->last_name;
         } 
-        $data['contact_list']  = $contact_list;     
+        $data['contact_list']  = $contact_list;
+        $booking_created = DB::table('histories')->where('booking_id', $booking->id)
+                                ->where('event', 'Created')->first();
+        $booking_modified = DB::table('histories')->where('booking_id', $booking->id)
+        ->where('event', 'Modified')->orderBy('id','DESC')->first();
+        if($booking_created){ 
+        $booking_created->created_at = date('d M Y H:i:s', strtotime($booking_created->created_at));
+        $data['booking_created'] = $booking_created;
+        }
+        if($booking_modified){
+        $booking_modified->created_at = date('d M Y H:i:s', strtotime($booking_modified->created_at));
+        $data['booking_modified'] = $booking_modified;
+        }
+        
+        
            
         return response()->json($data);
+        }
+        else{
+            return response()->json($data);
+        }
+
 
     }
 

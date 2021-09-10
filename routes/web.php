@@ -15,6 +15,7 @@ use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\ListsController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\HistoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,5 +81,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('store-booking', [BookingController::class, 'store']);
     Route::post('delete-booking', [BookingController::class, 'destroy']);
     
+    Route::resource('histories', HistoryController::class);
+    Route::post('delete-history', [HistoryController::class, 'destroy']);
 	
 });
