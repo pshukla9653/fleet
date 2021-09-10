@@ -213,4 +213,17 @@ class VehicleController extends Controller
 		
         return response()->json(['success' => true]);
     }
+    public function remove_img(Request $request)
+    {
+        //
+		$vehicle  = Vehicle::find($request->id);
+        //var_dump($vehicle[0]->file_name); exit;
+		if (Storage::disk('public')->exists($vehicle->image)) {
+            Storage::disk('public')->delete($vehicle->image);
+        }
+        
+		$vehicle->update(['image'=>'']);
+		
+        return response()->json(['success' => true]);
+    }
 }

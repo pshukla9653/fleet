@@ -17,6 +17,8 @@
 	<link href="{{ asset('assets/css/core.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('assets/css/components.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('assets/css/colors.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('assets/css/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css">
+	
 	
 	<!-- /global stylesheets -->
 
@@ -25,6 +27,7 @@
 	<script type="text/javascript" src="{{ asset('assets/js/core/libraries/jquery.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/core/libraries/bootstrap.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/plugins/loaders/blockui.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/bootstrap-datepicker.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/plugins/forms/selects/select2.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/ckeditor/ckeditor.js')}}"></script>
 	<!-- /core JS files -->

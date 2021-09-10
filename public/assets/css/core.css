@@ -1107,7 +1107,7 @@ fieldset[disabled] .form-control {
   color: #999999;
 }
 .form-control[readonly] {
-  border-bottom-style: dashed;
+  
   border-bottom-color: #ddd;
   color: #333333;
   -webkit-box-shadow: none;

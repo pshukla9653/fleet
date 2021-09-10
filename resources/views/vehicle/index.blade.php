@@ -235,7 +235,7 @@
                        <button class="btnsss">Upload Image</button>
                        <input type="file" name="image" onchange="loadFile(event)">
                     </div>
-                    
+                    <button type="button" id="remove_img" style="margin-left: 5px; margin-top: -15px;" class="btn custom-modal-btn btn-danger">Remove</button>
                  </div>
                  <script>
                     var loadFile = function(event) {
@@ -361,15 +361,30 @@
                   <div class="col-md-3">
                       <div class="form-group" style="margin-top: 15px;">
                         <strong>Adoption Date:</strong>
-                        {!! Form::date('adoption_date', null, array('class' =>
-                        'form-control custom-modal-textbox', 'id' =>'adoption_date','style' =>'padding:0px!important;')) !!}
+                        <div id="start_date_picker" class="input-group date">
+                          <input type="text" name="adoption_date" placeholder="yyyy-mm-dd"
+                              class="form-control custom-modal-textbox"
+                              style="width: 116px;" id="adoption_date" required readonly/>
+                              <span class="input-group-addon" style="float: right;">
+                                  <img src="{{ asset('assets/images/icon/calendar.png') }}" alt="icon"
+                                      style="width: 17px;margin-left: -14px;margin-top: 6px;" />
+                              </span>
+                          </div>
                         <div class="text-danger" id="adoption_date"></div>
                       </div>                                   
                     
                       <div class="form-group">
                         <strong>Projected Defleet Date:</strong>
-                        {!! Form::date('projected_defleet_date', null, array('class' =>
-                        'form-control custom-modal-textbox', 'id' =>'projected_defleet_date','style' =>'padding:0px!important;')) !!}
+                        
+                        <div id="end_date_picker" class="input-group date">
+                          <input type="text" name="projected_defleet_date" placeholder="yyyy-mm-dd"
+                              class="form-control custom-modal-textbox"
+                              style="width: 116px;" id="projected_defleet_date" required readonly/>
+                              <span class="input-group-addon" style="float: right;">
+                                  <img src="{{ asset('assets/images/icon/calendar.png') }}" alt="icon"
+                                      style="width: 17px;margin-left: -14px;margin-top: 6px;" />
+                              </span>
+                          </div>
                         <div class="text-danger" id="projected_defleet_date"></div>
                       </div> 
                       <div class="form-group">
@@ -551,10 +566,37 @@ $(document).ready(function($) {
         
     });
 
-    //view_specs
+    //remove_img
+    $('#remove_img').click(function() {
 
+          if (confirm("Remove Vehicle Image?") == true) {
+            var id = $('#item_id').val();
 
+              $.ajax({
+                  type: "POST",
+                  url: "{{ url('remove-img-vehicle') }}",
+                  data: {
+                      id: id
+                  },
+                  dataType: 'json',
+                  success: function(res) {
+                      $('#image-review').html('');
+                  }
+              });
+      }
+            
+        });
 
+        $('#start_date_picker.date').datepicker({
+            format: "yyyy-mm-dd",
+            daysOfWeekHighlighted: "0",
+            autoclose: true
+        });
+        $('#end_date_picker.date').datepicker({
+            format: "yyyy-mm-dd",
+            daysOfWeekHighlighted: "0",
+            autoclose: true
+        });
 });   
 </script>
 @endsection

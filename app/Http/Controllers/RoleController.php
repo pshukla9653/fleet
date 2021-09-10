@@ -87,7 +87,7 @@ class RoleController extends Controller
             $result['message']='The name field already exist';
             echo json_encode($result);die;
         }
-        $role = Role::create(['name' => $request->input('name'),'company_id'=>Auth()->user()->company_id]);
+        $role = Role::create(['name' => $request->input('name'),'guard_name'=>Auth()->user()->company_id,'company_id'=>Auth()->user()->company_id]);
         $role->syncPermissions($request->input('permission'));
         if($role)
         {
