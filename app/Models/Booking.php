@@ -51,7 +51,9 @@ class Booking extends Model
         'ib_pick_from_country',
         'ib_pick_from_notes',
         'ib_deliver_to',
-        'ib_deliver_to_notes'
+        'ib_deliver_to_notes',
+        'booking_start_date',
+        'booking_end_date',
     ];
 
     public function vehicle(): BelongsTo

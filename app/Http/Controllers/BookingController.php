@@ -21,15 +21,7 @@ class BookingController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -92,8 +84,11 @@ class BookingController extends Controller
                 'ib_pick_from_country'=> $request->ib_pick_from_country,
                 'ib_pick_from_notes'=> $request->ib_pick_from_notes,
                 'ib_deliver_to'=> $request->ib_deliver_to,
-                'ib_deliver_to_notes'=> $request->ib_deliver_to_notes
+                'ib_deliver_to_notes'=> $request->ib_deliver_to_notes,
+                'booking_start_date'=> $request->booking_start_date,
+                'booking_end_date'=> $request->booking_end_date
             );
+
             $booking = Booking::find($request->id);
             $booking->update($data);
             History::Create( [
@@ -145,7 +140,9 @@ class BookingController extends Controller
                         'ib_pick_from_country'=> $request->ib_pick_from_country,
                         'ib_pick_from_notes'=> $request->ib_pick_from_notes,
                         'ib_deliver_to'=> $request->ib_deliver_to,
-                        'ib_deliver_to_notes'=> $request->ib_deliver_to_notes
+                        'ib_deliver_to_notes'=> $request->ib_deliver_to_notes,
+                        'booking_start_date'=> $request->booking_start_date,
+                        'booking_end_date'=> $request->booking_end_date
                     ]);
                     History::Create( [
                         'company_id' => Auth()->user()->company_id,
@@ -215,25 +212,13 @@ class BookingController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Get booking from between two dates.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Booking $booking)
-    {
-        //
-    }
+    public function get_booking(Request $request){
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Booking $booking)
-    {
-        //
     }
+    
 }

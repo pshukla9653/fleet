@@ -736,9 +736,18 @@
                                                     ->whereDate('end_date', '>=', $thisdate)
                                                     ->get();
                                                 foreach ($booking as $key => $value) {
-                                                    if ($value->id) {
+                                                    $lag_date = date('Y-m-d', strtotime($value->start_date . '-' . $value->lag_time . ' day'));
+                                                    $lead_date = date('Y-m-d', strtotime($value->end_date . '+' . $value->lead_time . ' day'));
+                                                    if ($value->booking_start_date <= $thisdate && $value->booking_end_date >= $thisdate) {
                                                         echo 'style="background-color:#0f91fb;"';
                                                     }
+                                                    if ($value->start_date >= $thisdate && $value->booking_start_date > $value->start_date) {
+                                                        echo 'style="background-color:#abfb0f;"';
+                                                    }
+                                                    if ($value->end_date >= $thisdate && $value->booking_end_date < $value->end_date) {
+                                                        echo 'style="background-color:#abfb0f;"';
+                                                    }
+                                                    
                                                 }
                                             @endphp>
                                             @foreach ($booking as $key => $value)
@@ -759,8 +768,8 @@
                                   <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
                                   <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
                                   <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->start_date), 'd-M-Y') }}</td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->end_date), 'd-M-Y') }}</td></tr>
+                                  <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->booking_start_date), 'd-M-Y') }}</td></tr>
+                                  <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->booking_end_date), 'd-M-Y') }}</td></tr>
                                   <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Primary Contact:</b></td><td></td></tr>
                                   
                                   
@@ -769,8 +778,8 @@
                               <td style='width:33.33%;padding:10px;'>
                                 <table style='width:100%;margin-top:-80px;'>
                                   <tr><td style='color:#376473;font-weight:600;' colspan='2'>Vehicle Information<br>&nbsp;<br></td></tr>
-                                  <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->start_date), 'd-M-Y') }}</td></tr>
-                                  <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->end_date), 'd-M-Y') }}</td></tr>
+                                  <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->booking_start_date), 'd-M-Y') }}</td></tr>
+                                  <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->booking_end_date), 'd-M-Y') }}</td></tr>
                                   <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Primary Contact:</b></td><td>  </td></tr>
                                   <tr style='font-size:12px;'><td style='padding:2px;'><b>Company:</b></td><td></td></tr>
                                   <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Loan Type:</b></td><td></td></tr>
@@ -944,8 +953,8 @@
                                             </div>
                                             <div class="book-loan">
                                                 <div id="start_date_picker" class="input-group date">
-                                                <input type="text" name="start_date" placeholder="yyyy-mm-dd"
-                                                    class="ref-name form-control custom-modal-textbox1"
+                                                <input type="text" name="booking_start_date" placeholder="yyyy-mm-dd"
+                                                    class="ref-name form-control custom-modal-textbox1" onchange="get_start_date()"
                                                     style="width: 112px;" required readonly>
                                                     <span class="input-group-addon" style="float: right;">
                                                         <img src="{{ asset('assets/images/icon/calendar.png') }}" alt="icon"
@@ -953,8 +962,8 @@
                                                     </span>
                                                 </div>
                                                 <div id="end_date_picker" class="date">
-                                                <input type="text" name="end_date" placeholder="yyyy-mm-dd"
-                                                    class="loan-name form-control custom-modal-textbox1"
+                                                <input type="text" name="booking_end_date" placeholder="yyyy-mm-dd"
+                                                    class="loan-name form-control custom-modal-textbox1" onchange="get_end_date()"
                                                     style="width: 115px;margin-left: 30px;" required readonly>
                                                     <span class="input-group-addon" style="float: right;">
                                                         <img src="{{ asset('assets/images/icon/calendar.png') }}" id="end_date_icon" alt="icon"
@@ -962,6 +971,8 @@
                                                     </span>
                                                 </div>
                                                </div>
+                                               <input type="hidden" name="start_date" value=""/>
+                                               <input type="hidden" name="end_date" value=""/>
                                             <br>
                                             <div class="booking-set">
                                                 <span class="booknow">Booking Reference</span>
@@ -997,9 +1008,9 @@
                                                 <span class="booknowa1">Lead time (days)</span>
                                             </div>
                                             <div class="book-loan">
-                                                <input type="text" name="lag_time"
+                                                <input type="text" name="lag_time" onchange="get_start_date()"
                                                     class="ref-name form-control custom-modal-textbox1">&nbsp&nbsp
-                                                <input type="text" name="lead_time"
+                                                <input type="text" name="lead_time" onchange="get_end_date()"
                                                     class="loan-name form-control custom-modal-textbox1">
                                             </div>
                                             <br>
@@ -1640,7 +1651,7 @@
         function insert_vehicle() {
             var vehicle_id = $("input[name='vehi']:checked").val();
             var old_vehicle_id = $("#vehicle_id").val();
-            var date = $('.start_date').val();
+            var date = $('#start_date_picker input').val();
             var path = '{{ asset('storage/') }}';
             var img = path + '/' + $('#img_n_' + vehicle_id).html();
             var lead_time = $('#lead_n_'+ vehicle_id).html();
@@ -1756,6 +1767,8 @@
                             $('input[name="lead_time"]').val(lead_time);
                             $('input[name="lag_time"]').val(lag_time);
                             set_second_cal();
+                            get_start_date();
+                            get_end_date();
                         }
                     }
 
@@ -1911,6 +1924,8 @@
             $('#booking_created').html('');
             $('#booking_modified').html('');
             set_second_cal();
+            get_start_date();
+            get_end_date();
             $('#popup_model1').modal('show');
             $.ajax({
                 type: "POST",
@@ -2208,6 +2223,43 @@
             autoclose: true
             });
         }
+
+        //get start date based on booking start date and lead time
+        function get_start_date(){
+         var booking_date = $('input[name="booking_start_date"]').val();
+         var lag_time = $('input[name="lag_time"]').val();   
+        const d = new Date(booking_date);
+        d.setDate(d.getDate() - lag_time);
+        var month= d.getMonth() + 1;
+        var day = d.getDate();
+        if(month < 10){
+            month = '0'+month;
+        }
+        if(day < 10){
+            day = '0'+day;
+        }
+        $('input[name="start_date"]').val(d.getFullYear()+'-'+month+'-'+day);
+        }
+
+        //get end date based on booking end date and lead time 
+        function get_end_date(){
+         var booking_date = $('input[name="booking_end_date"]').val();
+         var lead_time = $('input[name="lead_time"]').val();   
+        const d = new Date(booking_date);
         
+        d.setDate(d.getDate() + parseInt(lead_time));
+        console.log(booking_date);
+        console.log(lead_time);
+        console.log(d);
+        var month= d.getMonth() + 1;
+        var day = d.getDate();
+        if(month < 10){
+            month = '0'+month;
+        }
+        if(day < 10){
+            day = '0'+day;
+        }
+        $('input[name="end_date"]').val(d.getFullYear()+'-'+month+'-'+day);
+        }
     </script>
 @endsection

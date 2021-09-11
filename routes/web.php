@@ -81,6 +81,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('edit-booking', [BookingController::class, 'edit']);
     Route::post('store-booking', [BookingController::class, 'store']);
     Route::post('delete-booking', [BookingController::class, 'destroy']);
+    Route::post('get-booking', [BookingController::class, 'get_booking']);
     
     Route::resource('histories', HistoryController::class);
     Route::post('delete-history', [HistoryController::class, 'destroy']);
