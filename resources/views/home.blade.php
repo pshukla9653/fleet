@@ -936,6 +936,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4">
+                                            <input type="hidden" name="id" id="id" />
+                                            <input type="hidden" name="vehicle_id" id="vehicle_id" />
                                             <div class="booking-set">
                                                 <span class="booknow">Start Date</span>
                                                 <span class="booknowaa" style="margin-left: 90px;">End Date</span>
@@ -1641,8 +1643,8 @@
             var date = $('.start_date').val();
             var path = '{{ asset('storage/') }}';
             var img = path + '/' + $('#img_n_' + vehicle_id).html();
-            var lead_time = $('#lead_n_' + vehicle_id).html();
-            var lag_time = ('#lag_n_' + vehicle_id).html();
+            var lead_time = $('#lead_n_'+ vehicle_id).html();
+            var lag_time = $('#lag_n_'+ vehicle_id).html();
             var reg_number = $('#reg_no_' + vehicle_id).html();
             var plate_colour = $('#col_n_' + vehicle_id).html();
             var brand = $('#br_n_' + vehicle_id).html();
@@ -1731,9 +1733,11 @@
                                     $('#booking_created').html(res.booking_created.event + ' by ' + res
                                         .booking_created.user_email + ' on ' + res.booking_created
                                         .created_at);
+                                if(res.booking_modified){
                                     $('#booking_modified').html(res.booking_modified.event + ' by ' +
                                         res.booking_modified.user_email + ' on ' + res
                                         .booking_modified.created_at);
+                                        }
                                 }
                             });
                             alert('Booking Already Exists with selected date range');
@@ -1963,9 +1967,11 @@
                                 $('#booking_created').html(res.booking_created.event + ' by ' + res
                                     .booking_created.user_email + ' on ' + res.booking_created
                                     .created_at);
+                            if(res.booking_modified){
                                 $('#booking_modified').html(res.booking_modified.event + ' by ' + res
                                     .booking_modified.user_email + ' on ' + res.booking_modified
                                     .created_at);
+                            }
                             }
                         });
                     }

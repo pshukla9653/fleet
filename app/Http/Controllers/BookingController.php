@@ -154,6 +154,7 @@ class BookingController extends Controller
                         'user_email'=> Auth()->user()->email,
                         'event'=> 'Created',
                     ]);
+                    
             //print_r($lists->id);die;
 
         }
@@ -191,10 +192,12 @@ class BookingController extends Controller
                                 ->where('event', 'Created')->first();
         $booking_modified = DB::table('histories')->where('booking_id', $booking->id)
         ->where('event', 'Modified')->orderBy('id','DESC')->first();
+        
         if($booking_created){ 
         $booking_created->created_at = date('d M Y H:i:s', strtotime($booking_created->created_at));
         $data['booking_created'] = $booking_created;
         }
+        
         if($booking_modified){
         $booking_modified->created_at = date('d M Y H:i:s', strtotime($booking_modified->created_at));
         $data['booking_modified'] = $booking_modified;

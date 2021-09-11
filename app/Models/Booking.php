@@ -17,7 +17,7 @@ class Booking extends Model
 		'start_date',
         'end_date',
         'booking_reference',
-        'purpose_of_lone',
+        'purpose_of_loan',
         'loan_type',
         'booking_notes',
         'lag_time',
