@@ -549,6 +549,7 @@
 
                         <div class="col-md-2" style="width: 14.28%">
                             <div class="form-group">
+                                <div id="custom_input"></div>
                                 <button class="btn btn-outline-success"
                                     style="width: 126px;left: 4px;bottom: -29px;height: 35px;">
                                     <i class="fa fa-fast-backward" onclick="step_fast_backward_date();"></i>
@@ -953,18 +954,18 @@
                                             </div>
                                             <div class="book-loan">
                                                 <div id="start_date_picker" class="input-group date">
-                                                <input type="text" name="booking_start_date" placeholder="yyyy-mm-dd"
+                                                <input type="text" name="booking_start_date" placeholder="yyyy-mm-dd" value=""
                                                     class="ref-name form-control custom-modal-textbox1" onchange="get_start_date()"
-                                                    style="width: 112px;" required readonly>
+                                                    style="width: 112px;" required>
                                                     <span class="input-group-addon" style="float: right;">
                                                         <img src="{{ asset('assets/images/icon/calendar.png') }}" alt="icon"
                                                             style="width: 17px;margin-left: -14px;margin-top: -5px;" />
                                                     </span>
                                                 </div>
                                                 <div id="end_date_picker" class="date">
-                                                <input type="text" name="booking_end_date" placeholder="yyyy-mm-dd"
+                                                <input type="text" name="booking_end_date" placeholder="yyyy-mm-dd" value=""
                                                     class="loan-name form-control custom-modal-textbox1" onchange="get_end_date()"
-                                                    style="width: 115px;margin-left: 30px;" required readonly>
+                                                    style="width: 115px;margin-left: 30px;" required>
                                                     <span class="input-group-addon" style="float: right;">
                                                         <img src="{{ asset('assets/images/icon/calendar.png') }}" id="end_date_icon" alt="icon"
                                                             style="width: 17px;margin-left: 10px;margin-top: -31px;" />
@@ -1767,8 +1768,8 @@
                             $('input[name="lead_time"]').val(lead_time);
                             $('input[name="lag_time"]').val(lag_time);
                             set_second_cal();
-                            get_start_date();
-                            get_end_date();
+                            set_start_date();
+                            set_end_date();
                         }
                     }
 
@@ -1924,8 +1925,8 @@
             $('#booking_created').html('');
             $('#booking_modified').html('');
             set_second_cal();
-            get_start_date();
-            get_end_date();
+            set_start_date();
+            set_end_date();
             $('#popup_model1').modal('show');
             $.ajax({
                 type: "POST",
@@ -2225,7 +2226,8 @@
         }
 
         //get start date based on booking start date and lead time
-        function get_start_date(){
+        function set_start_date(){
+            
          var booking_date = $('input[name="booking_start_date"]').val();
          var lag_time = $('input[name="lag_time"]').val();   
         const d = new Date(booking_date);
@@ -2238,19 +2240,22 @@
         if(day < 10){
             day = '0'+day;
         }
-        $('input[name="start_date"]').val(d.getFullYear()+'-'+month+'-'+day);
+        var start_date = d.getFullYear()+'-'+month+'-'+day;
+        $('input[name="start_date"]').val(start_date);
+        
         }
 
-        //get end date based on booking end date and lead time 
-        function get_end_date(){
-         var booking_date = $('input[name="booking_end_date"]').val();
-         var lead_time = $('input[name="lead_time"]').val();   
+        function get_start_date(){
+            event.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+         var booking_date = $('input[name="booking_start_date"]').val();
+         var lag_time = $('input[name="lag_time"]').val();   
         const d = new Date(booking_date);
-        
-        d.setDate(d.getDate() + parseInt(lead_time));
-        console.log(booking_date);
-        console.log(lead_time);
-        console.log(d);
+        d.setDate(d.getDate() - lag_time);
         var month= d.getMonth() + 1;
         var day = d.getDate();
         if(month < 10){
@@ -2259,7 +2264,98 @@
         if(day < 10){
             day = '0'+day;
         }
-        $('input[name="end_date"]').val(d.getFullYear()+'-'+month+'-'+day);
+        var start_date = d.getFullYear()+'-'+month+'-'+day;
+        $('input[name="start_date"]').val(start_date);
+        var id = $('#id').val();
+        var vehicle_id = $('#vehicle_id').val();
+        console.log(id);
+        console.log(vehicle_id);
+        console.log(start_date);
+        
+            
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url('get-booking') }}",
+                data: {
+                    id : id,
+                    vehicle_id:vehicle_id,
+                    date : start_date,
+                },
+                
+                dataType: 'json',
+                success: function(res) {
+                    if(res.status == true){
+                        alert('Warning! We have already booking with selected date range for this vehicle');
+                    }
+                }
+            });
+        }
+
+        //set/ get end date based on booking end date and lead time 
+        function set_end_date(){
+           
+         var booking_date = $('input[name="booking_end_date"]').val();
+         var lead_time = $('input[name="lead_time"]').val();   
+        const d = new Date(booking_date);
+        
+        d.setDate(d.getDate() + parseInt(lead_time));
+        
+        var month= d.getMonth() + 1;
+        var day = d.getDate();
+        if(month < 10){
+            month = '0'+month;
+        }
+        if(day < 10){
+            day = '0'+day;
+        }
+        var end_date = d.getFullYear()+'-'+month+'-'+day;
+        $('input[name="end_date"]').val(end_date);
+        
+        }
+
+        function get_end_date(){
+            event.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });   
+         var booking_date = $('input[name="booking_end_date"]').val();
+         var lead_time = $('input[name="lead_time"]').val();   
+        const d = new Date(booking_date);
+        
+        d.setDate(d.getDate() + parseInt(lead_time));
+        
+        var month= d.getMonth() + 1;
+        var day = d.getDate();
+        if(month < 10){
+            month = '0'+month;
+        }
+        if(day < 10){
+            day = '0'+day;
+        }
+        var end_date = d.getFullYear()+'-'+month+'-'+day;
+        $('input[name="end_date"]').val(end_date);
+        var id = $('#id').val();
+        var vehicle_id = $('#vehicle_id').val();
+
+            $.ajax({
+                type: "POST",
+                url: "{{ url('get-booking') }}",
+                data: {
+                    id : id,
+                    vehicle_id:vehicle_id,
+                    date : end_date,
+                },
+                
+                dataType: 'json',
+                success: function(res) {
+                    if(res.status == true){
+                        alert('Warning! We have already booking with selected date range for this vehicle');
+                    }
+                }
+            });
         }
     </script>
 @endsection

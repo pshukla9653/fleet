@@ -218,6 +218,32 @@ class BookingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function get_booking(Request $request){
+        
+        
+        $data['status'] = false;
+        $booking = DB::table('bookings')->where('company_id', Auth()->user()->company_id)
+              ->where('vehicle_id', $request->vehicle_id)
+              ->whereDate('start_date', '<=', $request->date)
+              ->whereDate('end_date', '>=', $request->date)
+              ->get();
+        //dd($booking->id);
+        if(!empty($booking)){
+            foreach($booking as $key=>$value){
+            if($value->id != $request->id){
+            $data['status'] = true;
+            return response()->json($data);
+                }
+            else{
+                return response()->json($data);
+                }
+            }
+        }
+        
+        else{
+            return response()->json($data);
+        }
+
+        
 
     }
     
