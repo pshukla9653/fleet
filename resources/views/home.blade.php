@@ -1045,8 +1045,8 @@
                                             </div>
                                             <label for="w3review">Contacts:</label>
 
-                                            <select class="checkings" id="contact_list_d" name="" size="5"
-                                                style="width:100%;background-color: #f2f2f2;">
+                                            <select class="checkings" id="contact_list_d" name="contacts[]" size="5"
+                                                style="width:100%;background-color: #f2f2f2;" multiple>
                                             </select>
                                             <!-- <textarea id="" name="contacts" rows="5" cols="47" class="form-control custom-modal-textbox3"> </textarea> -->
                                             <!-- button -->
@@ -1940,7 +1940,7 @@
                                         if (res.booking_list.primary_contact == v.id) {
                                             addtext = v.name + '*';
                                         } else {
-                                            addtext = '';
+                                            addtext = v.name;
                                         }
                                         $('#contact_list_d').append(new Option(addtext, v.id));
 
@@ -1975,7 +1975,7 @@
                 }
             });
             $("#btn").html('Please Wait...');
-
+            $("#contact_list_d option").attr("selected","selected")
             $.ajax({
                 type: "POST",
                 url: "{{ url('store-booking') }}",

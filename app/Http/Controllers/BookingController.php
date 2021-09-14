@@ -116,7 +116,7 @@ class BookingController extends Controller
                         'lead_notes'=> $request->lead_notes,
                         'show_delivery_day'=> $request->show_delivery_day,
                         'show_collection_day'=> $request->show_collection_day,
-                        'contacts'=> !empty($request->contacts)? implode(",", $request->contacts):'',
+                        'contacts'=> !empty($request->contacts)? implode(",", $request->contacts->all()):'',
                         'primary_contact'=> $request->primary_contact,
                         'email_template'=> !empty($request->email_template)? implode(",", $request->email_template):'',
                         'email_service' => $request->email_service,
