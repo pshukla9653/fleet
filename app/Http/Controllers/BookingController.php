@@ -88,7 +88,40 @@ class BookingController extends Controller
                 'booking_start_date'=> $request->booking_start_date,
                 'booking_end_date'=> $request->booking_end_date
             );
-
+            $check_lag = DB::table('bookings')->where('company_id', Auth()->user()->company_id)
+                
+              ->where('vehicle_id', $request->vehicle_id)
+              ->whereDate('start_date', '<=', $request->start_date)
+              ->whereDate('end_date', '>=', $request->start_date)
+              ->first();
+            $check_lead = DB::table('bookings')->where('company_id', Auth()->user()->company_id)
+           
+            ->where('vehicle_id', $request->vehicle_id)
+            ->whereDate('start_date', '<=', $request->end_date)
+            ->whereDate('end_date', '>=', $request->end_date)
+            ->first();
+            //dd($check_lag->id);
+            //dd($check_lead->id);
+            $status = false;
+            if(!empty($check_lag)){
+            if($check_lag->id == $request->id){
+                $status = false;
+            }
+            elseif($check_lag->id != $request->id){
+                $status = true;
+            }
+            }
+        if(!empty($check_lead)){
+            if($check_lead->id == $request->id){
+                $status = false;
+            }
+            elseif($check_lead->id != $request->id){
+                $status = true;
+            }
+        }
+            
+            
+            if($status == false){
             $booking = Booking::find($request->id);
             $booking->update($data);
             History::Create( [
@@ -98,9 +131,23 @@ class BookingController extends Controller
                 'user_email'=> Auth()->user()->email,
                 'event'=> 'Modified',
             ]);
+            }
+            else{
+                return response()->json(['success' => false]);
+            }
            
         } else{
-            
+            $check_lag = DB::table('bookings')->where('company_id', Auth()->user()->company_id)
+              ->where('vehicle_id', $request->vehicle_id)
+              ->whereDate('start_date', '<=', $request->start_date)
+              ->whereDate('end_date', '>=', $request->start_date)
+              ->first();
+            $check_lead = DB::table('bookings')->where('company_id', Auth()->user()->company_id)
+            ->where('vehicle_id', $request->vehicle_id)
+            ->whereDate('start_date', '<=', $request->end_date)
+            ->whereDate('end_date', '>=', $request->end_date)
+            ->first();
+            if($check_lag->id =='' && $check_lead->id ==''){
             $booking   =   Booking::Create( [
                         'company_id' => Auth()->user()->company_id,
                         'vehicle_id'=> $request->vehicle_id,
@@ -151,7 +198,10 @@ class BookingController extends Controller
                         'user_email'=> Auth()->user()->email,
                         'event'=> 'Created',
                     ]);
-                    
+            }
+            else{
+                return response()->json(['success' => false]);
+            }      
             //print_r($lists->id);die;
 
         }
@@ -223,25 +273,40 @@ class BookingController extends Controller
         $data['status'] = false;
         $booking = DB::table('bookings')->where('company_id', Auth()->user()->company_id)
               ->where('vehicle_id', $request->vehicle_id)
-              ->whereDate('start_date', '<=', $request->date)
-              ->whereDate('end_date', '>=', $request->date)
+              ->whereDate('start_date', '<=', $request->start)
+              ->whereDate('end_date', '>=', $request->start)
               ->get();
+        $booking1 = DB::table('bookings')->where('company_id', Auth()->user()->company_id)
+        ->where('vehicle_id', $request->vehicle_id)
+        ->whereDate('start_date', '<=', $request->end)
+        ->whereDate('end_date', '>=', $request->end)
+        ->get();      
         //dd($booking->id);
         if(!empty($booking)){
             foreach($booking as $key=>$value){
             if($value->id != $request->id){
+                $data['status'] = true;
+            
+            }
+        else{
+            $data['status'] = false;
+            }
+        }
+            }
+        
+        elseif(!empty($booking1)){
+            foreach($booking1 as $key=>$value){
+            if($value->id != $request->id){
             $data['status'] = true;
-            return response()->json($data);
+            
                 }
             else{
-                return response()->json($data);
+                $data['status'] = false;
                 }
             }
         }
         
-        else{
-            return response()->json($data);
-        }
+        return response()->json($data);
 
         
 
