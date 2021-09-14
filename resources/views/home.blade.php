@@ -1797,8 +1797,8 @@
         $('#insert_list').click(function() {
             var data = $('.select-remote-data').select2('data');
             console.log(data);
-            $('#contact_list_d').empty();
-            if (data.length == 1) {
+           
+            if (data.length == 1 && $('#primary_contact').val()=='') {
                 var x = data[0].text + '*';
                 $('#primary_contact').val(data[0].id);
                 $('#contact_list_d').append(new Option(x, data[0].id));
@@ -1809,6 +1809,14 @@
                     $('#popup_model_editor').modal('hide');
                 });
             }
+            var code = {};
+                $("#contact_list_d > option").each(function () {
+                if(code[this.text]) {
+                    $(this).remove();
+                } else {
+                    code[this.text] = this.value;
+                }
+            });                 
         });
         $('#delete_list').click(function() {
             $('#contact_list_d option:selected').remove();
@@ -1975,7 +1983,16 @@
                 }
             });
             $("#btn").html('Please Wait...');
-            $("#contact_list_d option").attr("selected","selected")
+            $("#contact_list_d option").each(function(){
+                
+                $(this).attr("selected","selected")
+            });
+            var check_lag = check_lag_date();
+            var check_lead = check_lead_date();
+            if(check_lead == true || check_lead == true){
+                alert('Warning! We have already booking with selected date range for this vehicle');
+            }
+            else{
             $.ajax({
                 type: "POST",
                 url: "{{ url('store-booking') }}",
@@ -1995,6 +2012,7 @@
                     }
                 }
             });
+            }
         });
         //add contact
         $(document).ready(function($) {
@@ -2206,12 +2224,7 @@
         }
 
         function get_start_date() {
-            event.preventDefault();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+            
             var booking_date = $('input[name="booking_start_date"]').val();
             var lag_time = $('input[name="lag_time"]').val();
             const d = new Date(booking_date);
@@ -2232,6 +2245,18 @@
 
 
 
+            
+
+        function check_lag_date(){
+            event.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            var id = $('#id').val();
+            var vehicle_id = $('#vehicle_id').val();
+            var start_date = $('input[name="start_date"]').val();
             $.ajax({
                 type: "POST",
                 url: "{{ url('get-booking') }}",
@@ -2243,13 +2268,12 @@
 
                 dataType: 'json',
                 success: function(res) {
-                    if (res.status == true) {
-                        alert('Warning! We have already booking with selected date range for this vehicle');
-                    }
+                    return res.status;
                 }
             });
         }
 
+        }
         //set/ get end date based on booking end date and lead time 
         function set_end_date() {
 
@@ -2271,14 +2295,9 @@
             $('input[name="end_date"]').val(end_date);
 
         }
-
+        
         function get_end_date() {
-            event.preventDefault();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+            
             var booking_date = $('input[name="booking_end_date"]').val();
             var lead_time = $('input[name="lead_time"]').val();
             const d = new Date(booking_date);
@@ -2295,9 +2314,21 @@
             }
             var end_date = d.getFullYear() + '-' + month + '-' + day;
             $('input[name="end_date"]').val(end_date);
+            
+
+            
+        }
+
+        function check_lead_date(){
+            event.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             var id = $('#id').val();
             var vehicle_id = $('#vehicle_id').val();
-
+            var end_date = $('input[name="end_date"]').val();
             $.ajax({
                 type: "POST",
                 url: "{{ url('get-booking') }}",
@@ -2309,9 +2340,19 @@
 
                 dataType: 'json',
                 success: function(res) {
-                    if (res.status == true) {
-                        alert('Warning! We have already booking with selected date range for this vehicle');
-                    }
+                    return res.status;
+                }
+            });
+        }
+
+        function getContactList() {
+            $.ajax({
+                type: "GET",
+                url: "{{ url('get-contact-lists-for-list') }}",
+                data: {},
+                success: function(res) {
+                    $('#list-mytable').html(res);
+                    $('.contact-list-row').css('display', 'block');
                 }
             });
         }
