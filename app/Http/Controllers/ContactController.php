@@ -108,27 +108,18 @@ class ContactController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function get_contact_list()
+    public function get_contact_list(Request $request)
     {
-        $contactlist = Contact::all();
-        //print_r($contactlist);die;
-        $html='<tr>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Email</th>
-                <th>Action</th>
-              </tr>';
-        foreach ($contactlist as $key => $value) {
-            //echo $value->first_name."<br>";
-            $html.='<tr class="contact-row">
-                    <td><input type="hidden" name="contacts[]" value="'.$value->id.'"> '.$value->first_name.'</td>
-                    <td>'.$value->last_name.'</td>
-                    <td>'.$value->email.'</td>
-                    <td class="check-box"><input type="checkbox" class="form-control checked" id="row-id-'.$value->id.'" style="width: 20px"></td>
-                  </tr>';
+        $contacts = [];
+
+        if($request->has('q')){
+            $search = $request->q;
+            $contacts =Contact::select("id", "first_name","last_name")
+            		->where('first_name', 'LIKE', "%$search%")
+                    ->orwhere('last_name', 'LIKE', "%$search%")
+            		->get();
         }
-        echo $html;
-        //print_r($contactlist);die;
+        return response()->json($contacts);
         
     }
     public function get_existing_contact_list()

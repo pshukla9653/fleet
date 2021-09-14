@@ -30,6 +30,7 @@
 	<script type="text/javascript" src="{{ asset('assets/js/bootstrap-datepicker.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/plugins/forms/selects/select2.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/ckeditor/ckeditor.js')}}"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/plugins/forms/selects/select2.min.js')}}"></script>
 	<!-- /core JS files -->
 
 	<!-- Theme JS files -->
@@ -40,7 +41,6 @@
 	<script type="text/javascript" src="{{ asset('assets/js/plugins/forms/selects/bootstrap_multiselect.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/plugins/ui/moment/moment.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/plugins/pickers/daterangepicker.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('assets/js/pages/form_layouts.js') }}"></script>
 
 	<script type="text/javascript" src="{{ asset('assets/js/core/app.js') }}"></script>
 

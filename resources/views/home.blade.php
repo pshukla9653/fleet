@@ -507,15 +507,15 @@
             </select>
         </div>
         <!-- <div class="col-md-4" style="padding: 30px;">
-            <select class="form-control border-0" style="background: transparent;width:6%;">
-              <option>Filter</option>
-           </select>
+                <select class="form-control border-0" style="background: transparent;width:6%;">
+                  <option>Filter</option>
+               </select>
 
-          </div>
-          <div class="col-md-4" style="">
-            <a id="additem" class="btn btn-primary" style="margin-left: 20px;"><img src="{{ asset('assets/images/icon/add.png') }}" alt="add" style="width: 21px;margin-left: -8px;"/>&nbsp;  Add New Item</a>
+              </div>
+              <div class="col-md-4" style="">
+                <a id="additem" class="btn btn-primary" style="margin-left: 20px;"><img src="{{ asset('assets/images/icon/add.png') }}" alt="add" style="width: 21px;margin-left: -8px;"/>&nbsp;  Add New Item</a>
 
-          </div> -->
+              </div> -->
         <div class="col-md-4" style="padding: 0px 30px 0px 30px;">
             <form class="example" action="#">
                 <input type="text" placeholder="Search.." name="search" style="height:33px;">
@@ -539,7 +539,7 @@
                                 <strong>Start Date</strong>
                                 <input type="text" placeholder="yyyy-mm-dd" onchange="submit();" value="{{ $start_date }}"
                                     id="start_date" class="form-control custom-modal-textbox"
-                                    style="padding:10px!important;width:90px;" name="start_date" readonly/>
+                                    style="padding:10px!important;width:90px;" name="start_date" readonly />
                                 <span class="input-group-addon" style="float: right;">
                                     <img src="{{ asset('assets/images/icon/calendar.png') }}" alt="icon"
                                         style="width: 17px;margin-left: 10px;margin-top: -45px;" />
@@ -666,55 +666,55 @@
                             @foreach ($vehicles as $key => $vehicle)
                                 <tr>
                                     <td style="width:7%;"><span data-popup="tooltip" title="
-                        <div style='background-color:#fff;width:800px;height:auto;padding:10px;border: 1px solid #bbb8b8;'>
-                          <table cellpadding = '10' cellspacing = '10'>
-                            <tr></tr>
-                            <tr>
-                              <td style='width:33.33%;padding:10px;'>
-                                <table style='width:100%'>
-                                  <tr><td colspan='2'><img src='{{ asset('storage/' . $vehicle->image) }}' alt='{{ $vehicle->registration_number }}' style='width: 100%; height:auto;padding:10px;'/></td></tr>
-                                  <tr><td colspan='2'>&nbsp;</td></tr>
-                                  <tr><td colspan='2' style='text-align:center;'><span style='font-size:18px;color:black;padding:5px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}'>{{ $vehicle->registration_number }}</span></td></tr>
-                                  <tr><td colspan='2'>&nbsp;</td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
-                                  
-                                  
-                                </table>
-                              </td>
-                              <td style='width:33.33%;padding:10px;'>
-                                <table style='width:100%;margin-top:-80px;'>
-                                  <tr><td style='color:#376473;font-weight:600;'>Vehicle Information<br>&nbsp;<br></td><td></td></tr>
-                                  <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
-                                  <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
-                                  <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px;'><b>Department:</b></td><td>{{ $vehicle->department->department_name }}</td></tr>
-                                  <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Registration NO:</b></td><td>{{ $vehicle->registration_number }}</td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px;'><b>VIN:</b></td><td>{{ $vehicle->vin }}</td></tr>
-                                  <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Adoption Date:</b></td><td>{{ $vehicle->adoption_date }}</td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px;'><b>Projected Defleet Date:</b></td><td>{{ $vehicle->projected_defleet_date }}</td></tr>
-                                </table>
-                              </td>
-                              <td style='width:33.33%;padding:10px;'>
-                                <table style='width:100%;margin-top:-35px;'>
-                                  
-                                  <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Regions:</b></td><td>{{ $vehicle->region->region_name }}</td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px;'><b>Other Details:</b></td><td>{{ $vehicle->other_details }}</td></tr>
-                                  <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Lead Time:</b></td><td>{{ $vehicle->lead_time }}</td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px;'><b>Lag Time:</b></td><td>{{ $vehicle->lag_time }}</td></tr>
-                                  <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Engine:</b></td><td>{{ $vehicle->engine }}</td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px;'><b>Colour:</b></td><td>{{ $vehicle->colour }}</td></tr>
-                                  <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Mileage:</b></td><td>{{ $vehicle->mileage }}</td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px;'><b>Value:</b></td><td>{{ $vehicle->value }}</td></tr>
-                                  <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Notes:</b></td><td>{{ $vehicle->notes }}</td></tr>
-                                </table>
-                              </td>
-                            </tr>
+                            <div style='background-color:#fff;width:800px;height:auto;padding:10px;border: 1px solid #bbb8b8;'>
+                              <table cellpadding = '10' cellspacing = '10'>
+                                <tr></tr>
+                                <tr>
+                                  <td style='width:33.33%;padding:10px;'>
+                                    <table style='width:100%'>
+                                      <tr><td colspan='2'><img src='{{ asset('storage/' . $vehicle->image) }}' alt='{{ $vehicle->registration_number }}' style='width: 100%; height:auto;padding:10px;'/></td></tr>
+                                      <tr><td colspan='2'>&nbsp;</td></tr>
+                                      <tr><td colspan='2' style='text-align:center;'><span style='font-size:18px;color:black;padding:5px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}'>{{ $vehicle->registration_number }}</span></td></tr>
+                                      <tr><td colspan='2'>&nbsp;</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
+                                      
+                                      
+                                    </table>
+                                  </td>
+                                  <td style='width:33.33%;padding:10px;'>
+                                    <table style='width:100%;margin-top:-80px;'>
+                                      <tr><td style='color:#376473;font-weight:600;'>Vehicle Information<br>&nbsp;<br></td><td></td></tr>
+                                      <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
+                                      <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
+                                      <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Department:</b></td><td>{{ $vehicle->department->department_name }}</td></tr>
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Registration NO:</b></td><td>{{ $vehicle->registration_number }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>VIN:</b></td><td>{{ $vehicle->vin }}</td></tr>
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Adoption Date:</b></td><td>{{ $vehicle->adoption_date }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Projected Defleet Date:</b></td><td>{{ $vehicle->projected_defleet_date }}</td></tr>
+                                    </table>
+                                  </td>
+                                  <td style='width:33.33%;padding:10px;'>
+                                    <table style='width:100%;margin-top:-35px;'>
+                                      
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Regions:</b></td><td>{{ $vehicle->region->region_name }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Other Details:</b></td><td>{{ $vehicle->other_details }}</td></tr>
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Lead Time:</b></td><td>{{ $vehicle->lead_time }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Lag Time:</b></td><td>{{ $vehicle->lag_time }}</td></tr>
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Engine:</b></td><td>{{ $vehicle->engine }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Colour:</b></td><td>{{ $vehicle->colour }}</td></tr>
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Mileage:</b></td><td>{{ $vehicle->mileage }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Value:</b></td><td>{{ $vehicle->value }}</td></tr>
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Notes:</b></td><td>{{ $vehicle->notes }}</td></tr>
+                                    </table>
+                                  </td>
+                                </tr>
 
-                          </table>
-                        </div>
-                        " data-html="true" data-placement="right"
+                              </table>
+                            </div>
+                            " data-html="true" data-placement="right"
                                             style="font-weight: 600; font-size:12px; padding: 5px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}">{{ $vehicle->registration_number }}</span>
                                         <br><span
                                             style="font-size:9px;position: absolute;margin-top: 7px;">{{ $vehicle->vin }}</span>
@@ -748,7 +748,6 @@
                                                     if ($value->end_date >= $thisdate && $value->booking_end_date < $value->end_date) {
                                                         echo 'style="background-color:#abfb0f;"';
                                                     }
-                                                    
                                                 }
                                             @endphp>
                                             @foreach ($booking as $key => $value)
@@ -756,58 +755,58 @@
 
                                                 @if ($value->id)
                                                     <span data-popup="tooltip" title="
-                        <div style='background-color:#fff;width:800px;height:auto;padding:10px;border: 1px solid #bbb8b8;'>
-                          <table cellpadding = '10' cellspacing = '10'>
-                            <tr></tr>
-                            <tr>
-                              <td style='width:33.33%;padding:10px;'>
-                                <table style='width:100%'>
-                                  <tr><td colspan='2'><img src='{{ asset('storage/' . $vehicle->image) }}' alt='{{ $vehicle->registration_number }}' style='width: 100%; height:auto;padding:10px;'/></td></tr>
-                                  <tr><td colspan='2'>&nbsp;</td></tr>
-                                  <tr><td colspan='2' style='text-align:center;'><span style='font-size:18px;color:black;padding:5px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}'>{{ $vehicle->registration_number }}</span></td></tr>
-                                  <tr><td colspan='2'>&nbsp;</td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->booking_start_date), 'd-M-Y') }}</td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->booking_end_date), 'd-M-Y') }}</td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Primary Contact:</b></td><td></td></tr>
-                                  
-                                  
-                                </table>
-                              </td>
-                              <td style='width:33.33%;padding:10px;'>
-                                <table style='width:100%;margin-top:-80px;'>
-                                  <tr><td style='color:#376473;font-weight:600;' colspan='2'>Vehicle Information<br>&nbsp;<br></td></tr>
-                                  <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->booking_start_date), 'd-M-Y') }}</td></tr>
-                                  <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->booking_end_date), 'd-M-Y') }}</td></tr>
-                                  <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Primary Contact:</b></td><td>  </td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px;'><b>Company:</b></td><td></td></tr>
-                                  <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Loan Type:</b></td><td></td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px;'><b>Purpose of Loan:</b></td><td>{{ $value->purpose_of_loan }}</td></tr>
-                                  <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Booking Reference:</b></td><td>{{ $value->booking_reference }}</td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px;'><b>Booking Notes:</b></td><td>{{ $value->booking_notes }}</td></tr>
-                                </table>
-                              </td>
-                              <td style='width:33.33%;padding:10px;'>
-                                <table style='width:100%;margin-top:-35px;'>
-                                  
-                                  <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Outbound Collection Notes:</b></td><td>{{ $value->ob_pick_from_notes }}</td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Collection Notes:</b></td><td>{{ $value->ib_pick_from_notes }}</td></tr>
-                                  <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Lead Time Notes:</b></td><td>{{ $value->lead_notes }}</td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px;'><b>Lag Time Notes:</b></td><td>{{ $value->lag_notes }}</td></tr>
-                                  <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Outbound Delivery Notes:</b></td><td>{{ $value->ob_pick_from_notes }}</td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Delivery Notes:</b></td><td>{{ $value->ib_pick_from_notes }}</td></tr>
-                                  <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Outbound Details Address:</b></td><td>{{ $value->ob_deliver_to_address_1 }}</td></tr>
-                                  <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Details Address:</b></td><td>{{ $value->ib_pick_from_address_1 }}</td></tr>
-                                  
-                                </table>
-                              </td>
-                            </tr>
+                            <div style='background-color:#fff;width:800px;height:auto;padding:10px;border: 1px solid #bbb8b8;'>
+                              <table cellpadding = '10' cellspacing = '10'>
+                                <tr></tr>
+                                <tr>
+                                  <td style='width:33.33%;padding:10px;'>
+                                    <table style='width:100%'>
+                                      <tr><td colspan='2'><img src='{{ asset('storage/' . $vehicle->image) }}' alt='{{ $vehicle->registration_number }}' style='width: 100%; height:auto;padding:10px;'/></td></tr>
+                                      <tr><td colspan='2'>&nbsp;</td></tr>
+                                      <tr><td colspan='2' style='text-align:center;'><span style='font-size:18px;color:black;padding:5px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}'>{{ $vehicle->registration_number }}</span></td></tr>
+                                      <tr><td colspan='2'>&nbsp;</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->booking_start_date), 'd-M-Y') }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->booking_end_date), 'd-M-Y') }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Primary Contact:</b></td><td></td></tr>
+                                      
+                                      
+                                    </table>
+                                  </td>
+                                  <td style='width:33.33%;padding:10px;'>
+                                    <table style='width:100%;margin-top:-80px;'>
+                                      <tr><td style='color:#376473;font-weight:600;' colspan='2'>Vehicle Information<br>&nbsp;<br></td></tr>
+                                      <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->booking_start_date), 'd-M-Y') }}</td></tr>
+                                      <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->booking_end_date), 'd-M-Y') }}</td></tr>
+                                      <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Primary Contact:</b></td><td>  </td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Company:</b></td><td></td></tr>
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Loan Type:</b></td><td></td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Purpose of Loan:</b></td><td>{{ $value->purpose_of_loan }}</td></tr>
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Booking Reference:</b></td><td>{{ $value->booking_reference }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Booking Notes:</b></td><td>{{ $value->booking_notes }}</td></tr>
+                                    </table>
+                                  </td>
+                                  <td style='width:33.33%;padding:10px;'>
+                                    <table style='width:100%;margin-top:-35px;'>
+                                      
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Outbound Collection Notes:</b></td><td>{{ $value->ob_pick_from_notes }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Collection Notes:</b></td><td>{{ $value->ib_pick_from_notes }}</td></tr>
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Lead Time Notes:</b></td><td>{{ $value->lead_notes }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Lag Time Notes:</b></td><td>{{ $value->lag_notes }}</td></tr>
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Outbound Delivery Notes:</b></td><td>{{ $value->ob_pick_from_notes }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Delivery Notes:</b></td><td>{{ $value->ib_pick_from_notes }}</td></tr>
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Outbound Details Address:</b></td><td>{{ $value->ob_deliver_to_address_1 }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Details Address:</b></td><td>{{ $value->ib_pick_from_address_1 }}</td></tr>
+                                      
+                                    </table>
+                                  </td>
+                                </tr>
 
-                          </table>
-                        </div>
-                        " data-html="true" data-placement="right"
+                              </table>
+                            </div>
+                            " data-html="true" data-placement="right"
                                                         style="font-weight: 600; font-size:12px; padding: 5px;border-radius: 5px;"></span>
                                                 @endif
                                             @endforeach
@@ -892,7 +891,7 @@
         }
 
     </style>
-    <div id="popup_model1" class="modal fade" style="overflow-y: auto;">
+    <div id="popup_model1" data-backdrop="false" class="modal fade" style="overflow-y: auto;">
         <div class="modal-dialog modal-lg">
             <div class="modal-content" style="background-color: #f2f2f2;">
                 <div class="modal-header">
@@ -938,7 +937,7 @@
                                             </div>
                                             <div class="sides-1">
                                                 <span id="rt-number" style="border-radius: 7px;border-color: #eecc00;margin: 5px;width: 110px;padding: 3px; 
-                                                    font-weight: 600;"></span>
+                                                        font-weight: 600;"></span>
                                                 <br>
                                                 <span id="brand_name" style="font-weight: 600"></span><br>
                                                 <span id="model_number" style="font-weight: 600"></span><br>
@@ -954,26 +953,29 @@
                                             </div>
                                             <div class="book-loan">
                                                 <div id="start_date_picker" class="input-group date">
-                                                <input type="text" name="booking_start_date" placeholder="yyyy-mm-dd" value=""
-                                                    class="ref-name form-control custom-modal-textbox1" onchange="get_start_date()"
-                                                    style="width: 112px;" required>
+                                                    <input type="text" name="booking_start_date" placeholder="yyyy-mm-dd"
+                                                        value="" class="ref-name form-control custom-modal-textbox1"
+                                                        onchange="get_start_date()" style="width: 112px;" required>
                                                     <span class="input-group-addon" style="float: right;">
-                                                        <img src="{{ asset('assets/images/icon/calendar.png') }}" alt="icon"
+                                                        <img src="{{ asset('assets/images/icon/calendar.png') }}"
+                                                            alt="icon"
                                                             style="width: 17px;margin-left: -14px;margin-top: -5px;" />
                                                     </span>
                                                 </div>
                                                 <div id="end_date_picker" class="date">
-                                                <input type="text" name="booking_end_date" placeholder="yyyy-mm-dd" value=""
-                                                    class="loan-name form-control custom-modal-textbox1" onchange="get_end_date()"
-                                                    style="width: 115px;margin-left: 30px;" required>
+                                                    <input type="text" name="booking_end_date" placeholder="yyyy-mm-dd"
+                                                        value="" class="loan-name form-control custom-modal-textbox1"
+                                                        onchange="get_end_date()" style="width: 115px;margin-left: 30px;"
+                                                        required>
                                                     <span class="input-group-addon" style="float: right;">
-                                                        <img src="{{ asset('assets/images/icon/calendar.png') }}" id="end_date_icon" alt="icon"
+                                                        <img src="{{ asset('assets/images/icon/calendar.png') }}"
+                                                            id="end_date_icon" alt="icon"
                                                             style="width: 17px;margin-left: 10px;margin-top: -31px;" />
                                                     </span>
                                                 </div>
-                                               </div>
-                                               <input type="hidden" name="start_date" value=""/>
-                                               <input type="hidden" name="end_date" value=""/>
+                                            </div>
+                                            <input type="hidden" name="start_date" value="" />
+                                            <input type="hidden" name="end_date" value="" />
                                             <br>
                                             <div class="booking-set">
                                                 <span class="booknow">Booking Reference</span>
@@ -1042,12 +1044,10 @@
                                                 </div>
                                             </div>
                                             <label for="w3review">Contacts:</label>
-                                            <div class="checkings form-control custom-modal-textbox3"
-                                                style="height: 152px;">
-                                                <div class="checkin-box11" id="inserted-list" style="margin-left:10px">
 
-                                                </div>
-                                            </div>
+                                            <select class="checkings" id="contact_list_d" name="" size="5"
+                                                style="width:100%;background-color: #f2f2f2;">
+                                            </select>
                                             <!-- <textarea id="" name="contacts" rows="5" cols="47" class="form-control custom-modal-textbox3"> </textarea> -->
                                             <!-- button -->
                                             <div class="button1">
@@ -1079,7 +1079,7 @@
                                             </div>
                                             <label for="vehicle">Vehicle(s):</label>
                                             <textarea id="vehicle" name="vehicle" rows="5" cols="47"
-                                                class="form-control custom-modal-textbox3"></textarea>
+                                                class="form-control custom-modal-textbox3" readonly></textarea>
                                             <div class="text-edit">
                                                 <a href="javascript:void(0)" class="anchor-btn"
                                                     onclick="getVehicleList()">Edit</a>
@@ -1137,9 +1137,7 @@
                             OUTBOUND DETAILS
                         </h5>
                         <div class="side-header">
-                            <span class="checkboxs">
-                                <img class="check-mark" src="{{ asset('assets/images/check.png') }}">
-                            </span>
+
 
                             <span id="chekckk1"><i class="fa fa-angle-down"></i></span>
                         </div>
@@ -1260,10 +1258,6 @@
                             INBOUND DETAILS
                         </h5>
                         <div class="side-header">
-                            <span class="checkboxs">
-                                <img class="check-mark" src="{{ asset('assets/images/check.png') }}">
-                            </span>
-
                             <span id="chekckk2"><i class="fa fa-angle-down"></i></span>
                         </div>
                     </div>
@@ -1332,7 +1326,7 @@
                                                 <span class="loan11">Notes:</span><br>
                                                 <textarea id="notes1" name="ib_pick_from_notes" rows="4" cols="58"
                                                     class="form-control custom-modal-textbox3" style="width: 368px;">
-                    </textarea>
+                        </textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -1376,7 +1370,8 @@
         </div>
     </div>
     <!-- end -->
-    <div id="popup_model_editor" class="modal fade second_model" style="margin-top:20%;margin-right:10%;">
+    <div id="popup_model_editor" data-backdrop="false" class="modal fade second_model"
+        style="margin-top:20%;margin-right:10%;">
         <div class="modal-dialog">
             <div class="modal-content" style="background-color: #f2f2f2;width: 100%;">
                 <div class="modal-header">
@@ -1388,12 +1383,10 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="checkings form-control custom-modal-textbox3" id="for-insert-list"
-                                style="height: auto;margin-top: 15px;">
-                                <div class="checkin-box11" style="margin:10px 0px;" id="mytable">
 
-                                </div>
-                            </div>
+                            <select class="select-remote-data form-control custom-modal-textbox1">
+
+                            </select>
                         </div>
                     </div>
 
@@ -1566,7 +1559,7 @@
         </div>
     </div>
 
-    <div id="list_popup_model" class="modal fade" style="width: 1200px;">
+    <div id="list_popup_model" data-backdrop="false" class="modal fade" style="width: 1200px;">
         <div class="modal-dialog modal-lg">
             <div class="modal-content" style="background-color: #f2f2f2;width: auto;">
                 <div class="modal-header">
@@ -1655,8 +1648,8 @@
             var date = $('#start_date_picker input').val();
             var path = '{{ asset('storage/') }}';
             var img = path + '/' + $('#img_n_' + vehicle_id).html();
-            var lead_time = $('#lead_n_'+ vehicle_id).html();
-            var lag_time = $('#lag_n_'+ vehicle_id).html();
+            var lead_time = $('#lead_n_' + vehicle_id).html();
+            var lag_time = $('#lag_n_' + vehicle_id).html();
             var reg_number = $('#reg_no_' + vehicle_id).html();
             var plate_colour = $('#col_n_' + vehicle_id).html();
             var brand = $('#br_n_' + vehicle_id).html();
@@ -1681,7 +1674,7 @@
                     success: function(res) {
                         if (res.status == true) {
                             $('#itemform').trigger("reset");
-                            
+
                             $('#form_heading').html("Booking Overview");
                             $('#btn').html('Submit');
                             $('#vehicle_id').val(vehicle_id);
@@ -1690,7 +1683,7 @@
                             $('#vahicle_img').attr('src', img);
                             $('#inserted-list').html('');
                             $('input[name="vehi"][value="' + vehicle_id.toString() + '"]').prop("checked",
-                            true);
+                                true);
                             $('#rt-number').html(reg_number);
                             $('#booking_created').html('');
                             $('#booking_modified').html('');
@@ -1725,18 +1718,13 @@
                                         var addtext = '';
                                         $.each(res.contact_list, function(index, v) {
                                             if (res.booking_list.primary_contact == v.id) {
-                                                addtext = ' (Primary)';
+                                                addtext = v.name + '*';
                                             } else {
-                                                addtext = '';
+                                                addtext = v.name;
                                             }
+                                            $('#contact_list_d').append(new Option(addtext, v
+                                                .id));
 
-                                            $('#inserted-list').append(
-                                                '<p><input type="checkbox" checked id="' + v
-                                                .id + '" value="' + v.id +
-                                                '" name="contacts[]"> &nbsp;&nbsp;&nbsp;<lable for="' +
-                                                v.id + '">' + v.name + addtext +
-                                                '</lable></p>'
-                                            );
 
                                         });
                                     } else {
@@ -1745,11 +1733,12 @@
                                     $('#booking_created').html(res.booking_created.event + ' by ' + res
                                         .booking_created.user_email + ' on ' + res.booking_created
                                         .created_at);
-                                if(res.booking_modified){
-                                    $('#booking_modified').html(res.booking_modified.event + ' by ' +
-                                        res.booking_modified.user_email + ' on ' + res
-                                        .booking_modified.created_at);
-                                        }
+                                    if (res.booking_modified) {
+                                        $('#booking_modified').html(res.booking_modified.event +
+                                            ' by ' +
+                                            res.booking_modified.user_email + ' on ' + res
+                                            .booking_modified.created_at);
+                                    }
                                 }
                             });
                             alert('Booking Already Exists with selected date range');
@@ -1758,7 +1747,7 @@
                             $('#vehicle_id').val(vehicle_id);
                             $('#vahicle_img').attr('src', img);
                             $('input[name="vehi"][value="' + vehicle_id.toString() + '"]').prop("checked",
-                            true);
+                                true);
                             $('#rt-number').html(reg_number);
                             $('#rt-number').css('background-color', plate_colour);
                             $('#brand_name').html('Brand: ' + brand);
@@ -1767,6 +1756,7 @@
                             $('#vehicle').html(reg_number);
                             $('input[name="lead_time"]').val(lead_time);
                             $('input[name="lag_time"]').val(lag_time);
+                            $('#contact_list_d').empty();
                             set_second_cal();
                             set_start_date();
                             set_end_date();
@@ -1805,62 +1795,44 @@
             });
         }
         $('#insert_list').click(function() {
-            $('#mytable').find('p').each(function() {
-                var row = $(this);
-                if (row.find('input[type="checkbox"]').is(':checked')) {
-                    var current_id = row.find('input').val();
-                    var contact = [];
-                    $('#inserted-list').find('p').each(function() {
-                        var row = $(this);
-                        var ids = row.find('input[type="checkbox"]').val();
-                        contact.push(ids);
-                    });
-                    if (contact.indexOf(current_id) == -1) {
-                        $("#inserted-list").append(row);
-                    }
-                }
-            });
-
-            $('#popup_model_editor').modal('hide');
+            var data = $('.select-remote-data').select2('data');
+            console.log(data);
+            $('#contact_list_d').empty();
+            if (data.length == 1) {
+                var x = data[0].text + '*';
+                $('#primary_contact').val(data[0].id);
+                $('#contact_list_d').append(new Option(x, data[0].id));
+            } else {
+                $.each(data, function(index, item) {
+                    console.log(item);
+                    $('#contact_list_d').append(new Option(item.text, item.id));
+                    $('#popup_model_editor').modal('hide');
+                });
+            }
         });
         $('#delete_list').click(function() {
-            $('#inserted-list').find('p').each(function() {
-                var row = $(this);
-                if (row.find('input[type="checkbox"]').is(':checked')) {
-                    row.hide();
-                }
-            });
+            $('#contact_list_d option:selected').remove();
             $('#popup_model_editor').modal('hide');
             $('#popup_model1').modal('show');
         });
         $('#mark_as_primary').click(function() {
-            var id = 0;
-            var counter = 0;
-            $('#inserted-list').find('p').each(function() {
-                var row = $(this);
-                if (row.find('input[type="checkbox"]').is(':checked')) {
-                    id = row.find('input[type="checkbox"]').val();
-                    counter++;
-                }
-            });
-            if (counter == 0) {
+            var id = $('#contact_list_d').find('option:selected').val();
+            var text = $('#contact_list_d').find('option:selected').text();
+
+            if (id == 0) {
                 alert("Please Select a Contact to make Mark as Primary");
-            } else if (counter > 1) {
-                alert("Please Select a Single Contact to make Mark as Primary");
             } else {
-                if (counter == 1) {
-                    $('#primary_contact').val(id);
-                    alert("Mark as Primary Successful");
-                }
+                $("#contact_list_d option").each(function() {
+
+                    $(this).text($(this).text().replace('*', ''));
+                });
+                $('#primary_contact').val(id);
+                $('#contact_list_d option:selected').text(text + '*');
+                alert("Mark as Primary Successful");
+
             }
         });
-        /*$('#edit_contact').click(function () {
-          $('#inserted-list').find('p').each(function () {
-                var row = $(this);
-                var id = row.find('input[type="checkbox"]').click();
-                
-            });
-        });*/
+
         function step_fast_backward_date() {
 
             $('#date_range').val(4);
@@ -1898,7 +1870,7 @@
         }
 
         function makebooking(vehicle_id, date, img, reg_number, plate_colour, brand, model, derivative, lead_time,
-        lag_time) {
+            lag_time) {
 
             $.ajaxSetup({
                 headers: {
@@ -1924,6 +1896,7 @@
             $('#vehicle').html(reg_number);
             $('#booking_created').html('');
             $('#booking_modified').html('');
+            $('#contact_list_d').empty();
             set_second_cal();
             set_start_date();
             set_end_date();
@@ -1965,17 +1938,12 @@
                                     var addtext = '';
                                     $.each(res.contact_list, function(index, v) {
                                         if (res.booking_list.primary_contact == v.id) {
-                                            addtext = ' (Primary)';
+                                            addtext = v.name + '*';
                                         } else {
                                             addtext = '';
                                         }
+                                        $('#contact_list_d').append(new Option(addtext, v.id));
 
-                                        $('#inserted-list').append(
-                                            '<p><input type="checkbox" checked id="' + v
-                                            .id + '" value="' + v.id +
-                                            '" name="contacts[]"> &nbsp;&nbsp;&nbsp;<lable for="' +
-                                            v.id + '">' + v.name + addtext + '</lable></p>'
-                                        );
                                     });
                                 } else {
                                     $("input[name='" + key + "']").val(value);
@@ -1983,11 +1951,12 @@
                                 $('#booking_created').html(res.booking_created.event + ' by ' + res
                                     .booking_created.user_email + ' on ' + res.booking_created
                                     .created_at);
-                            if(res.booking_modified){
-                                $('#booking_modified').html(res.booking_modified.event + ' by ' + res
-                                    .booking_modified.user_email + ' on ' + res.booking_modified
-                                    .created_at);
-                            }
+                                if (res.booking_modified) {
+                                    $('#booking_modified').html(res.booking_modified.event + ' by ' +
+                                        res
+                                        .booking_modified.user_email + ' on ' + res.booking_modified
+                                        .created_at);
+                                }
                             }
                         });
                     }
@@ -2157,17 +2126,7 @@
             });
         });
 
-        function getContactList() {
-            $.ajax({
-                type: "GET",
-                url: "{{ url('get-contact-lists') }}",
-                data: {},
-                success: function(res) {
-                    $('#list-mytable').html(res);
-                    $('.contact-list-row').css('display', 'block');
-                }
-            });
-        }
+
 
         function removethis(_this) {
             $(_this).parents(".contact-row").remove();
@@ -2204,88 +2163,87 @@
             daysOfWeekHighlighted: "0",
             autoclose: true
         });
-        $("#start_date_picker input").change(function(){
+        $("#start_date_picker input").change(function() {
             var d = $("#start_date_picker input").val();
-            $("#end_date_picker.date" ).datepicker( "destroy" );
+            $("#end_date_picker.date").datepicker("destroy");
             $('#end_date_picker.date').datepicker({
-            format: "yyyy-mm-dd",
-            startDate: d,
-            daysOfWeekHighlighted: "0",
-            autoclose: true
+                format: "yyyy-mm-dd",
+                startDate: d,
+                daysOfWeekHighlighted: "0",
+                autoclose: true
             });
         });
-        function set_second_cal(){
+
+        function set_second_cal() {
             var d = $("#start_date_picker input").val();
-            $("#end_date_picker.date" ).datepicker( "destroy" );
+            $("#end_date_picker.date").datepicker("destroy");
             $('#end_date_picker.date').datepicker({
-            format: "yyyy-mm-dd",
-            startDate: d,
-            daysOfWeekHighlighted: "0",
-            autoclose: true
+                format: "yyyy-mm-dd",
+                startDate: d,
+                daysOfWeekHighlighted: "0",
+                autoclose: true
             });
         }
 
         //get start date based on booking start date and lead time
-        function set_start_date(){
-            
-         var booking_date = $('input[name="booking_start_date"]').val();
-         var lag_time = $('input[name="lag_time"]').val();   
-        const d = new Date(booking_date);
-        d.setDate(d.getDate() - lag_time);
-        var month= d.getMonth() + 1;
-        var day = d.getDate();
-        if(month < 10){
-            month = '0'+month;
-        }
-        if(day < 10){
-            day = '0'+day;
-        }
-        var start_date = d.getFullYear()+'-'+month+'-'+day;
-        $('input[name="start_date"]').val(start_date);
-        
+        function set_start_date() {
+
+            var booking_date = $('input[name="booking_start_date"]').val();
+            var lag_time = $('input[name="lag_time"]').val();
+            const d = new Date(booking_date);
+            d.setDate(d.getDate() - lag_time);
+            var month = d.getMonth() + 1;
+            var day = d.getDate();
+            if (month < 10) {
+                month = '0' + month;
+            }
+            if (day < 10) {
+                day = '0' + day;
+            }
+            var start_date = d.getFullYear() + '-' + month + '-' + day;
+            $('input[name="start_date"]').val(start_date);
+
         }
 
-        function get_start_date(){
+        function get_start_date() {
             event.preventDefault();
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-         var booking_date = $('input[name="booking_start_date"]').val();
-         var lag_time = $('input[name="lag_time"]').val();   
-        const d = new Date(booking_date);
-        d.setDate(d.getDate() - lag_time);
-        var month= d.getMonth() + 1;
-        var day = d.getDate();
-        if(month < 10){
-            month = '0'+month;
-        }
-        if(day < 10){
-            day = '0'+day;
-        }
-        var start_date = d.getFullYear()+'-'+month+'-'+day;
-        $('input[name="start_date"]').val(start_date);
-        var id = $('#id').val();
-        var vehicle_id = $('#vehicle_id').val();
-        console.log(id);
-        console.log(vehicle_id);
-        console.log(start_date);
-        
+            var booking_date = $('input[name="booking_start_date"]').val();
+            var lag_time = $('input[name="lag_time"]').val();
+            const d = new Date(booking_date);
+            d.setDate(d.getDate() - lag_time);
+            var month = d.getMonth() + 1;
+            var day = d.getDate();
+            if (month < 10) {
+                month = '0' + month;
+            }
+            if (day < 10) {
+                day = '0' + day;
+            }
+            var start_date = d.getFullYear() + '-' + month + '-' + day;
+            $('input[name="start_date"]').val(start_date);
+            var id = $('#id').val();
+            var vehicle_id = $('#vehicle_id').val();
             
+
+
 
             $.ajax({
                 type: "POST",
                 url: "{{ url('get-booking') }}",
                 data: {
-                    id : id,
-                    vehicle_id:vehicle_id,
-                    date : start_date,
+                    id: id,
+                    vehicle_id: vehicle_id,
+                    date: start_date,
                 },
-                
+
                 dataType: 'json',
                 success: function(res) {
-                    if(res.status == true){
+                    if (res.status == true) {
                         alert('Warning! We have already booking with selected date range for this vehicle');
                     }
                 }
@@ -2293,69 +2251,108 @@
         }
 
         //set/ get end date based on booking end date and lead time 
-        function set_end_date(){
-           
-         var booking_date = $('input[name="booking_end_date"]').val();
-         var lead_time = $('input[name="lead_time"]').val();   
-        const d = new Date(booking_date);
-        
-        d.setDate(d.getDate() + parseInt(lead_time));
-        
-        var month= d.getMonth() + 1;
-        var day = d.getDate();
-        if(month < 10){
-            month = '0'+month;
-        }
-        if(day < 10){
-            day = '0'+day;
-        }
-        var end_date = d.getFullYear()+'-'+month+'-'+day;
-        $('input[name="end_date"]').val(end_date);
-        
+        function set_end_date() {
+
+            var booking_date = $('input[name="booking_end_date"]').val();
+            var lead_time = $('input[name="lead_time"]').val();
+            const d = new Date(booking_date);
+
+            d.setDate(d.getDate() + parseInt(lead_time));
+
+            var month = d.getMonth() + 1;
+            var day = d.getDate();
+            if (month < 10) {
+                month = '0' + month;
+            }
+            if (day < 10) {
+                day = '0' + day;
+            }
+            var end_date = d.getFullYear() + '-' + month + '-' + day;
+            $('input[name="end_date"]').val(end_date);
+
         }
 
-        function get_end_date(){
+        function get_end_date() {
             event.preventDefault();
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-            });   
-         var booking_date = $('input[name="booking_end_date"]').val();
-         var lead_time = $('input[name="lead_time"]').val();   
-        const d = new Date(booking_date);
-        
-        d.setDate(d.getDate() + parseInt(lead_time));
-        
-        var month= d.getMonth() + 1;
-        var day = d.getDate();
-        if(month < 10){
-            month = '0'+month;
-        }
-        if(day < 10){
-            day = '0'+day;
-        }
-        var end_date = d.getFullYear()+'-'+month+'-'+day;
-        $('input[name="end_date"]').val(end_date);
-        var id = $('#id').val();
-        var vehicle_id = $('#vehicle_id').val();
+            });
+            var booking_date = $('input[name="booking_end_date"]').val();
+            var lead_time = $('input[name="lead_time"]').val();
+            const d = new Date(booking_date);
+
+            d.setDate(d.getDate() + parseInt(lead_time));
+
+            var month = d.getMonth() + 1;
+            var day = d.getDate();
+            if (month < 10) {
+                month = '0' + month;
+            }
+            if (day < 10) {
+                day = '0' + day;
+            }
+            var end_date = d.getFullYear() + '-' + month + '-' + day;
+            $('input[name="end_date"]').val(end_date);
+            var id = $('#id').val();
+            var vehicle_id = $('#vehicle_id').val();
 
             $.ajax({
                 type: "POST",
                 url: "{{ url('get-booking') }}",
                 data: {
-                    id : id,
-                    vehicle_id:vehicle_id,
-                    date : end_date,
+                    id: id,
+                    vehicle_id: vehicle_id,
+                    date: end_date,
                 },
-                
+
                 dataType: 'json',
                 success: function(res) {
-                    if(res.status == true){
+                    if (res.status == true) {
                         alert('Warning! We have already booking with selected date range for this vehicle');
                     }
                 }
             });
         }
+        // Initialize
+        $(".select-remote-data").select2({
+            ajax: {
+                type: "POST",
+                url: "{{ url('get-contact-lists') }}",
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page
+                    };
+                },
+                processResults: function(data) {
+                    return {
+                        results: $.map(data, function(item) {
+                            return {
+                                text: item.first_name + ' ' + item.last_name,
+                                id: item.id,
+
+                            }
+                        })
+                    };
+                }
+
+            },
+            escapeMarkup: function(markup) {
+                return markup;
+            }, // let our custom formatter work
+            minimumInputLength: 1,
+            multiple: true,
+            placeholder: "Search Here",
+
+
+
+
+
+        });
     </script>
+
 @endsection
