@@ -1729,18 +1729,16 @@
                                     }
                                     if (key == 'contacts') {
                                         var addtext = '';
-                                        $.each(res.contact_list, function(index, v) {
-                                            if (res.booking_list.primary_contact == v.id) {
-                                                addtext = v.name + '*';
-                                            } else {
-                                                addtext = v.name;
-                                            }
-                                            $('#contact_list_d').append(new Option(addtext, v
-                                                .id));
-                                            $('#contacts').val(value);
+                                    $.each(res.contact_list, function(index, v) {
+                                        if (res.booking_list.primary_contact == v.id) {
+                                            addtext = v.name + '*';
+                                        } else {
+                                            addtext = v.name;
+                                        }
+                                        $('#contact_list_d').append(new Option(addtext, v.id));
+                                        $('#contacts').val(value);
 
-
-                                        });
+                                    });
                                     } else {
                                         $("input[name='" + key + "']").val(value);
                                     }
@@ -1771,7 +1769,7 @@
                             $('input[name="lead_time"]').val(lead_time);
                             $('input[name="lag_time"]').val(lag_time);
                             $('#start_date_picker.date').datepicker("update", date);
-                            $('#contact_list_d').empty();
+                            
                             set_second_cal();
                             set_start_date();
                             set_end_date();
