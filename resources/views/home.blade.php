@@ -651,14 +651,14 @@
                         <p>{{ $message }}</p>
                     </div>
                 @endif
-                <div class="row">
+                <div class="row" style="/* overflow: auto; */">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th style="width: 7%; font-weight: 600;">VEHICLES</th>
                                 @for ($i = 0; $i < $days; $i++)
-                                    <th style="width:3% !impotant;padding:10px; font-size:8px;font-weight: 600;">
-                                        {{ date('d-m-Y', strtotime($start_date . '+' . $i . ' day')) }}</th>
+                                    <th style="padding:10px; font-size:8px;font-weight: 600;">
+                                        {{ date('d-m-y', strtotime($start_date . '+' . $i . ' day')) }}</th>
                                 @endfor
                             </tr>
                         </thead>
@@ -810,7 +810,7 @@
                               </table>
                             </div>
                             " data-html="true" data-placement="right"
-                                                        style="font-weight: 600; font-size:12px; padding: 5px;border-radius: 5px;"></span>
+                                                        style="font-weight: 600; font-size:12px; padding: 5px;border-radius: 5px;white-space: nowrap;position: absolute;">@if($contact_detail && $value->booking_start_date==$thisdate){{$contact_detail->first_name.' '.$contact_detail->last_name}}@endif</span>
                                                 @endif
                                             @endforeach
                                         </td>
@@ -2129,6 +2129,7 @@
                         success: function(res) {
                             $('#popup_model').modal('hide');
                             alert("Contact Added Successful");
+                            $("#contact-submit-btn").html('Submit');
                             $("#contact-submit-btn").attr("disabled", false);
                         }
                     });
