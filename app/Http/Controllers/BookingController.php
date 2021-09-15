@@ -60,7 +60,7 @@ class BookingController extends Controller
                 'lead_notes'=> $request->lead_notes,
                 'show_delivery_day'=> $request->show_delivery_day,
                 'show_collection_day'=> $request->show_collection_day,
-                'contacts'=> !empty($request->contacts)? implode(",", $request->contacts):'',
+                'contacts'=> $request->contacts,
                 'primary_contact'=> $request->primary_contact,
                 'email_template'=> !empty($request->email_template)? implode(",", $request->email_template):'',
                 'email_service' => $request->email_service,
@@ -88,40 +88,26 @@ class BookingController extends Controller
                 'booking_start_date'=> $request->booking_start_date,
                 'booking_end_date'=> $request->booking_end_date
             );
-            $check_lag = DB::table('bookings')->where('company_id', Auth()->user()->company_id)
-                
+            $check_lag = Booking::select('*')->where('company_id', Auth()->user()->company_id)
+            ->where('id', '<>', $request->id)
               ->where('vehicle_id', $request->vehicle_id)
               ->whereDate('start_date', '<=', $request->start_date)
               ->whereDate('end_date', '>=', $request->start_date)
               ->first();
-            $check_lead = DB::table('bookings')->where('company_id', Auth()->user()->company_id)
-           
+            $check_lead = Booking::select('*')->where('company_id', Auth()->user()->company_id)
+            ->where('id', '<>', $request->id)
             ->where('vehicle_id', $request->vehicle_id)
             ->whereDate('start_date', '<=', $request->end_date)
             ->whereDate('end_date', '>=', $request->end_date)
             ->first();
-            //dd($check_lag->id);
-            //dd($check_lead->id);
-            $status = false;
-            if(!empty($check_lag)){
-            if($check_lag->id == $request->id){
-                $status = false;
-            }
-            elseif($check_lag->id != $request->id){
-                $status = true;
-            }
-            }
-        if(!empty($check_lead)){
-            if($check_lead->id == $request->id){
-                $status = false;
-            }
-            elseif($check_lead->id != $request->id){
-                $status = true;
-            }
-        }
+            $check_lag = json_decode(json_encode($check_lag), true);
+            $check_lead = json_decode(json_encode($check_lead), true);
+            //dd($check_lag);
+            //dd($check_lead);
             
             
-            if($status == false){
+            
+            if($check_lag ==null && $check_lead ==null){
             $booking = Booking::find($request->id);
             $booking->update($data);
             History::Create( [
@@ -137,17 +123,21 @@ class BookingController extends Controller
             }
            
         } else{
-            $check_lag = DB::table('bookings')->where('company_id', Auth()->user()->company_id)
+            $check_lag = Booking::select('*')->where('company_id', Auth()->user()->company_id)
               ->where('vehicle_id', $request->vehicle_id)
               ->whereDate('start_date', '<=', $request->start_date)
               ->whereDate('end_date', '>=', $request->start_date)
               ->first();
-            $check_lead = DB::table('bookings')->where('company_id', Auth()->user()->company_id)
+            $check_lead = Booking::select('*')->where('company_id', Auth()->user()->company_id)
             ->where('vehicle_id', $request->vehicle_id)
             ->whereDate('start_date', '<=', $request->end_date)
             ->whereDate('end_date', '>=', $request->end_date)
             ->first();
-            if($check_lag->id =='' && $check_lead->id ==''){
+            $check_lag = json_decode(json_encode($check_lag), true);
+            $check_lead = json_decode(json_encode($check_lead), true);
+            //dd($check_lag);
+            //dd($check_lead);
+            if($check_lag ==null && $check_lead ==null){
             $booking   =   Booking::Create( [
                         'company_id' => Auth()->user()->company_id,
                         'vehicle_id'=> $request->vehicle_id,
@@ -163,7 +153,7 @@ class BookingController extends Controller
                         'lead_notes'=> $request->lead_notes,
                         'show_delivery_day'=> $request->show_delivery_day,
                         'show_collection_day'=> $request->show_collection_day,
-                        'contacts'=> !empty($request->contacts)? implode(",", $request->contacts->all()):'',
+                        'contacts'=> $request->contacts,
                         'primary_contact'=> $request->primary_contact,
                         'email_template'=> !empty($request->email_template)? implode(",", $request->email_template):'',
                         'email_service' => $request->email_service,

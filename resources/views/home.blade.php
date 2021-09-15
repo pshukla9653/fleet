@@ -737,6 +737,8 @@
                                                     ->whereDate('end_date', '>=', $thisdate)
                                                     ->get();
                                                 foreach ($booking as $key => $value) {
+                                                    $contact_detail = DB::table('contacts')->where('id',$value->primary_contact)->first();
+                                                    $loan_detail = DB::table('loan_types')->where('id',$value->loan_type)->first();
                                                     $lag_date = date('Y-m-d', strtotime($value->start_date . '-' . $value->lag_time . ' day'));
                                                     $lead_date = date('Y-m-d', strtotime($value->end_date . '+' . $value->lead_time . ' day'));
                                                     if ($value->booking_start_date <= $thisdate && $value->booking_end_date >= $thisdate) {
@@ -747,6 +749,7 @@
                                                     }
                                                     if ($value->end_date >= $thisdate && $value->booking_end_date < $value->end_date) {
                                                         echo 'style="background-color:#abfb0f;"';
+                                                        //#abfb0f
                                                     }
                                                 }
                                             @endphp>
@@ -770,7 +773,7 @@
                                       <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
                                       <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->booking_start_date), 'd-M-Y') }}</td></tr>
                                       <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->booking_end_date), 'd-M-Y') }}</td></tr>
-                                      <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Primary Contact:</b></td><td></td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Primary Contact:</b></td><td>{{$contact_detail->first_name.' '.$contact_detail->last_name}}</td></tr>
                                       
                                       
                                     </table>
@@ -780,9 +783,9 @@
                                       <tr><td style='color:#376473;font-weight:600;' colspan='2'>Vehicle Information<br>&nbsp;<br></td></tr>
                                       <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->booking_start_date), 'd-M-Y') }}</td></tr>
                                       <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->booking_end_date), 'd-M-Y') }}</td></tr>
-                                      <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Primary Contact:</b></td><td>  </td></tr>
-                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Company:</b></td><td></td></tr>
-                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Loan Type:</b></td><td></td></tr>
+                                      <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Primary Contact:</b></td><td>{{$contact_detail->first_name.' '.$contact_detail->last_name}}</td></tr>
+                                      
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Loan Type:</b></td><td>{{$loan_detail->loan_type}}</td></tr>
                                       <tr style='font-size:12px;'><td style='padding:2px;'><b>Purpose of Loan:</b></td><td>{{ $value->purpose_of_loan }}</td></tr>
                                       <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Booking Reference:</b></td><td>{{ $value->booking_reference }}</td></tr>
                                       <tr style='font-size:12px;'><td style='padding:2px;'><b>Booking Notes:</b></td><td>{{ $value->booking_notes }}</td></tr>
@@ -889,6 +892,14 @@
             width: 1000px;
             font-size: 12px;
         }
+        .input-hidden{
+        height:0;
+        width:0;
+        visibility: hidden;
+        padding:0;
+        margin:0;
+        float:right;
+}
 
     </style>
     <div id="popup_model1" data-backdrop="false" class="modal fade" style="overflow-y: auto;">
@@ -1045,17 +1056,17 @@
                                             </div>
                                             <label for="w3review">Contacts:</label>
 
-                                            <select class="checkings" id="contact_list_d" name="contacts[]" size="5"
+                                            <select class="checkings" id="contact_list_d"  size="5"
                                                 style="width:100%;background-color: #f2f2f2;" multiple>
                                             </select>
-                                            <!-- <textarea id="" name="contacts" rows="5" cols="47" class="form-control custom-modal-textbox3"> </textarea> -->
+                                            <input type="hidden" name="contacts" id="contact_field" class="input-hidden" />
                                             <!-- button -->
                                             <div class="button1">
                                                 <a href="javascript:void(0)" class="anchor-btn" id="edit_contact"
                                                     style="margin-right: 10px;">Edit</a>&nbsp
                                                 <a href="javascript:void(0)" class="anchor-btn" id="mark_as_primary"
                                                     style="margin-right: 10px;">Mark as primary</a>&nbsp
-                                                <input type="hidden" name="primary_contact" id="primary_contact" value="0">
+                                                <input type="hidden" name="primary_contact" id="primary_contact" value="">
                                                 <a href="javascript:void(0)" class="anchor-btn" id="delete_list"
                                                     style="background-color:#ff4e4e;border-color: #ff4e4e;">Delete</a>
 
@@ -1692,6 +1703,8 @@
                             $('#model_number').html('Model: ' + model);
                             $('#derivative').html('Derivative: ' + derivative);
                             $('#vehicle').html(reg_number);
+                            $('#start_date_picker.date').datepicker("update", res.booking_list.booking_start_date);
+                            $('#end_date_picker.date').datepicker("update", res.booking_list.booking_end_date);
                             $.each(res.booking_list, function(key, value) {
                                 if (key == 'booking_notes' || key == 'lag_notes' || key ==
                                     'lead_notes' ||
@@ -1724,6 +1737,7 @@
                                             }
                                             $('#contact_list_d').append(new Option(addtext, v
                                                 .id));
+                                            $('#contacts').val(value);
 
 
                                         });
@@ -1772,6 +1786,7 @@
         }
 
         function getExistingContact() {
+            $('.select-remote-data').empty();
             $.ajax({
                 type: "GET",
                 url: "{{ url('get-contact-lists-booking') }}",
@@ -1797,12 +1812,15 @@
         $('#insert_list').click(function() {
             var data = $('.select-remote-data').select2('data');
             console.log(data);
+           var primary_contact = $('#primary_contact').val();
            
-            if (data.length == 1 && $('#primary_contact').val()=='') {
+            if (data.length == 1 && primary_contact=='') {
+               
                 var x = data[0].text + '*';
                 $('#primary_contact').val(data[0].id);
                 $('#contact_list_d').append(new Option(x, data[0].id));
             } else {
+               
                 $.each(data, function(index, item) {
                     console.log(item);
                     $('#contact_list_d').append(new Option(item.text, item.id));
@@ -1816,12 +1834,15 @@
                 } else {
                     code[this.text] = this.value;
                 }
-            });                 
+            });
+            $('#popup_model_editor').modal('hide');                 
         });
         $('#delete_list').click(function() {
+            var data = $('.select-remote-data').select2('data');
             $('#contact_list_d option:selected').remove();
-            $('#popup_model_editor').modal('hide');
-            $('#popup_model1').modal('show');
+            if(data.length == 0){
+                $('#primary_contact').val('');   
+            }
         });
         $('#mark_as_primary').click(function() {
             var id = $('#contact_list_d').find('option:selected').val();
@@ -1922,6 +1943,8 @@
 
                     if (res.status == true) {
                         $('#btn').html('Update');
+                        $('#start_date_picker.date').datepicker("update", res.booking_list.booking_start_date);
+                        $('#end_date_picker.date').datepicker("update", res.booking_list.booking_end_date);
                         $.each(res.booking_list, function(key, value) {
                             if (key == 'booking_notes' || key == 'lag_notes' || key == 'lead_notes' ||
                                 key == 'ob_pick_from_notes' || key == 'ib_deliver_to_notes' || key ==
@@ -1951,6 +1974,7 @@
                                             addtext = v.name;
                                         }
                                         $('#contact_list_d').append(new Option(addtext, v.id));
+                                        $('#contacts').val(value);
 
                                     });
                                 } else {
@@ -1983,17 +2007,27 @@
                 }
             });
             var btn_name = $("#btn").html();
+            var contact = new Array();
             $("#btn").html('Please Wait...');
             $("#contact_list_d option").each(function(){
-                
-                $(this).attr("selected","selected")
+                contact.push($(this).val());
             });
-            
-                //throw new Error('This is not an error. This is just to abort javascript');
+            if(contact.length==0){
+                $('#contact_field').val('');
+                alert('Contacts Required!');
+                $("#btn").html(btn_name);
+                throw new Error('This is not an error. This is just to abort javascript');
+            }
+            else if(contact.length!=0){
+             $('#contact_field').val(contact.toString());
+            const data = new FormData(this);
+            console.log(contact);
+            console.log(data.get('contacts'));
+               // throw new Error('This is not an error. This is just to abort javascript');
             $.ajax({
                 type: "POST",
                 url: "{{ url('store-booking') }}",
-                data: new FormData(this),
+                data: data,
                 contentType: false,
                 cache: false,
                 processData: false,
@@ -2010,6 +2044,7 @@
                     }
                 }
             });
+            }
             
         });
         //add contact
@@ -2091,8 +2126,8 @@
                     });
                 }
             });
-        });
-        //add list
+
+            //add list
         $("#list-form").submit(function(event) {
             event.preventDefault();
             $.ajaxSetup({
@@ -2101,10 +2136,13 @@
                 }
             });
             $("#listbtn").html('Please Wait...');
+            var data = new FormData(this);
+            console.log(data.get());
+            throw new Error('This is not an error. This is just to abort javascript');
             $.ajax({
                 type: "POST",
                 url: "{{ route('lists.store') }}",
-                data: new FormData(this),
+                data: data,
                 contentType: false,
                 cache: false,
                 processData: false,
@@ -2120,6 +2158,8 @@
                 }
             });
         });
+        });
+        
         $(document).ready(function($) {
             $.ajaxSetup({
                 headers: {
@@ -2174,10 +2214,12 @@
             daysOfWeekHighlighted: "0",
             autoclose: true
         });
+        
         $('#start_date_picker.date').datepicker({
             format: "yyyy-mm-dd",
             daysOfWeekHighlighted: "0",
-            autoclose: true
+            autoclose: true,
+            
         });
         $("#start_date_picker input").change(function() {
             var d = $("#start_date_picker input").val();
@@ -2218,6 +2260,8 @@
             }
             var start_date = d.getFullYear() + '-' + month + '-' + day;
             $('input[name="start_date"]').val(start_date);
+            
+            
 
         }
 
@@ -2241,6 +2285,7 @@
             var vehicle_id = $('#vehicle_id').val();
             
             
+            
 
         }
         //set/ get end date based on booking end date and lead time 
@@ -2262,6 +2307,7 @@
             }
             var end_date = d.getFullYear() + '-' + month + '-' + day;
             $('input[name="end_date"]').val(end_date);
+            
 
         }
         
