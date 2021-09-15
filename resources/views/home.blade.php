@@ -486,6 +486,10 @@
     .custom-modal-textbox {
         width: 100% !important;
     }
+    .col-pa{
+        padding:10px 5px !important;
+        text-align: center;
+    }
 
 </style>
 
@@ -657,8 +661,11 @@
                             <tr>
                                 <th style="width: 7%; font-weight: 600;">VEHICLES</th>
                                 @for ($i = 0; $i < $days; $i++)
-                                    <th style="padding:10px; font-size:8px;font-weight: 600;">
-                                        {{ date('d-m-y', strtotime($start_date . '+' . $i . ' day')) }}</th>
+                                    <th class='col-pa' style=" font-size:8px;font-weight: 600;">
+                                        {{ date('d', strtotime($start_date . '+' . $i . ' day')) }}
+                                        <br>{{ date('m', strtotime($start_date . '+' . $i . ' day')) }}
+                                        <br>{{ date('y', strtotime($start_date . '+' . $i . ' day')) }}
+                                    </th>
                                 @endfor
                             </tr>
                         </thead>
@@ -728,7 +735,7 @@
                                             
                                         @endphp
 
-                                        <td onclick="makebooking('{{ $vehicle->id }}','{{ $thisdate }}','{{ $img_path }}','{{ $vehicle->registration_number }}','{{ $vehicle->registration_plate_colour }}','{{ $vehicle->brand->brand_name }}','{{ $vehicle->model }}','{{ $vehicle->derivative }}','{{ $vehicle->lead_time }}','{{ $vehicle->lag_time }}');"
+                                        <td class='col-pa' onclick="makebooking('{{ $vehicle->id }}','{{ $thisdate }}','{{ $img_path }}','{{ $vehicle->registration_number }}','{{ $vehicle->registration_plate_colour }}','{{ $vehicle->brand->brand_name }}','{{ $vehicle->model }}','{{ $vehicle->derivative }}','{{ $vehicle->lead_time }}','{{ $vehicle->lag_time }}');"
                                             @php
                                                 $booking = DB::table('bookings')
                                                     ->where('company_id', Auth()->user()->company_id)
