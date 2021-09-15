@@ -663,7 +663,7 @@
                                 @for ($i = 0; $i < $days; $i++)
                                     <th class='col-pa' style=" font-size:8px;font-weight: 600;">
                                         {{ date('d', strtotime($start_date . '+' . $i . ' day')) }}
-                                        <br>{{ date('m', strtotime($start_date . '+' . $i . ' day')) }}
+                                        <br>{{ date('M', strtotime($start_date . '+' . $i . ' day')) }}
                                         <br>{{ date('y', strtotime($start_date . '+' . $i . ' day')) }}
                                     </th>
                                 @endfor
@@ -765,7 +765,7 @@
 
                                                 @if ($value->id)
                                                     <span data-popup="tooltip" title="
-                            <div style='background-color:#fff;width:800px;height:auto;padding:10px;border: 1px solid #bbb8b8;'>
+                            <div style='background-color:#fff;width:700px;height:auto;padding:10px;border: 1px solid #bbb8b8;'>
                               <table cellpadding = '10' cellspacing = '10'>
                                 <tr></tr>
                                 <tr>
@@ -816,8 +816,12 @@
 
                               </table>
                             </div>
-                            " data-html="true" data-placement="right"
-                                                        style="font-weight: 600; font-size:12px; padding: 5px;border-radius: 5px;white-space: nowrap;position: absolute;">@if($contact_detail && $value->booking_start_date==$thisdate){{$contact_detail->first_name.' '.$contact_detail->last_name}}@endif</span>
+                            " data-html="true" data-placement="auto"
+                                                        style="font-size:9px; color:#fff; padding: 20px;margin: -30px 0px 0px -30px;border-radius: 5px;white-space: nowrap;position: absolute;">@if($contact_detail && $value->booking_start_date==$thisdate){{$contact_detail->first_name.' '.$contact_detail->last_name}}
+                                                    @else
+                                                    &nbsp;&nbsp;&nbsp;
+                                                    @endforelse
+                                                    </span>
                                                 @endif
                                             @endforeach
                                         </td>
