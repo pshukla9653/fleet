@@ -1812,8 +1812,8 @@
             var data = $('.select-remote-data').select2('data');
             console.log(data);
            var primary_contact = $('#primary_contact').val();
-           
-            if (data.length == 1 && primary_contact=='') {
+           var v= $('#contact_list_d option').length;
+            if (v == 0 && primary_contact=='') {
                
                 var x = data[0].text + '*';
                 $('#primary_contact').val(data[0].id);
@@ -1828,22 +1828,23 @@
             }
             var code = {};
                 $("#contact_list_d > option").each(function () {
-                if(code[this.text]) {
+                if(code[this.value]) {
                     $(this).remove();
                 } else {
-                    code[this.text] = this.value;
+                    code[this.value] = this.value;
                 }
             });
             $('#popup_model_editor').modal('hide');                 
         });
         $('#delete_list').click(function() {
-            var data = $('.select-remote-data').select2('data');
-            $('#contact_list_d option:selected').remove();
-            if(data.length == 0){
+            var value = $('#contact_list_d option:selected').val();
+            var primary = $('#primary_contact').val();
+            if(value == primary){
                 $('#primary_contact').val('');   
             }
+            $('#contact_list_d option:selected').remove();
         });
-        $('#mark_as_primary').click(function() {
+        $ ('#mark_as_primary').click(function() {
             var id = $('#contact_list_d').find('option:selected').val();
             var text = $('#contact_list_d').find('option:selected').text();
 
@@ -2012,9 +2013,16 @@
             $("#contact_list_d option").each(function(){
                 contact.push($(this).val());
             });
+            var primary = $('#primary_contact').val();
             if(contact.length==0){
                 $('#contact_field').val('');
                 alert('Contacts Required!');
+                $("#btn").html(btn_name);
+                throw new Error('This is not an error. This is just to abort javascript');
+            }
+            else if(primary== ''){
+                
+                alert('Please mark a Primary Contact!');
                 $("#btn").html(btn_name);
                 throw new Error('This is not an error. This is just to abort javascript');
             }
