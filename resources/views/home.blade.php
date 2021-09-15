@@ -1770,6 +1770,7 @@
                             $('#vehicle').html(reg_number);
                             $('input[name="lead_time"]').val(lead_time);
                             $('input[name="lag_time"]').val(lag_time);
+                            $('#start_date_picker.date').datepicker("update", date);
                             $('#contact_list_d').empty();
                             set_second_cal();
                             set_start_date();
@@ -1925,6 +1926,7 @@
             $('#vehicle').html(reg_number);
             $('#booking_created').html('');
             $('#booking_modified').html('');
+            $('#start_date_picker.date').datepicker("update", date);
             $('#contact_list_d').empty();
             set_second_cal();
             set_start_date();
