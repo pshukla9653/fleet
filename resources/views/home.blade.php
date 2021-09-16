@@ -1821,10 +1821,10 @@
         }
         $('#insert_list').click(function() {
             var data = $('.select-remote-data').select2('data');
-            console.log(data);
+            
            var primary_contact = $('#primary_contact').val();
            var v= $('#contact_list_d option').length;
-            if (v == 0 && primary_contact=='') {
+            if (v == 0 && primary_contact=='' && data.length ==1) {
                
                 var x = data[0].text + '*';
                 $('#primary_contact').val(data[0].id);
@@ -1848,20 +1848,33 @@
             $('#popup_model_editor').modal('hide');                 
         });
         $('#delete_list').click(function() {
-            var value = $('#contact_list_d option:selected').val();
+            var value ='';
+            value = $('#contact_list_d option:selected').val();
             var primary = $('#primary_contact').val();
-            if(value == primary){
+            
+            if(typeof value === 'undefined'){
+                alert('Please Select a Contact for delete');
+            }
+            else{
+                
+                if(value == primary){
                 $('#primary_contact').val('');   
             }
             $('#contact_list_d option:selected').remove();
+            }
+            
         });
         $ ('#mark_as_primary').click(function() {
-            var id = $('#contact_list_d').find('option:selected').val();
-            var text = $('#contact_list_d').find('option:selected').text();
-
-            if (id == 0) {
+            var id = '';
+            var text = '';
+            id = $('#contact_list_d option:selected').val();
+            
+            if (typeof id === 'undefined') {
                 alert("Please Select a Contact to make Mark as Primary");
             } else {
+                var check_id = $('#primary_contact').val();
+                if(check_id != id){
+                text = $('#contact_list_d').find('option:selected').text();
                 $("#contact_list_d option").each(function() {
 
                     $(this).text($(this).text().replace('*', ''));
@@ -1869,6 +1882,9 @@
                 $('#primary_contact').val(id);
                 $('#contact_list_d option:selected').text(text + '*');
                 alert("Mark as Primary Successful");
+                }else{
+                    alert('This contact already selected as a primary contact! Please select another one');
+                }
 
             }
         });
