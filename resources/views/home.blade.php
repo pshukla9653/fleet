@@ -1490,8 +1490,8 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content" style="background-color: #f2f2f2;width: auto;">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><i
-                            class="icon-cancel-circle2"></i></button>
+                    <button type="button" class="close"><i
+                            class="icon-cancel-circle2" onclick="$('#popup_model').modal('hide')"></i></button>
                 </div>
                 <h6 class="modal-title md-heading-custom">Add Contact</h6>
                 <form action="javascript:void(0)" id="contactform" class="form-horizontal" method="POST">
@@ -1585,8 +1585,8 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content" style="background-color: #f2f2f2;width: auto;">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><i
-                            class="icon-cancel-circle2"></i></button>
+                    <button type="button" class="close"><i
+                            class="icon-cancel-circle2" onclick="$('#list_popup_model').modal('hide')"></i></button>
 
                 </div>
                 <h6 class="modal-title md-heading-custom">Add List</h6>
