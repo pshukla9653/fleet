@@ -1189,7 +1189,7 @@
                                         <div class="main-for-checking1">
 
                                             <div class="container">
-                                                <span>Deliver To</span><br>
+                                                <span>Deliver to factory</span><br>
                                                 <label class="switch1" for="checkbox1">
                                                     <input type="checkbox" id="checkbox1" checked name="ob_deliver_to" />
                                                     <div class="slider1 round1"></div>
@@ -1354,7 +1354,7 @@
                                         <div class="main-for-checking1" style="    margin-left: 88px;">
 
                                             <div class="for-checking">
-                                                <span>Deliver To</span><br>
+                                                <span>Deliver to factory</span><br>
                                                 <label class="switcha">
                                                     <input type="checkbox" checked name="ib_deliver_to">
                                                     <span class="slidera rounda"></span>
