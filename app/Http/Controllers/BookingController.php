@@ -302,4 +302,11 @@ class BookingController extends Controller
 
     }
     
+    public function destroy(Request $request)
+    {
+        //
+       
+		Booking::find($request->id)->delete();
+        return response()->json(['success' => true]);
+    }
 }

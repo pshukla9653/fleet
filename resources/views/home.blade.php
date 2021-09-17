@@ -506,9 +506,7 @@
 
     <div class="row">
         <div class="col-md-8" style="padding: 0px 30px 0px 30px;display: inline-flex;">
-            <select class="form-control border-0" style="background: transparent;width:12%;">
-                <option>Filter</option>
-            </select>
+            
         </div>
         <!-- <div class="col-md-4" style="padding: 30px;">
                 <select class="form-control border-0" style="background: transparent;width:6%;">
@@ -555,7 +553,7 @@
                             <div class="form-group">
                                 <div id="custom_input"></div>
                                 <button class="btn btn-outline-success"
-                                    style="width: 126px;left: 4px;bottom: -29px;height: 35px;">
+                                    style="width: 150px;left: -10px;bottom: -29px;height: 35px;padding:2px;">
                                     <i class="fa fa-fast-backward" onclick="step_fast_backward_date();"></i>
                                     <i class="fa fa-step-backward" onclick="step_backward_date();"></i>
                                     <span
@@ -1017,7 +1015,7 @@
                                                 loan1">Loan Type:</span><br>
                                                 <select id="cars" name="loan_type"
                                                     class="form-control custom-modal-textbox2"
-                                                    style="height: 26px;padding: 0px;width: 298px">
+                                                    style="height: 26px;padding: 0px;width: 298px" required>
                                                     @foreach ($loan_type as $key => $value)
                                                         <option value="{{ $value->id }}">{{ $value->loan_type }}
                                                         </option>
@@ -1034,9 +1032,9 @@
                                             </div>
                                             <div class="book-loan">
                                                 <input type="text" name="lag_time" onchange="get_start_date()"
-                                                    class="ref-name form-control custom-modal-textbox1">&nbsp&nbsp
+                                                    class="ref-name form-control custom-modal-textbox1" required>&nbsp&nbsp
                                                 <input type="text" name="lead_time" onchange="get_end_date()"
-                                                    class="loan-name form-control custom-modal-textbox1">
+                                                    class="loan-name form-control custom-modal-textbox1" required>
                                             </div>
                                             <br>
                                             <span class="loan1">Lead time Notes:</span>
@@ -1068,7 +1066,7 @@
                                             <label for="w3review">Contacts:</label>
 
                                             <select class="checkings" id="contact_list_d"  size="5"
-                                                style="width:100%;background-color: #f2f2f2;" multiple>
+                                                style="width:100%;background-color: #f2f2f2;">
                                             </select>
                                             <input type="hidden" name="contacts" id="contact_field" class="input-hidden" />
                                             <!-- button -->
@@ -1174,7 +1172,7 @@
                                         <div class="main-for-checking">
 
                                             <div class="for-checking">
-                                                <label>Pickup Form</label><br>
+                                                <label>Pickup from factory</label><br>
                                                 <label class="switch" for="checkbox">
                                                     <input type="checkbox" id="checkbox" checked name="ob_pick_from" />
                                                     <div class="slider round"></div>
@@ -1294,7 +1292,7 @@
 
                                         <div class="main-for-checking11">
                                             <div class="for-checking11">
-                                                <span>Pickup From</span><br>
+                                                <span>Pickup from factory</span><br>
                                                 <label class="switcha">
                                                     <input type="checkbox" checked name="ib_pick_from">
                                                     <span class="slidera rounda"></span>
@@ -1384,6 +1382,8 @@
                                     change</button>
                                 <button type="button" class="btn custom-modal-btn btn-danger"
                                     data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn custom-modal-btn btn-danger"
+                                    style="float: right" onclick="deleteitem();">Delete</button>
 
                             </div><br>
                 </form>
@@ -1601,51 +1601,31 @@
                                     <input type="text" form="list-form" name="list_name" id="list_name" placeholder="List"
                                         class="form-control custom-modal-textbox">
                                 </div>
-                                <div class="text-danger"></div>
+                                
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0px;">
+                                <div class="form-group" style="margin-bottom: 0px;"> <strong>Contacts:</strong>
+                                    <select class="select-contact-data-list form-control custom-modal-textbox">
+                                    </select>
+                                </div>
+                                
+                            </div>
+                            <div class="text-right">
+                                <button type="submit" class="btn custom-modal-btn anchor-btn" id="add_c_list">Add Contact</button>
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6">
-                            <button type="button" class="btn btn-primary" style="margin-top: 30px;font-size: 10px;"
-                                onclick="getContactList()">Add Existing Contact</button>
+                            <div class="form-group" style="margin-bottom: 0px;"> <strong>Selected Contacts:</strong>
+                            <select class="checkings" id="contact_list_final" size="5" style="margin-top: 10px;width:100%;background-color: #f2f2f2;">
+                            </select>
+                            </div>
+                            <div class="text-right">
+                                <button type="submit" class="btn custom-modal-btn btn-danger" id="delete_c_list">Delete</button>
+                            </div>
+                            
                         </div>
                     </div>
-                    <div class="row contact-list-row" style="display: none">
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <hr>
-                            <h4>List of Contacts</h4>
-
-
-                            <table class="table table-bordered table-responsive" id="list-mytable">
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Surname</th>
-                                    <th>Email</th>
-                                    <th>Action</th>
-                                </tr>
-
-                            </table>
-                            <button type="button" class="btn btn-primary text-end"
-                                style="margin-top: 30px;font-size: 10px;float: right;" id="add-rows">Add</button>
-                        </div>
-                    </div>
-                    <div class="row" style="">
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <h4>Added List of Contact</h4>
-                            <form action="javascript:void(0)" id="list-form" class="form-horizontal" style="padding: 20px"
-                                method="POST">
-
-                                <table class="table table-bordered table-responsive" id="final-contact">
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Surname</th>
-                                        <th>Email</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </table>
-
-                            </form>
-                        </div>
-                    </div>
+                    
 
                 </div>
 
@@ -1830,12 +1810,15 @@
                 $('#primary_contact').val(data[0].id);
                 $('#contact_list_d').append(new Option(x, data[0].id));
             } else {
-               
                 $.each(data, function(index, item) {
-                    console.log(item);
                     $('#contact_list_d').append(new Option(item.text, item.id));
-                    $('#popup_model_editor').modal('hide');
                 });
+                if(primary_contact ==''){
+                    var first_id = $("#contact_list_d option:first").val();
+                    var first_text = $("#contact_list_d option:first").text();
+                    $('#primary_contact').val(first_id);
+                    $("#contact_list_d option:first").text(first_text+'*');
+                }
             }
             var code = {};
                 $("#contact_list_d > option").each(function () {
@@ -1847,6 +1830,23 @@
             });
             $('#popup_model_editor').modal('hide');                 
         });
+        $('#add_c_list').click(function() {
+            var data = $('.select-contact-data-list').select2('data');
+            
+            $.each(data, function(index, item) {
+                    $('#contact_list_final').append(new Option(item.text, item.id));
+                });
+            var code = {};
+                $("#contact_list_final > option").each(function () {
+                if(code[this.value]) {
+                    $(this).remove();
+                } else {
+                    code[this.value] = this.value;
+                }
+            });
+                             
+        });
+        
         $('#delete_list').click(function() {
             var value ='';
             value = $('#contact_list_d option:selected').val();
@@ -2035,8 +2035,9 @@
                 }
             });
             var btn_name = $("#btn").html();
-            var contact = new Array();
+            
             $("#btn").html('Please Wait...');
+            var contact = new Array();
             $("#contact_list_d option").each(function(){
                 contact.push($(this).val());
             });
@@ -2056,8 +2057,7 @@
             else if(contact.length!=0){
              $('#contact_field').val(contact.toString());
             const data = new FormData(this);
-            console.log(contact);
-            console.log(data.get('contacts'));
+            
                // throw new Error('This is not an error. This is just to abort javascript');
             $.ajax({
                 type: "POST",
@@ -2082,7 +2082,8 @@
             }
             
         });
-        //add contact
+
+        //add new contact
         $(document).ready(function($) {
             $.ajaxSetup({
                 headers: {
@@ -2162,6 +2163,7 @@
                     });
                 }
             });
+            //end add new contact
 
             //add list
         $("#list-form").submit(function(event) {
@@ -2203,26 +2205,57 @@
                 }
             });
             $('#add-list-contact').click(function() {
-
-                $('#list-form').trigger("reset");
-                $("#listbtn").attr("disabled", false);
-                $('.text-danger').html('');
-                $('#final-contact').html(
-                    '<tr> <th>Name</th> <th>Surname</th> <th>Email</th> <th>Action</th> </tr>');
-                $('#list-mytable').html('');
                 $('#list_popup_model').modal('show');
             });
 
             $('#listbtn').click(function(event) {
-                $("#list-form").submit();
+                $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+                });
+                var list_name = $('#list_name').val();
+                var contact = new Array();
+                $("#contact_list_final option").each(function(){
+                contact.push($(this).val());
+                });
+                console.log(contact);
+               // throw new Error('This is not an error. This is just to abort javascript');
+                if(list_name ==''){
+                    alert('List name required!');
+                }
+                else if(contact.length==0){
+                    alert('Contacts required!');
+                     
+                }
+                else{
+
+                $.ajax({
+                type: "POST",
+                url: "{{ route('lists.store') }}",
+                data: {
+                    list_name:list_name,
+                    contacts:contact
+                },
+                dataType: 'json',
+                success: function(res) {
+                    console.log(res);
+                    if (res.success == true) {
+                        $('#list_popup_model').modal('hide');
+                    } else {
+                        
+                        $("#listbtn").html(btn);
+                        $("#listbtn").attr("disabled", false);
+                    }
+                }
+            });
+                }
             });
         });
 
 
 
-        function removethis(_this) {
-            $(_this).parents(".contact-row").remove();
-        }
+        
         $('#add-rows').click(function() {
             $('#list-mytable').find('tr').each(function() {
                 var row = $(this);
@@ -2245,6 +2278,8 @@
             });
             $('.contact-list-row').css('display', 'none');
         });
+
+
         $('.form-group.date').datepicker({
             format: "yyyy-mm-dd",
             daysOfWeekHighlighted: "0",
@@ -2383,7 +2418,7 @@
                 }
             });
         }
-        // Initialize
+        // Initialize select2 for contact list
         $(".select-remote-data").select2({
             ajax: {
                 type: "POST",
@@ -2421,6 +2456,68 @@
 
 
         });
+
+        $(".select-contact-data-list").select2({
+            ajax: {
+                type: "POST",
+                url: "{{ url('get-contact-lists') }}",
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page
+                    };
+                },
+                processResults: function(data) {
+                    return {
+                        results: $.map(data, function(item) {
+                            return {
+                                text: item.first_name + ' ' + item.last_name,
+                                id: item.id,
+
+                            }
+                        })
+                    };
+                }
+
+            },
+            escapeMarkup: function(markup) {
+                return markup;
+            }, // let our custom formatter work
+            minimumInputLength: 1,
+            multiple: true,
+            placeholder: "Search Here",
+
+
+
+
+
+        });
+    function deleteitem() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    var id = $('#id').val();
+    if (confirm("Delete Booking?") == true) {
+
+
+        // ajax
+        $.ajax({
+            type: "POST",
+            url: "{{ url('delete-booking') }}",
+            data: {
+                id: id
+            },
+            dataType: 'json',
+            success: function(res) {
+                window.location.reload();
+            }
+        });
+    }
+}
     </script>
 
 @endsection

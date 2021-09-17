@@ -285,8 +285,8 @@
                   <input type="hidden" id="item_id" name="id">
                     <div class="form-group" style="margin-top: 15px;">
                       <strong>Brand:</strong>
-                          <select name="brand_id" id="brand_id" class="form-control custom-modal-textbox">
-                           
+                          <select name="brand_id" id="brand_id" class="form-control custom-modal-textbox" required>
+                            <option value="" selected>Select</option>
                             @foreach ($brands as $key=>$brand)
                             <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
                             @endforeach
@@ -297,7 +297,7 @@
                     <div class="form-group">
                       <strong>Model:</strong>
                         {!! Form::text('model', null, array('placeholder' => 'Model','class' =>
-                        'form-control custom-modal-textbox', 'id' =>'model')) !!}
+                        'form-control custom-modal-textbox', 'id' =>'model','required' =>'required')) !!}
                         <div class="text-danger" id="model"></div>
                     </div>
                            
@@ -305,14 +305,14 @@
                     <div class="form-group">
                       <strong>Derivative:</strong>
                         {!! Form::text('derivative', null, array('placeholder' => 'Derivative','class' =>
-                        'form-control custom-modal-textbox', 'id' =>'derivative')) !!}
+                        'form-control custom-modal-textbox', 'id' =>'derivative','required' =>'required')) !!}
                       <div class="text-danger" id="derivative"></div>
                     </div>
                             
                     <div class="form-group">
                       <strong>Region:</strong>
-                        <select name="region_id" id="region_id" class="form-control custom-modal-textbox">
-                           
+                        <select name="region_id" id="region_id" class="form-control custom-modal-textbox" required>
+                          <option value="" selected>Select</option>
                             @foreach ($regions as $key=>$region)
                             <option value="{{$region->id}}">{{$region->region_name}}</option>
                             @endforeach
@@ -323,8 +323,8 @@
                             
                     <div class="form-group">
                       <strong>Department:</strong>
-                      <select name="department_id" id="department_id" class="form-control custom-modal-textbox">
-                        
+                      <select name="department_id" id="department_id" class="form-control custom-modal-textbox" required>
+                        <option value="" selected>Select</option>
                             @foreach ($departments as $key=>$department)
                             <option value="{{$department->id}}">{{$department->department_name}}</option>
                             @endforeach
@@ -334,14 +334,14 @@
                     <div class="form-group">
                       <strong>Registration Number:</strong>
                       {!! Form::text('registration_number', null, array('placeholder' => 'Registration No.','class' =>
-                      'form-control custom-modal-textbox', 'id' =>'registration_number')) !!}
+                      'form-control custom-modal-textbox', 'id' =>'registration_number','required' =>'required')) !!}
                       <div class="text-danger" id="registration_number"></div>
                     </div>
                               
                     <div class="form-group">
                       <strong>Loan Cost:</strong>
                       {!! Form::number('loan_cost', null, array('placeholder' => '0.00','class' =>
-                      'form-control custom-modal-textbox', 'id' =>'loan_cost')) !!}
+                      'form-control custom-modal-textbox', 'id' =>'loan_cost','required' =>'required')) !!}
                       <div class="text-danger" id="loan_cost"></div>
                     </div>
                               
@@ -354,7 +354,7 @@
                     <div class="form-group">
                       <strong>VIN:</strong>
                       {!! Form::text('vin', null, array('placeholder' => 'VIN','class' =>
-                      'form-control custom-modal-textbox', 'id' =>'vin')) !!}
+                      'form-control custom-modal-textbox', 'id' =>'vin','required' =>'required')) !!}
                       <div class="text-danger" id="vin"></div>
                     </div>
                   </div> 
@@ -364,7 +364,7 @@
                         <div id="start_date_picker" class="input-group date">
                           <input type="text" name="adoption_date" placeholder="yyyy-mm-dd"
                               class="form-control custom-modal-textbox"
-                              style="width: 116px;" id="adoption_date" required readonly/>
+                              style="width: 116px;" id="adoption_date" required/>
                               <span class="input-group-addon" style="float: right;">
                                   <img src="{{ asset('assets/images/icon/calendar.png') }}" alt="icon"
                                       style="width: 17px;margin-left: -14px;margin-top: 6px;" />
@@ -379,7 +379,7 @@
                         <div id="end_date_picker" class="input-group date">
                           <input type="text" name="projected_defleet_date" placeholder="yyyy-mm-dd"
                               class="form-control custom-modal-textbox"
-                              style="width: 116px;" id="projected_defleet_date" required readonly/>
+                              style="width: 116px;" id="projected_defleet_date" required/>
                               <span class="input-group-addon" style="float: right;">
                                   <img src="{{ asset('assets/images/icon/calendar.png') }}" alt="icon"
                                       style="width: 17px;margin-left: -14px;margin-top: 6px;" />
@@ -390,13 +390,13 @@
                       <div class="form-group">
                           <strong>Lead Time:</strong>
                           {!! Form::text('lead_time', 0, array('class' =>
-                          'form-control custom-modal-textbox', 'id' =>'lead_time')) !!}
+                          'form-control custom-modal-textbox', 'id' =>'lead_time','required' =>'required')) !!}
                           <div class="text-danger" id="lead_time"></div>
                       </div>
                       <div class="form-group">
                         <strong>Lag Time:</strong>
                         {!! Form::text('lag_time', 0, array('class' =>
-                        'form-control custom-modal-textbox', 'id' =>'lag_time')) !!}
+                        'form-control custom-modal-textbox', 'id' =>'lag_time','required' =>'required')) !!}
                         <div class="text-danger" id="lag_time"></div>
                       </div>
                     
@@ -421,7 +421,7 @@
                       <div class="form-group">
                         <strong>Value:</strong>
                         {!! Form::number('value', null, array('placeholder' => 'Value','class' =>
-                        'form-control custom-modal-textbox', 'id' =>'value')) !!}
+                        'form-control custom-modal-textbox', 'id' =>'value','required' =>'required')) !!}
                         <div class="text-danger" id="value"></div>
                       </div>
                       <div class="form-group">

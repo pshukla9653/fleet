@@ -56,7 +56,7 @@ class ListsController extends Controller
                 $data->list_id = $request->id;
                 $data->contact_id = $value;
                 $data->save();
-            }
+            }   
         } else{
             $lists   =   Lists::Create( [
                         'company_id' => Auth()->user()->company_id,
