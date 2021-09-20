@@ -79,6 +79,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('get-lists-booking', [ContactController::class, 'get_existing_list_booking']);
     Route::post('get-lists-contact-list', [ListsController::class, 'get_lists_contact_list']);
     Route::post('delete-contact', [ListsController::class, 'delete_contact']);
+    Route::post('get-contacts-by-list-id', [ListsController::class, 'get_contacts_by_list_id']);
+    Route::post('get-list-search', [ListsController::class, 'get_list_for_search']);
     
     Route::resource('booking', BookingController::class);
     Route::post('edit-booking', [BookingController::class, 'edit']);

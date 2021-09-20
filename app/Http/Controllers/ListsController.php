@@ -47,17 +47,21 @@ class ListsController extends Controller
             $validation = ['list_name' => 'required|unique:lists,list_name'];
         }
         $this->validate($request, $validation);
-      
+        $status = array();
+        $status['success'] = false;
         if($request->id){
             $lists = Lists::find($request->id);
             $lists->update(['list_name' => $request->list_name]);
             foreach ($request->contacts as $key => $value) {
-                $data = new ListContact;
-                $data->company_id = Auth()->user()->company_id;
-                $data->list_id = $request->id;
-                $data->contact_id = $value;
-                $data->save();
-            }   
+                $contact = ListContact::Create([
+                    'company_id' => Auth()->user()->company_id,
+                    'list_id' => $lists->id,
+                    'contact_id' => $value
+                ]);
+
+            }
+            $status['success'] = true;
+            $status['list_id'] = $lists->id; 
         } else{
             $lists   =   Lists::Create( [
                         'company_id' => Auth()->user()->company_id,
@@ -65,14 +69,18 @@ class ListsController extends Controller
                     ]);
            
             foreach ($request->contacts as $key => $value) {
-                $data = new ListContact;
-                $data->company_id = Auth()->user()->company_id;
-                $data->list_id = $lists->id;
-                $data->contact_id = $value;
-                $data->save();
+                $contact = ListContact::Create([
+                    'company_id' => Auth()->user()->company_id,
+                    'list_id' => $lists->id,
+                    'contact_id' => $value
+                ]);
+                
+
             }
+            $status['success'] = true;
+            $status['list_id'] = $lists->id;
         }
-        return response()->json(['success' => true]);
+        return response()->json($status);
     }
 
     
@@ -133,7 +141,41 @@ class ListsController extends Controller
     public function delete_contact(Request $request)
     {
         $res = DB::table('list_contacts')->where('id', '=', $request->id)->delete();
-        echo $res;die;
+        
         return response()->json(['success' => true]);
     }
+
+    public function get_contacts_by_list_id(Request $request){
+        $status['success'] = false;
+        $list = DB::table('list_contacts')->where('list_id', '=', $request->id)->get();
+        if(!empty($list)){
+        foreach($list as $key=>$value){
+            $contact = DB::table('contacts')->where('id','=', $value->contact_id)->first();
+            $contact_list[$key]['id'] = $contact->id;
+            $contact_list[$key]['name'] = $contact->first_name.' '.$contact->last_name;
+        }
+        $status['success'] = true;
+        $status['contacts'] = $contact_list;
+        }
+        else{
+            $status['success'] = false;
+        }
+
+        return response()->json($status);
+    }
+
+    public function get_list_for_search(Request $request)
+    {
+        $lists = [];
+
+        if($request->has('q')){
+            $search = $request->q;
+            $lists =Lists::select("id", "list_name")
+            		->where('list_name', 'LIKE', "%$search%")
+            		->get();
+        }
+        return response()->json($lists);
+        
+    }
+
 }

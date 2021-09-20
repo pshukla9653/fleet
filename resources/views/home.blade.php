@@ -512,15 +512,15 @@
 
         </div>
         <!-- <div class="col-md-4" style="padding: 30px;">
-                    <select class="form-control border-0" style="background: transparent;width:6%;">
-                      <option>Filter</option>
-                   </select>
+                        <select class="form-control border-0" style="background: transparent;width:6%;">
+                          <option>Filter</option>
+                       </select>
 
-                  </div>
-                  <div class="col-md-4" style="">
-                    <a id="additem" class="btn btn-primary" style="margin-left: 20px;"><img src="{{ asset('assets/images/icon/add.png') }}" alt="add" style="width: 21px;margin-left: -8px;"/>&nbsp;  Add New Item</a>
+                      </div>
+                      <div class="col-md-4" style="">
+                        <a id="additem" class="btn btn-primary" style="margin-left: 20px;"><img src="{{ asset('assets/images/icon/add.png') }}" alt="add" style="width: 21px;margin-left: -8px;"/>&nbsp;  Add New Item</a>
 
-                  </div> -->
+                      </div> -->
         <div class="col-md-4" style="padding: 0px 30px 0px 30px;">
             <form class="example" action="#">
                 <input type="text" placeholder="Search.." name="search" style="height:33px;">
@@ -674,55 +674,55 @@
                             @foreach ($vehicles as $key => $vehicle)
                                 <tr>
                                     <td style="width:7%;"><span data-popup="tooltip" title="
-                                <div style='background-color:#fff;width:800px;height:auto;padding:10px;border: 1px solid #bbb8b8;'>
-                                  <table cellpadding = '10' cellspacing = '10'>
-                                    <tr></tr>
-                                    <tr>
-                                      <td style='width:33.33%;padding:10px;'>
-                                        <table style='width:100%'>
-                                          <tr><td colspan='2'><img src='{{ asset('storage/' . $vehicle->image) }}' alt='{{ $vehicle->registration_number }}' style='width: 100%; height:auto;padding:10px;'/></td></tr>
-                                          <tr><td colspan='2'>&nbsp;</td></tr>
-                                          <tr><td colspan='2' style='text-align:center;'><span style='font-size:18px;color:black;padding:5px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}'>{{ $vehicle->registration_number }}</span></td></tr>
-                                          <tr><td colspan='2'>&nbsp;</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
-                                          
-                                          
-                                        </table>
-                                      </td>
-                                      <td style='width:33.33%;padding:10px;'>
-                                        <table style='width:100%;margin-top:-80px;'>
-                                          <tr><td style='color:#376473;font-weight:600;'>Vehicle Information<br>&nbsp;<br></td><td></td></tr>
-                                          <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
-                                          <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
-                                          <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Department:</b></td><td>{{ $vehicle->department->department_name }}</td></tr>
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Registration NO:</b></td><td>{{ $vehicle->registration_number }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>VIN:</b></td><td>{{ $vehicle->vin }}</td></tr>
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Adoption Date:</b></td><td>{{ $vehicle->adoption_date }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Projected Defleet Date:</b></td><td>{{ $vehicle->projected_defleet_date }}</td></tr>
-                                        </table>
-                                      </td>
-                                      <td style='width:33.33%;padding:10px;'>
-                                        <table style='width:100%;margin-top:-35px;'>
-                                          
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Regions:</b></td><td>{{ $vehicle->region->region_name }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Other Details:</b></td><td>{{ $vehicle->other_details }}</td></tr>
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Lead Time:</b></td><td>{{ $vehicle->lead_time }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Lag Time:</b></td><td>{{ $vehicle->lag_time }}</td></tr>
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Engine:</b></td><td>{{ $vehicle->engine }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Colour:</b></td><td>{{ $vehicle->colour }}</td></tr>
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Mileage:</b></td><td>{{ $vehicle->mileage }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Value:</b></td><td>{{ $vehicle->value }}</td></tr>
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Notes:</b></td><td>{{ $vehicle->notes }}</td></tr>
-                                        </table>
-                                      </td>
-                                    </tr>
+                                    <div style='background-color:#fff;width:800px;height:auto;padding:10px;border: 1px solid #bbb8b8;'>
+                                      <table cellpadding = '10' cellspacing = '10'>
+                                        <tr></tr>
+                                        <tr>
+                                          <td style='width:33.33%;padding:10px;'>
+                                            <table style='width:100%'>
+                                              <tr><td colspan='2'><img src='{{ asset('storage/' . $vehicle->image) }}' alt='{{ $vehicle->registration_number }}' style='width: 100%; height:auto;padding:10px;'/></td></tr>
+                                              <tr><td colspan='2'>&nbsp;</td></tr>
+                                              <tr><td colspan='2' style='text-align:center;'><span style='font-size:18px;color:black;padding:5px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}'>{{ $vehicle->registration_number }}</span></td></tr>
+                                              <tr><td colspan='2'>&nbsp;</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
+                                              
+                                              
+                                            </table>
+                                          </td>
+                                          <td style='width:33.33%;padding:10px;'>
+                                            <table style='width:100%;margin-top:-80px;'>
+                                              <tr><td style='color:#376473;font-weight:600;'>Vehicle Information<br>&nbsp;<br></td><td></td></tr>
+                                              <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
+                                              <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
+                                              <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:2px;'><b>Department:</b></td><td>{{ $vehicle->department->department_name }}</td></tr>
+                                              <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Registration NO:</b></td><td>{{ $vehicle->registration_number }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:2px;'><b>VIN:</b></td><td>{{ $vehicle->vin }}</td></tr>
+                                              <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Adoption Date:</b></td><td>{{ $vehicle->adoption_date }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:2px;'><b>Projected Defleet Date:</b></td><td>{{ $vehicle->projected_defleet_date }}</td></tr>
+                                            </table>
+                                          </td>
+                                          <td style='width:33.33%;padding:10px;'>
+                                            <table style='width:100%;margin-top:-35px;'>
+                                              
+                                              <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Regions:</b></td><td>{{ $vehicle->region->region_name }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:2px;'><b>Other Details:</b></td><td>{{ $vehicle->other_details }}</td></tr>
+                                              <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Lead Time:</b></td><td>{{ $vehicle->lead_time }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:2px;'><b>Lag Time:</b></td><td>{{ $vehicle->lag_time }}</td></tr>
+                                              <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Engine:</b></td><td>{{ $vehicle->engine }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:2px;'><b>Colour:</b></td><td>{{ $vehicle->colour }}</td></tr>
+                                              <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Mileage:</b></td><td>{{ $vehicle->mileage }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:2px;'><b>Value:</b></td><td>{{ $vehicle->value }}</td></tr>
+                                              <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Notes:</b></td><td>{{ $vehicle->notes }}</td></tr>
+                                            </table>
+                                          </td>
+                                        </tr>
 
-                                  </table>
-                                </div>
-                                " data-html="true" data-placement="right"
+                                      </table>
+                                    </div>
+                                    " data-html="true" data-placement="right"
                                             style="font-weight: 600; font-size:12px; padding: 5px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}">{{ $vehicle->registration_number }}</span>
                                         <br><span
                                             style="font-size:9px;position: absolute;margin-top: 7px;">{{ $vehicle->vin }}</span>
@@ -771,58 +771,58 @@
 
                                                 @if ($value->id)
                                                     <span data-popup="tooltip" title="
-                                <div style='background-color:#fff;width:700px;height:auto;padding:10px;border: 1px solid #bbb8b8;'>
-                                  <table cellpadding = '10' cellspacing = '10'>
-                                    <tr></tr>
-                                    <tr>
-                                      <td style='width:33.33%;padding:10px;'>
-                                        <table style='width:100%'>
-                                          <tr><td colspan='2'><img src='{{ asset('storage/' . $vehicle->image) }}' alt='{{ $vehicle->registration_number }}' style='width: 100%; height:auto;padding:10px;'/></td></tr>
-                                          <tr><td colspan='2'>&nbsp;</td></tr>
-                                          <tr><td colspan='2' style='text-align:center;'><span style='font-size:18px;color:black;padding:5px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}'>{{ $vehicle->registration_number }}</span></td></tr>
-                                          <tr><td colspan='2'>&nbsp;</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->booking_start_date), 'd-M-Y') }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->booking_end_date), 'd-M-Y') }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Primary Contact:</b></td><td>@if ($contact_detail){{ $contact_detail->first_name . ' ' . $contact_detail->last_name }}@endif</td></tr>
-                                          
-                                          
-                                        </table>
-                                      </td>
-                                      <td style='width:33.33%;padding:10px;'>
-                                        <table style='width:100%;margin-top:-80px;'>
-                                          <tr><td style='color:#376473;font-weight:600;' colspan='2'>Booking Information<br>&nbsp;<br></td></tr>
-                                          <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->booking_start_date), 'd-M-Y') }}</td></tr>
-                                          <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->booking_end_date), 'd-M-Y') }}</td></tr>
-                                          <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Primary Contact:</b></td><td>@if ($contact_detail){{ $contact_detail->first_name . ' ' . $contact_detail->last_name }}@endif</td></tr>
-                                          
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Loan Type:</b></td><td>@if ($loan_detail){{ $loan_detail->loan_type }}@endif</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Purpose of Loan:</b></td><td>{{ $value->purpose_of_loan }}</td></tr>
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Booking Reference:</b></td><td>{{ $value->booking_reference }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Booking Notes:</b></td><td>{{ $value->booking_notes }}</td></tr>
-                                        </table>
-                                      </td>
-                                      <td style='width:33.33%;padding:10px;'>
-                                        <table style='width:100%;margin-top:-35px;'>
-                                          
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Outbound Collection Notes:</b></td><td>{{ $value->ob_pick_from_notes }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Collection Notes:</b></td><td>{{ $value->ib_pick_from_notes }}</td></tr>
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Lead Time Notes:</b></td><td>{{ $value->lead_notes }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Lag Time Notes:</b></td><td>{{ $value->lag_notes }}</td></tr>
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Outbound Delivery Notes:</b></td><td>{{ $value->ob_pick_from_notes }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Delivery Notes:</b></td><td>{{ $value->ib_pick_from_notes }}</td></tr>
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Outbound Details Address:</b></td><td>{{ $value->ob_deliver_to_address_1 }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Details Address:</b></td><td>{{ $value->ib_pick_from_address_1 }}</td></tr>
-                                          
-                                        </table>
-                                      </td>
-                                    </tr>
+                                    <div style='background-color:#fff;width:700px;height:auto;padding:10px;border: 1px solid #bbb8b8;'>
+                                      <table cellpadding = '10' cellspacing = '10'>
+                                        <tr></tr>
+                                        <tr>
+                                          <td style='width:33.33%;padding:10px;'>
+                                            <table style='width:100%'>
+                                              <tr><td colspan='2'><img src='{{ asset('storage/' . $vehicle->image) }}' alt='{{ $vehicle->registration_number }}' style='width: 100%; height:auto;padding:10px;'/></td></tr>
+                                              <tr><td colspan='2'>&nbsp;</td></tr>
+                                              <tr><td colspan='2' style='text-align:center;'><span style='font-size:18px;color:black;padding:5px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}'>{{ $vehicle->registration_number }}</span></td></tr>
+                                              <tr><td colspan='2'>&nbsp;</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->booking_start_date), 'd-M-Y') }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->booking_end_date), 'd-M-Y') }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Primary Contact:</b></td><td>@if ($contact_detail){{ $contact_detail->first_name . ' ' . $contact_detail->last_name }}@endif</td></tr>
+                                              
+                                              
+                                            </table>
+                                          </td>
+                                          <td style='width:33.33%;padding:10px;'>
+                                            <table style='width:100%;margin-top:-80px;'>
+                                              <tr><td style='color:#376473;font-weight:600;' colspan='2'>Booking Information<br>&nbsp;<br></td></tr>
+                                              <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->booking_start_date), 'd-M-Y') }}</td></tr>
+                                              <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->booking_end_date), 'd-M-Y') }}</td></tr>
+                                              <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Primary Contact:</b></td><td>@if ($contact_detail){{ $contact_detail->first_name . ' ' . $contact_detail->last_name }}@endif</td></tr>
+                                              
+                                              <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Loan Type:</b></td><td>@if ($loan_detail){{ $loan_detail->loan_type }}@endif</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:2px;'><b>Purpose of Loan:</b></td><td>{{ $value->purpose_of_loan }}</td></tr>
+                                              <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Booking Reference:</b></td><td>{{ $value->booking_reference }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:2px;'><b>Booking Notes:</b></td><td>{{ $value->booking_notes }}</td></tr>
+                                            </table>
+                                          </td>
+                                          <td style='width:33.33%;padding:10px;'>
+                                            <table style='width:100%;margin-top:-35px;'>
+                                              
+                                              <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Outbound Collection Notes:</b></td><td>{{ $value->ob_pick_from_notes }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Collection Notes:</b></td><td>{{ $value->ib_pick_from_notes }}</td></tr>
+                                              <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Lead Time Notes:</b></td><td>{{ $value->lead_notes }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:2px;'><b>Lag Time Notes:</b></td><td>{{ $value->lag_notes }}</td></tr>
+                                              <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Outbound Delivery Notes:</b></td><td>{{ $value->ob_pick_from_notes }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Delivery Notes:</b></td><td>{{ $value->ib_pick_from_notes }}</td></tr>
+                                              <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Outbound Details Address:</b></td><td>{{ $value->ob_deliver_to_address_1 }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Details Address:</b></td><td>{{ $value->ib_pick_from_address_1 }}</td></tr>
+                                              
+                                            </table>
+                                          </td>
+                                        </tr>
 
-                                  </table>
-                                </div>
-                                " data-html="true" data-placement="auto"
+                                      </table>
+                                    </div>
+                                    " data-html="true" data-placement="auto"
                                                         style="font-size:9px; color:#fff; padding: 20px;margin: -30px 0px 0px -30px;border-radius: 5px;white-space: nowrap;position: absolute;">
                                                         @if ($contact_detail && $value->booking_start_date == $thisdate)
                                                             {{ $contact_detail->first_name . ' ' . $contact_detail->last_name }}
@@ -968,7 +968,7 @@
                                             </div>
                                             <div class="sides-1">
                                                 <span id="rt-number" style="border-radius: 7px;border-color: #eecc00;margin: 5px;width: 110px;padding: 3px; 
-                                                            font-weight: 600;"></span>
+                                                                font-weight: 600;"></span>
                                                 <br>
                                                 <span id="brand_name" style="font-weight: 600"></span><br>
                                                 <span id="model_number" style="font-weight: 600"></span><br>
@@ -1128,7 +1128,8 @@
                                             </div>
                                             <div class="">
                                                 <span >Email Service:</span><br>
-                                <select name="email_service" class="form-control custom-modal-textbox2"
+                                <select name="
+                                                email_service" class="form-control custom-modal-textbox2"
                                                 style="height: 26px;padding: 0px;width: 298px">
 
                                                 <option value="sendinblue">Sendinblue</option>
@@ -1237,7 +1238,7 @@
                                                 <span class="loan11">Notes:</span><br>
                                                 <textarea id="notes1" name="ob_pick_from_notes" rows="4" cols="58"
                                                     class="form-control custom-modal-textbox3" style="width: 368px;">
-                                            </textarea>
+                                                </textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -1302,7 +1303,7 @@
                                                 <span class="loan11">Notes:</span><br>
                                                 <textarea id="notes1" name="ob_deliver_to_notes" rows="4" cols="58"
                                                     class="form-control custom-modal-textbox3" style="width: 368px;">
-                                            </textarea>
+                                                </textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -1409,7 +1410,7 @@
                                                 <span class="loan11">Notes:</span><br>
                                                 <textarea id="notes1" name="ib_pick_from_notes" rows="4" cols="58"
                                                     class="form-control custom-modal-textbox3" style="width: 368px;">
-                                            </textarea>
+                                                </textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -1474,7 +1475,7 @@
                                                 <span class="loan11">Notes:</span><br>
                                                 <textarea id="notes1" name="ib_deliver_to_notes" rows="4" cols="58"
                                                     class="form-control custom-modal-textbox3" style="width: 368px;">
-                                            </textarea>
+                                                </textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -1526,6 +1527,39 @@
                         <button type="button" class="btn custom-modal-btn btn-success" id="insert_list">Insert</button>
                         <button type="button" class="btn custom-modal-btn btn-danger"
                             onclick="$('#popup_model_editor').modal('hide')">Cancel</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="popup_model_search-list" data-backdrop="false" class="modal fade second_model"
+        style="margin-top:20%;margin-right:10%;">
+        <div class="modal-dialog">
+            <div class="modal-content" style="background-color: #f2f2f2;width: 100%;">
+                <div class="modal-header">
+                    <button type="button" class="close" onclick="$('#popup_model_search-list').modal('hide')"><i
+                            class="icon-cancel-circle2"></i></button>
+                </div>
+                <h6 class="modal-title md-heading-custom" id="form_heading">Lists</h6>
+                <div class="modal-body md-body-custom">
+
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <select class="select-remote-list form-control custom-modal-textbox1">
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer md-footer-custom" style="margin: 0px 20px 20px -20px;">
+                        <hr style="margin-top: 0px;">
+                        <button type="button" class="btn custom-modal-btn btn-success"
+                            id="insert_contact_by_list">Insert</button>
+                        <button type="button" class="btn custom-modal-btn btn-danger"
+                            onclick="$('#popup_model_search-list').modal('hide')">Cancel</button>
 
                     </div>
 
@@ -1847,40 +1881,42 @@
                                     } else {
                                         $('#ob_pick_from').prop('checked', false);
                                         $("#ob_pick_from_box").show(); // unchecked
-                $('#ob_pick_from_address_1').attr('required', 'required');
+                                        $('#ob_pick_from_address_1').attr('required', 'required');
                                     }
                                 }
                                 if (key == 'ob_deliver_to') {
                                     if (value == 1) {
                                         $('#ob_deliver_to').prop('checked', true);
                                         $("#ob_deliver_to_box").hide(); // checked
-                $('#ob_deliver_to_address_1').removeAttr('required', 'required');
+                                        $('#ob_deliver_to_address_1').removeAttr('required',
+                                        'required');
                                     } else {
                                         $('#ob_deliver_to').prop('checked', false);
                                         $("#ob_deliver_to_box").show(); // unchecked
-                $('#ob_deliver_to_address_1').attr('required', 'required');
+                                        $('#ob_deliver_to_address_1').attr('required', 'required');
                                     }
                                 }
                                 if (key == 'ib_pick_from') {
-                                if (value == 1) {
-                                    $('#ib_pick_from').prop('checked', true);
-                                    $("#ib_pick_from_box").hide(); // checked
-                $('#ib_pick_from_address_1').removeAttr('required', 'required');
-                                } else {
-                                    $('#ib_pick_from').prop('checked', false);
-                                    $("#ib_pick_from_box").show(); // unchecked
-                $('#ib_pick_from_address_1').attr('required', 'required');
+                                    if (value == 1) {
+                                        $('#ib_pick_from').prop('checked', true);
+                                        $("#ib_pick_from_box").hide(); // checked
+                                        $('#ib_pick_from_address_1').removeAttr('required', 'required');
+                                    } else {
+                                        $('#ib_pick_from').prop('checked', false);
+                                        $("#ib_pick_from_box").show(); // unchecked
+                                        $('#ib_pick_from_address_1').attr('required', 'required');
+                                    }
                                 }
-                            }
-                            if (key == 'ib_deliver_to') {
+                                if (key == 'ib_deliver_to') {
                                     if (value == 1) {
                                         $('#ib_deliver_to').prop('checked', true);
                                         $("#ib_deliver_to_box").hide(); // checked
-                $('#ib_deliver_to_address_1').removeAttr('required', 'required');
+                                        $('#ib_deliver_to_address_1').removeAttr('required',
+                                        'required');
                                     } else {
                                         $('#ib_deliver_to').prop('checked', false);
                                         $("#ib_deliver_to_box").show(); // unchecked
-                $('#ib_deliver_to_address_1').attr('required', 'required');
+                                        $('#ib_deliver_to_address_1').attr('required', 'required');
                                     }
                                 }
 
@@ -1904,10 +1940,18 @@
 
                                     });
                                 } else {
-                                if (key != 'booking_notes' && key != 'lag_notes' && key != 'lead_notes' && key != 'ob_deliver_to_notes' && key != 'ob_pick_from_notes' && key != 'ib_deliver_to_notes' && key != 'ib_pick_from_notes' && key != 'vehicle' && key != 'loan_type' && key != 'email_service' && key != 'email_template' && key != 'show_delivery_day' && key != 'show_collection_day' && key != 'ob_pick_from'&& key != 'ob_deliver_to' && key != 'ib_deliver_to' && key != 'ib_pick_from' && key != 'contacts') {
-                                    $("input[name='" + key + "']").val(value);
+                                    if (key != 'booking_notes' && key != 'lag_notes' && key !=
+                                        'lead_notes' && key != 'ob_deliver_to_notes' && key !=
+                                        'ob_pick_from_notes' && key != 'ib_deliver_to_notes' && key !=
+                                        'ib_pick_from_notes' && key != 'vehicle' && key !=
+                                        'loan_type' && key != 'email_service' && key !=
+                                        'email_template' && key != 'show_delivery_day' && key !=
+                                        'show_collection_day' && key != 'ob_pick_from' && key !=
+                                        'ob_deliver_to' && key != 'ib_deliver_to' && key !=
+                                        'ib_pick_from' && key != 'contacts') {
+                                        $("input[name='" + key + "']").val(value);
+                                    }
                                 }
-                            }
                                 $('#booking_created').html(res.booking_created.event + ' by ' + res
                                     .booking_created.user_email + ' on ' + res.booking_created
                                     .created_at);
@@ -1953,27 +1997,12 @@
 
         function getExistingContact() {
             $('.select-remote-data').empty();
-            $.ajax({
-                type: "GET",
-                url: "{{ url('get-contact-lists-booking') }}",
-                data: {},
-                success: function(res) {
-                    $('#mytable').html(res);
-                    $('#popup_model_editor').modal('show');
-                }
-            });
+            $('#popup_model_editor').modal('show');
         }
 
         function getExistingList() {
-            $.ajax({
-                type: "GET",
-                url: "{{ url('get-lists-booking') }}",
-                data: {},
-                success: function(res) {
-                    $('#mytable').html(res);
-                    $('#popup_model_editor').modal('show');
-                }
-            });
+            $('.select-remote-list').empty();
+            $('#popup_model_search-list').modal('show');
         }
         $('#insert_list').click(function() {
             var data = $('.select-remote-data').select2('data');
@@ -2039,6 +2068,9 @@
             }
 
         });
+
+
+
         $('#mark_as_primary').click(function() {
             var id = '';
             var text = '';
@@ -2186,50 +2218,50 @@
                                 }
                             }
                             if (key == 'ob_pick_from') {
-                                    if (value == 1) {
-                                        $('#ob_pick_from').prop('checked', true);
-                                        $("#ob_pick_from_box").hide(); // checked
-                                        $('#ob_pick_from_address_1').removeAttr('required', 'required');
+                                if (value == 1) {
+                                    $('#ob_pick_from').prop('checked', true);
+                                    $("#ob_pick_from_box").hide(); // checked
+                                    $('#ob_pick_from_address_1').removeAttr('required', 'required');
 
-                                    } else {
-                                        $('#ob_pick_from').prop('checked', false);
-                                        $("#ob_pick_from_box").show(); // unchecked
-                $('#ob_pick_from_address_1').attr('required', 'required');
-                                    }
+                                } else {
+                                    $('#ob_pick_from').prop('checked', false);
+                                    $("#ob_pick_from_box").show(); // unchecked
+                                    $('#ob_pick_from_address_1').attr('required', 'required');
                                 }
-                                if (key == 'ob_deliver_to') {
-                                    if (value == 1) {
-                                        $('#ob_deliver_to').prop('checked', true);
-                                        $("#ob_deliver_to_box").hide(); // checked
-                $('#ob_deliver_to_address_1').removeAttr('required', 'required');
-                                    } else {
-                                        $('#ob_deliver_to').prop('checked', false);
-                                        $("#ob_deliver_to_box").show(); // unchecked
-                $('#ob_deliver_to_address_1').attr('required', 'required');
-                                    }
+                            }
+                            if (key == 'ob_deliver_to') {
+                                if (value == 1) {
+                                    $('#ob_deliver_to').prop('checked', true);
+                                    $("#ob_deliver_to_box").hide(); // checked
+                                    $('#ob_deliver_to_address_1').removeAttr('required', 'required');
+                                } else {
+                                    $('#ob_deliver_to').prop('checked', false);
+                                    $("#ob_deliver_to_box").show(); // unchecked
+                                    $('#ob_deliver_to_address_1').attr('required', 'required');
                                 }
-                                if (key == 'ib_pick_from') {
+                            }
+                            if (key == 'ib_pick_from') {
                                 if (value == 1) {
                                     $('#ib_pick_from').prop('checked', true);
                                     $("#ib_pick_from_box").hide(); // checked
-                $('#ib_pick_from_address_1').removeAttr('required', 'required');
+                                    $('#ib_pick_from_address_1').removeAttr('required', 'required');
                                 } else {
                                     $('#ib_pick_from').prop('checked', false);
                                     $("#ib_pick_from_box").show(); // unchecked
-                $('#ib_pick_from_address_1').attr('required', 'required');
+                                    $('#ib_pick_from_address_1').attr('required', 'required');
                                 }
                             }
-                                if (key == 'ib_deliver_to') {
-                                    if (value == 1) {
-                                        $('#ib_deliver_to').prop('checked', true);
-                                        $("#ib_deliver_to_box").hide(); // checked
-                $('#ib_deliver_to_address_1').removeAttr('required', 'required');
-                                    } else {
-                                        $('#ib_deliver_to').prop('checked', false);
-                                        $("#ib_deliver_to_box").show(); // unchecked
-                $('#ib_deliver_to_address_1').attr('required', 'required');
-                                    }
+                            if (key == 'ib_deliver_to') {
+                                if (value == 1) {
+                                    $('#ib_deliver_to').prop('checked', true);
+                                    $("#ib_deliver_to_box").hide(); // checked
+                                    $('#ib_deliver_to_address_1').removeAttr('required', 'required');
+                                } else {
+                                    $('#ib_deliver_to').prop('checked', false);
+                                    $("#ib_deliver_to_box").show(); // unchecked
+                                    $('#ib_deliver_to_address_1').attr('required', 'required');
                                 }
+                            }
                             if (key == 'contacts') {
                                 var addtext = '';
                                 $.each(res.contact_list, function(index, v) {
@@ -2243,7 +2275,14 @@
 
                                 });
                             } else {
-                                if (key != 'booking_notes' && key != 'lag_notes' && key != 'lead_notes' && key != 'ob_deliver_to_notes' && key != 'ob_pick_from_notes' && key != 'ib_deliver_to_notes' && key != 'ib_pick_from_notes' && key != 'vehicle' && key != 'loan_type' && key != 'email_service' && key != 'email_template' && key != 'show_delivery_day' && key != 'show_collection_day' && key != 'ob_pick_from'&& key != 'ob_deliver_to' && key != 'ib_deliver_to' && key != 'ib_pick_from' && key != 'contacts') {
+                                if (key != 'booking_notes' && key != 'lag_notes' && key !=
+                                    'lead_notes' && key != 'ob_deliver_to_notes' && key !=
+                                    'ob_pick_from_notes' && key != 'ib_deliver_to_notes' && key !=
+                                    'ib_pick_from_notes' && key != 'vehicle' && key != 'loan_type' &&
+                                    key != 'email_service' && key != 'email_template' && key !=
+                                    'show_delivery_day' && key != 'show_collection_day' && key !=
+                                    'ob_pick_from' && key != 'ob_deliver_to' && key !=
+                                    'ib_deliver_to' && key != 'ib_pick_from' && key != 'contacts') {
                                     $("input[name='" + key + "']").val(value);
                                 }
                             }
@@ -2312,7 +2351,8 @@
                             $("#btn").html(btn_name);
                             $("#btn").attr("disabled", false);
                             alert(
-                                'Warning! We have already booking with selected date range for this vehicle');
+                                'Warning! We have already booking with selected date range for this vehicle'
+                                );
 
                         }
                     }
@@ -2394,24 +2434,23 @@
                         dataType: 'json',
                         success: function(res) {
                             console.log(res);
-                            if(res.success == true){
-                            var id = res.contact.id;
-                            var text = res.contact.first_name+' '+res.contact.last_name;
-                            var primary_contact = $('#primary_contact').val();
-		                    if (primary_contact == '') {
-                                $('#primary_contact').val(id);
-                                $('#contact_list_d').append(new Option(text+'*', id));
-                            }else{
-                                $('#contact_list_d').append(new Option(text, id));
-                            }
-                                
-                            $('#popup_model').modal('hide');
-                            alert("Contact Added Successful");
-                            $("#contact-submit-btn").html('Submit');
-                            $("#contact-submit-btn").attr("disabled", false);
-                            }
-                            else{
-                                alert("Try Again"); 
+                            if (res.success == true) {
+                                var id = res.contact.id;
+                                var text = res.contact.first_name + ' ' + res.contact.last_name;
+                                var primary_contact = $('#primary_contact').val();
+                                if (primary_contact == '') {
+                                    $('#primary_contact').val(id);
+                                    $('#contact_list_d').append(new Option(text + '*', id));
+                                } else {
+                                    $('#contact_list_d').append(new Option(text, id));
+                                }
+
+                                $('#popup_model').modal('hide');
+                                alert("Contact Added Successful");
+                                $("#contact-submit-btn").html('Submit');
+                                $("#contact-submit-btn").attr("disabled", false);
+                            } else {
+                                alert("Try Again");
                             }
                         }
                     });
@@ -2420,33 +2459,7 @@
             //end add new contact
 
             //add list
-            $("#list-form").submit(function(event) {
-                event.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $("#listbtn").html('Please Wait...');
-                var data = new FormData(this);
-                console.log(data.get());
-                throw new Error('This is not an error. This is just to abort javascript');
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('lists.store') }}",
-                    data: data,
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    dataType: 'json',
-                    success: function(res) {
-                        if (res.success == true) {
-                            $('#list_popup_model').modal('hide');
-                            alert('List Added Successfully');
-                        } 
-                    }
-                });
-            });
+
         });
 
         $(document).ready(function($) {
@@ -2456,6 +2469,9 @@
                 }
             });
             $('#add-list-contact').click(function() {
+                $('#list_name').val('');
+                $('.select-contact-data-list').empty();
+                $('#contact_list_final').empty();
                 $('#list_popup_model').modal('show');
             });
 
@@ -2488,13 +2504,11 @@
                         },
                         dataType: 'json',
                         success: function(res) {
-                            console.log(res);
+                            
                             if (res.success == true) {
+                                get_contact_list_by_list_id(res.list_id);
+                                alert('List Added Successfully');
                                 $('#list_popup_model').modal('hide');
-                            } else {
-
-                                $("#listbtn").html(btn);
-                                $("#listbtn").attr("disabled", false);
                             }
                         }
                     });
@@ -2502,31 +2516,6 @@
             });
         });
 
-
-
-
-        $('#add-rows').click(function() {
-            $('#list-mytable').find('tr').each(function() {
-                var row = $(this);
-                if (row.find('input[type="checkbox"]').is(':checked')) {
-                    row.children(".check-box").html(
-                        '<button type="button" class="btn btn-danger delete" onclick="removethis(this)">Delete</button>'
-                    );
-
-                    var current_id = row.find('input[type="hidden"]').val();
-                    var contact = [];
-                    $('#final-contact').find('tr').each(function() {
-                        var ids = $(this).find('input[type="hidden"]').val();
-                        contact.push(ids);
-                    });
-                    if (contact.indexOf(current_id) == -1) {
-                        $("#final-contact").append(row);
-                        row.children(".contact-row").hide();
-                    }
-                }
-            });
-            $('.contact-list-row').css('display', 'none');
-        });
 
 
         $('.form-group.date').datepicker({
@@ -2741,6 +2730,111 @@
 
 
 
+
+        });
+
+        $(".select-remote-list").select2({
+            ajax: {
+                type: "POST",
+                url: "{{ url('get-list-search') }}",
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page
+                    };
+                },
+                processResults: function(data) {
+                    return {
+                        results: $.map(data, function(item) {
+                            return {
+                                text: item.list_name,
+                                id: item.id
+                            }
+                        })
+                    };
+                }
+
+            },
+            escapeMarkup: function(markup) {
+                return markup;
+            }, // let our custom formatter work
+            minimumInputLength: 1,
+            placeholder: "Search Here",
+
+
+
+
+
+        });
+
+        $('#insert_contact_by_list').click(function() {
+            var id = $('.select-remote-list option:selected').val();
+            get_contact_list_by_list_id(id);
+            $('#popup_model_search-list').modal('hide');
+
+        });
+
+        function get_contact_list_by_list_id(id) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "{{ url('get-contacts-by-list-id') }}",
+                data: {
+                    id: id
+                },
+                dataType: 'json',
+                success: function(res) {
+                    console.log(res);
+                    var primary_contact = $('#primary_contact').val();
+                    var v = $('#contact_list_d option').length;
+                    if (v == 0 && primary_contact == '' && contacts
+                        .length == 1) {
+
+                        var x = contacts[0].name + '*';
+                        $('#primary_contact').val(contacts[0].id);
+                        $('#contact_list_d').append(new Option(x,
+                            contacts[0].id));
+                    } else {
+                        $.each(res.contacts, function(index, item) {
+                            $('#contact_list_d').append(
+                            new Option(item.name,item.id));
+                        });
+                        if (primary_contact == '') {
+                            var first_id = $(
+                                    "#contact_list_d option:first")
+                                .val();
+                            var first_text = $(
+                                    "#contact_list_d option:first")
+                                .text();
+                            $('#primary_contact').val(first_id);
+                            $("#contact_list_d option:first").text(
+                                first_text + '*');
+                        }
+                    }
+                    var code = {};
+                    $("#contact_list_d > option").each(function() {
+                        if (code[this.value]) {
+                            $(this).remove();
+                        } else {
+                            code[this.value] = this.value;
+                        }
+                    });
+                }
+            });
+
+        }
+
+        $('#delete_c_list').click(function() {
+            var value = '';
+            value = $('#contact_list_final option:selected').val();
+            var primary = $('#primary_contact').val();
+            $('#contact_list_final option:selected').remove();
 
         });
 
