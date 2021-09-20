@@ -2793,13 +2793,13 @@
                     console.log(res);
                     var primary_contact = $('#primary_contact').val();
                     var v = $('#contact_list_d option').length;
-                    if (v == 0 && primary_contact == '' && contacts
+                    if (v == 0 && primary_contact == '' && res.contacts
                         .length == 1) {
 
-                        var x = contacts[0].name + '*';
-                        $('#primary_contact').val(contacts[0].id);
+                        var x = res.contacts[0].name + '*';
+                        $('#primary_contact').val(res.contacts[0].id);
                         $('#contact_list_d').append(new Option(x,
-                            contacts[0].id));
+                            res.contacts[0].id));
                     } else {
                         $.each(res.contacts, function(index, item) {
                             $('#contact_list_d').append(

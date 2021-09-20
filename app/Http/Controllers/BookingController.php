@@ -40,8 +40,8 @@ class BookingController extends Controller
                 ];
         }else{
             $validation = [
-                    'start_date' => 'required|unique:bookings,start_date',
-                    'end_date' => 'required|unique:bookings,end_date'
+                    'start_date' => 'required',
+                    'end_date' => 'required'
                 ];
         }
         $this->validate($request, $validation);
