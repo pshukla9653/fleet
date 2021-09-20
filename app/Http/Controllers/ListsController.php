@@ -40,6 +40,7 @@ class ListsController extends Controller
 
     public function store(Request $request)
     {
+        //dd($request->all());
         if($request->id){
             $validation = ['list_name' => 'required|unique:lists,list_name,'.$request->id];
         }else{

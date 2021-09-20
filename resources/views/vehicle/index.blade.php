@@ -233,13 +233,14 @@
                   <div style="text-align: right; width: 78%;">
                     <div class="upload-btn-wrapper" style="margin-top: 4px;margin-right: -3px;">
                        <button class="btnsss">Upload Image</button>
-                       <input type="file" name="image" onchange="loadFile(event)">
+                       <input type="file" name="image" id="vehicle_img" onchange="loadFile(event)" style="width: 111px;height: 10px;" required>
                     </div>
                     <button type="button" id="remove_img" style="margin-left: 5px; margin-top: -15px;" class="btn custom-modal-btn btn-danger">Remove</button>
                  </div>
                  <script>
                     var loadFile = function(event) {
                       var output = document.getElementById('output');
+                      
                       output.src = URL.createObjectURL(event.target.files[0]);
                       output.onload = function() {
                         URL.revokeObjectURL(output.src) // free memory
@@ -473,6 +474,7 @@ function edititem(id) {
             $('#form_heading').html("Configure Vehicle");
             $('#btn').html('Update');
             $('#item_id').val(res.id);
+            $('#vehicle_img').removeAttr('required','required');
             $.each(res, function(key, value) {
               $('#'+key).val(value);
             });
@@ -581,6 +583,7 @@ $(document).ready(function($) {
                   dataType: 'json',
                   success: function(res) {
                       $('#image-review').html('');
+                      $('#vehicle_img').attr('required','required');
                   }
               });
       }

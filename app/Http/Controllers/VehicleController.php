@@ -113,6 +113,7 @@ class VehicleController extends Controller
             unset($input['spec_sheet']);
         } 
         $vehicle->update($input);
+        return redirect()->route('vehicles.index')->with('success','Vehicle updated successfully'); 
         }
         else{
         //
@@ -138,10 +139,9 @@ class VehicleController extends Controller
                 DB::table('vehicle_specs')->insert($vehicle_specs);
             }
         }
-     
+        return redirect()->route('vehicles.index')->with('success','Vehicle created successfully');   
         }
-        return redirect()->route('vehicles.index')
-                        ->with('success','Vehicle created successfully');
+        
 						
     
         

@@ -2393,10 +2393,26 @@
                         },
                         dataType: 'json',
                         success: function(res) {
+                            console.log(res);
+                            if(res.success == true){
+                            var id = res.contact.id;
+                            var text = res.contact.first_name+' '+res.contact.last_name;
+                            var primary_contact = $('#primary_contact').val();
+		                    if (primary_contact == '') {
+                                $('#primary_contact').val(id);
+                                $('#contact_list_d').append(new Option(text+'*', id));
+                            }else{
+                                $('#contact_list_d').append(new Option(text, id));
+                            }
+                                
                             $('#popup_model').modal('hide');
                             alert("Contact Added Successful");
                             $("#contact-submit-btn").html('Submit');
                             $("#contact-submit-btn").attr("disabled", false);
+                            }
+                            else{
+                                alert("Try Again"); 
+                            }
                         }
                     });
                 }
@@ -2426,11 +2442,8 @@
                     success: function(res) {
                         if (res.success == true) {
                             $('#list_popup_model').modal('hide');
-                        } else {
-                            $('.text-danger').html(res.error - msg);
-                            $("#listbtn").html(btn);
-                            $("#listbtn").attr("disabled", false);
-                        }
+                            alert('List Added Successfully');
+                        } 
                     }
                 });
             });

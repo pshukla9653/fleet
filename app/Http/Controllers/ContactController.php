@@ -59,20 +59,25 @@ class ContactController extends Controller
             'first_name' => 'required',
             'email' => 'required|email',
         ]);
-    
+        $status = array();
+        $status['success'] = false;
         $input = $request->all();
 		
         if($request->id){
-            $regions = Contact::find($request->id);
-            $regions->update($input);
+            $contact = Contact::find($request->id);
+            $contact->update($input);
+            $status['contact'] = $contact;
+            $status['success'] = true;
         }
         else{
             $input['company_id'] = Auth()->user()->company_id;
             $contact = Contact::create($input);
+            $status['contact'] = $contact;
+            $status['success'] = true;
         }
         
         
-        return response()->json(['success' => true]);
+        return response()->json($status);
     
         
     }
