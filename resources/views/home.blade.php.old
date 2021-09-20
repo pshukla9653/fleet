@@ -286,19 +286,9 @@
         margin-left: 10px;
     }
 
-    .main-for-checking {
-        margin-left: 10px;
-        margin-right: 10px;
-    }
+    
 
-    .main-for-checking1 {
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-
-    .for-checking {
-        margin-left: -26px;
-    }
+    
 
     input.address2 {
         width: 215px;
@@ -447,9 +437,7 @@
         border-radius: 50%;
     }
 
-    .for-checking11 {
-        margin-left: 10px;
-    }
+    
 
     /*button.editss {
   font-size: 12px;
@@ -488,9 +476,8 @@
     .custom-modal-textbox {
         width: 100% !important;
     }
-
-    .col-pa {
-        padding: 10px 5px !important;
+    .col-pa{
+        padding:10px 5px !important;
         text-align: center;
     }
 
@@ -509,18 +496,18 @@
 
     <div class="row">
         <div class="col-md-8" style="padding: 0px 30px 0px 30px;display: inline-flex;">
-
+            
         </div>
         <!-- <div class="col-md-4" style="padding: 30px;">
-                    <select class="form-control border-0" style="background: transparent;width:6%;">
-                      <option>Filter</option>
-                   </select>
+                <select class="form-control border-0" style="background: transparent;width:6%;">
+                  <option>Filter</option>
+               </select>
 
-                  </div>
-                  <div class="col-md-4" style="">
-                    <a id="additem" class="btn btn-primary" style="margin-left: 20px;"><img src="{{ asset('assets/images/icon/add.png') }}" alt="add" style="width: 21px;margin-left: -8px;"/>&nbsp;  Add New Item</a>
+              </div>
+              <div class="col-md-4" style="">
+                <a id="additem" class="btn btn-primary" style="margin-left: 20px;"><img src="{{ asset('assets/images/icon/add.png') }}" alt="add" style="width: 21px;margin-left: -8px;"/>&nbsp;  Add New Item</a>
 
-                  </div> -->
+              </div> -->
         <div class="col-md-4" style="padding: 0px 30px 0px 30px;">
             <form class="example" action="#">
                 <input type="text" placeholder="Search.." name="search" style="height:33px;">
@@ -674,55 +661,55 @@
                             @foreach ($vehicles as $key => $vehicle)
                                 <tr>
                                     <td style="width:7%;"><span data-popup="tooltip" title="
-                                <div style='background-color:#fff;width:800px;height:auto;padding:10px;border: 1px solid #bbb8b8;'>
-                                  <table cellpadding = '10' cellspacing = '10'>
-                                    <tr></tr>
-                                    <tr>
-                                      <td style='width:33.33%;padding:10px;'>
-                                        <table style='width:100%'>
-                                          <tr><td colspan='2'><img src='{{ asset('storage/' . $vehicle->image) }}' alt='{{ $vehicle->registration_number }}' style='width: 100%; height:auto;padding:10px;'/></td></tr>
-                                          <tr><td colspan='2'>&nbsp;</td></tr>
-                                          <tr><td colspan='2' style='text-align:center;'><span style='font-size:18px;color:black;padding:5px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}'>{{ $vehicle->registration_number }}</span></td></tr>
-                                          <tr><td colspan='2'>&nbsp;</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
-                                          
-                                          
-                                        </table>
-                                      </td>
-                                      <td style='width:33.33%;padding:10px;'>
-                                        <table style='width:100%;margin-top:-80px;'>
-                                          <tr><td style='color:#376473;font-weight:600;'>Vehicle Information<br>&nbsp;<br></td><td></td></tr>
-                                          <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
-                                          <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
-                                          <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Department:</b></td><td>{{ $vehicle->department->department_name }}</td></tr>
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Registration NO:</b></td><td>{{ $vehicle->registration_number }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>VIN:</b></td><td>{{ $vehicle->vin }}</td></tr>
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Adoption Date:</b></td><td>{{ $vehicle->adoption_date }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Projected Defleet Date:</b></td><td>{{ $vehicle->projected_defleet_date }}</td></tr>
-                                        </table>
-                                      </td>
-                                      <td style='width:33.33%;padding:10px;'>
-                                        <table style='width:100%;margin-top:-35px;'>
-                                          
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Regions:</b></td><td>{{ $vehicle->region->region_name }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Other Details:</b></td><td>{{ $vehicle->other_details }}</td></tr>
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Lead Time:</b></td><td>{{ $vehicle->lead_time }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Lag Time:</b></td><td>{{ $vehicle->lag_time }}</td></tr>
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Engine:</b></td><td>{{ $vehicle->engine }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Colour:</b></td><td>{{ $vehicle->colour }}</td></tr>
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Mileage:</b></td><td>{{ $vehicle->mileage }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Value:</b></td><td>{{ $vehicle->value }}</td></tr>
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Notes:</b></td><td>{{ $vehicle->notes }}</td></tr>
-                                        </table>
-                                      </td>
-                                    </tr>
+                            <div style='background-color:#fff;width:800px;height:auto;padding:10px;border: 1px solid #bbb8b8;'>
+                              <table cellpadding = '10' cellspacing = '10'>
+                                <tr></tr>
+                                <tr>
+                                  <td style='width:33.33%;padding:10px;'>
+                                    <table style='width:100%'>
+                                      <tr><td colspan='2'><img src='{{ asset('storage/' . $vehicle->image) }}' alt='{{ $vehicle->registration_number }}' style='width: 100%; height:auto;padding:10px;'/></td></tr>
+                                      <tr><td colspan='2'>&nbsp;</td></tr>
+                                      <tr><td colspan='2' style='text-align:center;'><span style='font-size:18px;color:black;padding:5px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}'>{{ $vehicle->registration_number }}</span></td></tr>
+                                      <tr><td colspan='2'>&nbsp;</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
+                                      
+                                      
+                                    </table>
+                                  </td>
+                                  <td style='width:33.33%;padding:10px;'>
+                                    <table style='width:100%;margin-top:-80px;'>
+                                      <tr><td style='color:#376473;font-weight:600;'>Vehicle Information<br>&nbsp;<br></td><td></td></tr>
+                                      <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
+                                      <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
+                                      <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Department:</b></td><td>{{ $vehicle->department->department_name }}</td></tr>
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Registration NO:</b></td><td>{{ $vehicle->registration_number }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>VIN:</b></td><td>{{ $vehicle->vin }}</td></tr>
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Adoption Date:</b></td><td>{{ $vehicle->adoption_date }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Projected Defleet Date:</b></td><td>{{ $vehicle->projected_defleet_date }}</td></tr>
+                                    </table>
+                                  </td>
+                                  <td style='width:33.33%;padding:10px;'>
+                                    <table style='width:100%;margin-top:-35px;'>
+                                      
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Regions:</b></td><td>{{ $vehicle->region->region_name }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Other Details:</b></td><td>{{ $vehicle->other_details }}</td></tr>
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Lead Time:</b></td><td>{{ $vehicle->lead_time }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Lag Time:</b></td><td>{{ $vehicle->lag_time }}</td></tr>
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Engine:</b></td><td>{{ $vehicle->engine }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Colour:</b></td><td>{{ $vehicle->colour }}</td></tr>
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Mileage:</b></td><td>{{ $vehicle->mileage }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Value:</b></td><td>{{ $vehicle->value }}</td></tr>
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Notes:</b></td><td>{{ $vehicle->notes }}</td></tr>
+                                    </table>
+                                  </td>
+                                </tr>
 
-                                  </table>
-                                </div>
-                                " data-html="true" data-placement="right"
+                              </table>
+                            </div>
+                            " data-html="true" data-placement="right"
                                             style="font-weight: 600; font-size:12px; padding: 5px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}">{{ $vehicle->registration_number }}</span>
                                         <br><span
                                             style="font-size:9px;position: absolute;margin-top: 7px;">{{ $vehicle->vin }}</span>
@@ -736,8 +723,7 @@
                                             
                                         @endphp
 
-                                        <td class='col-pa'
-                                            onclick="makebooking('{{ $vehicle->id }}','{{ $thisdate }}','{{ $img_path }}','{{ $vehicle->registration_number }}','{{ $vehicle->registration_plate_colour }}','{{ $vehicle->brand->brand_name }}','{{ $vehicle->model }}','{{ $vehicle->derivative }}','{{ $vehicle->lead_time }}','{{ $vehicle->lag_time }}');"
+                                        <td class='col-pa' onclick="makebooking('{{ $vehicle->id }}','{{ $thisdate }}','{{ $img_path }}','{{ $vehicle->registration_number }}','{{ $vehicle->registration_plate_colour }}','{{ $vehicle->brand->brand_name }}','{{ $vehicle->model }}','{{ $vehicle->derivative }}','{{ $vehicle->lead_time }}','{{ $vehicle->lag_time }}');"
                                             @php
                                                 $booking = DB::table('bookings')
                                                     ->where('company_id', Auth()->user()->company_id)
@@ -746,12 +732,8 @@
                                                     ->whereDate('end_date', '>=', $thisdate)
                                                     ->get();
                                                 foreach ($booking as $key => $value) {
-                                                    $contact_detail = DB::table('contacts')
-                                                        ->where('id', $value->primary_contact)
-                                                        ->first();
-                                                    $loan_detail = DB::table('loan_types')
-                                                        ->where('id', $value->loan_type)
-                                                        ->first();
+                                                    $contact_detail = DB::table('contacts')->where('id',$value->primary_contact)->first();
+                                                    $loan_detail = DB::table('loan_types')->where('id',$value->loan_type)->first();
                                                     $lag_date = date('Y-m-d', strtotime($value->start_date . '-' . $value->lag_time . ' day'));
                                                     $lead_date = date('Y-m-d', strtotime($value->end_date . '+' . $value->lead_time . ' day'));
                                                     if ($value->booking_start_date <= $thisdate && $value->booking_end_date >= $thisdate) {
@@ -771,64 +753,62 @@
 
                                                 @if ($value->id)
                                                     <span data-popup="tooltip" title="
-                                <div style='background-color:#fff;width:700px;height:auto;padding:10px;border: 1px solid #bbb8b8;'>
-                                  <table cellpadding = '10' cellspacing = '10'>
-                                    <tr></tr>
-                                    <tr>
-                                      <td style='width:33.33%;padding:10px;'>
-                                        <table style='width:100%'>
-                                          <tr><td colspan='2'><img src='{{ asset('storage/' . $vehicle->image) }}' alt='{{ $vehicle->registration_number }}' style='width: 100%; height:auto;padding:10px;'/></td></tr>
-                                          <tr><td colspan='2'>&nbsp;</td></tr>
-                                          <tr><td colspan='2' style='text-align:center;'><span style='font-size:18px;color:black;padding:5px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}'>{{ $vehicle->registration_number }}</span></td></tr>
-                                          <tr><td colspan='2'>&nbsp;</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->booking_start_date), 'd-M-Y') }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->booking_end_date), 'd-M-Y') }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Primary Contact:</b></td><td>@if ($contact_detail){{ $contact_detail->first_name . ' ' . $contact_detail->last_name }}@endif</td></tr>
-                                          
-                                          
-                                        </table>
-                                      </td>
-                                      <td style='width:33.33%;padding:10px;'>
-                                        <table style='width:100%;margin-top:-80px;'>
-                                          <tr><td style='color:#376473;font-weight:600;' colspan='2'>Booking Information<br>&nbsp;<br></td></tr>
-                                          <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->booking_start_date), 'd-M-Y') }}</td></tr>
-                                          <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->booking_end_date), 'd-M-Y') }}</td></tr>
-                                          <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Primary Contact:</b></td><td>@if ($contact_detail){{ $contact_detail->first_name . ' ' . $contact_detail->last_name }}@endif</td></tr>
-                                          
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Loan Type:</b></td><td>@if ($loan_detail){{ $loan_detail->loan_type }}@endif</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Purpose of Loan:</b></td><td>{{ $value->purpose_of_loan }}</td></tr>
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Booking Reference:</b></td><td>{{ $value->booking_reference }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Booking Notes:</b></td><td>{{ $value->booking_notes }}</td></tr>
-                                        </table>
-                                      </td>
-                                      <td style='width:33.33%;padding:10px;'>
-                                        <table style='width:100%;margin-top:-35px;'>
-                                          
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Outbound Collection Notes:</b></td><td>{{ $value->ob_pick_from_notes }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Collection Notes:</b></td><td>{{ $value->ib_pick_from_notes }}</td></tr>
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Lead Time Notes:</b></td><td>{{ $value->lead_notes }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Lag Time Notes:</b></td><td>{{ $value->lag_notes }}</td></tr>
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Outbound Delivery Notes:</b></td><td>{{ $value->ob_pick_from_notes }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Delivery Notes:</b></td><td>{{ $value->ib_pick_from_notes }}</td></tr>
-                                          <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Outbound Details Address:</b></td><td>{{ $value->ob_deliver_to_address_1 }}</td></tr>
-                                          <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Details Address:</b></td><td>{{ $value->ib_pick_from_address_1 }}</td></tr>
-                                          
-                                        </table>
-                                      </td>
-                                    </tr>
+                            <div style='background-color:#fff;width:700px;height:auto;padding:10px;border: 1px solid #bbb8b8;'>
+                              <table cellpadding = '10' cellspacing = '10'>
+                                <tr></tr>
+                                <tr>
+                                  <td style='width:33.33%;padding:10px;'>
+                                    <table style='width:100%'>
+                                      <tr><td colspan='2'><img src='{{ asset('storage/' . $vehicle->image) }}' alt='{{ $vehicle->registration_number }}' style='width: 100%; height:auto;padding:10px;'/></td></tr>
+                                      <tr><td colspan='2'>&nbsp;</td></tr>
+                                      <tr><td colspan='2' style='text-align:center;'><span style='font-size:18px;color:black;padding:5px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}'>{{ $vehicle->registration_number }}</span></td></tr>
+                                      <tr><td colspan='2'>&nbsp;</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->booking_start_date), 'd-M-Y') }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->booking_end_date), 'd-M-Y') }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Primary Contact:</b></td><td>@if($contact_detail){{$contact_detail->first_name.' '.$contact_detail->last_name}}@endif</td></tr>
+                                      
+                                      
+                                    </table>
+                                  </td>
+                                  <td style='width:33.33%;padding:10px;'>
+                                    <table style='width:100%;margin-top:-80px;'>
+                                      <tr><td style='color:#376473;font-weight:600;' colspan='2'>Booking Information<br>&nbsp;<br></td></tr>
+                                      <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->booking_start_date), 'd-M-Y') }}</td></tr>
+                                      <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->booking_end_date), 'd-M-Y') }}</td></tr>
+                                      <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Primary Contact:</b></td><td>@if($contact_detail){{$contact_detail->first_name.' '.$contact_detail->last_name}}@endif</td></tr>
+                                      
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Loan Type:</b></td><td>@if($loan_detail){{$loan_detail->loan_type}}@endif</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Purpose of Loan:</b></td><td>{{ $value->purpose_of_loan }}</td></tr>
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Booking Reference:</b></td><td>{{ $value->booking_reference }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Booking Notes:</b></td><td>{{ $value->booking_notes }}</td></tr>
+                                    </table>
+                                  </td>
+                                  <td style='width:33.33%;padding:10px;'>
+                                    <table style='width:100%;margin-top:-35px;'>
+                                      
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Outbound Collection Notes:</b></td><td>{{ $value->ob_pick_from_notes }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Collection Notes:</b></td><td>{{ $value->ib_pick_from_notes }}</td></tr>
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Lead Time Notes:</b></td><td>{{ $value->lead_notes }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Lag Time Notes:</b></td><td>{{ $value->lag_notes }}</td></tr>
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Outbound Delivery Notes:</b></td><td>{{ $value->ob_pick_from_notes }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Delivery Notes:</b></td><td>{{ $value->ib_pick_from_notes }}</td></tr>
+                                      <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Outbound Details Address:</b></td><td>{{ $value->ob_deliver_to_address_1 }}</td></tr>
+                                      <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Details Address:</b></td><td>{{ $value->ib_pick_from_address_1 }}</td></tr>
+                                      
+                                    </table>
+                                  </td>
+                                </tr>
 
-                                  </table>
-                                </div>
-                                " data-html="true" data-placement="auto"
-                                                        style="font-size:9px; color:#fff; padding: 20px;margin: -30px 0px 0px -30px;border-radius: 5px;white-space: nowrap;position: absolute;">
-                                                        @if ($contact_detail && $value->booking_start_date == $thisdate)
-                                                            {{ $contact_detail->first_name . ' ' . $contact_detail->last_name }}
-                                                        @else
-                                                            &nbsp;&nbsp;&nbsp;
-                                                        @endforelse
+                              </table>
+                            </div>
+                            " data-html="true" data-placement="auto"
+                                                        style="font-size:9px; color:#fff; padding: 20px;margin: -30px 0px 0px -30px;border-radius: 5px;white-space: nowrap;position: absolute;">@if($contact_detail && $value->booking_start_date==$thisdate){{$contact_detail->first_name.' '.$contact_detail->last_name}}
+                                                    @else
+                                                    &nbsp;&nbsp;&nbsp;
+                                                    @endforelse
                                                     </span>
                                                 @endif
                                             @endforeach
@@ -882,7 +862,7 @@
             border: 1px solid #bbb8b8;
             background-color: #f2f2f2;
             padding-left: 15px !important;
-            width: 180px;
+            width: 363px;
             height: 26px;
             border-radius: 2px;
         }
@@ -911,15 +891,14 @@
             width: 1000px;
             font-size: 12px;
         }
-
-        .input-hidden {
-            height: 0;
-            width: 0;
-            visibility: hidden;
-            padding: 0;
-            margin: 0;
-            float: right;
-        }
+        .input-hidden{
+        height:0;
+        width:0;
+        visibility: hidden;
+        padding:0;
+        margin:0;
+        float:right;
+}
 
     </style>
     <div id="popup_model1" data-backdrop="false" class="modal fade" style="overflow-y: auto;">
@@ -968,7 +947,7 @@
                                             </div>
                                             <div class="sides-1">
                                                 <span id="rt-number" style="border-radius: 7px;border-color: #eecc00;margin: 5px;width: 110px;padding: 3px; 
-                                                            font-weight: 600;"></span>
+                                                        font-weight: 600;"></span>
                                                 <br>
                                                 <span id="brand_name" style="font-weight: 600"></span><br>
                                                 <span id="model_number" style="font-weight: 600"></span><br>
@@ -1062,23 +1041,24 @@
                                                         Show delivery day
                                                     </label>
                                                     <input class="form-check-input-reverse" type="checkbox"
-                                                        name="show_delivery_day" value=1 id="show_delivery_day" />
+                                                        name="show_delivery_day" value="1"
+                                                        id="show_delivery_day">
                                                 </div>&nbsp &nbsp &nbsp
                                                 <div class="form-check">
                                                     <label class="form-check-label" for="show_collection_day">
                                                         Show collection day
                                                     </label>
-                                                    <input class="form-check-input-reverse" type="checkbox"
-                                                        name="show_collection_day" value=1 id="show_collection_day" />
+                                                    <input class="form-check-input-reverse " type="checkbox"
+                                                        name="show_collection_day" value="1"
+                                                        id="show_collection_day">
                                                 </div>
                                             </div>
                                             <label for="w3review">Contacts:</label>
 
-                                            <select class="checkings" id="contact_list_d" size="5"
+                                            <select class="checkings" id="contact_list_d"  size="5"
                                                 style="width:100%;background-color: #f2f2f2;">
                                             </select>
-                                            <input type="hidden" name="contacts" id="contact_field"
-                                                class="input-hidden" />
+                                            <input type="hidden" name="contacts" id="contact_field" class="input-hidden" />
                                             <!-- button -->
                                             <div class="button1">
                                                 <a href="javascript:void(0)" class="anchor-btn" id="edit_contact"
@@ -1128,7 +1108,8 @@
                                             </div>
                                             <div class="">
                                                 <span >Email Service:</span><br>
-                                <select name="email_service" class="form-control custom-modal-textbox2"
+                                                <select name="
+                                                email_service" class="form-control custom-modal-textbox2"
                                                 style="height: 26px;padding: 0px;width: 298px">
 
                                                 <option value="sendinblue">Sendinblue</option>
@@ -1178,95 +1159,29 @@
                             <div class="row">
                                 <div class="col-md-12 main">
                                     <div class="col-md-6">
-                                        <div class="main-for-checking11">
-                                            <div class="for-checking11">
-                                                <span>Pickup from factory</span><br>
-                                                <label class="switcha">
-                                                    <input type="checkbox" value=1 name="ob_pick_from" id="ob_pick_from" />
-                                                    <span class="slidera rounda"></span>
-                                                </label>
+                                        <div>
 
-                                            </div>
-                                            <!--  -->
-                                            <div id="ob_pick_from_box">
-                                                <div class="main-address">
-                                                    <div class="address">
-                                                        <span class="address1">Address1</span><br>
-                                                        <input type="text" name="ob_pick_from_address_1"
-                                                            id="ob_pick_from_address_1"
-                                                            class="address2 form-control custom-modal-textbox4"
-                                                            style="height: 26px;padding: 0px;width: 180px" required>
-                                                    </div>
-                                                    <div class="address">
-                                                        <span class="address1">Address2</span><br>
-                                                        <input type="text" name="ob_pick_from_address_2"
-                                                            class="address2 form-control custom-modal-textbox4"
-                                                            style="height: 26px;padding: 0px;width: 180px">
-                                                    </div>
-                                                </div>
-                                                <div class="main-address">
-                                                    <div class="address">
-                                                        <span class="address1">Town/City</span><br>
-                                                        <input type="text" name="ob_pick_from_town_city"
-                                                            class="address2 form-control custom-modal-textbox4"
-                                                            style="height: 26px;padding: 0px;width: 180px">
-                                                    </div>
-                                                    <div class="address">
-                                                        <span class="address1">County</span><br>
-                                                        <input type="text" name="ob_pick_from_county"
-                                                            class="address2 form-control custom-modal-textbox4"
-                                                            style="height: 26px;padding: 0px;width: 180px">
-                                                    </div>
-                                                </div>
-                                                <div class="main-address">
-                                                    <div class="address">
-                                                        <span class="address1">Postcode</span><br>
-                                                        <input type="text" name="ob_pick_from_post_code"
-                                                            class="address2 form-control custom-modal-textbox4"
-                                                            style="height: 26px;padding: 0px;width: 180px">
-                                                    </div>
-                                                    <div class="address">
-                                                        <span class="address1">Country</span><br>
-                                                        <input type="text" name="ob_pick_from_country"
-                                                            class="address2 form-control custom-modal-textbox4"
-                                                            style="height: 26px;padding: 0px;width: 180px">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="notes-all">
-                                                <span class="loan11">Notes:</span><br>
-                                                <textarea id="notes1" name="ob_pick_from_notes" rows="4" cols="58"
-                                                    class="form-control custom-modal-textbox3" style="width: 368px;">
-                                            </textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="main-for-checking11">
-                                            <div class="for-checking11">
-                                                <span>Deliver to factory</span><br>
-                                                <label class="switcha">
-                                                    <input type="checkbox" value="1" name="ob_deliver_to"
-                                                        id="ob_deliver_to">
-                                                    <span class="slidera rounda"></span>
+                                            <div>
+                                                <label>Pickup from factory</label><br>
+                                                <label class="switch" for="checkbox">
+                                                    <input type="checkbox" id="checkbox" value="1" name="ob_pick_from" />
+                                                    <div class="slider round"></div>
                                                 </label>
-
                                             </div>
-                                            <!--  -->
                                             <div id="ob_deliver_to_box">
                                                 <div class="main-address">
                                                     <div class="address">
                                                         <span class="address1">Address1</span><br>
                                                         <input type="text" name="ob_deliver_to_address_1"
-                                                            id="ob_deliver_to_address_1"
+                                                        id="ob_deliver_to_address_1"
                                                             class="address2 form-control custom-modal-textbox4"
-                                                            style="height: 26px;padding: 0px;width: 180px" required>
+                                                            style="height: 26px;padding: 0px;width: 216px">
                                                     </div>
                                                     <div class="address">
                                                         <span class="address1">Address2</span><br>
                                                         <input type="text" name="ob_deliver_to_address_2"
                                                             class="address2 form-control custom-modal-textbox4"
-                                                            style="height: 26px;padding: 0px;width: 180px">
+                                                            style="height: 26px;padding: 0px;width: 216px">
                                                     </div>
                                                 </div>
                                                 <div class="main-address">
@@ -1274,13 +1189,13 @@
                                                         <span class="address1">Town/City</span><br>
                                                         <input type="text" name="ob_deliver_to_town_city"
                                                             class="address2 form-control custom-modal-textbox4"
-                                                            style="height: 26px;padding: 0px;width: 180px">
+                                                            style="height: 26px;padding: 0px;width: 216px">
                                                     </div>
                                                     <div class="address">
                                                         <span class="address1">County</span><br>
                                                         <input type="text" name="ob_deliver_to_county"
                                                             class="address2 form-control custom-modal-textbox4"
-                                                            style="height: 26px;padding: 0px;width: 180px">
+                                                            style="height: 26px;padding: 0px;width: 216px">
                                                     </div>
                                                 </div>
                                                 <div class="main-address">
@@ -1288,21 +1203,84 @@
                                                         <span class="address1">Postcode</span><br>
                                                         <input type="text" name="ob_deliver_to_post_code"
                                                             class="address2 form-control custom-modal-textbox4"
-                                                            style="height: 26px;padding: 0px;width: 180px">
+                                                            style="height: 26px;padding: 0px;width: 216px">
                                                     </div>
                                                     <div class="address">
                                                         <span class="address1">Country</span><br>
                                                         <input type="text" name="ob_deliver_to_country"
                                                             class="address2 form-control custom-modal-textbox4"
-                                                            style="height: 26px;padding: 0px;width: 180px">
+                                                            style="height: 26px;padding: 0px;width: 216px">
                                                     </div>
                                                 </div>
+                                                </div>
+                                            <div class="notes" id="ob_pick_from_box">
+                                                <span class="loan1">Notes:</span><br>
+                                                <textarea id="w3review" name="ob_pick_from_notes" rows="4" cols="45"
+                                                    class="form-control custom-modal-textbox3"></textarea>
                                             </div>
-                                            <div class="notes-all">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div>
+
+                                            <div class="container">
+                                                <span>Deliver to factory</span><br>
+                                                <label class="switch1" for="checkbox1">
+                                                    <input type="checkbox" id="checkbox1" value="1" name="ob_deliver_to" />
+                                                    <div class="slider1 round1"></div>
+                                                </label>
+                                            </div>
+                                            <!--  -->
+                                            <div id="ob_deliver_to_box">
+                                            <div class="main-address">
+                                                <div class="address">
+                                                    <span class="address1">Address1</span><br>
+                                                    <input type="text" name="ob_deliver_to_address_1"
+                                                    id="ob_deliver_to_address_1"
+                                                        class="address2 form-control custom-modal-textbox4"
+                                                        style="height: 26px;padding: 0px;width: 216px">
+                                                </div>
+                                                <div class="address">
+                                                    <span class="address1">Address2</span><br>
+                                                    <input type="text" name="ob_deliver_to_address_2"
+                                                        class="address2 form-control custom-modal-textbox4"
+                                                        style="height: 26px;padding: 0px;width: 216px">
+                                                </div>
+                                            </div>
+                                            <div class="main-address">
+                                                <div class="address">
+                                                    <span class="address1">Town/City</span><br>
+                                                    <input type="text" name="ob_deliver_to_town_city"
+                                                        class="address2 form-control custom-modal-textbox4"
+                                                        style="height: 26px;padding: 0px;width: 216px">
+                                                </div>
+                                                <div class="address">
+                                                    <span class="address1">County</span><br>
+                                                    <input type="text" name="ob_deliver_to_county"
+                                                        class="address2 form-control custom-modal-textbox4"
+                                                        style="height: 26px;padding: 0px;width: 216px">
+                                                </div>
+                                            </div>
+                                            <div class="main-address">
+                                                <div class="address">
+                                                    <span class="address1">Postcode</span><br>
+                                                    <input type="text" name="ob_deliver_to_post_code"
+                                                        class="address2 form-control custom-modal-textbox4"
+                                                        style="height: 26px;padding: 0px;width: 216px">
+                                                </div>
+                                                <div class="address">
+                                                    <span class="address1">Country</span><br>
+                                                    <input type="text" name="ob_deliver_to_country"
+                                                        class="address2 form-control custom-modal-textbox4"
+                                                        style="height: 26px;padding: 0px;width: 216px">
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div class="notes-all" id="ob_deliver_to_deliver_notes" style="display: none;">
                                                 <span class="loan11">Notes:</span><br>
-                                                <textarea id="notes1" name="ob_deliver_to_notes" rows="4" cols="58"
-                                                    class="form-control custom-modal-textbox3" style="width: 368px;">
-                                            </textarea>
+                                                <textarea id="notes1" name="ob_deliver_to_deliver_notes" rows="4" cols="58"
+                                                    class="form-control custom-modal-textbox3"
+                                                    style="width: 441px;"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -1350,22 +1328,83 @@
 
                                     <div class="col-md-6">
 
-                                        <div class="main-for-checking11">
-                                            <div class="for-checking11">
+                                        <div>
+                                            
                                                 <span>Pickup from factory</span><br>
                                                 <label class="switcha">
-                                                    <input type="checkbox" value=1 name="ib_pick_from" id="ib_pick_from" />
+                                                    <input type="checkbox" value="1" name="ib_pick_from" id="ib_pick_from">
                                                     <span class="slidera rounda"></span>
                                                 </label>
 
-                                            </div>
+                                           
                                             <!--  -->
+                                            <div id="ib_pick_from_box">
+                                            <div class="main-address">
+                                                <div class="address">
+                                                    <span class="address1">Address1</span><br>
+                                                    <input type="text" name="ib_pick_from_address_1"
+                                                        class="address2 form-control custom-modal-textbox4"
+                                                        style="height: 26px;padding: 0px;width: 180px" required>
+                                                </div>
+                                                <div class="address">
+                                                    <span class="address1">Address2</span><br>
+                                                    <input type="text" name="ib_pick_from_address_2"
+                                                        class="address2 form-control custom-modal-textbox4"
+                                                        style="height: 26px;padding: 0px;width: 180px">
+                                                </div>
+                                            </div>
+                                            <div class="main-address">
+                                                <div class="address">
+                                                    <span class="address1">Town/City</span><br>
+                                                    <input type="text" name="ib_pick_from_town_city"
+                                                        class="address2 form-control custom-modal-textbox4"
+                                                        style="height: 26px;padding: 0px;width: 180px">
+                                                </div>
+                                                <div class="address">
+                                                    <span class="address1">County</span><br>
+                                                    <input type="text" name="ib_pick_from_county"
+                                                        class="address2 form-control custom-modal-textbox4"
+                                                        style="height: 26px;padding: 0px;width: 180px">
+                                                </div>
+                                            </div>
+                                            <div class="main-address">
+                                                <div class="address">
+                                                    <span class="address1">Postcode</span><br>
+                                                    <input type="text" name="ib_pick_from_post_code"
+                                                        class="address2 form-control custom-modal-textbox4"
+                                                        style="height: 26px;padding: 0px;width: 180px">
+                                                </div>
+                                                <div class="address">
+                                                    <span class="address1">Country</span><br>
+                                                    <input type="text" name="ib_pick_from_country"
+                                                        class="address2 form-control custom-modal-textbox4"
+                                                        style="height: 26px;padding: 0px;width: 180px">
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div class="notes-all">
+                                                <span class="loan11">Notes:</span><br>
+                                                <textarea id="notes1" name="ib_pick_from_notes" rows="4" cols="58"
+                                                    class="form-control custom-modal-textbox3" style="width: 368px;">
+                        </textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div style="margin-left: 88px;">
+
+                                           
+                                                <span>Deliver to factory</span><br>
+                                                <label class="switcha">
+                                                    <input type="checkbox" value="1" name="ib_deliver_to" id="ib_deliver_to">
+                                                    <span class="slidera rounda"></span>
+                                                </label>
+                                           
                                             <div id="ib_pick_from_box">
                                                 <div class="main-address">
                                                     <div class="address">
                                                         <span class="address1">Address1</span><br>
                                                         <input type="text" name="ib_pick_from_address_1"
-                                                            id="ib_pick_from_address_1"
                                                             class="address2 form-control custom-modal-textbox4"
                                                             style="height: 26px;padding: 0px;width: 180px" required>
                                                     </div>
@@ -1404,77 +1443,12 @@
                                                             style="height: 26px;padding: 0px;width: 180px">
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="notes-all">
-                                                <span class="loan11">Notes:</span><br>
-                                                <textarea id="notes1" name="ib_pick_from_notes" rows="4" cols="58"
-                                                    class="form-control custom-modal-textbox3" style="width: 368px;">
-                                            </textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="main-for-checking11">
-                                            <div class="for-checking11">
-                                                <span>Deliver to factory</span><br>
-                                                <label class="switcha">
-                                                    <input type="checkbox" value=1 name="ib_deliver_to"
-                                                        id="ib_deliver_to" />
-                                                    <span class="slidera rounda"></span>
-                                                </label>
-
-                                            </div>
-                                            <!--  -->
-                                            <div id="ib_deliver_to_box">
-                                                <div class="main-address">
-                                                    <div class="address">
-                                                        <span class="address1">Address1</span><br>
-                                                        <input type="text" name="ib_deliver_to_address_1"
-                                                            id="ib_deliver_to_address_1"
-                                                            class="address2 form-control custom-modal-textbox4"
-                                                            style="height: 26px;padding: 0px;width: 180px" required>
-                                                    </div>
-                                                    <div class="address">
-                                                        <span class="address1">Address2</span><br>
-                                                        <input type="text" name="ib_deliver_to_address_2"
-                                                            class="address2 form-control custom-modal-textbox4"
-                                                            style="height: 26px;padding: 0px;width: 180px">
-                                                    </div>
                                                 </div>
-                                                <div class="main-address">
-                                                    <div class="address">
-                                                        <span class="address1">Town/City</span><br>
-                                                        <input type="text" name="ib_deliver_to_town_city"
-                                                            class="address2 form-control custom-modal-textbox4"
-                                                            style="height: 26px;padding: 0px;width: 180px">
-                                                    </div>
-                                                    <div class="address">
-                                                        <span class="address1">County</span><br>
-                                                        <input type="text" name="ib_deliver_to_county"
-                                                            class="address2 form-control custom-modal-textbox4"
-                                                            style="height: 26px;padding: 0px;width: 180px">
-                                                    </div>
-                                                </div>
-                                                <div class="main-address">
-                                                    <div class="address">
-                                                        <span class="address1">Postcode</span><br>
-                                                        <input type="text" name="ib_deliver_to_post_code"
-                                                            class="address2 form-control custom-modal-textbox4"
-                                                            style="height: 26px;padding: 0px;width: 180px">
-                                                    </div>
-                                                    <div class="address">
-                                                        <span class="address1">Country</span><br>
-                                                        <input type="text" name="ib_deliver_to_country"
-                                                            class="address2 form-control custom-modal-textbox4"
-                                                            style="height: 26px;padding: 0px;width: 180px">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="notes-all">
-                                                <span class="loan11">Notes:</span><br>
-                                                <textarea id="notes1" name="ib_deliver_to_notes" rows="4" cols="58"
-                                                    class="form-control custom-modal-textbox3" style="width: 368px;">
-                                            </textarea>
+                                            <div class="notes-all" id="ib_deliver_to_notes_box">
+                                                <span class="loan1">Notes:</span><br>
+                                                <textarea id="w3review" name="ib_deliver_to_notes" rows="4" cols="45"
+                                                    class="form-control custom-modal-textbox3"
+                                                    style="width: 441px"> </textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -1491,7 +1465,7 @@
                                     change</button>
                                 <button type="button" class="btn custom-modal-btn btn-danger"
                                     data-dismiss="modal">Cancel</button>
-                                <button type="button" id="delete_booking" class="btn custom-modal-btn btn-danger"
+                                <button type="button" class="btn custom-modal-btn btn-danger"
                                     style="float: right" onclick="deleteitem();">Delete</button>
 
                             </div><br>
@@ -1599,8 +1573,8 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content" style="background-color: #f2f2f2;width: auto;">
                 <div class="modal-header">
-                    <button type="button" class="close"><i class="icon-cancel-circle2"
-                            onclick="$('#popup_model').modal('hide')"></i></button>
+                    <button type="button" class="close"><i
+                            class="icon-cancel-circle2" onclick="$('#popup_model').modal('hide')"></i></button>
                 </div>
                 <h6 class="modal-title md-heading-custom">Add Contact</h6>
                 <form action="javascript:void(0)" id="contactform" class="form-horizontal" method="POST">
@@ -1694,8 +1668,8 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content" style="background-color: #f2f2f2;width: auto;">
                 <div class="modal-header">
-                    <button type="button" class="close"><i class="icon-cancel-circle2"
-                            onclick="$('#list_popup_model').modal('hide')"></i></button>
+                    <button type="button" class="close"><i
+                            class="icon-cancel-circle2" onclick="$('#list_popup_model').modal('hide')"></i></button>
 
                 </div>
                 <h6 class="modal-title md-heading-custom">Add List</h6>
@@ -1710,34 +1684,31 @@
                                     <input type="text" form="list-form" name="list_name" id="list_name" placeholder="List"
                                         class="form-control custom-modal-textbox">
                                 </div>
-
+                                
                             </div>
                             <div class="form-group" style="margin-bottom: 0px;">
                                 <div class="form-group" style="margin-bottom: 0px;"> <strong>Contacts:</strong>
                                     <select class="select-contact-data-list form-control custom-modal-textbox">
                                     </select>
                                 </div>
-
+                                
                             </div>
                             <div class="text-right">
-                                <button type="submit" class="btn custom-modal-btn anchor-btn" id="add_c_list">Add
-                                    Contact</button>
+                                <button type="submit" class="btn custom-modal-btn anchor-btn" id="add_c_list">Add Contact</button>
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group" style="margin-bottom: 0px;"> <strong>Selected Contacts:</strong>
-                                <select class="checkings" id="contact_list_final" size="5"
-                                    style="margin-top: 10px;width:100%;background-color: #f2f2f2;">
-                                </select>
+                            <select class="checkings" id="contact_list_final" size="5" style="margin-top: 10px;width:100%;background-color: #f2f2f2;">
+                            </select>
                             </div>
                             <div class="text-right">
-                                <button type="submit" class="btn custom-modal-btn btn-danger"
-                                    id="delete_c_list">Delete</button>
+                                <button type="submit" class="btn custom-modal-btn btn-danger" id="delete_c_list">Delete</button>
                             </div>
-
+                            
                         </div>
                     </div>
-
+                    
 
                 </div>
 
@@ -1806,93 +1777,40 @@
                             $('#model_number').html('Model: ' + model);
                             $('#derivative').html('Derivative: ' + derivative);
                             $('#vehicle').html(reg_number);
-                            $('#start_date_picker.date').datepicker("update", res.booking_list
-                                .booking_start_date);
+                            $('#start_date_picker.date').datepicker("update", res.booking_list.booking_start_date);
                             $('#end_date_picker.date').datepicker("update", res.booking_list.booking_end_date);
                             $.each(res.booking_list, function(key, value) {
                                 if (key == 'booking_notes' || key == 'lag_notes' || key ==
                                     'lead_notes' ||
                                     key == 'ob_pick_from_notes' || key == 'ib_deliver_to_notes' ||
-                                    key == 'ob_deliver_to_notes' ||
-                                    key == 'ib_pick_from_notes' || key == 'vehicle') {
+                                    key ==
+                                    'ib_pick_from_notes' || key == 'vehicle') {
                                     $("textarea[name='" + key + "']").val(value);
                                     $('#btn').html('Update');
-                                }
-                                if (key == 'loan_type') {
-                                    $("select[name='" + key + "']").val(value);
-                                }
-                                if (key == 'email_service') {
-                                    $("select[name='" + key + "']").val(value);
-                                }
-                                if (key == 'show_delivery_day') {
-                                    if (value == 1) {
-                                        $('#show_delivery_day').prop('checked', true);
-                                    } else {
-                                        $('#show_delivery_day').prop('checked', false);
-                                    }
-                                }
-                                if (key == 'show_collection_day') {
-                                    if (value == 1) {
-                                        $('#show_collection_day').prop('checked', true);
-                                    } else {
-                                        $('#show_collection_day').prop('checked', false);
-                                    }
-                                }
-                                if (key == 'ob_pick_from') {
-                                    if (value == 1) {
-                                        $('#ob_pick_from').prop('checked', true);
-                                        $("#ob_pick_from_box").hide(); // checked
-                                        $('#ob_pick_from_address_1').removeAttr('required', 'required');
-
-                                    } else {
-                                        $('#ob_pick_from').prop('checked', false);
-                                        $("#ob_pick_from_box").show(); // unchecked
-                $('#ob_pick_from_address_1').attr('required', 'required');
-                                    }
-                                }
-                                if (key == 'ob_deliver_to') {
-                                    if (value == 1) {
-                                        $('#ob_deliver_to').prop('checked', true);
-                                        $("#ob_deliver_to_box").hide(); // checked
-                $('#ob_deliver_to_address_1').removeAttr('required', 'required');
-                                    } else {
-                                        $('#ob_deliver_to').prop('checked', false);
-                                        $("#ob_deliver_to_box").show(); // unchecked
-                $('#ob_deliver_to_address_1').attr('required', 'required');
-                                    }
-                                }
-                                if (key == 'ib_pick_from') {
-                                if (value == 1) {
-                                    $('#ib_pick_from').prop('checked', true);
-                                    $("#ib_pick_from_box").hide(); // checked
-                $('#ib_pick_from_address_1').removeAttr('required', 'required');
                                 } else {
-                                    $('#ib_pick_from').prop('checked', false);
-                                    $("#ib_pick_from_box").show(); // unchecked
-                $('#ib_pick_from_address_1').attr('required', 'required');
-                                }
-                            }
-                            if (key == 'ib_deliver_to') {
-                                    if (value == 1) {
-                                        $('#ib_deliver_to').prop('checked', true);
-                                        $("#ib_deliver_to_box").hide(); // checked
-                $('#ib_deliver_to_address_1').removeAttr('required', 'required');
-                                    } else {
-                                        $('#ib_deliver_to').prop('checked', false);
-                                        $("#ib_deliver_to_box").show(); // unchecked
-                $('#ib_deliver_to_address_1').attr('required', 'required');
+                                    if (key == 'loan_type') {
+                                        $("select[name='" + key + "']").val(value);
                                     }
-                                }
-
-                                if (key == 'email_template') {
-                                    var email_tem = value.split(",");
-                                    $.each(email_tem, function(index, v) {
-                                        $('input[name="email_template[]"][value="' + v
-                                            .toString() + '"]').prop("checked", true);
-                                    });
-                                }
-                                if (key == 'contacts') {
-                                    var addtext = '';
+                                    if (key == 'email_service') {
+                                        $("select[name='" + key + "']").val(value);
+                                    }
+                                    if (key == 'show_delivery_day') {
+                                       if(value == 1){
+                                           $('#show_delivery_day').prop('checked', true);
+                                       }
+                                       else{
+                                            $('#show_delivery_day').prop('checked', true);
+                                       }
+                                    }
+                                    if (key == 'email_template') {
+                                        var email_tem = value.split(",");
+                                        $.each(email_tem, function(index, v) {
+                                            $('input[name="email_template[]"][value="' + v
+                                                .toString() + '"]').prop("checked", true);
+                                        });
+                                    }
+                                    if (key == 'contacts') {
+                                        var addtext = '';
                                     $.each(res.contact_list, function(index, v) {
                                         if (res.booking_list.primary_contact == v.id) {
                                             addtext = v.name + '*';
@@ -1903,21 +1821,19 @@
                                         $('#contacts').val(value);
 
                                     });
-                                } else {
-                                if (key != 'booking_notes' && key != 'lag_notes' && key != 'lead_notes' && key != 'ob_deliver_to_notes' && key != 'ob_pick_from_notes' && key != 'ib_deliver_to_notes' && key != 'ib_pick_from_notes' && key != 'vehicle' && key != 'loan_type' && key != 'email_service' && key != 'email_template' && key != 'show_delivery_day' && key != 'show_collection_day' && key != 'ob_pick_from'&& key != 'ob_deliver_to' && key != 'ib_deliver_to' && key != 'ib_pick_from' && key != 'contacts') {
-                                    $("input[name='" + key + "']").val(value);
+                                    } else {
+                                        $("input[name='" + key + "']").val(value);
+                                    }
+                                    $('#booking_created').html(res.booking_created.event + ' by ' + res
+                                        .booking_created.user_email + ' on ' + res.booking_created
+                                        .created_at);
+                                    if (res.booking_modified) {
+                                        $('#booking_modified').html(res.booking_modified.event +
+                                            ' by ' +
+                                            res.booking_modified.user_email + ' on ' + res
+                                            .booking_modified.created_at);
+                                    }
                                 }
-                            }
-                                $('#booking_created').html(res.booking_created.event + ' by ' + res
-                                    .booking_created.user_email + ' on ' + res.booking_created
-                                    .created_at);
-                                if (res.booking_modified) {
-                                    $('#booking_modified').html(res.booking_modified.event +
-                                        ' by ' +
-                                        res.booking_modified.user_email + ' on ' + res
-                                        .booking_modified.created_at);
-                                }
-
                             });
                             alert('Booking Already Exists with selected date range');
                         } else {
@@ -1935,11 +1851,10 @@
                             $('input[name="lead_time"]').val(lead_time);
                             $('input[name="lag_time"]').val(lag_time);
                             $('#start_date_picker.date').datepicker("update", date);
-
+                            
                             set_second_cal();
                             set_start_date();
                             set_end_date();
-                            $('#delete_booking').hide();
                         }
                     }
 
@@ -1977,11 +1892,11 @@
         }
         $('#insert_list').click(function() {
             var data = $('.select-remote-data').select2('data');
-
-            var primary_contact = $('#primary_contact').val();
-            var v = $('#contact_list_d option').length;
-            if (v == 0 && primary_contact == '' && data.length == 1) {
-
+            
+           var primary_contact = $('#primary_contact').val();
+           var v= $('#contact_list_d option').length;
+            if (v == 0 && primary_contact=='' && data.length ==1) {
+               
                 var x = data[0].text + '*';
                 $('#primary_contact').val(data[0].id);
                 $('#contact_list_d').append(new Option(x, data[0].id));
@@ -1989,75 +1904,76 @@
                 $.each(data, function(index, item) {
                     $('#contact_list_d').append(new Option(item.text, item.id));
                 });
-                if (primary_contact == '') {
+                if(primary_contact ==''){
                     var first_id = $("#contact_list_d option:first").val();
                     var first_text = $("#contact_list_d option:first").text();
                     $('#primary_contact').val(first_id);
-                    $("#contact_list_d option:first").text(first_text + '*');
+                    $("#contact_list_d option:first").text(first_text+'*');
                 }
             }
             var code = {};
-            $("#contact_list_d > option").each(function() {
-                if (code[this.value]) {
+                $("#contact_list_d > option").each(function () {
+                if(code[this.value]) {
                     $(this).remove();
                 } else {
                     code[this.value] = this.value;
                 }
             });
-            $('#popup_model_editor').modal('hide');
+            $('#popup_model_editor').modal('hide');                 
         });
         $('#add_c_list').click(function() {
             var data = $('.select-contact-data-list').select2('data');
-
+            
             $.each(data, function(index, item) {
-                $('#contact_list_final').append(new Option(item.text, item.id));
-            });
+                    $('#contact_list_final').append(new Option(item.text, item.id));
+                });
             var code = {};
-            $("#contact_list_final > option").each(function() {
-                if (code[this.value]) {
+                $("#contact_list_final > option").each(function () {
+                if(code[this.value]) {
                     $(this).remove();
                 } else {
                     code[this.value] = this.value;
                 }
             });
-
+                             
         });
-
+        
         $('#delete_list').click(function() {
-            var value = '';
+            var value ='';
             value = $('#contact_list_d option:selected').val();
             var primary = $('#primary_contact').val();
-
-            if (typeof value === 'undefined') {
+            
+            if(typeof value === 'undefined'){
                 alert('Please Select a Contact for delete');
-            } else {
-
-                if (value == primary) {
-                    $('#primary_contact').val('');
-                }
-                $('#contact_list_d option:selected').remove();
             }
-
+            else{
+                
+                if(value == primary){
+                $('#primary_contact').val('');   
+            }
+            $('#contact_list_d option:selected').remove();
+            }
+            
         });
-        $('#mark_as_primary').click(function() {
+        $ ('#mark_as_primary').click(function() {
             var id = '';
             var text = '';
             id = $('#contact_list_d option:selected').val();
-
+            
             if (typeof id === 'undefined') {
                 alert("Please Select a Contact to make Mark as Primary");
             } else {
                 var check_id = $('#primary_contact').val();
-                if (check_id != id) {
-                    text = $('#contact_list_d').find('option:selected').text();
-                    $("#contact_list_d option").each(function() {
+                if(check_id != id){
+                text = $('#contact_list_d').find('option:selected').text();
+                $("#contact_list_d option").each(function() {
 
-                        $(this).text($(this).text().replace('*', ''));
-                    });
-                    $('#primary_contact').val(id);
-                    $('#contact_list_d option:selected').text(text + '*');
-                    alert("Mark as Primary Successful");
-                } else {
+                    $(this).text($(this).text().replace('*', ''));
+                });
+                $('#primary_contact').val(id);
+                $('#contact_list_d option:selected').text(text + '*');
+                alert("Mark as Primary Successful");
+                }else{
                     alert('This contact already selected as a primary contact! Please select another one');
                 }
 
@@ -2129,7 +2045,6 @@
             $('#booking_modified').html('');
             $('#start_date_picker.date').datepicker("update", date);
             $('#contact_list_d').empty();
-            $('#delete_booking').hide();
             set_second_cal();
             set_start_date();
             set_end_date();
@@ -2147,116 +2062,53 @@
 
                     if (res.status == true) {
                         $('#btn').html('Update');
-                        $('#delete_booking').show();
                         $('#start_date_picker.date').datepicker("update", res.booking_list.booking_start_date);
                         $('#end_date_picker.date').datepicker("update", res.booking_list.booking_end_date);
                         $.each(res.booking_list, function(key, value) {
                             if (key == 'booking_notes' || key == 'lag_notes' || key == 'lead_notes' ||
-                                key == 'ob_deliver_to_notes' ||
                                 key == 'ob_pick_from_notes' || key == 'ib_deliver_to_notes' || key ==
                                 'ib_pick_from_notes' || key == 'vehicle') {
                                 $("textarea[name='" + key + "']").val(value);
                                 $('#btn').html('Update');
-                            }
-                            if (key == 'loan_type') {
-                                $("select[name='" + key + "']").val(value);
-                            }
-                            if (key == 'email_service') {
-                                $("select[name='" + key + "']").val(value);
-                            }
-                            if (key == 'email_template') {
-                                var email_tem = value.split(",");
-                                $.each(email_tem, function(index, v) {
-                                    $('input[name="email_template[]"][value="' + v
-                                        .toString() + '"]').prop("checked", true);
-                                });
-                            }
-                            if (key == 'show_delivery_day') {
-                                if (value == 1) {
-                                    $('#show_delivery_day').prop('checked', true);
-                                } else {
-                                    $('#show_delivery_day').prop('checked', false);
-                                }
-                            }
-                            if (key == 'show_collection_day') {
-                                if (value == 1) {
-                                    $('#show_collection_day').prop('checked', true);
-                                } else {
-                                    $('#show_collection_day').prop('checked', false);
-                                }
-                            }
-                            if (key == 'ob_pick_from') {
-                                    if (value == 1) {
-                                        $('#ob_pick_from').prop('checked', true);
-                                        $("#ob_pick_from_box").hide(); // checked
-                                        $('#ob_pick_from_address_1').removeAttr('required', 'required');
-
-                                    } else {
-                                        $('#ob_pick_from').prop('checked', false);
-                                        $("#ob_pick_from_box").show(); // unchecked
-                $('#ob_pick_from_address_1').attr('required', 'required');
-                                    }
-                                }
-                                if (key == 'ob_deliver_to') {
-                                    if (value == 1) {
-                                        $('#ob_deliver_to').prop('checked', true);
-                                        $("#ob_deliver_to_box").hide(); // checked
-                $('#ob_deliver_to_address_1').removeAttr('required', 'required');
-                                    } else {
-                                        $('#ob_deliver_to').prop('checked', false);
-                                        $("#ob_deliver_to_box").show(); // unchecked
-                $('#ob_deliver_to_address_1').attr('required', 'required');
-                                    }
-                                }
-                                if (key == 'ib_pick_from') {
-                                if (value == 1) {
-                                    $('#ib_pick_from').prop('checked', true);
-                                    $("#ib_pick_from_box").hide(); // checked
-                $('#ib_pick_from_address_1').removeAttr('required', 'required');
-                                } else {
-                                    $('#ib_pick_from').prop('checked', false);
-                                    $("#ib_pick_from_box").show(); // unchecked
-                $('#ib_pick_from_address_1').attr('required', 'required');
-                                }
-                            }
-                                if (key == 'ib_deliver_to') {
-                                    if (value == 1) {
-                                        $('#ib_deliver_to').prop('checked', true);
-                                        $("#ib_deliver_to_box").hide(); // checked
-                $('#ib_deliver_to_address_1').removeAttr('required', 'required');
-                                    } else {
-                                        $('#ib_deliver_to').prop('checked', false);
-                                        $("#ib_deliver_to_box").show(); // unchecked
-                $('#ib_deliver_to_address_1').attr('required', 'required');
-                                    }
-                                }
-                            if (key == 'contacts') {
-                                var addtext = '';
-                                $.each(res.contact_list, function(index, v) {
-                                    if (res.booking_list.primary_contact == v.id) {
-                                        addtext = v.name + '*';
-                                    } else {
-                                        addtext = v.name;
-                                    }
-                                    $('#contact_list_d').append(new Option(addtext, v.id));
-                                    $('#contacts').val(value);
-
-                                });
                             } else {
-                                if (key != 'booking_notes' && key != 'lag_notes' && key != 'lead_notes' && key != 'ob_deliver_to_notes' && key != 'ob_pick_from_notes' && key != 'ib_deliver_to_notes' && key != 'ib_pick_from_notes' && key != 'vehicle' && key != 'loan_type' && key != 'email_service' && key != 'email_template' && key != 'show_delivery_day' && key != 'show_collection_day' && key != 'ob_pick_from'&& key != 'ob_deliver_to' && key != 'ib_deliver_to' && key != 'ib_pick_from' && key != 'contacts') {
+                                if (key == 'loan_type') {
+                                    $("select[name='" + key + "']").val(value);
+                                }
+                                if (key == 'email_service') {
+                                    $("select[name='" + key + "']").val(value);
+                                }
+                                if (key == 'email_template') {
+                                    var email_tem = value.split(",");
+                                    $.each(email_tem, function(index, v) {
+                                        $('input[name="email_template[]"][value="' + v
+                                            .toString() + '"]').prop("checked", true);
+                                    });
+                                }
+                                if (key == 'contacts') {
+                                    var addtext = '';
+                                    $.each(res.contact_list, function(index, v) {
+                                        if (res.booking_list.primary_contact == v.id) {
+                                            addtext = v.name + '*';
+                                        } else {
+                                            addtext = v.name;
+                                        }
+                                        $('#contact_list_d').append(new Option(addtext, v.id));
+                                        $('#contacts').val(value);
+
+                                    });
+                                } else {
                                     $("input[name='" + key + "']").val(value);
                                 }
-                            }
-                            $('#booking_created').html(res.booking_created.event + ' by ' + res
-                                .booking_created.user_email + ' on ' + res.booking_created
-                                .created_at);
-                            if (res.booking_modified) {
-                                $('#booking_modified').html(res.booking_modified.event + ' by ' +
-                                    res
-                                    .booking_modified.user_email + ' on ' + res.booking_modified
+                                $('#booking_created').html(res.booking_created.event + ' by ' + res
+                                    .booking_created.user_email + ' on ' + res.booking_created
                                     .created_at);
+                                if (res.booking_modified) {
+                                    $('#booking_modified').html(res.booking_modified.event + ' by ' +
+                                        res
+                                        .booking_modified.user_email + ' on ' + res.booking_modified
+                                        .created_at);
+                                }
                             }
-
                         });
                     }
 
@@ -2274,51 +2126,52 @@
                 }
             });
             var btn_name = $("#btn").html();
-
+            
             $("#btn").html('Please Wait...');
             var contact = new Array();
-            $("#contact_list_d option").each(function() {
+            $("#contact_list_d option").each(function(){
                 contact.push($(this).val());
             });
             var primary = $('#primary_contact').val();
-            if (contact.length == 0) {
+            if(contact.length==0){
                 $('#contact_field').val('');
                 alert('Contacts Required!');
                 $("#btn").html(btn_name);
                 throw new Error('This is not an error. This is just to abort javascript');
-            } else if (primary == '') {
-
+            }
+            else if(primary== ''){
+                
                 alert('Please mark a Primary Contact!');
                 $("#btn").html(btn_name);
                 throw new Error('This is not an error. This is just to abort javascript');
-            } else if (contact.length != 0) {
-                $('#contact_field').val(contact.toString());
-                const data = new FormData(this);
-
-                // throw new Error('This is not an error. This is just to abort javascript');
-                $.ajax({
-                    type: "POST",
-                    url: "{{ url('store-booking') }}",
-                    data: data,
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    dataType: 'json',
-                    success: function(res) {
-                        console.log(res);
-                        if (res.success == true) {
-                            window.location.reload();
-                        } else {
-                            $("#btn").html(btn_name);
-                            $("#btn").attr("disabled", false);
-                            alert(
-                                'Warning! We have already booking with selected date range for this vehicle');
-
-                        }
-                    }
-                });
             }
-
+            else if(contact.length!=0){
+             $('#contact_field').val(contact.toString());
+            const data = new FormData(this);
+            
+               // throw new Error('This is not an error. This is just to abort javascript');
+            $.ajax({
+                type: "POST",
+                url: "{{ url('store-booking') }}",
+                data: data,
+                contentType: false,
+                cache: false,
+                processData: false,
+                dataType: 'json',
+                success: function(res) {
+                    console.log(res);
+                    if (res.success == true) {
+                        window.location.reload();
+                    } else {
+                        $("#btn").html(btn_name);
+                        $("#btn").attr("disabled", false);
+                        alert('Warning! We have already booking with selected date range for this vehicle');
+                        
+                    }
+                }
+            });
+            }
+            
         });
 
         //add new contact
@@ -2404,38 +2257,38 @@
             //end add new contact
 
             //add list
-            $("#list-form").submit(function(event) {
-                event.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        $("#list-form").submit(function(event) {
+            event.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $("#listbtn").html('Please Wait...');
+            var data = new FormData(this);
+            console.log(data.get());
+            throw new Error('This is not an error. This is just to abort javascript');
+            $.ajax({
+                type: "POST",
+                url: "{{ route('lists.store') }}",
+                data: data,
+                contentType: false,
+                cache: false,
+                processData: false,
+                dataType: 'json',
+                success: function(res) {
+                    if (res.success == true) {
+                        $('#list_popup_model').modal('hide');
+                    } else {
+                        $('.text-danger').html(res.error - msg);
+                        $("#listbtn").html(btn);
+                        $("#listbtn").attr("disabled", false);
                     }
-                });
-                $("#listbtn").html('Please Wait...');
-                var data = new FormData(this);
-                console.log(data.get());
-                throw new Error('This is not an error. This is just to abort javascript');
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('lists.store') }}",
-                    data: data,
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    dataType: 'json',
-                    success: function(res) {
-                        if (res.success == true) {
-                            $('#list_popup_model').modal('hide');
-                        } else {
-                            $('.text-danger').html(res.error - msg);
-                            $("#listbtn").html(btn);
-                            $("#listbtn").attr("disabled", false);
-                        }
-                    }
-                });
+                }
             });
         });
-
+        });
+        
         $(document).ready(function($) {
             $.ajaxSetup({
                 headers: {
@@ -2448,50 +2301,52 @@
 
             $('#listbtn').click(function(event) {
                 $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
                 });
                 var list_name = $('#list_name').val();
                 var contact = new Array();
-                $("#contact_list_final option").each(function() {
-                    contact.push($(this).val());
+                $("#contact_list_final option").each(function(){
+                contact.push($(this).val());
                 });
                 console.log(contact);
-                // throw new Error('This is not an error. This is just to abort javascript');
-                if (list_name == '') {
+               // throw new Error('This is not an error. This is just to abort javascript');
+                if(list_name ==''){
                     alert('List name required!');
-                } else if (contact.length == 0) {
+                }
+                else if(contact.length==0){
                     alert('Contacts required!');
+                     
+                }
+                else{
 
-                } else {
-
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ route('lists.store') }}",
-                        data: {
-                            list_name: list_name,
-                            contacts: contact
-                        },
-                        dataType: 'json',
-                        success: function(res) {
-                            console.log(res);
-                            if (res.success == true) {
-                                $('#list_popup_model').modal('hide');
-                            } else {
-
-                                $("#listbtn").html(btn);
-                                $("#listbtn").attr("disabled", false);
-                            }
-                        }
-                    });
+                $.ajax({
+                type: "POST",
+                url: "{{ route('lists.store') }}",
+                data: {
+                    list_name:list_name,
+                    contacts:contact
+                },
+                dataType: 'json',
+                success: function(res) {
+                    console.log(res);
+                    if (res.success == true) {
+                        $('#list_popup_model').modal('hide');
+                    } else {
+                        
+                        $("#listbtn").html(btn);
+                        $("#listbtn").attr("disabled", false);
+                    }
+                }
+            });
                 }
             });
         });
 
 
 
-
+        
         $('#add-rows').click(function() {
             $('#list-mytable').find('tr').each(function() {
                 var row = $(this);
@@ -2521,12 +2376,12 @@
             daysOfWeekHighlighted: "0",
             autoclose: true
         });
-
+        
         $('#start_date_picker.date').datepicker({
             format: "yyyy-mm-dd",
             daysOfWeekHighlighted: "0",
             autoclose: true,
-
+            
         });
         $("#start_date_picker input").change(function() {
             var d = $("#start_date_picker input").val();
@@ -2567,13 +2422,13 @@
             }
             var start_date = d.getFullYear() + '-' + month + '-' + day;
             $('input[name="start_date"]').val(start_date);
-
-
+            
+            
 
         }
 
         function get_start_date() {
-
+            
             var booking_date = $('input[name="booking_start_date"]').val();
             var lag_time = $('input[name="lag_time"]').val();
             const d = new Date(booking_date);
@@ -2590,9 +2445,9 @@
             $('input[name="start_date"]').val(start_date);
             var id = $('#id').val();
             var vehicle_id = $('#vehicle_id').val();
-
-
-
+            
+            
+            
 
         }
         //set/ get end date based on booking end date and lead time 
@@ -2614,12 +2469,12 @@
             }
             var end_date = d.getFullYear() + '-' + month + '-' + day;
             $('input[name="end_date"]').val(end_date);
-
+            
 
         }
-
+        
         function get_end_date() {
-
+            
             var booking_date = $('input[name="booking_end_date"]').val();
             var lead_time = $('input[name="lead_time"]').val();
             const d = new Date(booking_date);
@@ -2636,12 +2491,12 @@
             }
             var end_date = d.getFullYear() + '-' + month + '-' + day;
             $('input[name="end_date"]').val(end_date);
+            
 
-
-
+            
         }
 
-
+        
 
         function getContactList() {
             $.ajax({
@@ -2730,73 +2585,68 @@
 
 
         });
-
-        function deleteitem() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            var id = $('#id').val();
-            if (confirm("Delete Booking?") == true) {
-
-
-                // ajax
-                $.ajax({
-                    type: "POST",
-                    url: "{{ url('delete-booking') }}",
-                    data: {
-                        id: id
-                    },
-                    dataType: 'json',
-                    success: function(res) {
-                        window.location.reload();
-                    }
-                });
-            }
+    function deleteitem() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
+    });
+    var id = $('#id').val();
+    if (confirm("Delete Booking?") == true) {
 
-        $('#ob_pick_from').change(function() {
-            if ($(this).is(':checked')) {
-                $("#ob_pick_from_box").hide(); // checked
-                $('#ob_pick_from_address_1').removeAttr('required', 'required');
-            } else {
-                $("#ob_pick_from_box").show(); // unchecked
-                $('#ob_pick_from_address_1').attr('required', 'required');
+
+        // ajax
+        $.ajax({
+            type: "POST",
+            url: "{{ url('delete-booking') }}",
+            data: {
+                id: id
+            },
+            dataType: 'json',
+            success: function(res) {
+                window.location.reload();
             }
         });
+    }
+}
 
-        $('#ob_deliver_to').change(function() {
-            if ($(this).is(':checked')) {
-                $("#ob_deliver_to_box").hide(); // checked
-                $('#ob_deliver_to_address_1').removeAttr('required', 'required');
-            } else {
-                $("#ob_deliver_to_box").show(); // unchecked
-                $('#ob_deliver_to_address_1').attr('required', 'required');
-            }
+$('#ib_deliver_to').change(function () {
+    if($(this).is(':checked'))
+    $("#ib_deliver_to_notes_box").show();  // checked
+else
+    $("#ib_deliver_to_notes_box").hide();  // unchecked
+});
+ 
+$('#ib_pick_from').change(function () {
+    if($(this).is(':checked'))
+    $("#ib_pick_from_box").show();  // checked
+	//$('input [name="ib_pick_from_address_1"]').attr('required');
+else
+    $("#ib_pick_from_box").hide();  // unchecked
+	//$('input [name="ib_pick_from_address_1"]').removeAttr('required');
+});
 
-        });
+$('#checkbox1').change(function () {
+    if($(this).is(':checked')){
+    $("#ob_deliver_to_box").hide();  // checked
+	$("#ob_deliver_to_deliver_notes").show(); 
+	$('#ob_deliver_to_address_1').removeAttr('required');
+}
+	
+else{
+    $("#ob_deliver_to_box").show();  // unchecked
+	$("#ob_deliver_to_deliver_notes").hide(); 
+    $('#ob_deliver_to_address_1').attr('required','required');
+    }
+});
 
-        $('#ib_pick_from').change(function() {
-            if ($(this).is(':checked')) {
-                $("#ib_pick_from_box").hide(); // checked
-                $('#ib_pick_from_address_1').removeAttr('required', 'required');
-            } else {
-                $("#ib_pick_from_box").show(); // unchecked
-                $('#ib_pick_from_address_1').attr('required', 'required');
-
-            }
-        });
-
-        $('#ib_deliver_to').change(function() {
-            if ($(this).is(':checked')) {
-                $("#ib_deliver_to_box").hide(); // checked
-                $('#ib_deliver_to_address_1').removeAttr('required', 'required');
-            } else {
-                $("#ib_deliver_to_box").show(); // unchecked
-                $('#ib_deliver_to_address_1').attr('required', 'required');
-            }
-        });
+$('#checkbox').change(function () {
+    if($(this).is(':checked'))
+    $("#ob_pick_from_box").show();  // checked
+else
+    $("#ob_pick_from_box").hide();  // unchecked
+    $("#ob_deliver_to_box").show(); 
+});
     </script>
 
 @endsection

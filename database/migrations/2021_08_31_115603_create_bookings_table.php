@@ -52,7 +52,7 @@ class CreateBookingsTable extends Migration
             $table->string('ob_deliver_to_address_1')->nullable();
             $table->string('ob_deliver_to_town_city')->nullable();
             $table->string('ob_deliver_to_post_code')->nullable();
-            $table->string('ob_deliver_to_deliver_notes')->nullable();
+            $table->string('ob_deliver_to_notes')->nullable();
             $table->string('ob_deliver_to_address_2')->nullable();
             $table->string('ob_deliver_to_county')->nullable();
             $table->string('ob_deliver_to_country')->nullable();
