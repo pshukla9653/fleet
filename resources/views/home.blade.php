@@ -771,7 +771,7 @@
 
                                                 @if ($value->id)
                                                     <span data-popup="tooltip" title="
-                                    <div style='background-color:#fff;width:700px;height:auto;padding:10px;border: 1px solid #bbb8b8;'>
+                                    <div style='background-color:#fff;min-width:700px;height:auto;padding:10px;border: 1px solid #bbb8b8;'>
                                       <table cellpadding = '10' cellspacing = '10'>
                                         <tr></tr>
                                         <tr>
@@ -792,7 +792,7 @@
                                             </table>
                                           </td>
                                           <td style='width:33.33%;padding:10px;'>
-                                            <table style='width:100%;margin-top:-80px;'>
+                                            <table style='width:100%;top:25px;'>
                                               <tr><td style='color:#376473;font-weight:600;' colspan='2'>Booking Information<br>&nbsp;<br></td></tr>
                                               <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->booking_start_date), 'd-M-Y') }}</td></tr>
                                               <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->booking_end_date), 'd-M-Y') }}</td></tr>

@@ -17,7 +17,7 @@ class EmailService
 
     private BookingEmailDTO $mailerData;
 
-    public function __construct(WordDocumentService $documentService,  array $config)
+    public function __construct(protected WordDocumentService $documentService, protected array $config)
     {}
 
     public function setData(Booking $booking)
