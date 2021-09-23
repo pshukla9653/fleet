@@ -29,6 +29,7 @@ class SendinblueMailer extends IMailer
     public function sendEmailTest(): mixed
     {
         if (!empty($this->dto->email_body)) {
+            dd($this->dto);
             $to = array_map(function ($email) {
                 return [
                     'name' => explode('@', $email)[0],

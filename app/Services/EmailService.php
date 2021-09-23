@@ -22,6 +22,7 @@ class EmailService
 
     public function setData(Booking $booking)
     {
+        
         $data = array_merge([
                 'current_date' => now()->toFormattedDateString(),
                 'current_date_dd_mm_yy' => now()->format('d/m/Y'),
@@ -64,7 +65,7 @@ class EmailService
         );
 
         $this->mailerData = new BookingEmailDTO($data);
-
+        dd($this->mailerData);
         return $this;
     }
 

@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\History;
+use App\Models\EmailTemplate;
+use App\Models\Contact;
+use App\Models\Vehicle;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use DB;
+use App\Services\EmailService;
 
 class BookingController extends Controller
 {
-    function __construct()
+    function __construct(protected EmailService $emailService)
     {
         //  $this->middleware('permission:booking-list|booking-create|booking-edit|booking-delete', ['only' => ['index','store']]);
         //  $this->middleware('permission:booking-create', ['only' => ['create','store']]);
@@ -335,5 +340,175 @@ class BookingController extends Controller
        
 		Booking::find($request->id)->delete();
         return response()->json(['success' => true]);
+    }
+
+    public function send_booking_email(Request $request){
+       
+        $booking = Booking::find($request->id);
+        $primary_contact = Contact::find($booking->primary_contact);
+        $vehicle = Vehicle::find($booking->vehicle_id);
+        $company = Company::find(Auth()->user()->company_id);
+        $contact_list = Contact::whereIn('id', explode(',', $booking->contacts))->get();
+        
+        foreach($contact_list as $key=>$value){
+            $contacts[] = $value->first_name.' '.$value->last_name;
+        }
+        
+        $email_templates_ids = explode(',', $booking->email_template);
+        
+        for($i=0; $i < count($email_templates_ids); $i++){
+
+            $email_template = EmailTemplate::find($email_templates_ids[$i]);
+            //Change To email if variable specified
+            if (str_contains($email_template->to_email, '%%PrimaryEmail%%')) {
+                $email_template->to_email = $primary_contact->email;
+            }
+            if (str_contains($email_template->email_body, '%%PrimaryContact%%')) {
+                $email_template->email_body = str_replace("%%PrimaryContact%%", $primary_contact->first_name.' '.$primary_contact->last_name, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%PrimaryFirstname%%')) {
+                $email_template->email_body = str_replace("%%PrimaryFirstname%%", $primary_contact->first_name, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%PrimaryLastname%%')) {
+                $email_template->email_body = str_replace("%%PrimaryLastname%%", $primary_contact->last_name, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%PrimaryEmail%%')) {
+                $email_template->email_body = str_replace("%%PrimaryEmail%%", $primary_contact->email, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%PrimaryPhone%%')) {
+                $email_template->email_body = str_replace("%%PrimaryPhone%%", $primary_contact->phone_number, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%PrimaryAddress%%')) {
+                $primary_add  = $primary_contact->address1.' '.$primary_contact->address2.' '.$primary_contact->address3.' '.$primary_contact->city.' '.$primary_contact->country;  
+                $email_template->email_body = str_replace("%%PrimaryAddress%%", $primary_add, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%PrimaryPostcode%%')) {
+                $email_template->email_body = str_replace("%%PrimaryPostcode%%", $primary_contact->post_code, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%BookingNotes%%')) {
+                $email_template->email_body = str_replace("%%BookingNotes%%", $booking->booking_notes, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%PrimaryCompanyName%%')) {
+                $email_template->email_body = str_replace("%%PrimaryCompanyName%%", $company->company_name, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%PrimaryCountry%%')) {
+                $email_template->email_body = str_replace("%%PrimaryCountry%%", $primary_contact->country, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%ContactsComma%%')) {
+                
+                $email_template->email_body = str_replace("%%ContactsComma%%", implode(', ', $contacts), $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%ContactsList*%%')) {
+                
+                $email_template->email_body = str_replace("%%ContactsList*%%", implode('</br>', $contacts), $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%VehiclesComma%%')) {
+                
+                $email_template->email_body = str_replace("%%VehiclesComma%%", $vehicle->model.'('.$vehicle->registration_number.')', $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%VehiclesList*%%')) {
+                
+                $email_template->email_body = str_replace("%%VehiclesList*%%", $vehicle->model.'('.$vehicle->registration_number.')', $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%VehiclesModelDerivative*%%')) {
+                
+                $email_template->email_body = str_replace("%%VehiclesModelDerivative*%%", $vehicle->derivative, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%VehiclesRegistration*%%')) {
+                
+                $email_template->email_body = str_replace("%%VehiclesRegistration*%%", $vehicle->registration_number, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%VehiclesVinNumber*%%')) {
+                
+                $email_template->email_body = str_replace("%%VehiclesVinNumber*%%", $vehicle->vin, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%CurrentDate%%')) {
+                
+                $email_template->email_body = str_replace("%%CurrentDate%%", date('Y/m/d H:i:s'), $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%CurrentDateDDMMYYYY%%')) {
+                
+                $email_template->email_body = str_replace("%%CurrentDateDDMMYYYY%%", date('d/m/Y'), $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%CurrentDateMMDDYYYY%%')) {
+                
+                $email_template->email_body = str_replace("%%CurrentDateMMDDYYYY%%", date('m/d/Y'), $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%PurposeOfLoan%%')) {
+                
+                $email_template->email_body = str_replace("%%PurposeOfLoan%%", $booking->purpose_of_loan, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%AddressOutboundCollection*%%')) {
+                $ob_pickup= $booking->ob_pick_from_address_1.' '.$booking->ob_pick_from_address_2.' '.$booking->ob_pick_from_town_city.' '.$booking->ob_pick_from_county.' '.$booking->ob_pick_from_country;
+                $email_template->email_body = str_replace("%%AddressOutboundCollection*%%", $ob_pickup, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%AddressOutboundDelivery*%%')) {
+                $ob_deliver= $booking->ob_deliver_to_address_1.' '.$booking->ob_deliver_to_address_2.' '.$booking->ob_deliver_to_town_city.' '.$booking->ob_deliver_to_county.' '.$booking->ob_deliver_to_country;
+                $email_template->email_body = str_replace("%%AddressOutboundDelivery*%%", $ob_deliver, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%AddressInboundCollection*%%')) {
+                $ib_pickup= $booking->ib_pick_from_address_1.' '.$booking->ib_pick_from_address_2.' '.$booking->ib_pick_from_town_city.' '.$booking->ib_pick_from_county.' '.$booking->ib_pick_from_country;
+                $email_template->email_body = str_replace("%%AddressInboundCollection*%%", $ib_pickup, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%AddressInboundDelivery*%%')) {
+                $ib_deliver= $booking->ib_deliver_to_address_1.' '.$booking->ib_deliver_to_address_2.' '.$booking->ib_deliver_to_town_city.' '.$booking->ib_deliver_to_county.' '.$booking->ib_deliver_to_country;
+                $email_template->email_body = str_replace("%%AddressInboundDelivery*%%", $ib_deliver, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%AddressOutboundDeliveryPostcode*%%')) {
+                
+                $email_template->email_body = str_replace("%%AddressOutboundDeliveryPostcode*%%", $booking->ob_deliver_to_post_code, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%AddressInboundCollectionPostcode*%%')) {
+                
+                $email_template->email_body = str_replace("%%AddressInboundCollectionPostcode*%%", $booking->ob_pick_from_post_code, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%NotesOutboundCollection%%')) {
+                
+                $email_template->email_body = str_replace("%%NotesOutboundCollection%%", $booking->ob_pick_from_notes, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%NotesOutboundDelivery%%')) {
+                
+                $email_template->email_body = str_replace("%%NotesOutboundDelivery%%", $booking->ob_deliver_to_notes, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%NotesInboundCollection%%')) {
+                
+                $email_template->email_body = str_replace("%%NotesInboundCollection%%", $booking->ib_pick_from_notes, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%NotesInboundDelivery%%')) {
+                
+                $email_template->email_body = str_replace("%%NotesInboundDelivery%%", $booking->ib_deliver_to_notes, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%StartDate%%')) {
+                
+                $email_template->email_body = str_replace("%%StartDate%%", $booking->booking_start_date, $email_template->email_body);
+            }
+            if (str_contains($email_template->email_body, '%%EndDate%%')) {
+                
+                $email_template->email_body = str_replace("%%EndDate%%", $booking->booking_end_date, $email_template->email_body);
+            }
+
+            if($email_template->is_spec =='1'){
+               $vehicle_spec =  DB::table('vehicle_specs')->where('vehicle_id','=', $booking->vehicle_id)->get();
+            
+               foreach($vehicle_spec as $key=>$item){
+                    $file_name[] = asset('storage/'.$item->file_name);
+               }
+
+            }
+            
+            $TO_EMAIL = $email_template->to_email;
+            $TO_NAME = $primary_contact->first_name.' '.$primary_contact->last_name;
+            $SUBJECT = $email_template->subject;
+            $FROM_NAME = $email_template->from_name;
+            $EMAIL_BODY = $email_template->email_body;
+            $ATTACHMENT_ARRAY = $file_name;
+            $CC_MAIL = $email_template->cc_email;
+
+            dd($EMAIL_BODY);
+            dd($ATTACHMENT_ARRAY);
+            
+             
+
+        }
     }
 }
