@@ -28,15 +28,15 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        dd(
-            $this->emailService
-                ->setData(
-                    Booking::with('vehicle', 'emailTemplate.attachments')->first()
-                )
-                ->from('sendinblue')
-                // ->from('sparkpost')
-                ->sendEmailTest()
-        );
+        // dd(
+        //     $this->emailService
+        //         ->setData(
+        //             Booking::with('vehicle', 'emailTemplate.attachments')->first()
+        //         )
+        //         ->from('sendinblue')
+        //         // ->from('sparkpost')
+        //         ->sendEmailTest()
+        // );
 
         $email_templates = DB::table('email_templates')->where('company_id', Auth()->user()->company_id)->get();
         //dd($email_templates);
