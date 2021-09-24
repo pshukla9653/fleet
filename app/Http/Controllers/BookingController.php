@@ -487,13 +487,28 @@ class BookingController extends Controller
                 $email_template->email_body = str_replace("%%EndDate%%", $booking->booking_end_date, $email_template->email_body);
             }
 
-            if($email_template->is_spec =='1'){
+            if($email_template?->is_spec =='1'){
                $vehicle_spec =  DB::table('vehicle_specs')->where('vehicle_id','=', $booking->vehicle_id)->get();
             
                foreach($vehicle_spec as $key=>$item){
                     $file_name[] = asset('storage/'.$item->file_name);
                }
 
+            }
+            
+            if(!empty($email_template)){
+                $get_doc_files = DB::table('email_file')->where('template_id','=',$email_template->id)->where('file_name','LIKE','%.doc%')->get();
+                $context = stream_context_create(array(
+                    'http'=>array(
+                        'method' => "GET",
+                        'header' => "Accept-Encoding: gzip;q=0, compress;q=0\r\n",
+                    )
+                ));
+                foreach($get_doc_files as $key=>$file){
+                    $file_path = asset('storage/'.$file->file_name);
+                    $get_data_from_file = file_get_contents($file_path, false, $context);
+                    //dd($get_data_from_file);
+                }
             }
             
             $TO_EMAIL = $email_template->to_email;
