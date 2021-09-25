@@ -320,7 +320,8 @@ a.badge,
 .showmin{
 	transition : .3s transform ease-in-out;
 	transform : rotate(180deg);
-	margin-left: 2.5em !important;
+	margin-left: 30px !important;
+  margin-top: -35px !important;
 }
 
 
@@ -904,11 +905,11 @@ form.example::after {
     position: absolute;
     top: 0;
     right: -260px;
-    background-color: #304047;
+    background-color: #eeeded;
     padding: 12px 20px;
     width: 260px;
     text-align: left;
-    color: #fff;
+    color: #000;
     cursor: pointer;
     border-bottom-right-radius: 3px;
     border-top-right-radius: 3px;
@@ -955,11 +956,11 @@ form.example::after {
   }
   .sidebar-xs .sidebar-main .navigation > li > ul {
     position: absolute;
-    right: -260px;
-    top: 44px;
+    right: -248px;
+    top: 56px;
     width: 260px;
     display: none;
-    background-color: #263238;
+    background-color: #eeeded;
     border-radius: 0 0 3px 0;
     -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
