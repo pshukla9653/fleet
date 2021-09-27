@@ -33,9 +33,23 @@ class VehicleController extends Controller
 
         if($request->input('search')){
             $query = $request->input('search');
-            $vehicles = Vehicle::where('registration_number', 'LIKE', '%'. $query. '%')->orderByRaw("CAST(order_number as UNSIGNED) ASC")->paginate(10);
+            $vehicles = Vehicle::where('registration_number', 'LIKE', '%'. $query. '%')
+                ->orWhereHas('brand', function ($q) use ($query){
+                    $q->where('brand_name', 'LIKE', '%'. $query. '%');
+                })
+                ->orWhereHas('region', function ($q) use ($query){
+                    $q->where('region_name', 'LIKE', '%'. $query. '%');
+                })
+                ->orWhereHas('department', function ($q) use ($query){
+                    $q->where('department_name', 'LIKE', '%'. $query. '%');
+                })
+                ->orWhere('model', 'LIKE', '%'. $query. '%')
+                ->orWhere('derivative', 'LIKE', '%'. $query. '%')
+                ->orWhere('derivative', 'LIKE', '%'. $query. '%')
+                ->orWhere('vin', 'LIKE', '%'. $query. '%')
+                ->orderByRaw("CAST(order_number as UNSIGNED) ASC")->paginate(10);
 
-            return view('vehicle.index', compact('vehicles','brands','regions','departments'));
+            return view('vehicle.index', compact('vehicles','brands','regions','departments', 'query'));
 
         }
         else{
