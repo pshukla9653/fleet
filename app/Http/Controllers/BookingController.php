@@ -8,25 +8,27 @@ use App\Models\EmailTemplate;
 use App\Models\Contact;
 use App\Models\Vehicle;
 use App\Models\Company;
+use App\Services\BookingService;
 use Illuminate\Http\Request;
 use DB;
 use App\Services\EmailService;
 
 class BookingController extends Controller
 {
-    function __construct(protected EmailService $emailService)
+    function __construct(protected BookingService $bookingService)
     {
         //  $this->middleware('permission:booking-list|booking-create|booking-edit|booking-delete', ['only' => ['index','store']]);
         //  $this->middleware('permission:booking-create', ['only' => ['create','store']]);
         //  $this->middleware('permission:booking-edit', ['only' => ['edit','update']]);
         //  $this->middleware('permission:booking-delete', ['only' => ['destroy']]);
     }
+
     public function index()
     {
         //
     }
 
-    
+
 
     /**
      * Store a newly created resource in storage.
@@ -123,9 +125,9 @@ class BookingController extends Controller
             $check_lead = json_decode(json_encode($check_lead), true);
             //dd($check_lag);
             //dd($check_lead);
-            
-            
-            
+
+
+
             if($check_lag ==null && $check_lead ==null){
             $booking = Booking::find($request->id);
             $booking->update($data);
@@ -140,7 +142,7 @@ class BookingController extends Controller
             else{
                 return response()->json(['success' => false]);
             }
-           
+
         } else{
             $check_lag = Booking::select('*')->where('company_id', Auth()->user()->company_id)
               ->where('vehicle_id', $request->vehicle_id)
@@ -158,8 +160,8 @@ class BookingController extends Controller
             //dd($check_lead);
             if($check_lag ==null && $check_lead ==null){
             $booking   =   Booking::Create( [
-                        'company_id' => Auth()->user()->company_id,
-                        'vehicle_id'=> $request->vehicle_id,
+                'company_id' => Auth()->user()->company_id,
+                'vehicle_id'=> $request->vehicle_id,
                 'start_date'=> $request->start_date,
                 'end_date'=> $request->end_date,
                 'booking_reference'=> $request->booking_reference,
@@ -220,17 +222,20 @@ class BookingController extends Controller
                         'user_email'=> Auth()->user()->email,
                         'event'=> 'Created',
                     ]);
+
+            $this->bookingService->sendBookingEmails($booking);
+
             }
             else{
                 return response()->json(['success' => false]);
-            }      
+            }
             //print_r($lists->id);die;
 
         }
         return response()->json(['success' => true]);
     }
 
-    
+
 
     /**
      * Show the form for editing the specified resource.
@@ -247,33 +252,33 @@ class BookingController extends Controller
               ->whereDate('start_date', '<=', $request->date)
               ->whereDate('end_date', '>=', $request->date)
               ->first();
-        if(!empty($booking)){ 
-        $data['status']  = true;    
-        $data['booking_list']  = $booking; 
+        if(!empty($booking)){
+        $data['status']  = true;
+        $data['booking_list']  = $booking;
         $contact = explode(',', $booking->contacts);
         for($i=0; $i < count($contact); $i++){
             $get_contact = DB::table('contacts')->where('id', $contact[$i])->first();
             $contact_list[$i]['id'] = $get_contact->id;
             $contact_list[$i]['name'] = $get_contact->first_name.' '.$get_contact->last_name;
-        } 
+        }
         $data['contact_list']  = $contact_list;
         $booking_created = DB::table('histories')->where('booking_id', $booking->id)
                                 ->where('event', 'Created')->first();
         $booking_modified = DB::table('histories')->where('booking_id', $booking->id)
         ->where('event', 'Modified')->orderBy('id','DESC')->first();
-        
-        if($booking_created){ 
+
+        if($booking_created){
         $booking_created->created_at = date('d M Y H:i:s', strtotime($booking_created->created_at));
         $data['booking_created'] = $booking_created;
         }
-        
+
         if($booking_modified){
         $booking_modified->created_at = date('d M Y H:i:s', strtotime($booking_modified->created_at));
         $data['booking_modified'] = $booking_modified;
         }
-        
-        
-           
+
+
+
         return response()->json($data);
         }
         else{
@@ -290,8 +295,8 @@ class BookingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function get_booking(Request $request){
-        
-        
+
+
         $data['status'] = false;
         $booking = DB::table('bookings')->where('company_id', Auth()->user()->company_id)
               ->where('vehicle_id', $request->vehicle_id)
@@ -302,60 +307,60 @@ class BookingController extends Controller
         ->where('vehicle_id', $request->vehicle_id)
         ->whereDate('start_date', '<=', $request->end)
         ->whereDate('end_date', '>=', $request->end)
-        ->get();      
+        ->get();
         //dd($booking->id);
         if(!empty($booking)){
             foreach($booking as $key=>$value){
             if($value->id != $request->id){
                 $data['status'] = true;
-            
+
             }
         else{
             $data['status'] = false;
             }
         }
             }
-        
+
         elseif(!empty($booking1)){
             foreach($booking1 as $key=>$value){
             if($value->id != $request->id){
             $data['status'] = true;
-            
+
                 }
             else{
                 $data['status'] = false;
                 }
             }
         }
-        
+
         return response()->json($data);
 
-        
+
 
     }
-    
+
     public function destroy(Request $request)
     {
         //
-       
+
 		Booking::find($request->id)->delete();
         return response()->json(['success' => true]);
     }
 
     public function send_booking_email(Request $request){
-       
+
         $booking = Booking::find($request->id);
         $primary_contact = Contact::find($booking->primary_contact);
         $vehicle = Vehicle::find($booking->vehicle_id);
         $company = Company::find(Auth()->user()->company_id);
         $contact_list = Contact::whereIn('id', explode(',', $booking->contacts))->get();
-        
+
         foreach($contact_list as $key=>$value){
             $contacts[] = $value->first_name.' '.$value->last_name;
         }
-        
+
         $email_templates_ids = explode(',', $booking->email_template);
-        
+
         for($i=0; $i < count($email_templates_ids); $i++){
 
             $email_template = EmailTemplate::find($email_templates_ids[$i]);
@@ -379,7 +384,7 @@ class BookingController extends Controller
                 $email_template->email_body = str_replace("%%PrimaryPhone%%", $primary_contact->phone_number, $email_template->email_body);
             }
             if (str_contains($email_template->email_body, '%%PrimaryAddress%%')) {
-                $primary_add  = $primary_contact->address1.' '.$primary_contact->address2.' '.$primary_contact->address3.' '.$primary_contact->city.' '.$primary_contact->country;  
+                $primary_add  = $primary_contact->address1.' '.$primary_contact->address2.' '.$primary_contact->address3.' '.$primary_contact->city.' '.$primary_contact->country;
                 $email_template->email_body = str_replace("%%PrimaryAddress%%", $primary_add, $email_template->email_body);
             }
             if (str_contains($email_template->email_body, '%%PrimaryPostcode%%')) {
@@ -395,47 +400,47 @@ class BookingController extends Controller
                 $email_template->email_body = str_replace("%%PrimaryCountry%%", $primary_contact->country, $email_template->email_body);
             }
             if (str_contains($email_template->email_body, '%%ContactsComma%%')) {
-                
+
                 $email_template->email_body = str_replace("%%ContactsComma%%", implode(', ', $contacts), $email_template->email_body);
             }
             if (str_contains($email_template->email_body, '%%ContactsList*%%')) {
-                
+
                 $email_template->email_body = str_replace("%%ContactsList*%%", implode('</br>', $contacts), $email_template->email_body);
             }
             if (str_contains($email_template->email_body, '%%VehiclesComma%%')) {
-                
+
                 $email_template->email_body = str_replace("%%VehiclesComma%%", $vehicle->model.'('.$vehicle->registration_number.')', $email_template->email_body);
             }
             if (str_contains($email_template->email_body, '%%VehiclesList*%%')) {
-                
+
                 $email_template->email_body = str_replace("%%VehiclesList*%%", $vehicle->model.'('.$vehicle->registration_number.')', $email_template->email_body);
             }
             if (str_contains($email_template->email_body, '%%VehiclesModelDerivative*%%')) {
-                
+
                 $email_template->email_body = str_replace("%%VehiclesModelDerivative*%%", $vehicle->derivative, $email_template->email_body);
             }
             if (str_contains($email_template->email_body, '%%VehiclesRegistration*%%')) {
-                
+
                 $email_template->email_body = str_replace("%%VehiclesRegistration*%%", $vehicle->registration_number, $email_template->email_body);
             }
             if (str_contains($email_template->email_body, '%%VehiclesVinNumber*%%')) {
-                
+
                 $email_template->email_body = str_replace("%%VehiclesVinNumber*%%", $vehicle->vin, $email_template->email_body);
             }
             if (str_contains($email_template->email_body, '%%CurrentDate%%')) {
-                
+
                 $email_template->email_body = str_replace("%%CurrentDate%%", date('Y/m/d H:i:s'), $email_template->email_body);
             }
             if (str_contains($email_template->email_body, '%%CurrentDateDDMMYYYY%%')) {
-                
+
                 $email_template->email_body = str_replace("%%CurrentDateDDMMYYYY%%", date('d/m/Y'), $email_template->email_body);
             }
             if (str_contains($email_template->email_body, '%%CurrentDateMMDDYYYY%%')) {
-                
+
                 $email_template->email_body = str_replace("%%CurrentDateMMDDYYYY%%", date('m/d/Y'), $email_template->email_body);
             }
             if (str_contains($email_template->email_body, '%%PurposeOfLoan%%')) {
-                
+
                 $email_template->email_body = str_replace("%%PurposeOfLoan%%", $booking->purpose_of_loan, $email_template->email_body);
             }
             if (str_contains($email_template->email_body, '%%AddressOutboundCollection*%%')) {
@@ -455,47 +460,47 @@ class BookingController extends Controller
                 $email_template->email_body = str_replace("%%AddressInboundDelivery*%%", $ib_deliver, $email_template->email_body);
             }
             if (str_contains($email_template->email_body, '%%AddressOutboundDeliveryPostcode*%%')) {
-                
+
                 $email_template->email_body = str_replace("%%AddressOutboundDeliveryPostcode*%%", $booking->ob_deliver_to_post_code, $email_template->email_body);
             }
             if (str_contains($email_template->email_body, '%%AddressInboundCollectionPostcode*%%')) {
-                
+
                 $email_template->email_body = str_replace("%%AddressInboundCollectionPostcode*%%", $booking->ob_pick_from_post_code, $email_template->email_body);
             }
             if (str_contains($email_template->email_body, '%%NotesOutboundCollection%%')) {
-                
+
                 $email_template->email_body = str_replace("%%NotesOutboundCollection%%", $booking->ob_pick_from_notes, $email_template->email_body);
             }
             if (str_contains($email_template->email_body, '%%NotesOutboundDelivery%%')) {
-                
+
                 $email_template->email_body = str_replace("%%NotesOutboundDelivery%%", $booking->ob_deliver_to_notes, $email_template->email_body);
             }
             if (str_contains($email_template->email_body, '%%NotesInboundCollection%%')) {
-                
+
                 $email_template->email_body = str_replace("%%NotesInboundCollection%%", $booking->ib_pick_from_notes, $email_template->email_body);
             }
             if (str_contains($email_template->email_body, '%%NotesInboundDelivery%%')) {
-                
+
                 $email_template->email_body = str_replace("%%NotesInboundDelivery%%", $booking->ib_deliver_to_notes, $email_template->email_body);
             }
             if (str_contains($email_template->email_body, '%%StartDate%%')) {
-                
+
                 $email_template->email_body = str_replace("%%StartDate%%", $booking->booking_start_date, $email_template->email_body);
             }
             if (str_contains($email_template->email_body, '%%EndDate%%')) {
-                
+
                 $email_template->email_body = str_replace("%%EndDate%%", $booking->booking_end_date, $email_template->email_body);
             }
 
             if($email_template?->is_spec =='1'){
                $vehicle_spec =  DB::table('vehicle_specs')->where('vehicle_id','=', $booking->vehicle_id)->get();
-            
+
                foreach($vehicle_spec as $key=>$item){
                     $file_name[] = asset('storage/'.$item->file_name);
                }
 
             }
-            
+
             if(!empty($email_template)){
                 $get_doc_files = DB::table('email_file')->where('template_id','=',$email_template->id)->where('file_name','LIKE','%.doc%')->get();
                 $context = stream_context_create(array(
@@ -510,7 +515,7 @@ class BookingController extends Controller
                     //dd($get_data_from_file);
                 }
             }
-            
+
             $TO_EMAIL = $email_template->to_email;
             $TO_NAME = $primary_contact->first_name.' '.$primary_contact->last_name;
             $SUBJECT = $email_template->subject;
@@ -521,8 +526,8 @@ class BookingController extends Controller
 
             dd($EMAIL_BODY);
             dd($ATTACHMENT_ARRAY);
-            
-             
+
+
 
         }
     }

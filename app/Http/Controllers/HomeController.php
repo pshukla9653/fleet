@@ -16,7 +16,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct(protected EmailService $emailService)
+    public function __construct()
     {
         $this->middleware('auth');
     }
@@ -28,16 +28,6 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        // dd(
-        //     $this->emailService
-        //         ->setData(
-        //             Booking::with('vehicle', 'emailTemplate.attachments')->first()
-        //         )
-        //         ->from('sendinblue')
-        //         // ->from('sparkpost')
-        //         ->sendEmailTest()
-        // );
-
         $email_templates = DB::table('email_templates')->where('company_id', Auth()->user()->company_id)->get();
         //dd($email_templates);
         $brands = DB::table('brands')->where('company_id', Auth()->user()->company_id)->get();
@@ -67,7 +57,7 @@ class HomeController extends Controller
             $find['department_id'] = $request->input('department_id');
             $department_id = $request->input('department_id');
             $seach_by_find = true;
-            
+
         }
         else{
         $vehicles = Vehicle::orderByRaw("CAST(order_number as UNSIGNED) ASC")->get();
@@ -93,7 +83,7 @@ class HomeController extends Controller
         $diff=date_diff(date_create($start_date), date_create($end_date));
         $days = $diff->days;
         }
-        
+
         else{
         $start_date  =  date('Y-m-d');
         $date_range  =  4;
@@ -104,7 +94,7 @@ class HomeController extends Controller
         if($seach_by_find == true){
         $vehicles = Vehicle::where($find)->orderByRaw("CAST(order_number as UNSIGNED) ASC")->get();
         }
-        
+
         return view('home', compact('email_templates','loan_type','brands','regions','departments','vehicles','start_date','end_date','days','date_range','brand_id','region_id','department_id'));
     }
 }

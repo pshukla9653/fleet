@@ -12,6 +12,8 @@ class SendinblueMailer extends IMailer
 {
     const OPENING_TAG = '{{ ';
     const CLOSING_TAG = ' }}';
+    const AUTOESCAPE_OFF = '{% autoescape off %}';
+    const END_AUTOESCAPE = '{% endautoescape %}';
 
     public Configuration $config;
     public TransactionalEmailsApi $transactionalApiInstance;
@@ -29,7 +31,6 @@ class SendinblueMailer extends IMailer
     public function sendEmailTest(): mixed
     {
         if (!empty($this->dto->email_body)) {
-            dd($this->dto);
             $to = array_map(function ($email) {
                 return [
                     'name' => explode('@', $email)[0],
@@ -82,6 +83,9 @@ class SendinblueMailer extends IMailer
 
     public function formatReplaceable(string $key): string
     {
+        if (in_array($key, self::AUTOESCAPE)) {
+            return self::AUTOESCAPE_OFF . self::OPENING_TAG . 'params.' . camel_to_snake_case($key) . self::CLOSING_TAG . self::END_AUTOESCAPE;
+        }
         return self::OPENING_TAG . 'params.' . camel_to_snake_case($key) . self::CLOSING_TAG;
     }
 }

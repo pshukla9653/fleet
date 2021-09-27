@@ -34,6 +34,11 @@ abstract class IMailer
         'NotesInboundDelivery',
     ];
 
+    const AUTOESCAPE = [
+        'ContactsList',
+        'VehiclesList'
+    ];
+
     abstract public function sendEmailTest();
 
     abstract public function formatReplaceable(string $key): string;
