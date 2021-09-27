@@ -12,6 +12,8 @@ class SendinblueMailer extends IMailer
 {
     const OPENING_TAG = '{{ ';
     const CLOSING_TAG = ' }}';
+    const AUTOESCAPE_OFF = '{% autoescape off %}';
+    const END_AUTOESCAPE = '{% endautoescape %}';
 
     public Configuration $config;
     public TransactionalEmailsApi $transactionalApiInstance;
@@ -29,7 +31,6 @@ class SendinblueMailer extends IMailer
     public function sendEmailTest(): mixed
     {
         if (!empty($this->dto->email_body)) {
-            dd($this->dto);
             $to = array_map(function ($email) {
                 return [
                     'name' => explode('@', $email)[0],
@@ -43,10 +44,12 @@ class SendinblueMailer extends IMailer
         return false;
     }
 
-    public function sendTransactionalEmail($to, $template_id = false, $params = [])
+    public function sendTransactionalEmail()
     {
         $data = [
-            'to' => $to,
+            'to' => [[
+                'email' => $this->dto->to_email
+            ]],
             'cc' => [[
                 'email' => $this->dto->cc_email
             ]],
@@ -69,13 +72,9 @@ class SendinblueMailer extends IMailer
             })->toArray()
         ];
 
-        if (!$template_id) {
-            $data['htmlContent'] = $this->getHtmlContent();
-        } else {
-            $data['templateId'] = (int) $template_id;
-        }
+        $data['htmlContent'] = $this->getHtmlContent();
 
-        $data['params'] = array_merge($params, $this->getEmailParams());
+        $data['params'] = $this->getEmailParams();
 
         return json_decode(
             $this->transactionalApiInstance->sendTransacEmail(new SendSmtpEmail($data))
@@ -84,6 +83,9 @@ class SendinblueMailer extends IMailer
 
     public function formatReplaceable(string $key): string
     {
+        if (in_array($key, self::AUTOESCAPE)) {
+            return self::AUTOESCAPE_OFF . self::OPENING_TAG . 'params.' . camel_to_snake_case($key) . self::CLOSING_TAG . self::END_AUTOESCAPE;
+        }
         return self::OPENING_TAG . 'params.' . camel_to_snake_case($key) . self::CLOSING_TAG;
     }
 }

@@ -1,6 +1,7 @@
 @extends('layouts.theme')
 
 @section('heading', 'Booking Overview')
+
 <style>
     .tooltip-inner {
 
@@ -22,6 +23,7 @@
     }
 
 </style>
+
 <style type="text/css">
     .upload-btn-wrapper {
         position: relative;
@@ -580,6 +582,7 @@
                                     <option value="2" {{ $date_range == '2' ? 'selected' : '' }}>2 weeks</option>
                                     <option value="3" {{ $date_range == '3' ? 'selected' : '' }}>3 weeks</option>
                                     <option value="4" {{ $date_range == '4' ? 'selected' : '' }}>4 weeks</option>
+                                    <option value="8" {{ $date_range == '8' ? 'selected' : '' }}>8 weeks</option>
                                 </select>
 
 
@@ -656,8 +659,9 @@
                         <p>{{ $message }}</p>
                     </div>
                 @endif
-                <div class="row" style="/* overflow: auto; */">
-                    <table class="table table-bordered">
+                <div class="row" style="overflow: auto;">
+                    <input type="hidden" id="hidden-date" value="">
+                    <table class="table table-bordered" id="selectable">
                         <thead>
                             <tr>
                                 <th style="width: 7%; font-weight: 600;">VEHICLES</th>
@@ -723,10 +727,10 @@
                                       </table>
                                     </div>
                                     " data-html="true" data-placement="right"
-                                            style="font-weight: 600; font-size:12px; padding: 5px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}">{{ $vehicle->registration_number }}</span>
+                                            style="font-weight: 600; font-size:12px; padding: 3px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}">{{ $vehicle->registration_number }}</span>
                                         <br><span
-                                            style="font-size:9px;position: absolute;margin-top: 7px;">{{ $vehicle->vin }}</span>
-                                        <br><span style="font-size:9px;position: absolute;margin-top: -4px;">Newspress
+                                            style="font-size:9px;margin-top: 7px;padding-top:5px;">{{ $vehicle->vin }}</span>
+                                        <br><span style="font-size:9px;margin-top: -4px;">Newspress
                                             {{ $vehicle->model }}</span>
                                     </td>
                                     @for ($i = 0; $i < $days; $i++)
@@ -735,9 +739,9 @@
                                             $img_path = asset('storage/' . $vehicle->image);
                                             
                                         @endphp
-
+                                        
                                         <td class='col-pa'
-                                            onclick="makebooking('{{ $vehicle->id }}','{{ $thisdate }}','{{ $img_path }}','{{ $vehicle->registration_number }}','{{ $vehicle->registration_plate_colour }}','{{ $vehicle->brand->brand_name }}','{{ $vehicle->model }}','{{ $vehicle->derivative }}','{{ $vehicle->lead_time }}','{{ $vehicle->lag_time }}');"
+                                        onmousedown="startDate('{{ $thisdate }}')" onmouseup="makebooking('{{ $vehicle->id }}','{{ $thisdate }}','{{ $img_path }}','{{ $vehicle->registration_number }}','{{ $vehicle->registration_plate_colour }}','{{ $vehicle->brand->brand_name }}','{{ $vehicle->model }}','{{ $vehicle->derivative }}','{{ $vehicle->lead_time }}','{{ $vehicle->lag_time }}');"
                                             @php
                                                 $booking = DB::table('bookings')
                                                     ->where('company_id', Auth()->user()->company_id)
@@ -823,7 +827,7 @@
                                       </table>
                                     </div>
                                     " data-html="true" data-placement="auto"
-                                                        style="font-size:9px; color:#fff; padding: 20px;margin: -30px 0px 0px -30px;border-radius: 5px;white-space: nowrap;position: absolute;">
+                                                        style="font-size:9px; color:#fff; padding: 20px;margin: -30px -145px 0px -88px;border-radius: 5px;white-space: nowrap;">
                                                         @if ($contact_detail && $value->booking_start_date == $thisdate)
                                                             {{ $contact_detail->first_name . ' ' . $contact_detail->last_name }}
                                                         @else
@@ -1785,6 +1789,7 @@
             </div>
         </div>
     </div>
+    
     <script>
         function getVehicleList() {
             $('#popup_model_vehicle').modal('show');
@@ -2098,7 +2103,7 @@
 
         function step_fast_backward_date() {
 
-            $('#date_range').val(4);
+            $('#date_range').val(8);
             $('#custom_input').html('<input type="hidden" name="mode" value="backward"/>');
 
             $('#search_form').submit();
@@ -2122,7 +2127,7 @@
 
         function step_fast_forward_date() {
 
-            $('#date_range').val(4);
+            $('#date_range').val(8);
             $('#custom_input').html('<input type="hidden" name="mode" value="forward"/>');
 
             $('#search_form').submit();
@@ -2130,6 +2135,11 @@
 
         function custom_search() {
             $('#search_form').submit();
+        }
+
+        function startDate(start_date) {
+            $("#hidden-date").val(start_date);
+            //console.log("date=>", $("#hidden-date").val());
         }
 
         function makebooking(vehicle_id, date, img, reg_number, plate_colour, brand, model, derivative, lead_time,
@@ -2140,12 +2150,25 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+            var start_date = $("#hidden-date").val();
+            $("#hidden-date").val(null);
+            //console.log(start_date, date);
             $('#itemform').trigger("reset");
             $('#form_heading').html("Booking Overview");
             $('#btn').html('Submit');
             $('#vehicle_id').val(vehicle_id);
             $('#id').val('');
+            var st_date = new Date(start_date);
+            var en_date = new Date(date);
+            if(st_date > en_date){
             $('#start_date_picker input').val(date);
+            $('#end_date_picker input').val(start_date);
+            }
+            else{
+                $('#start_date_picker input').val(start_date);
+            $('#end_date_picker input').val(date);
+            }
+            
             $('#vahicle_img').attr('src', img);
             $('#inserted-list').html('');
             $('input[name="vehi"][value="' + vehicle_id.toString() + '"]').prop("checked", true);
@@ -2159,7 +2182,7 @@
             $('#vehicle').html(reg_number);
             $('#booking_created').html('');
             $('#booking_modified').html('');
-            $('#start_date_picker.date').datepicker("update", date);
+            $('#start_date_picker.date').datepicker("update", start_date);
             $('#contact_list_d').empty();
             $('#delete_booking').hide();
             set_second_cal();
@@ -2176,8 +2199,9 @@
 
                 dataType: 'json',
                 success: function(res) {
-
+                    console.log("res");
                     if (res.status == true) {
+                        console.log("res", res.booking_list.booking_start_date);
                         $('#btn').html('Update');
                         $('#delete_booking').show();
                         $('#start_date_picker.date').datepicker("update", res.booking_list.booking_start_date);
@@ -2904,6 +2928,8 @@
                 $('#ib_deliver_to_address_1').attr('required', 'required');
             }
         });
+        
+        
     </script>
 
 @endsection

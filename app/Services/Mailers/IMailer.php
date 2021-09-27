@@ -34,19 +34,23 @@ abstract class IMailer
         'NotesInboundDelivery',
     ];
 
+    const AUTOESCAPE = [
+        'ContactsList',
+        'VehiclesList'
+    ];
+
     abstract public function sendEmailTest();
+
     abstract public function formatReplaceable(string $key): string;
 
-    abstract public function sendTransactionalEmail($to, $template_id = false, $params = []);
+    abstract public function sendTransactionalEmail();
 
     public function getHtmlContent(): string
     {
         $body = $this->dto->email_body;
-
         foreach (self::REPLACEABLE as $key) {
             $body = str_replace("%%$key%%", $this->formatReplaceable($key), $body);
         }
-
         return $body;
     }
 

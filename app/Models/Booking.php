@@ -44,12 +44,12 @@ class Booking extends Model
         'ob_deliver_to_address_1',
         'ob_deliver_to_town_city',
         'ob_deliver_to_post_code',
-       
+
         'ob_deliver_to_address_2',
         'ob_deliver_to_county',
         'ob_deliver_to_country',
         'ob_deliver_to_notes',
-        
+
 
         'ib_pick_from',
         'ib_pick_from_address_1',
@@ -76,13 +76,34 @@ class Booking extends Model
         return $this->belongsTo(Vehicle::class);
     }
 
-    public function emailTemplate(): BelongsTo
-    {
-        return $this->belongsTo(EmailTemplate::class, 'email_temeplete');
-    }
-
     protected static function booted()
     {
         static::addGlobalScope(new CompanyScope);
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function primaryContact(): BelongsTo
+    {
+        return $this->belongsTo(Contact::class, 'primary_contact', 'id');
+    }
+
+    /**
+     * @note Relation between bookings and contacts is not done in the right way
+     * @note a table called booking_contacts should be created, which will handle relation between
+     * those 2 tables.
+     * TODO:: Update relation logic between booking and contacts
+     * @return mixed
+     */
+    public function contactsCollection(): mixed
+    {
+        $contactIds = array_map('intval', explode(',', $this->contacts));
+        return Contact::whereIn('id', $contactIds);
+    }
+
+    public function emailTemplates() {
+        $emailTemplateIds = array_map('intval', explode(',', $this->email_template));
+        return EmailTemplate::whereIn('id', $emailTemplateIds);
     }
 }

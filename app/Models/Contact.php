@@ -12,7 +12,7 @@ use App\Scopes\CompanyScope;
 class Contact extends Model
 {
     use HasFactory, Notifiable, HasRoles;
-	
+
 	//protected $table = 'Contact';
 	protected $fillable = [
 		'company_id',
@@ -27,9 +27,16 @@ class Contact extends Model
 		'city',
 		'country',
         'post_code',
-        
-		
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+	public function company(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+	    return $this->belongsTo(Company::class, 'company_id', 'id');
+    }
+
 	protected static function booted()
     {
         static::addGlobalScope(new CompanyScope);
