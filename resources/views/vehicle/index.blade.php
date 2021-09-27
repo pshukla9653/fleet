@@ -481,7 +481,6 @@
             });
             var filepath = "{{ asset('storage') }}";
             $('#itemform').trigger("reset");
-            $('#uploaded_spec').empty();
             // ajax
             $.ajax({
                 type: "POST",
@@ -502,6 +501,7 @@
                         }
                         if (key == 'projected_defleet_date') {
                             $('#end_date_picker.date').datepicker("update", value);
+                            
                         }
                     });
 
@@ -517,6 +517,14 @@
                     $('#image-review').html('<img src="' + filesrc + '" style="width:100%;height:100%"/>');
                     $('#image-text').html(res.registration_number);
                     $('#image-text').css('background-color', res.registration_plate_colour);
+                    var d = $("#start_date_picker input").val();
+            $("#end_date_picker.date").datepicker("destroy");
+            $('#end_date_picker.date').datepicker({
+                format: "yyyy-mm-dd",
+                startDate: d,
+                daysOfWeekHighlighted: "0",
+                autoclose: true
+            });
                     $('#popup_model').modal('show');
                     //console.log(res.specs);
                     //uploaded_spec
@@ -563,11 +571,12 @@
                 $('#itemform').trigger("reset");
                 $('#form_heading').html("Configure Vehicle");
                 $('#btn').html('Submit');
+                $('#uploaded_spec').html('');
                 $('#image-review').html('');
                 $('#image-text').html('');
                 $('#item_id').val('');
-                $('#uploaded_spec').empty();
                 $('#image-text').css('background-color', '');
+                
                 $('#popup_model').modal('show');
             });
             $('#view_specs').click(function() {
@@ -632,6 +641,7 @@
 
             $("#start_date_picker input").change(function() {
             var d = $("#start_date_picker input").val();
+            
             $("#end_date_picker.date").datepicker("destroy");
             $('#end_date_picker.date').datepicker({
                 format: "yyyy-mm-dd",
