@@ -87,6 +87,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('store-booking', [BookingController::class, 'store']);
     Route::post('delete-booking', [BookingController::class, 'destroy']);
     Route::post('get-booking', [BookingController::class, 'get_booking']);
+    Route::get('send-booking-email', [BookingController::class, 'send_booking_email']);
     
     Route::resource('histories', HistoryController::class);
     Route::post('delete-history', [HistoryController::class, 'destroy']);

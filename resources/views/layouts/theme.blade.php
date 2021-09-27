@@ -109,7 +109,7 @@
 									
 								</li>
 								@endif -->
-								<li style="padding: 12px;margin-top: -35px;"><a href="{{ url('/') }}"  style="background-color: #eeeded;border-radius: 5px;"> <i class="icon-home4"></i><span>DASHBOARD</span> <i class="icon-menu" title="Main pages"></i></a><span class="sidebar-control sidebar-main-toggle hidden-xs"><i class="fa fa-angle-double-left pull-right" style="position: absolute;
+								<li style="padding: 12px;margin-top: -35px;"><a href="{{ url('/') }}"  style="background-color: #eeeded;border-radius: 5px;"> <i class="icon-home4"></i><span>DASHBOARD</span></a><span class="sidebar-control sidebar-main-toggle hidden-xs"><i class="fa fa-angle-double-left pull-right" style="position: absolute;
     margin-top: -1.3em;
     margin-left: 6.5em;
     font-size: 30px;"></i></span></li>
