@@ -43,10 +43,12 @@ class SendinblueMailer extends IMailer
         return false;
     }
 
-    public function sendTransactionalEmail($to, $template_id = false, $params = [])
+    public function sendTransactionalEmail()
     {
         $data = [
-            'to' => $to,
+            'to' => [[
+                'email' => $this->dto->to_email
+            ]],
             'cc' => [[
                 'email' => $this->dto->cc_email
             ]],
@@ -69,13 +71,9 @@ class SendinblueMailer extends IMailer
             })->toArray()
         ];
 
-        if (!$template_id) {
-            $data['htmlContent'] = $this->getHtmlContent();
-        } else {
-            $data['templateId'] = (int) $template_id;
-        }
+        $data['htmlContent'] = $this->getHtmlContent();
 
-        $data['params'] = array_merge($params, $this->getEmailParams());
+        $data['params'] = $this->getEmailParams();
 
         return json_decode(
             $this->transactionalApiInstance->sendTransacEmail(new SendSmtpEmail($data))
