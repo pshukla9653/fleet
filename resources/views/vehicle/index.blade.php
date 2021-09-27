@@ -7,7 +7,8 @@
         <div class="page-header-content">
             <div class="page-title" style="margin: 0px 20px;">
                 <h6><i class="icon-home2 position-left"></i> <i class="fa fa-angle-double-right"></i> <span
-                        style="color: #3a6d7f;">Configure</span> <i class="fa fa-angle-double-right"></i> @yield('heading')
+                        style="color: #3a6d7f;">Configure</span> <i
+                        class="fa fa-angle-double-right"></i> @yield('heading')
                 </h6>
             </div>
 
@@ -18,17 +19,17 @@
         <div class="col-md-8" style="padding: 15px 30px;">
             <a href="{{ route('vehicles.index') }}" class="btn btn-primary"><img
                     src="{{ asset('assets/images/icon/refresh.png') }}" alt="refresh"
-                    style="width: 20px;margin-left: -8px;" />&nbsp; Refresh @yield('heading')</a>
+                    style="width: 20px;margin-left: -8px;"/>&nbsp; Refresh @yield('heading')</a>
             @can('user-create')
                 <a id="additem" class="btn btn-primary" style="margin-left: 20px;"><img
                         src="{{ asset('assets/images/icon/add.png') }}" alt="add"
-                        style="width: 21px;margin-left: -8px;" />&nbsp; Add New Item</a>
+                        style="width: 21px;margin-left: -8px;"/>&nbsp; Add New Item</a>
             @endcan
         </div>
         <div class="col-md-4" style="padding: 15px 30px;">
             <form class="example" action="">
                 <input type="text" placeholder="Search" name="search">
-                <button type="submit"><img src="{{ asset('assets/images/icon/search.png') }}" alt="search" /></button>
+                <button type="submit"><img src="{{ asset('assets/images/icon/search.png') }}" alt="search"/></button>
             </form>
         </div>
 
@@ -49,49 +50,49 @@
                 <div class="heading-elements">
                 </div>
                 @error('registration_number')
-                    <div class="alert alert-danger">
-                        <strong>{{ $message }}</strong>
-                    </div>
+                <div class="alert alert-danger">
+                    <strong>{{ $message }}</strong>
+                </div>
                 @enderror
                 @error('model')
-                    <div class="alert alert-danger">
-                        <strong>{{ $message }}</strong>
-                    </div>
+                <div class="alert alert-danger">
+                    <strong>{{ $message }}</strong>
+                </div>
                 @enderror
                 @error('derivative')
-                    <div class="alert alert-danger">
-                        <strong>{{ $message }}</strong>
-                    </div>
+                <div class="alert alert-danger">
+                    <strong>{{ $message }}</strong>
+                </div>
                 @enderror
                 @error('vin')
-                    <div class="alert alert-danger">
-                        <strong>{{ $message }}</strong>
-                    </div>
+                <div class="alert alert-danger">
+                    <strong>{{ $message }}</strong>
+                </div>
                 @enderror
                 @error('adoption_date')
-                    <div class="alert alert-danger">
-                        <strong>{{ $message }}</strong>
-                    </div>
+                <div class="alert alert-danger">
+                    <strong>{{ $message }}</strong>
+                </div>
                 @enderror
                 @error('projected_defleet_date')
-                    <div class="alert alert-danger">
-                        <strong>{{ $message }}</strong>
-                    </div>
+                <div class="alert alert-danger">
+                    <strong>{{ $message }}</strong>
+                </div>
                 @enderror
                 @error('loan_cost')
-                    <div class="alert alert-danger">
-                        <strong>{{ $message }}</strong>
-                    </div>
+                <div class="alert alert-danger">
+                    <strong>{{ $message }}</strong>
+                </div>
                 @enderror
                 @error('value')
-                    <div class="alert alert-danger">
-                        <strong>{{ $message }}</strong>
-                    </div>
+                <div class="alert alert-danger">
+                    <strong>{{ $message }}</strong>
+                </div>
                 @enderror
                 @error('order_number')
-                    <div class="alert alert-danger">
-                        <strong>{{ $message }}</strong>
-                    </div>
+                <div class="alert alert-danger">
+                    <strong>{{ $message }}</strong>
+                </div>
                 @enderror
             </div>
             <div class="panel-body" style="padding: 0px 10px 10px 10px;">
@@ -105,37 +106,41 @@
 
                     <table class="table table-bordered table-responsive">
                         <thead>
-                            <tr>
-                                <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Vehicles
-                                    Images</th>
-                                <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Registration
-                                    No.</th>
-                                <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Brand</th>
-                                <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Model</th>
-                                <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Derivative
-                                </th>
-                                <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Region</th>
-                                <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Department
-                                </th>
-                                <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Vin</th>
-                                <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Adoption
-                                    Date</th>
-                                <th style="border-top: none;padding: 0px 0px 0px 10px;font-weight: 600;" colspan="2">
-                                    Projected Defleet Date</th>
+                        <tr>
+                            <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Vehicles
+                                Images
+                            </th>
+                            <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Registration
+                                No.
+                            </th>
+                            <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Brand</th>
+                            <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Model</th>
+                            <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Derivative
+                            </th>
+                            <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Region</th>
+                            <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Department
+                            </th>
+                            <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Vin</th>
+                            <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Adoption
+                                Date
+                            </th>
+                            <th style="border-top: none;padding: 0px 0px 0px 10px;font-weight: 600;" colspan="2">
+                                Projected Defleet Date
+                            </th>
 
-                            </tr>
+                        </tr>
                         </thead>
                         @foreach ($vehicles as $key => $vehicle)
                             <tr>
                                 <td style="width: 15%; padding: 0px 5px;">
                                     @can('vehicle-edit')
                                         <a onclick="edititem({{ $vehicle->id }})">
-                                            <img src="{{ asset('assets/images/icon/edit.png') }}" alt="edit" />
+                                            <img src="{{ asset('assets/images/icon/edit.png') }}" alt="edit"/>
                                         </a>
                                     @endcan
                                     &nbsp;
                                     <img src="{{ ($vehicle->image) ? asset('storage/' . $vehicle->image) : '#' }}"
-                                        alt="{{ $vehicle->registration_number }}" style="width: 100px; height:auto;" />
+                                         alt="{{ $vehicle->registration_number }}" style="width: 100px; height:auto;"/>
                                 </td>
                                 <td style="text-align: center;"><span
                                         style="padding: 5px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}">{{ $vehicle->registration_number }}</span>
@@ -153,7 +158,7 @@
 
                                     @can('vehicle-delete')
                                         <a onclick="deleteitem({{ $vehicle->id }})">
-                                            <img src="{{ asset('assets/images/icon/delete.png') }}" alt="delete" />
+                                            <img src="{{ asset('assets/images/icon/delete.png') }}" alt="delete"/>
                                         </a>
                                     @endcan
                                 </td>
@@ -240,29 +245,30 @@
                 <div class="modal-body md-body-custom">
 
                     <form action="{{ route('vehicles.store') }}" id="itemform" class="form-horizontal" method="POST"
-                        enctype="multipart/form-data">
+                          enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="col-md-6">
                                     <div id="image-text"
-                                        style="position: relative;bottom: -140px;left: 15px;width: fit-content;padding: 5px;border-radius: 5px;">
+                                         style="position: relative;bottom: -140px;left: 15px;width: fit-content;padding: 5px;border-radius: 5px;">
                                     </div>
                                     <div id="image-review" style="height: 130px; border: 1px solid #bbb8b8;
                       background-color: #f2f2f2; width:80%; margin:20px 20px 0px 0px;">
-                                        <img class="hidden" id="image" src="#" alt="the image" style="width:100%;height:100%;" />
+                                        <img class="hidden" id="image" src="#" alt="the image"
+                                             style="width:100%;height:100%;"/>
                                     </div>
-
                                     <div class="form-group">
                                         <div style="text-align: right; width: 78%;">
                                             <div class="upload-btn-wrapper" style="margin-top: 4px;margin-right: -3px;">
                                                 <button class="btnsss">Upload Image</button>
                                                 <input type="file" name="image" id="vehicle_img"
-                                                    style="width: 111px;height: 10px;" required>
+                                                       style="width: 111px;height: 10px;" required>
                                             </div>
                                             <button type="button" id="remove_img"
-                                                style="margin-left: 5px; margin-top: -15px;"
-                                                class="btn custom-modal-btn btn-danger">Remove</button>
+                                                    style="margin-left: 5px; margin-top: -15px;"
+                                                    class="btn custom-modal-btn btn-danger">Remove
+                                            </button>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -281,18 +287,20 @@
                                     </select>
                                     <div class="form-group" style="text-align:right;width:82%;">
                                         <button type="button" id="view_specs"
-                                            class="btn custom-modal-btn btn-info">View</button>
+                                                class="btn custom-modal-btn btn-info">View
+                                        </button>
                                         <button type="button" id="delete_specs"
-                                            class="btn custom-modal-btn btn-danger">Delete</button>
+                                                class="btn custom-modal-btn btn-danger">Delete
+                                        </button>
                                     </div>
                                     <div class="form-group">
 
                                         <div style="text-align:right;width: 79%;margin-top:10px;">
 
                                             <div class="upload-btn-wrapper">
-                                                <button class="btnsss">Upload </button>
+                                                <button class="btnsss">Upload</button>
                                                 <input type="file" name="spec_sheet[]" id="spec_sheet"
-                                                    onchange="get_file_name(this.files);" multiple>
+                                                       onchange="get_file_name(this.files);" multiple>
                                             </div>
                                         </div>
                                         <div class="text-info">Can be upload multiple files (Only PDF)</div>
@@ -304,7 +312,7 @@
                                     <div class="form-group" style="margin-top: 15px;">
                                         <strong>Brand:</strong>
                                         <select name="brand_id" id="brand_id" class="form-control custom-modal-textbox"
-                                            required>
+                                                required>
                                             <option value="" selected>Select</option>
                                             @foreach ($brands as $key => $brand)
                                                 <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
@@ -312,24 +320,21 @@
                                         </select>
                                         <div class="text-danger" id="brand_id"></div>
                                     </div>
-
                                     <div class="form-group">
                                         <strong>Model:</strong>
                                         {!! Form::text('model', null, ['placeholder' => 'Model', 'class' => 'form-control custom-modal-textbox', 'id' => 'model', 'required' => 'required']) !!}
                                         <div class="text-danger" id="model"></div>
                                     </div>
-
-
                                     <div class="form-group">
                                         <strong>Derivative:</strong>
                                         {!! Form::text('derivative', null, ['placeholder' => 'Derivative', 'class' => 'form-control custom-modal-textbox', 'id' => 'derivative', 'required' => 'required']) !!}
                                         <div class="text-danger" id="derivative"></div>
                                     </div>
-
                                     <div class="form-group">
                                         <strong>Region:</strong>
-                                        <select name="region_id" id="region_id" class="form-control custom-modal-textbox"
-                                            required>
+                                        <select name="region_id" id="region_id"
+                                                class="form-control custom-modal-textbox"
+                                                required>
                                             <option value="" selected>Select</option>
                                             @foreach ($regions as $key => $region)
                                                 <option value="{{ $region->id }}">{{ $region->region_name }}</option>
@@ -337,12 +342,10 @@
                                         </select>
                                         <div class="text-danger" id="region_id"></div>
                                     </div>
-
-
                                     <div class="form-group">
                                         <strong>Department:</strong>
                                         <select name="department_id" id="department_id"
-                                            class="form-control custom-modal-textbox" required>
+                                                class="form-control custom-modal-textbox" required>
                                             <option value="" selected>Select</option>
                                             @foreach ($departments as $key => $department)
                                                 <option value="{{ $department->id }}">{{ $department->department_name }}
@@ -356,13 +359,11 @@
                                         {!! Form::text('registration_number', null, ['placeholder' => 'Registration No.', 'class' => 'form-control custom-modal-textbox', 'id' => 'registration_number', 'required' => 'required']) !!}
                                         <div class="text-danger" id="registration_number"></div>
                                     </div>
-
                                     <div class="form-group">
                                         <strong>Loan Cost:</strong>
                                         {!! Form::number('loan_cost', null, ['placeholder' => '0.00', 'class' => 'form-control custom-modal-textbox', 'id' => 'loan_cost', 'required' => 'required']) !!}
                                         <div class="text-danger" id="loan_cost"></div>
                                     </div>
-
                                     <div class="form-group">
                                         <strong>Registation Plate Colour:</strong>
                                         {!! Form::color('registration_plate_colour', '#FAF43D', ['placeholder' => '0.00', 'class' => 'form-control custom-modal-textbox', 'id' => 'registration_plate_colour', 'style' => 'padding:0px!important;width:25%;']) !!}
@@ -379,26 +380,25 @@
                                         <strong>Adoption Date:</strong>
                                         <div id="start_date_picker" class="input-group date">
                                             <input type="text" name="adoption_date" placeholder="yyyy-mm-dd"
-                                                class="form-control custom-modal-textbox" style="width: 116px;"
-                                                id="adoption_date" required />
+                                                   class="form-control custom-modal-textbox" style="width: 116px;"
+                                                   id="adoption_date" required/>
                                             <span class="input-group-addon" style="float: right;">
                                                 <img src="{{ asset('assets/images/icon/calendar.png') }}" alt="icon"
-                                                    style="width: 17px;margin-left: -14px;margin-top: 6px;" />
+                                                     style="width: 17px;margin-left: -14px;margin-top: 6px;"/>
                                             </span>
                                         </div>
                                         <div class="text-danger" id="adoption_date"></div>
                                     </div>
-
                                     <div class="form-group">
                                         <strong>Projected Defleet Date:</strong>
 
                                         <div id="end_date_picker" class="input-group date">
                                             <input type="text" name="projected_defleet_date" placeholder="yyyy-mm-dd"
-                                                class="form-control custom-modal-textbox" style="width: 116px;"
-                                                id="projected_defleet_date" required />
+                                                   class="form-control custom-modal-textbox" style="width: 116px;"
+                                                   id="projected_defleet_date" required/>
                                             <span class="input-group-addon" style="float: right;">
                                                 <img src="{{ asset('assets/images/icon/calendar.png') }}" alt="icon"
-                                                    style="width: 17px;margin-left: -14px;margin-top: 6px;" />
+                                                     style="width: 17px;margin-left: -14px;margin-top: 6px;"/>
                                             </span>
                                         </div>
                                         <div class="text-danger" id="projected_defleet_date"></div>
@@ -413,7 +413,6 @@
                                         {!! Form::text('lag_time', 0, ['class' => 'form-control custom-modal-textbox', 'id' => 'lag_time', 'required' => 'required']) !!}
                                         <div class="text-danger" id="lag_time"></div>
                                     </div>
-
                                     <div class="form-group">
                                         <strong>Engine:</strong>
                                         {!! Form::text('engine', null, ['placeholder' => 'Engine', 'class' => 'form-control custom-modal-textbox', 'id' => 'engine']) !!}
@@ -441,23 +440,13 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
                         </div>
-
-
-
-
-                </div>
-
-                <div class="modal-footer md-footer-custom">
-                    <hr style="margin-top: 0px;">
-                    <button type="submit" class="btn custom-modal-btn btn-success" id="btn"></button>
-                    <button type="button" class="btn custom-modal-btn btn-danger" data-dismiss="modal">Cancel</button>
-
-                </div>
-                {!! Form::close() !!}
+                        <div class="modal-footer md-footer-custom">
+                            <hr style="margin-top: 0px;">
+                            <button type="submit" class="btn custom-modal-btn btn-success" id="btn"></button>
+                            <button type="button" class="btn custom-modal-btn btn-danger" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
             </div>
         </div>
     </div>
@@ -478,51 +467,45 @@
                     id: id
                 },
                 dataType: 'json',
-                success: function(res) {
+                success: function (res) {
                     $('#form_heading').html("Configure Vehicle");
                     $('#btn').html('Update');
                     $('#item_id').val(res.id);
                     $('#vehicle_img').removeAttr('required', 'required');
-                    $.each(res, function(key, value) {
+                    $.each(res, function (key, value) {
                         $('#' + key).val(value);
                         if (key == 'adoption_date') {
                             $('#start_date_picker.date').datepicker("update", value);
                         }
                         if (key == 'projected_defleet_date') {
                             $('#end_date_picker.date').datepicker("update", value);
-                            
                         }
                     });
 
                     var specs = res.specs;
-                    $.each(specs, function(key, value) {
-
-                        $('#uploaded_spec').append('<option value="' + value.id + '">' + value
-                            .file_name + '</option>');
+                    $('#uploaded_spec').empty();
+                    $.each(specs, function (key, value) {
+                        $('#uploaded_spec').append('<option value="' + value.id + '">' + value.original_name + '</option>');
                     });
 
-
                     var filesrc = (res.image) ? filepath + '/' + res.image : '#';
-                    $('#image-review #image').attr('src', filesrc).attr('alt',res.registration_number);
-                    if($('#image-review #image').hasClass('hidden')){
+                    $('#image-review #image').attr('src', filesrc).attr('alt', res.registration_number);
+                    if ($('#image-review #image').hasClass('hidden')) {
                         $('#image-review #image').removeClass('hidden');
                     }
                     $('#image-text').html(res.registration_number);
                     $('#image-text').css('background-color', res.registration_plate_colour);
                     var d = $("#start_date_picker input").val();
-            $("#end_date_picker.date").datepicker("destroy");
-            $('#end_date_picker.date').datepicker({
-                format: "yyyy-mm-dd",
-                startDate: d,
-                daysOfWeekHighlighted: "0",
-                autoclose: true
-            });
+                    $("#end_date_picker.date").datepicker("destroy");
+                    $('#end_date_picker.date').datepicker({
+                        format: "yyyy-mm-dd",
+                        startDate: d,
+                        daysOfWeekHighlighted: "0",
+                        autoclose: true
+                    });
                     $('#popup_model').modal('show');
                     //console.log(res.specs);
                     //uploaded_spec
-
-
-
                 }
             });
         }
@@ -545,20 +528,20 @@
                         id: id
                     },
                     dataType: 'json',
-                    success: function(res) {
+                    success: function (res) {
                         window.location.reload();
                     }
                 });
             }
         }
 
-        $(document).ready(function($) {
+        $(document).ready(function ($) {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            $('#additem').click(function() {
+            $('#additem').click(function () {
 
                 $('#itemform').trigger("reset");
                 $('#form_heading').html("Configure Vehicle");
@@ -568,43 +551,42 @@
                 $('#image-text').html('');
                 $('#item_id').val('');
                 $('#image-text').css('background-color', '');
-                
+
                 $('#popup_model').modal('show');
             });
-            $('#view_specs').click(function() {
+            $('#view_specs').click(function () {
 
                 var filepath = "{{ asset('storage') }}/";
                 var filename = $('#uploaded_spec option:selected').text();
                 window.open(filepath + filename, '_blank');
 
             });
-            $('#delete_specs').click(function() {
+            $('#delete_specs').click(function () {
 
                 if (confirm("Delete Vehicle Spec?") == true) {
                     var id = $('#uploaded_spec').val();
-                    if(id ==''){
-                      $('#uploaded_spec option:selected').remove();
+                    if (id == '') {
+                        $('#uploaded_spec option:selected').remove();
+                    } else {
+                        $.ajax({
+                            type: "POST",
+                            url: "{{ url('deletespec-vehicle') }}",
+                            data: {
+                                id: id
+                            },
+                            dataType: 'json',
+                            success: function (res) {
+                                alert('Vehicle Spec deleted successfully!');
+                                $('#uploaded_spec option:selected').remove();
+                            }
+                        });
                     }
-                    else{
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ url('deletespec-vehicle') }}",
-                        data: {
-                            id: id
-                        },
-                        dataType: 'json',
-                        success: function(res) {
-                            alert('Vehicle Spec deleted successfully!');
-                            $('#uploaded_spec option:selected').remove();
-                        }
-                    });
                 }
-              }
 
             });
 
             //remove_img
-            $('#remove_img').click(function() {
+            $('#remove_img').click(function () {
 
                 if (confirm("Remove Vehicle Image?") == true) {
                     var id = $('#item_id').val();
@@ -616,8 +598,8 @@
                             id: id
                         },
                         dataType: 'json',
-                        success: function(res) {
-                            $('#image-review #image').addClass('hidden').attr("src",'#');
+                        success: function (res) {
+                            $('#image-review #image').addClass('hidden').attr("src", '#');
                             $('#vehicle_img').attr('required', 'required');
                         }
                     });
@@ -631,18 +613,18 @@
                 autoclose: true
             });
 
-            $("#start_date_picker input").change(function() {
-            var d = $("#start_date_picker input").val();
-            
-            $("#end_date_picker.date").datepicker("destroy");
-            $('#end_date_picker.date').datepicker({
-                format: "yyyy-mm-dd",
-                startDate: d,
-                daysOfWeekHighlighted: "0",
-                autoclose: true
+            $("#start_date_picker input").change(function () {
+                var d = $("#start_date_picker input").val();
+
+                $("#end_date_picker.date").datepicker("destroy");
+                $('#end_date_picker.date').datepicker({
+                    format: "yyyy-mm-dd",
+                    startDate: d,
+                    daysOfWeekHighlighted: "0",
+                    autoclose: true
+                });
             });
-        });
-        
+
             $('#end_date_picker.date').datepicker({
                 format: "yyyy-mm-dd",
                 daysOfWeekHighlighted: "0",
