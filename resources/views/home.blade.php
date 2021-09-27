@@ -1,6 +1,7 @@
 @extends('layouts.theme')
 
 @section('heading', 'Booking Overview')
+
 <style>
     .tooltip-inner {
 
@@ -22,6 +23,7 @@
     }
 
 </style>
+
 <style type="text/css">
     .upload-btn-wrapper {
         position: relative;
@@ -657,7 +659,7 @@
                     </div>
                 @endif
                 <div class="row" style="/* overflow: auto; */">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="selectable">
                         <thead>
                             <tr>
                                 <th style="width: 7%; font-weight: 600;">VEHICLES</th>
@@ -1785,6 +1787,7 @@
             </div>
         </div>
     </div>
+    
     <script>
         function getVehicleList() {
             $('#popup_model_vehicle').modal('show');
@@ -2904,6 +2907,8 @@
                 $('#ib_deliver_to_address_1').attr('required', 'required');
             }
         });
+        
+        
     </script>
 
 @endsection
