@@ -134,7 +134,7 @@
                                         </a>
                                     @endcan
                                     &nbsp;
-                                    <img src="{{ asset('storage/' . $vehicle->image) }}"
+                                    <img src="{{ ($vehicle->image) ? asset('storage/' . $vehicle->image) : '#' }}"
                                         alt="{{ $vehicle->registration_number }}" style="width: 100px; height:auto;" />
                                 </td>
                                 <td style="text-align: center;"><span
@@ -250,31 +250,20 @@
                                     </div>
                                     <div id="image-review" style="height: 130px; border: 1px solid #bbb8b8;
                       background-color: #f2f2f2; width:80%; margin:20px 20px 0px 0px;">
-
+                                        <img class="hidden" id="image" src="#" alt="the image" style="width:100%;height:100%;" />
                                     </div>
 
                                     <div class="form-group">
                                         <div style="text-align: right; width: 78%;">
                                             <div class="upload-btn-wrapper" style="margin-top: 4px;margin-right: -3px;">
                                                 <button class="btnsss">Upload Image</button>
-                                                <input type="file" name="image" id="vehicle_img" onchange="loadFile(event)"
+                                                <input type="file" name="image" id="vehicle_img"
                                                     style="width: 111px;height: 10px;" required>
                                             </div>
                                             <button type="button" id="remove_img"
                                                 style="margin-left: 5px; margin-top: -15px;"
                                                 class="btn custom-modal-btn btn-danger">Remove</button>
                                         </div>
-                                        <script>
-                                            var loadFile = function(event) {
-                                                var output = document.getElementById('output');
-
-                                                output.src = URL.createObjectURL(event.target.files[0]);
-                                                output.onload = function() {
-                                                    URL.revokeObjectURL(output.src) // free memory
-                                                }
-                                            };
-                                        </script>
-
                                     </div>
                                     <div class="form-group">
                                         <strong style="padding: 0px 0px 0px 10px;">Other Details:</strong>
@@ -512,8 +501,11 @@
                     });
 
 
-                    var filesrc = filepath + '/' + res.image;
-                    $('#image-review').html('<img src="' + filesrc + '" style="width:100%;height:100%"/>');
+                    var filesrc = (res.image) ? filepath + '/' + res.image : '#';
+                    $('#image-review #image').attr('src', filesrc).attr('alt',res.registration_number);
+                    if($('#image-review #image').hasClass('hidden')){
+                        $('#image-review #image').removeClass('hidden');
+                    }
                     $('#image-text').html(res.registration_number);
                     $('#image-text').css('background-color', res.registration_plate_colour);
                     $('#popup_model').modal('show');
@@ -563,7 +555,7 @@
                 $('#form_heading').html("Configure Vehicle");
                 $('#btn').html('Submit');
                 $('#uploaded_spec').html('');
-                $('#image-review').html('');
+
                 $('#image-text').html('');
                 $('#image-text').css('background-color', '');
                 $('#popup_model').modal('show');
@@ -614,7 +606,7 @@
                         },
                         dataType: 'json',
                         success: function(res) {
-                            $('#image-review').html('');
+                            $('#image-review #image').addClass('hidden').attr("src",'#');
                             $('#vehicle_img').attr('required', 'required');
                         }
                     });

@@ -8,8 +8,8 @@
 	<title>{{ config('app.name', 'Laravel') }}</title>
 
 	<!-- Global stylesheets -->
-	
-	
+
+
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
 	<link href="{{ asset('assets/css/icons/icomoon/styles.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('assets/css/icons/fontawesome/styles.min.css') }}" rel="stylesheet" type="text/css">
@@ -18,8 +18,8 @@
 	<link href="{{ asset('assets/css/components.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('assets/css/colors.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('assets/css/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css">
-	
-	
+
+
 	<!-- /global stylesheets -->
 
 	<!-- Core JS files -->
@@ -58,14 +58,14 @@
 			text-transform: initial !important;
 		}
 
-		
-	</style>	
+
+	</style>
 
 </head>
 
 <body>
 
-	
+
 
 
 	<!-- Page container -->
@@ -83,13 +83,13 @@
 						<div class="category-content">
 							<div class="sidebar-user-material-content">
 								<a href="{{ url('/') }}"><img src="{{ asset('assets/images/new_fleet_logo.png') }}" class="img-responsive" alt=""></a>
-								
+
 							</div>
-														
-							
+
+
 						</div>
-						
-						
+
+
 					</div>
 					<!-- /user menu -->
 
@@ -100,13 +100,13 @@
 							<ul class="navigation navigation-main navigation-accordion">
 
 								<!-- Main -->
-								
+
 								<!-- <li class=""><a href="#"><i class="icon-home4"></i> <span>DASHBOARD</span></a><span class="sidebar-control sidebar-main-toggle "><i class="fa fa-angle-double-left pull-right" style="position: absolute;margin-top: -6.5em;margin-left: 18.2em;"></i></span></li>
 								<li class="navigation-header"><span>Menu</span> <i class="icon-menu" title="Main pages"></i></li>
-								@if(session()->get('company_id') == null)	
+								@if(session()->get('company_id') == null)
 								<li class="{{ (request()->segment(1) == 'companies') ? 'active' : '' }}">
 									<a href="{{ route('companies.index') }}"><i class="icon-stack2"></i> <span>Companies</span></a>
-									
+
 								</li>
 								@endif -->
 								<li style="padding: 12px;margin-top: -35px;"><a href="{{ url('/') }}"  style="background-color: #eeeded;border-radius: 5px;"> <i class="icon-home4"></i><span>DASHBOARD</span></a><span class="sidebar-control sidebar-main-toggle hidden-xs"><i class="fa fa-angle-double-left pull-right" style="position: absolute;
@@ -115,17 +115,17 @@
     font-size: 30px;"></i></span></li>
     							<li style="margin-bottom: -20px;margin-left: 10px;">Menu</li>
 								<!-- <li class="{{ (request()->segment(1) == '') ? 'active' : '' }}"><a href="{{ url('/') }}"><i class="icon-home4"></i> <span>DASHBOARD</span></a><span class="sidebar-control sidebar-main-toggle hidden-xs"><i class="fa fa-angle-double-left pull-right" style="position: absolute; margin-top: -6.5em; margin-left: 16.2em;"></i></span></li> -->
-								@if(session()->get('company_id') == null)	
+								@if(session()->get('company_id') == null)
 								<li class="{{ (request()->segment(1) == 'companies') ? 'active' : '' }}">
 									<a href="{{ route('companies.index') }}"><i class="icon-stack2"></i> <span>Companies</span></a>
-									
+
 								</li>
 								@endif
 								<li class="{{ (request()->segment(1) == '') ? 'active' : '' }}">
 									<a href="{{ url('/') }}"><i class="icon-stack2"></i> <span>OVERVIEW</span></a>
-									
+
 								</li>
-								
+
 								@can('configure')
 								<li>
 									<a href="#"><i class="icon-car"></i> <span>CONFIGURE</span></a>
@@ -139,7 +139,7 @@
 										@can('region-list')
 										<li class="{{ (request()->segment(1) == 'regions') ? 'active' : '' }}"><a href="{{ route('regions.index') }}">Regions</a></li>
 										@endcan
-										@can('department-list')        
+										@can('department-list')
 										<li class="{{ (request()->segment(1) == 'departments') ? 'active' : '' }}"><a href="{{ route('departments.index') }}">Department</a></li>
 										@endcan
 										@can('brand-list')
@@ -148,21 +148,21 @@
 										@can('loantype-list')
 										<li class="{{ (request()->segment(1) == 'loantypes') ? 'active' : '' }}"><a href="{{ route('loantypes.index') }}">Loan Type</a></li>
 										@endcan
-										
-										
-										
-										<li class="{{ (request()->segment(1) == 'email-template') ? 'active' : '' }}"><a href="{{ route('email-template.index')}}">Email Templates</a></li>
-										
 
-										
+
+
+										<li class="{{ (request()->segment(1) == 'email-template') ? 'active' : '' }}"><a href="{{ route('email-template.index')}}">Email Templates</a></li>
+
+
+
 										<li class="{{ (request()->segment(1) == 'histories') ? 'active' : '' }}"><a href="{{ route('histories.index') }}">History</a></li>
-										
-										
+
+
 										<li class="{{ (request()->segment(1) == 'users') ? 'active' : '' }}"><a href="{{ route('users.index') }}">Users</a></li>
-										
-										
+
+
 										<li class="{{ (request()->segment(1) == 'lists') ? 'active' : '' }}"><a href="{{ route('lists.index') }}">Lists</a></li>
-										
+
 										@can('system-configuration')
 										<li><a href="#">System Configuration</a></li>
 										@endcan
@@ -172,7 +172,7 @@
 								@can('contact-list')
 								<li class="{{ (request()->segment(1) == 'contacts') ? 'active' : '' }}">
 									<a href="{{ route('contacts.index') }}"><i class="icon-user-plus"></i> <span>CONTACT PROFILES</span></a>
-									
+
 								</li>
 								@endcan
 								@can('report-list')
@@ -210,24 +210,24 @@
 	</div>
 
 	<div class="navbar-collapse collapse" id="navbar-mobile">
-		
+
 		<div class="nav navbar-nav"><h6 style="margin-top: 16px; text-transform: uppercase;"><strong>@yield('heading-pre')@yield('heading')</strong></h6></div>
 		<ul class="nav navbar-nav navbar-right">
-				
 
-				
+
+
 			<li style="padding-top: 10px;"><img src="{{ asset('assets/images/icon/bell.png') }}" alt="bell" style="width: 17px;"/>
 				<span>{{ Auth::user()->first_name }}</span>
 				<img style="max-width: 40px" src="{{ asset('assets/images/icon/oval.png') }}" alt="">
 			</li>
 			<li class="dropdown dropdown-user">
 				<a class="dropdown-toggle" data-toggle="dropdown" style="padding-top: 18px; padding-left:0px;">
-					
+
 					<i class="caret"></i>
 				</a>
 
 				<ul class="dropdown-menu dropdown-menu-right">
-					
+
 					<li><a href="{{ route('logout') }}" onClick="event.preventDefault();
 												 document.getElementById('logout-form').submit();"><i class="icon-switch2"></i> {{ __('Logout') }}</a></li>
 				</ul>
@@ -236,8 +236,8 @@
 		<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 									@csrf
 								</form>
-		
-		
+
+
 	</div>
 </div>
 
@@ -251,7 +251,7 @@
 	</div>
 	<!-- /page container -->
 	<script>
-		
+
 		window.setTimeout(function () {
 			$(".alert-success").fadeTo(300, 0).slideUp(300, function () {
 				$(this).remove();
@@ -267,14 +267,20 @@
 				$(this).remove();
 			});
 		}, 3000);
-    
+
 		window.setTimeout(function () {
 			$(".alert-warning").fadeTo(300, 0).slideUp(300, function () {
 				$(this).remove();
 			});
 		}, 3000);
-    
-	
+
+        $(document).on('change', 'input[name="image"]', function(){
+            if($(this).closest('form').find('#image').hasClass('hidden')){
+                $(this).closest('form').find('#image').removeClass('hidden');
+            }
+            $(this).closest('form').find('#image').attr("src", URL.createObjectURL($(this).prop('files')[0]));
+        });
+
     </script>
 </body>
 </html>
