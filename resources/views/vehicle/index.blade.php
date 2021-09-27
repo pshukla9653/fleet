@@ -228,7 +228,7 @@
         }
 
     </style>
-    <div id="popup_model" class="modal fade">
+    <div id="popup_model" class="modal fade" data-backdrop="false">
         <div class="modal-dialog modal-lg">
             <div class="modal-content" style="background-color: #f2f2f2;">
                 <div class="modal-header">
@@ -481,6 +481,7 @@
             });
             var filepath = "{{ asset('storage') }}";
             $('#itemform').trigger("reset");
+            $('#uploaded_spec').empty();
             // ajax
             $.ajax({
                 type: "POST",
@@ -562,9 +563,10 @@
                 $('#itemform').trigger("reset");
                 $('#form_heading').html("Configure Vehicle");
                 $('#btn').html('Submit');
-                $('#uploaded_spec').html('');
                 $('#image-review').html('');
                 $('#image-text').html('');
+                $('#item_id').val('');
+                $('#uploaded_spec').empty();
                 $('#image-text').css('background-color', '');
                 $('#popup_model').modal('show');
             });
@@ -627,6 +629,18 @@
                 daysOfWeekHighlighted: "0",
                 autoclose: true
             });
+
+            $("#start_date_picker input").change(function() {
+            var d = $("#start_date_picker input").val();
+            $("#end_date_picker.date").datepicker("destroy");
+            $('#end_date_picker.date').datepicker({
+                format: "yyyy-mm-dd",
+                startDate: d,
+                daysOfWeekHighlighted: "0",
+                autoclose: true
+            });
+        });
+        
             $('#end_date_picker.date').datepicker({
                 format: "yyyy-mm-dd",
                 daysOfWeekHighlighted: "0",

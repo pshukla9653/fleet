@@ -582,6 +582,7 @@
                                     <option value="2" {{ $date_range == '2' ? 'selected' : '' }}>2 weeks</option>
                                     <option value="3" {{ $date_range == '3' ? 'selected' : '' }}>3 weeks</option>
                                     <option value="4" {{ $date_range == '4' ? 'selected' : '' }}>4 weeks</option>
+                                    <option value="8" {{ $date_range == '8' ? 'selected' : '' }}>8 weeks</option>
                                 </select>
 
 
@@ -658,7 +659,7 @@
                         <p>{{ $message }}</p>
                     </div>
                 @endif
-                <div class="row" style="/* overflow: auto; */">
+                <div class="row" style="overflow: auto;">
                     <table class="table table-bordered" id="selectable">
                         <thead>
                             <tr>
@@ -725,10 +726,10 @@
                                       </table>
                                     </div>
                                     " data-html="true" data-placement="right"
-                                            style="font-weight: 600; font-size:12px; padding: 5px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}">{{ $vehicle->registration_number }}</span>
+                                            style="font-weight: 600; font-size:12px; padding: 3px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}">{{ $vehicle->registration_number }}</span>
                                         <br><span
-                                            style="font-size:9px;position: absolute;margin-top: 7px;">{{ $vehicle->vin }}</span>
-                                        <br><span style="font-size:9px;position: absolute;margin-top: -4px;">Newspress
+                                            style="font-size:9px;margin-top: 7px;padding-top:5px;">{{ $vehicle->vin }}</span>
+                                        <br><span style="font-size:9px;margin-top: -4px;">Newspress
                                             {{ $vehicle->model }}</span>
                                     </td>
                                     @for ($i = 0; $i < $days; $i++)
@@ -825,7 +826,7 @@
                                       </table>
                                     </div>
                                     " data-html="true" data-placement="auto"
-                                                        style="font-size:9px; color:#fff; padding: 20px;margin: -30px 0px 0px -30px;border-radius: 5px;white-space: nowrap;position: absolute;">
+                                                        style="font-size:9px; color:#fff; padding: 20px;margin: -30px -145px 0px -88px;border-radius: 5px;white-space: nowrap;">
                                                         @if ($contact_detail && $value->booking_start_date == $thisdate)
                                                             {{ $contact_detail->first_name . ' ' . $contact_detail->last_name }}
                                                         @else
@@ -2101,7 +2102,7 @@
 
         function step_fast_backward_date() {
 
-            $('#date_range').val(4);
+            $('#date_range').val(8);
             $('#custom_input').html('<input type="hidden" name="mode" value="backward"/>');
 
             $('#search_form').submit();
@@ -2125,7 +2126,7 @@
 
         function step_fast_forward_date() {
 
-            $('#date_range').val(4);
+            $('#date_range').val(8);
             $('#custom_input').html('<input type="hidden" name="mode" value="forward"/>');
 
             $('#search_form').submit();

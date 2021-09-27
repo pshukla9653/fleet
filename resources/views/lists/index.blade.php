@@ -101,7 +101,7 @@
     display: none;
   }
 </style>
-<div id="popup_model" class="modal fade">
+<div id="popup_model" class="modal fade" data-backdrop="false">
   <div class="modal-dialog modal-lg">
     <div class="modal-content" style="background-color: #f2f2f2;">
       <div class="modal-header">
