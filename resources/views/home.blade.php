@@ -660,6 +660,7 @@
                     </div>
                 @endif
                 <div class="row" style="overflow: auto;">
+                    <input type="hidden" id="hidden-date" value="">
                     <table class="table table-bordered" id="selectable">
                         <thead>
                             <tr>
@@ -738,9 +739,9 @@
                                             $img_path = asset('storage/' . $vehicle->image);
                                             
                                         @endphp
-
+                                        
                                         <td class='col-pa'
-                                            onclick="makebooking('{{ $vehicle->id }}','{{ $thisdate }}','{{ $img_path }}','{{ $vehicle->registration_number }}','{{ $vehicle->registration_plate_colour }}','{{ $vehicle->brand->brand_name }}','{{ $vehicle->model }}','{{ $vehicle->derivative }}','{{ $vehicle->lead_time }}','{{ $vehicle->lag_time }}');"
+                                        onmousedown="startDate('{{ $thisdate }}')" onmouseup="makebooking('{{ $vehicle->id }}','{{ $thisdate }}','{{ $img_path }}','{{ $vehicle->registration_number }}','{{ $vehicle->registration_plate_colour }}','{{ $vehicle->brand->brand_name }}','{{ $vehicle->model }}','{{ $vehicle->derivative }}','{{ $vehicle->lead_time }}','{{ $vehicle->lag_time }}');"
                                             @php
                                                 $booking = DB::table('bookings')
                                                     ->where('company_id', Auth()->user()->company_id)
@@ -2136,6 +2137,11 @@
             $('#search_form').submit();
         }
 
+        function startDate(start_date) {
+            $("#hidden-date").val(start_date);
+            //console.log("date=>", $("#hidden-date").val());
+        }
+
         function makebooking(vehicle_id, date, img, reg_number, plate_colour, brand, model, derivative, lead_time,
             lag_time) {
 
@@ -2144,12 +2150,25 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+            var start_date = $("#hidden-date").val();
+            $("#hidden-date").val(null);
+            //console.log(start_date, date);
             $('#itemform').trigger("reset");
             $('#form_heading').html("Booking Overview");
             $('#btn').html('Submit');
             $('#vehicle_id').val(vehicle_id);
             $('#id').val('');
+            var st_date = new Date(start_date);
+            var en_date = new Date(date);
+            if(st_date > en_date){
             $('#start_date_picker input').val(date);
+            $('#end_date_picker input').val(start_date);
+            }
+            else{
+                $('#start_date_picker input').val(start_date);
+            $('#end_date_picker input').val(date);
+            }
+            
             $('#vahicle_img').attr('src', img);
             $('#inserted-list').html('');
             $('input[name="vehi"][value="' + vehicle_id.toString() + '"]').prop("checked", true);
@@ -2163,7 +2182,7 @@
             $('#vehicle').html(reg_number);
             $('#booking_created').html('');
             $('#booking_modified').html('');
-            $('#start_date_picker.date').datepicker("update", date);
+            $('#start_date_picker.date').datepicker("update", start_date);
             $('#contact_list_d').empty();
             $('#delete_booking').hide();
             set_second_cal();
@@ -2180,8 +2199,9 @@
 
                 dataType: 'json',
                 success: function(res) {
-
+                    console.log("res");
                     if (res.status == true) {
+                        console.log("res", res.booking_list.booking_start_date);
                         $('#btn').html('Update');
                         $('#delete_booking').show();
                         $('#start_date_picker.date').datepicker("update", res.booking_list.booking_start_date);
