@@ -513,20 +513,19 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-
             if (confirm("Delete Record?") == true) {
-
-
                 // ajax
                 $.ajax({
-                    type: "POST",
+                    type: "DELETE",
                     url: "{{ url('delete-vehicle') }}",
-                    data: {
-                        id: id
-                    },
+                    data: {id: id},
                     dataType: 'json',
                     success: function (res) {
-                        window.location.reload();
+                        if (res.success) {
+                            window.location.reload();
+                        } else {
+                            window.alert("Can't delete this vehicle due to it's relations!");
+                        }
                     }
                 });
             }

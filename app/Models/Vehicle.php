@@ -58,4 +58,8 @@ class Vehicle extends Model
         return $this->hasOne(Department::class, 'id', 'department_id');
     }
 
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
 }

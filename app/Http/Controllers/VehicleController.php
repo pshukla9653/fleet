@@ -158,6 +158,7 @@ class VehicleController extends Controller
 
         return redirect()->route('vehicles.index')->with('success','Vehicle updated successfully');
     }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -174,8 +175,6 @@ class VehicleController extends Controller
 
     }
 
-
-
     /**
      * Remove the specified resource from storage.
      *
@@ -185,7 +184,10 @@ class VehicleController extends Controller
     public function destroy(Request $request)
     {
         //
-		$vehicle = Vehicle::Find($request->id);
+		$vehicle = Vehicle::find($request->id);
+        if (count($vehicle->bookings)) {
+            return response()->json(['success' => false]);
+        }
 		if (Storage::disk('public')->exists($vehicle->image)) {
             Storage::disk('public')->delete($vehicle->image);
         }
