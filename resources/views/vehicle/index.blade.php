@@ -17,11 +17,8 @@
     <hr style="margin: 0px 20px;">
     <div class="row">
         <div class="col-md-8" style="padding: 15px 30px;">
-            <a href="{{ route('vehicles.index') }}" class="btn btn-primary"><img
-                    src="{{ asset('assets/images/icon/refresh.png') }}" alt="refresh"
-                    style="width: 20px;margin-left: -8px;"/>&nbsp; Refresh @yield('heading')</a>
             @can('user-create')
-                <a id="additem" class="btn btn-primary" style="margin-left: 20px;"><img
+                <a id="additem" class="btn btn-primary"><img
                         src="{{ asset('assets/images/icon/add.png') }}" alt="add"
                         style="width: 21px;margin-left: -8px;"/>&nbsp; Add New Item</a>
             @endcan

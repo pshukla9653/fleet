@@ -44,8 +44,8 @@
 
 	<script type="text/javascript" src="{{ asset('assets/js/core/app.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/plugins/ui/ripple.min.js') }}"></script>
-	
-	
+
+
 	<!-- /theme JS files -->
 
 	<style>
@@ -79,17 +79,16 @@
 				<div class="sidebar-content">
 
 					<!-- User menu -->
-					<div class="sidebar-user-material">
-						<div class="category-content">
-							<div class="sidebar-user-material-content">
-								<a href="{{ url('/') }}"><img src="{{ asset('assets/images/new_fleet_logo.png') }}" class="img-responsive" alt=""></a>
-
-							</div>
-
-
-						</div>
-
-
+                    <div class="sidebar-user-material">
+                        <div class="category-content">
+                            <div class="sidebar-user-material-content">
+                                @if((\Illuminate\Support\Facades\Auth::user()->hasRole('Admin')))
+                                    <a href="{{ url('/') }}"><img src="{{ asset('assets/images/newspress_logo.png') }}" class="img-responsive" alt=""></a>
+                                @else
+                                    <a href="{{ url('/') }}"><img src="{{ asset('assets/images/new_fleet_logo.png') }}" class="img-responsive" alt=""></a>
+                                @endif
+                            </div>
+                        </div>
 					</div>
 					<!-- /user menu -->
 

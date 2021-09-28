@@ -7,53 +7,52 @@
 	  <div class="page-title" style="margin: 0px 20px;">
 		<h6><i class="icon-home2 position-left"></i> <i class="fa fa-angle-double-right"></i> <span style="color: #3a6d7f;">Configure</span> <i class="fa fa-angle-double-right"></i> @yield('heading')</h6>
 	  </div>
-  
-	  
+
+
 	</div>
 	</div>
   <hr style="margin: 0px 20px;">
 <!-- /main navbar -->
-<div class="row">		
+<div class="row">
 <div class="col-md-8" style="padding: 15px 30px;">
-<a href="{{ route('regions.index')}}" class="btn btn-primary"><img src="{{ asset('assets/images/icon/refresh.png') }}" alt="refresh" style="width: 20px;margin-left: -8px;"/>&nbsp;  Refresh @yield('heading')</a>
-@can('region-create')	
-<a id="additem" class="btn btn-primary" style="margin-left: 20px;"><img src="{{ asset('assets/images/icon/add.png') }}" alt="add" style="width: 21px;margin-left: -8px;"/>&nbsp;  Add New Item</a>
+@can('region-create')
+<a id="additem" class="btn btn-primary"><img src="{{ asset('assets/images/icon/add.png') }}" alt="add" style="width: 21px;margin-left: -8px;"/>&nbsp;  Add New Item</a>
 @endcan
 </div>
 <div class="col-md-4" style="padding: 15px 30px;">
 <form class="example" action="">
   <input type="text" placeholder="Search" name="search">
   <button type="submit"><img src="{{ asset('assets/images/icon/search.png') }}" alt="search"/></button>
-  </form>		
+  </form>
 </div>
 
-</div>	
+</div>
 
-<div class="content"> 
-  
-  <!-- Main charts --> 
-  <!-- Quick stats boxes --> 
-  
-  <!-- /quick stats boxes --> 
+<div class="content">
+
+  <!-- Main charts -->
+  <!-- Quick stats boxes -->
+
+  <!-- /quick stats boxes -->
   <!-- /main charts -->
   <div class="panel panel-flat">
     <div class="panel-heading" style="padding: 0px;">
       <h5 class="panel-title"><span style="margin-left: 12px;">Region</span></h5>
       <div class="heading-elements">
         </div>
-      
+
     </div>
     <div class="panel-body" style="padding: 0px 10px 10px 10px;">
-      <div class="row"> 
+      <div class="row">
       @if ($message = Session::get('success'))
     <div class="alert alert-success">
         <p>{{ $message }}</p>
     </div>
 @endif
 
-        
+
           <table class="table table-bordered table-responsive">
-  
+
     @foreach ($regions as $key => $region)
     <tr>
       <td style="width: 15%">
@@ -65,17 +64,17 @@
         &nbsp;
         {{ $region->region_name }}
       </td>
-        
+
         <td style="width: 80%"></td>
         <td style="width: 4%">
-            
+
           @can('region-delete')
             <a onclick="deleteitem({{ $region->id }})">
               <img src="{{ asset('assets/images/icon/delete.png') }}" alt="delete"/>
             </a>
-          @endcan  
-          
-           
+          @endcan
+
+
         </td>
     </tr>
     @endforeach
@@ -83,7 +82,7 @@
 
 <br>
 {!! $regions->render() !!}
-      
+
       </div>
     </div>
   </div>
@@ -93,7 +92,7 @@
     <div class="modal-content" style="background-color: #f2f2f2;">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><i class="icon-cancel-circle2"></i></button>
-        
+
       </div>
       <h6 class="modal-title md-heading-custom" id="form_heading"></h6>
       <div class="modal-body md-body-custom">
@@ -104,13 +103,13 @@
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group" style="margin-bottom: 0px;">
-          
+
             <input type="hidden" id="item_id" name="id">
             <div class="form-group" style="margin-bottom: 0px;"> <strong>Region:</strong> {!! Form::text('region_name', null, array('placeholder' => 'Region','class' => 'form-control custom-modal-textbox', 'id' => 'region_name')) !!} </div>
             <div class="text-danger"></div>
         </div>
     </div>
-  
+
 </div>
 
       </div>
@@ -119,9 +118,9 @@
         <hr style="margin-top: 0px;">
         <button type="submit" class="btn custom-modal-btn btn-success" id="btn"></button>
         <button type="button" class="btn custom-modal-btn btn-danger" data-dismiss="modal">Cancel</button>
-        
+
       </div>
-{!! Form::close() !!}      
+{!! Form::close() !!}
     </div>
   </div>
 </div>
@@ -132,7 +131,7 @@ function edititem(id) {
          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          }
      });
-        
+
         // ajax
         $.ajax({
             type:"POST",
@@ -147,7 +146,7 @@ function edititem(id) {
               $('.text-danger').html('');
               $('#popup_model').modal('show');
               $("#btn"). attr("disabled", false);
-              
+
            }
         });
     }
@@ -157,10 +156,10 @@ function edititem(id) {
          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          }
      });
-        
+
         if (confirm("Delete Record?") == true) {
-         
-          
+
+
          // ajax
          $.ajax({
              type:"POST",
@@ -173,7 +172,7 @@ function edititem(id) {
          });
         }
      }
-       
+
   $(document).ready(function($){
      $.ajaxSetup({
          headers: {
@@ -181,7 +180,7 @@ function edititem(id) {
          }
      });
      $('#additem').click(function () {
-       
+
         $('#itemform').trigger("reset");
         $('#form_heading').html("Add Region");
         $('#btn').html('Submit');
@@ -190,9 +189,9 @@ function edititem(id) {
         $('.text-danger').html('');
         $('#popup_model').modal('show');
      });
-  
-     
-     
+
+
+
      $('#btn').click(function () {
            var id = $("#item_id").val();
            var region_name = $("#region_name").val();
@@ -200,10 +199,10 @@ function edititem(id) {
           if(region_name ==''){
               $('.text-danger').html('Region Required!');
           }
-          else{        
+          else{
            $("#btn").html('Please Wait...');
            $("#btn"). attr("disabled", true);
-          
+
          // ajax
          $.ajax({
              type:"POST",
@@ -211,7 +210,7 @@ function edititem(id) {
              data: {
                id:id,
                region_name:region_name,
-               
+
              },
              dataType: 'json',
              success: function(res){
@@ -222,7 +221,7 @@ function edititem(id) {
               $('.text-danger').html(res.error-msg);
               $("#btn").html(btn);
               $("#btn"). attr("disabled", false);
-            } 
+            }
             },
             error: function(xhr, status, error) {
               var err = JSON.parse(xhr.responseText);
