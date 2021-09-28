@@ -257,7 +257,7 @@
                                         </div>
                                         <div class="form-group">
                                             <strong>To Email:</strong>
-                                            {!! Form::email('to_email', null, ['placeholder' => 'To Email', 'class' => 'form-control custom-modal-textbox', 'id' => 'to_email','required' => 'required']) !!}
+                                            {!! Form::text('to_email', null, ['placeholder' => 'To Email', 'class' => 'form-control custom-modal-textbox', 'id' => 'to_email','required' => 'required']) !!}
 
                                         </div>
                                         <div class="form-group">
