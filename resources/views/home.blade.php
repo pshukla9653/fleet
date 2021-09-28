@@ -691,8 +691,8 @@
                                               <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
                                               <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
                                               <tr style='font-size:12px;'><td style='padding:2px 2px 2px 78px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
-                                              
-                                              
+
+
                                             </table>
                                           </td>
                                           <td style='width:33.33%;padding:10px;'>
@@ -710,7 +710,7 @@
                                           </td>
                                           <td style='width:33.33%;padding:10px;'>
                                             <table style='width:100%;margin-top:-35px;'>
-                                              
+
                                               <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Regions:</b></td><td>{{ $vehicle->region->region_name }}</td></tr>
                                               <tr style='font-size:12px;'><td style='padding:2px;'><b>Other Details:</b></td><td>{{ $vehicle->other_details }}</td></tr>
                                               <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Lead Time:</b></td><td>{{ $vehicle->lead_time }}</td></tr>
@@ -737,9 +737,9 @@
                                         @php
                                             $thisdate = date('Y-m-d', strtotime($start_date . '+' . $i . ' day'));
                                             $img_path = asset('storage/' . $vehicle->image);
-                                            
+
                                         @endphp
-                                        
+
                                         <td class='col-pa'
                                         onmousedown="startDate('{{ $thisdate }}')" onmouseup="makebooking('{{ $vehicle->id }}','{{ $thisdate }}','{{ $img_path }}','{{ $vehicle->registration_number }}','{{ $vehicle->registration_plate_colour }}','{{ $vehicle->brand->brand_name }}','{{ $vehicle->model }}','{{ $vehicle->derivative }}','{{ $vehicle->lead_time }}','{{ $vehicle->lag_time }}');"
                                             @php
@@ -783,16 +783,16 @@
                                             <table style='width:100%'>
                                               <tr><td colspan='2'><img src='{{ asset('storage/' . $vehicle->image) }}' alt='{{ $vehicle->registration_number }}' style='width: 100%; height:auto;padding:10px;'/></td></tr>
                                               <tr><td colspan='2'>&nbsp;</td></tr>
-                                              <tr><td colspan='2' style='text-align:center;'><span style='font-size:18px;color:black;padding:5px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}'>{{ $vehicle->registration_number }}</span></td></tr>
+                                              <tr><td colspan='2' style='text-align:left;'><span style='font-size:18px;color:black;padding:5px;border-radius: 5px;background-color:{{ $vehicle->registration_plate_colour }}'>{{ $vehicle->registration_number }}</span></td></tr>
                                               <tr><td colspan='2'>&nbsp;</td></tr>
-                                              <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
-                                              <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
-                                              <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
-                                              <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->booking_start_date), 'd-M-Y') }}</td></tr>
-                                              <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->booking_end_date), 'd-M-Y') }}</td></tr>
-                                              <tr style='font-size:12px;'><td style='padding:2px 2px 2px 70px;'><b>Primary Contact:</b></td><td>@if ($contact_detail){{ $contact_detail->first_name . ' ' . $contact_detail->last_name }}@endif</td></tr>
-                                              
-                                              
+                                              <tr style='font-size:12px;'><td style='padding:5px;'><b>Brand:</b></td><td> {{ $vehicle->brand->brand_name }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:5px;'><b>Model:</b></td><td> {{ $vehicle->model }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:5px;'><b>Derivative:</b></td><td> {{ $vehicle->derivative }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:5px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->booking_start_date), 'd-M-Y') }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:5px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->booking_end_date), 'd-M-Y') }}</td></tr>
+                                              <tr style='font-size:12px;'><td style='padding:5px;'><b>Primary Contact:</b></td><td>@if ($contact_detail){{ $contact_detail->first_name . ' ' . $contact_detail->last_name }}@endif</td></tr>
+
+
                                             </table>
                                           </td>
                                           <td style='width:33.33%;padding:10px;'>
@@ -801,7 +801,7 @@
                                               <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Start Date:</b></td><td> {{ date_format(date_create($value->booking_start_date), 'd-M-Y') }}</td></tr>
                                               <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>End Date:</b></td><td> {{ date_format(date_create($value->booking_end_date), 'd-M-Y') }}</td></tr>
                                               <tr style='font-size:12px; background-color:{{ $vehicle->registration_plate_colour }}'><td style='padding:2px;'><b>Primary Contact:</b></td><td>@if ($contact_detail){{ $contact_detail->first_name . ' ' . $contact_detail->last_name }}@endif</td></tr>
-                                              
+
                                               <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Loan Type:</b></td><td>@if ($loan_detail){{ $loan_detail->loan_type }}@endif</td></tr>
                                               <tr style='font-size:12px;'><td style='padding:2px;'><b>Purpose of Loan:</b></td><td>{{ $value->purpose_of_loan }}</td></tr>
                                               <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Booking Reference:</b></td><td>{{ $value->booking_reference }}</td></tr>
@@ -810,7 +810,7 @@
                                           </td>
                                           <td style='width:33.33%;padding:10px;'>
                                             <table style='width:100%;margin-top:-35px;'>
-                                              
+
                                               <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Outbound Collection Notes:</b></td><td>{{ $value->ob_pick_from_notes }}</td></tr>
                                               <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Collection Notes:</b></td><td>{{ $value->ib_pick_from_notes }}</td></tr>
                                               <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Lead Time Notes:</b></td><td>{{ $value->lead_notes }}</td></tr>
@@ -819,7 +819,7 @@
                                               <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Delivery Notes:</b></td><td>{{ $value->ib_pick_from_notes }}</td></tr>
                                               <tr style='font-size:12px;background-color:#eeeeee;'><td style='padding:2px;'><b>Outbound Details Address:</b></td><td>{{ $value->ob_deliver_to_address_1 }}</td></tr>
                                               <tr style='font-size:12px;'><td style='padding:2px;'><b>Inbound Details Address:</b></td><td>{{ $value->ib_pick_from_address_1 }}</td></tr>
-                                              
+
                                             </table>
                                           </td>
                                         </tr>
@@ -971,7 +971,7 @@
                                                 <img class="image-1" id="vahicle_img" src="">
                                             </div>
                                             <div class="sides-1">
-                                                <span id="rt-number" style="border-radius: 7px;border-color: #eecc00;margin: 5px;width: 110px;padding: 3px; 
+                                                <span id="rt-number" style="border-radius: 7px;border-color: #eecc00;margin: 5px;width: 110px;padding: 3px;
                                                                 font-weight: 600;"></span>
                                                 <br>
                                                 <span id="brand_name" style="font-weight: 600"></span><br>
@@ -1789,7 +1789,7 @@
             </div>
         </div>
     </div>
-    
+
     <script>
         function getVehicleList() {
             $('#popup_model_vehicle').modal('show');
@@ -2168,7 +2168,7 @@
                 $('#start_date_picker input').val(start_date);
             $('#end_date_picker input').val(date);
             }
-            
+
             $('#vahicle_img').attr('src', img);
             $('#inserted-list').html('');
             $('input[name="vehi"][value="' + vehicle_id.toString() + '"]').prop("checked", true);
@@ -2528,7 +2528,7 @@
                         },
                         dataType: 'json',
                         success: function(res) {
-                            
+
                             if (res.success == true) {
                                 get_contact_list_by_list_id(res.list_id);
                                 alert('List Added Successfully');
@@ -2621,7 +2621,7 @@
 
 
         }
-        //set/ get end date based on booking end date and lead time 
+        //set/ get end date based on booking end date and lead time
         function set_end_date() {
 
             var booking_date = $('input[name="booking_end_date"]').val();
@@ -2928,8 +2928,8 @@
                 $('#ib_deliver_to_address_1').attr('required', 'required');
             }
         });
-        
-        
+
+
     </script>
 
 @endsection
