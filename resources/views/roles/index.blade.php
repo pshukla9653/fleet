@@ -33,7 +33,16 @@
       <h5 class="panel-title">Role</h5>
       <div class="heading-elements">
         </div>
-
+        @error('name')
+        <div class="alert alert-danger">
+            <strong>{{ $message }}</strong>
+        </div>
+        @enderror
+        @error('permission')
+        <div class="alert alert-danger">
+            <strong>{{ $message }}</strong>
+        </div>
+        @enderror
     </div>
     <div class="panel-body" style="padding: 0px 10px 10px 10px;">
       <div class="row">
