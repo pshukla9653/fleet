@@ -223,7 +223,7 @@ class BookingController extends Controller
                         'event'=> 'Created',
                     ]);
 
-            $this->bookingService->sendBookingEmails($booking);
+            //$this->bookingService->sendBookingEmails($booking);
 
             }
             else{

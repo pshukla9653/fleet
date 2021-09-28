@@ -492,7 +492,7 @@
 
                         if (confirm("Delete file Record?") == true) {
 
-                            var id = $('#item_id').val();
+                            var id = $('#uploaded_spec option:selected').val();
                             // ajax
                             $.ajax({
                                 type: "POST",
