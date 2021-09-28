@@ -303,6 +303,8 @@
                           background-color: #f2f2f2; width:100%; margin:10px 20px 20px 0px; padding:5px;height: 248px;"
                                         id="uploaded_spec">
                                     </select>
+                                    <select name="sp_hidden" size="4" style="display:none" id="uploaded_spec_hidden">
+                                    </select>
                                     <div class="form-group"
                                         style="text-align:right;margin-top: -16px;margin-right: 0px;">
                                         <button type="button" id="view_specs" class="btn custom-modal-btn"
@@ -396,6 +398,7 @@
                     var filepath = "{{ asset('storage') }}";
                     $('#itemform').trigger("reset");
                     $('#uploaded_spec').empty();
+                    $('#uploaded_spec_hidden').empty();
                     // ajax
 
                     $.ajax({
@@ -429,6 +432,8 @@
                             $.each(specs, function(key, value) {
 
                                 $('#uploaded_spec').append('<option value="' + value.id + '">' + value
+                                    .original_name + '</option>');
+                                $('#uploaded_spec_hidden').append('<option value="' + value.id + '">' + value
                                     .file_name + '</option>');
                             });
                             $('#popup_model').modal('show');
@@ -477,13 +482,15 @@
                         $('#itemform').trigger("reset");
                         $('#form_heading').html("Configure Email Template");
                         $('#btn').html('Submit');
-                        $('#uploaded_spec').html('');
+                        $('#uploaded_spec').empty();
+                        $('#uploaded_spec_hidden').empty();
                         $('#popup_model').modal('show');
                     });
                     $('#view_specs').click(function() {
 
                         var filepath = "{{ asset('storage') }}/";
-                        var filename = $('#uploaded_spec option:selected').text();
+                        var id = $('#uploaded_spec option:selected').val();
+                        var filename = $('#uploaded_spec_hidden option[value="'+id+'"]').text();
 
                         window.open(filepath + filename, '_blank');
 
@@ -502,7 +509,11 @@
                                 },
                                 dataType: 'json',
                                 success: function(res) {
-                                    window.location.reload();
+                                    if(res.success == true){
+                                        alert('Delete file successfully');
+                                        $('#uploaded_spec option:selected').remove();
+                                    }
+                                    
                                 }
                             });
                         }

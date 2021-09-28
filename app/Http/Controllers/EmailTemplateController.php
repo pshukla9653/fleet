@@ -21,7 +21,9 @@ class EmailTemplateController extends Controller
 
         if($request->input('search')){
             $query = $request->input('search');
-            $emailTemplate = EmailTemplate::where('subject', 'LIKE', '%'. $query. '%')->orderBy('id','DESC')->paginate(10);
+            $emailTemplate = EmailTemplate::where('subject', 'LIKE', '%'. $query. '%')
+                ->orWhere('description', 'LIKE', '%'. $query. '%')
+                ->orderBy('id','DESC')->paginate(10);
 
             return view('email_template.index', compact('emailTemplate'));
 
@@ -75,6 +77,7 @@ class EmailTemplateController extends Controller
                 foreach ($spec_sheet as $key => $spec) {
                     $file_name = Storage::disk('public')->put($path, $spec);
                     $email_file['template_id'] = $request->id;
+                    $email_file['original_name'] = $spec->getClientOriginalName();
                     $email_file['file_name'] = $file_name;
                     DB::table('email_file')->insert($email_file);
                 }
@@ -104,6 +107,7 @@ class EmailTemplateController extends Controller
                 foreach ($spec_sheet as $key => $spec) {
                     $file_name = Storage::disk('public')->put($path, $spec);
                     $email_file['template_id'] = $emailTemplate->id;
+                    $email_file['original_name'] = $spec->getClientOriginalName();
                     $email_file['file_name'] = $file_name;
                     DB::table('email_file')->insert($email_file);
                 }
