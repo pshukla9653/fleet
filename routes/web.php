@@ -62,7 +62,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('vehicle', [VehicleController::class, 'store']);
     Route::post('edit-vehicle', [VehicleController::class, 'edit']);
     Route::post('edit-vehicle/{id}', [VehicleController::class, 'update']);
-    Route::post('delete-vehicle', [VehicleController::class, 'destroy']);
+    Route::delete('delete-vehicle', [VehicleController::class, 'destroy']);
     Route::post('deletespec-vehicle', [VehicleController::class, 'delete']);
     Route::post('remove-img-vehicle', [VehicleController::class, 'remove_img']);
     Route::resource('email-template', EmailTemplateController::class);
