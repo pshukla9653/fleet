@@ -17,8 +17,9 @@ class BookingService
 
     public function sendBookingEmails(Booking $booking)
     {
-        if ($booking->emailTemplates()->exists()) {
-            foreach ($booking->emailTemplates()->get() as $emailTemplate) {
+        $emailTemplates = $booking->emailTemplates()->where('status', 1)->get();
+        if (!empty($emailTemplates) && count($emailTemplates)) {
+            foreach ($emailTemplates as $emailTemplate) {
                 $this->emailService
                     ->setData(
                         $booking,

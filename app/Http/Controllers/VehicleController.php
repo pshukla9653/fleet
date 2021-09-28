@@ -167,12 +167,10 @@ class VehicleController extends Controller
      */
     public function edit(Request $request)
     {
-        //
         $vehicle  = Vehicle::find($request->id);
         $vehicle->specs = DB::table('vehicle_specs')->where('vehicle_id', $request->id)->get();
-    	//var_dump($brand); exit;
-        return response()->json($vehicle);
 
+        return response()->json($vehicle);
     }
 
     /**
