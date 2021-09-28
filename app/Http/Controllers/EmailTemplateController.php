@@ -75,6 +75,7 @@ class EmailTemplateController extends Controller
                 foreach ($spec_sheet as $key => $spec) {
                     $file_name = Storage::disk('public')->put($path, $spec);
                     $email_file['template_id'] = $request->id;
+                    $email_file['original_name'] = $spec->getClientOriginalName();
                     $email_file['file_name'] = $file_name;
                     DB::table('email_file')->insert($email_file);
                 }
@@ -104,6 +105,7 @@ class EmailTemplateController extends Controller
                 foreach ($spec_sheet as $key => $spec) {
                     $file_name = Storage::disk('public')->put($path, $spec);
                     $email_file['template_id'] = $emailTemplate->id;
+                    $email_file['original_name'] = $spec->getClientOriginalName();
                     $email_file['file_name'] = $file_name;
                     DB::table('email_file')->insert($email_file);
                 }
