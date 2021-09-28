@@ -59,7 +59,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('edit-loantype', [LoanTypeController::class, 'edit']);
     Route::post('delete-loantype', [LoanTypeController::class, 'destroy']);
     Route::resource('vehicles', VehicleController::class);
+    Route::post('vehicle', [VehicleController::class, 'store']);
     Route::post('edit-vehicle', [VehicleController::class, 'edit']);
+    Route::post('edit-vehicle/{id}', [VehicleController::class, 'update']);
     Route::post('delete-vehicle', [VehicleController::class, 'destroy']);
     Route::post('deletespec-vehicle', [VehicleController::class, 'delete']);
     Route::post('remove-img-vehicle', [VehicleController::class, 'remove_img']);
@@ -71,7 +73,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('lists', ListsController::class);
     Route::post('edit-lists', [ListsController::class, 'edit']);
     Route::post('delete-lists', [ListsController::class, 'destroy']);
-    
+
     Route::get('get-contact-lists', [ContactController::class, 'get_contact_list']);
     Route::post('get-contact-lists-for-search', [ContactController::class, 'get_contact_list_for_search']);
     Route::get('get-contact-lists-for-list', [ContactController::class, 'get_contact_list_for_list']);
@@ -81,15 +83,15 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('delete-contact', [ListsController::class, 'delete_contact']);
     Route::post('get-contacts-by-list-id', [ListsController::class, 'get_contacts_by_list_id']);
     Route::post('get-list-search', [ListsController::class, 'get_list_for_search']);
-    
+
     Route::resource('booking', BookingController::class);
     Route::post('edit-booking', [BookingController::class, 'edit']);
     Route::post('store-booking', [BookingController::class, 'store']);
     Route::post('delete-booking', [BookingController::class, 'destroy']);
     Route::post('get-booking', [BookingController::class, 'get_booking']);
     Route::get('send-booking-email', [BookingController::class, 'send_booking_email']);
-    
+
     Route::resource('histories', HistoryController::class);
     Route::post('delete-history', [HistoryController::class, 'destroy']);
-	
+
 });

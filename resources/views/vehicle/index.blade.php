@@ -17,18 +17,15 @@
     <hr style="margin: 0px 20px;">
     <div class="row">
         <div class="col-md-8" style="padding: 15px 30px;">
-            <a href="{{ route('vehicles.index') }}" class="btn btn-primary"><img
-                    src="{{ asset('assets/images/icon/refresh.png') }}" alt="refresh"
-                    style="width: 20px;margin-left: -8px;"/>&nbsp; Refresh @yield('heading')</a>
             @can('user-create')
-                <a id="additem" class="btn btn-primary" style="margin-left: 20px;"><img
+                <a id="additem" class="btn btn-primary"><img
                         src="{{ asset('assets/images/icon/add.png') }}" alt="add"
                         style="width: 21px;margin-left: -8px;"/>&nbsp; Add New Item</a>
             @endcan
         </div>
         <div class="col-md-4" style="padding: 15px 30px;">
             <form class="example" action="">
-                <input type="text" placeholder="Search" name="search" value="{{ $query }}">
+                <input type="text" placeholder="Search" name="search" value="{{ $query ?? '' }}">
                 <button type="submit"><img src="{{ asset('assets/images/icon/search.png') }}" alt="search"/></button>
             </form>
         </div>
@@ -449,6 +446,7 @@
             </div>
         </div>
     </div>
+    </div>
     <script type="text/javascript">
         function edititem(id) {
             $.ajaxSetup({
@@ -462,11 +460,11 @@
             $.ajax({
                 type: "POST",
                 url: "{{ url('edit-vehicle') }}",
-                data: {
-                    id: id
-                },
+                data: {id: id},
                 dataType: 'json',
                 success: function (res) {
+                    $('#itemform').trigger("reset");
+                    $('#itemform').attr("action", "{{ url('edit-vehicle/id') }}".replace("{id}", id));
                     $('#form_heading').html("Configure Vehicle");
                     $('#btn').html('Update');
                     $('#item_id').val(res.id);
@@ -541,12 +539,13 @@
                 }
             });
             $('#additem').click(function () {
-
                 $('#itemform').trigger("reset");
+                $('#itemform').attr("action", "{{ url('vehicle') }}");
+                $('#image').removeAttr('src');
+                $('#image').attr('alt', '');
                 $('#form_heading').html("Configure Vehicle");
                 $('#btn').html('Submit');
                 $('#uploaded_spec').html('');
-
                 $('#image-text').html('');
                 $('#item_id').val('');
                 $('#image-text').css('background-color', '');

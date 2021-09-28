@@ -7,33 +7,32 @@
 	  <div class="page-title" style="margin: 0px 20px;">
 		<h6><i class="icon-home2 position-left"></i> <i class="fa fa-angle-double-right"></i> <span style="color: #3a6d7f;">Configure</span> <i class="fa fa-angle-double-right"></i> @yield('heading')</h6>
 	  </div>
-  
-	  
+
+
 	</div>
 	</div>
   <hr style="margin: 0px 20px;">
-  <div class="row">		
+  <div class="row">
     <div class="col-md-8" style="padding: 15px 30px;">
-    <a href="{{ route('contacts.index')}}" class="btn btn-primary"><img src="{{ asset('assets/images/icon/refresh.png') }}" alt="refresh" style="width: 20px;margin-left: -8px;"/>&nbsp;  Refresh @yield('heading')</a>
-    @can('contact-create')	
-    <a id="additem" class="btn btn-primary" style="margin-left: 20px;"><img src="{{ asset('assets/images/icon/add.png') }}" alt="add" style="width: 21px;margin-left: -8px;"/>&nbsp;  Add New Item</a>
+    @can('contact-create')
+    <a id="additem" class="btn btn-primary"><img src="{{ asset('assets/images/icon/add.png') }}" alt="add" style="width: 21px;margin-left: -8px;"/>&nbsp;  Add New Item</a>
     @endcan
     </div>
     <div class="col-md-4" style="padding: 15px 30px;">
     <form class="example" action="">
       <input type="text" placeholder="Search" name="search">
       <button type="submit"><img src="{{ asset('assets/images/icon/search.png') }}" alt="search"/></button>
-      </form>		
+      </form>
     </div>
-    
-    </div>	
 
-<div class="content"> 
-  
-  <!-- Main charts --> 
-  <!-- Quick stats boxes --> 
-  
-  <!-- /quick stats boxes --> 
+    </div>
+
+<div class="content">
+
+  <!-- Main charts -->
+  <!-- Quick stats boxes -->
+
+  <!-- /quick stats boxes -->
   <!-- /main charts -->
   <div class="panel panel-flat">
     <div class="panel-heading" style="padding: 0px;">
@@ -50,9 +49,9 @@
         </h5>
         <div class="heading-elements">
           </div>
-        
+
       </div>
-    
+
         <div class="panel-body" style="padding: 0px 0px 10px 0px;">
       @if ($message = Session::get('success'))
     <div class="alert alert-success">
@@ -60,9 +59,9 @@
     </div>
 @endif
 
-        
+
 <table class="table table-bordered table-responsive">
-  
+
     @foreach ($contacts as $key => $contact)
     <tr>
         <td style="width: 20%">
@@ -77,12 +76,12 @@
         <td style="width: 25%">{{ $contact->last_name }}</td>
         <td style="width: 25%">{{ $contact->email }}</td>
         <td style="width: 25%">{{ $contact->phone_number }}</td>
-       
-         
-           
+
+
+
         <td style="width: 5%">
-           
-            
+
+
             @can('contact-delete')
             <a onclick="deleteitem({{ $contact->id }})">
                 <img src="{{ asset('assets/images/icon/delete.png') }}" alt="delete"/>
@@ -104,7 +103,7 @@
       <div class="modal-content" style="background-color: #f2f2f2;">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><i class="icon-cancel-circle2"></i></button>
-          
+
         </div>
         <h6 class="modal-title md-heading-custom" id="form_heading"></h6>
         <div class="modal-body md-body-custom">
@@ -115,7 +114,7 @@
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
-          
+
             <input type="hidden" id="item_id" name="id">
             <div class="col-md-6">
               <div class="form-group row">
@@ -125,9 +124,9 @@
               <div class="form-group row">
 
                       <input id="last_name" type="text" placeholder="Last Name" class="form-control custom-modal-textbox @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" />
-                     
+
               </div>
-  
+
               <div class="form-group row">
 
                       <input id="job_title" type="text" placeholder="Job Title" class="form-control custom-modal-textbox @error('job_title') is-invalid @enderror" name="job_title" value="{{ old('job_title') }}" />
@@ -143,16 +142,16 @@
                       <input id="phone_number" type="text" placeholder="Phone Number" class="form-control custom-modal-textbox @error('phone_number') is-invalid @enderror" name="phone_number" value="{{ old('phone_number') }}"/>
                       <div class="text-danger" id="error_phone"></div>
               </div>
-              
 
-             
+
+
 </div>
           <div class="col-md-6">
            <div class="form-group row">
 
                       <input id="address1" type="text" placeholder="Address1" class="form-control custom-modal-textbox @error('address1') is-invalid @enderror" name="address1" value="{{ old('address1') }}"/>
 
-                     
+
               </div>
               <div class="form-group row">
 
@@ -177,11 +176,11 @@
                       <input id="post_code" type="text" placeholder="Post Code" class="form-control custom-modal-textbox @error('post_code') is-invalid @enderror" name="post_code" value="{{ old('post_code') }}"/>
 
                     </div>
-             
+
           </div>
         </div>
     </div>
-  
+
 </div>
 
       </div>
@@ -190,9 +189,9 @@
         <hr style="margin-top: 0px;">
         <button type="submit" class="btn custom-modal-btn btn-success" id="btn"></button>
         <button type="button" class="btn custom-modal-btn btn-danger" data-dismiss="modal">Cancel</button>
-        
+
       </div>
-{!! Form::close() !!}      
+{!! Form::close() !!}
     </div>
   </div>
 </div>
@@ -203,7 +202,7 @@ function edititem(id) {
          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          }
      });
-        
+
         // ajax
         $.ajax({
             type:"POST",
@@ -226,7 +225,7 @@ function edititem(id) {
               $('#country').val(res.country);
               $('#post_code').val(res.post_code);
               $('#popup_model').modal('show');
-              
+
            }
         });
     }
@@ -236,10 +235,10 @@ function edititem(id) {
          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          }
      });
-        
+
         if (confirm("Delete Record?") == true) {
-         
-          
+
+
          // ajax
          $.ajax({
              type:"POST",
@@ -260,15 +259,15 @@ function edititem(id) {
          }
      });
      $('#additem').click(function () {
-       
+
         $('#itemform').trigger("reset");
         $('#form_heading').html("Add Contact");
         $('#btn').html('Submit');
         $('#popup_model').modal('show');
      });
-  
-     
-     
+
+
+
      $('#btn').click(function () {
            var id           = $("#item_id").val();
            var first_name   = $("#first_name").val();
@@ -287,7 +286,7 @@ function edititem(id) {
               $('#error_name').html('Name Required!');
           }
           else{ $('#error_name').html('');}
-          
+
           if(job_title ==''){
               $('#error_job').html('Job Title Required!');
           }
@@ -304,7 +303,7 @@ function edititem(id) {
           else{
            $("#btn").html('Please Wait...');
            $("#btn"). attr("disabled", true);
-           
+
          // ajax
          $.ajax({
              type:"POST",
@@ -322,7 +321,7 @@ function edititem(id) {
                city:city,
                country:country,
                post_code:post_code,
-               
+
              },
              dataType: 'json',
              success: function(res){

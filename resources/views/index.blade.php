@@ -7,16 +7,15 @@
 	<div class="page-header-content">
 	  <div class="page-title" style="margin: 0px 20px;">
 		<h6><i class="icon-home2 position-left"></i> <i class="fa fa-angle-double-right"></i> <span style="color: #3a6d7f;">Configure</span> <i class="fa fa-angle-double-right"></i> @yield('heading')</h6>
-	  </div>  
-	  
+	  </div>
+
 	</div>
 	</div>
   <hr style="margin: 0px 20px;">
-  <div class="row">		
+  <div class="row">
     <div class="col-md-8" style="padding: 15px 30px;">
-    <a href="{{ route('vehicles.index')}}" class="btn btn-primary"><img src="{{ asset('assets/images/icon/refresh.png') }}" alt="refresh" style="width: 20px;margin-left: -8px;"/>&nbsp;  Refresh @yield('heading')</a>
-    @can('user-create')	
-    <a id="additem" class="btn btn-primary" style="margin-left: 20px;"><img src="{{ asset('assets/images/icon/add.png') }}" alt="add" style="width: 21px;margin-left: -8px;"/>&nbsp;  Add New Item</a>
+    @can('user-create')
+    <a id="additem" class="btn btn-primary"><img src="{{ asset('assets/images/icon/add.png') }}" alt="add" style="width: 21px;margin-left: -8px;"/>&nbsp;  Add New Item</a>
     <!-- button 2-->
       <a id="additem1" class="btn btn-primary" style="margin-left: 20px;"><img src="{{ asset('assets/images/icon/add.png') }}" alt="add" style="width: 21px;margin-left: -8px;"/>&nbsp;  Add New Item2</a>
       <!-- button 3-->
@@ -27,10 +26,10 @@
     <form class="example" action="">
       <input type="text" placeholder="Search" name="search">
       <button type="submit"><img src="{{ asset('assets/images/icon/search.png') }}" alt="search"/></button>
-      </form>		
+      </form>
     </div>
-    
-    </div>	
+
+    </div>
 <!-- /page header -->
 
 <!-- Content area -->
@@ -43,7 +42,7 @@
     <!-- /main charts -->
     <div class="panel panel-flat">
         <div class="panel-heading" style="padding: 0px;">
-            
+
             <div class="heading-elements">
               </div>
               @error('registration_number')
@@ -114,7 +113,7 @@
                     <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Vin</th>
                     <th style="border-top: none;padding: 10px;font-weight: 600;text-align: center;">Adoption Date</th>
                     <th style="border-top: none;padding: 0px 0px 0px 10px;font-weight: 600;" colspan="2">Projected Defleet Date</th>
-                    
+
                 </tr>
                   </thead>
                     @foreach ($vehicles as $key => $vehicle)
@@ -129,7 +128,7 @@
                             <img src="{{ asset('storage/'.$vehicle->image) }}" alt="{{$vehicle->registration_number}}" style="width: 100px; height:auto;"/>
                         </td>
                         <td style="text-align: center;"><span style="padding: 5px;border-radius: 5px;background-color:{{$vehicle->registration_plate_colour}}">{{$vehicle->registration_number}}</span>
-                        
+
                         <td style="text-align: center;">{{ $vehicle->brand->brand_name }}</td>
                         <td style="text-align: center;">{{ $vehicle->model }}</td>
                         <td style="text-align: center;">{{ $vehicle->derivative }}</td>
@@ -267,7 +266,7 @@ textarea#w3review {
     display: flex;
 }
 .button1 {
-      
+
     display: flex;
     justify-content: flex-end;
 }
@@ -328,7 +327,7 @@ img.image-1 {
     margin-top: -24px;
     display: flex;
     justify-content: flex-end;
-}               
+}
 
 .checkings { border:2px solid #ccc; width:361px; height: 100px; overflow-y: scroll;}
   /*second-form css*/
@@ -482,7 +481,7 @@ img.check-mark {
   height: 34px;
 }
 
-.switcha input { 
+.switcha input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -566,12 +565,12 @@ button#imagecolor {
       <div class="modal-content" style="background-color: #f2f2f2;">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><i class="icon-cancel-circle2"></i></button>
-          
+
         </div>
         <h6 class="modal-title md-heading-custom" id="form_heading"></h6>
 
         <div class="modal-body md-body-custom">
-         
+
         <form action="{{route('vehicles.store')}}" id="itemform" class="form-horizontal" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
@@ -580,9 +579,9 @@ button#imagecolor {
                   <div id="image-text" style="position: relative;bottom: -140px;left: 15px;width: fit-content;padding: 5px;border-radius: 5px;"></div>
                   <div id="image-review" style="height: 130px; border: 1px solid #bbb8b8;
                   background-color: #f2f2f2; width:80%; margin:20px 20px 0px 0px;">
- 
+
                   </div>
-                  
+
                   <div class="form-group">
                   <div style="text-align: right; width: 78%;">
                     <div class="upload-btn-wrapper" style="margin-top: 4px;margin-right: -3px;">
@@ -600,9 +599,9 @@ button#imagecolor {
                       }
                     };
                  </script>
-                 
+
                  </div>
-                
+
                   <div class="form-group">
                     <strong style="padding: 0px 0px 0px 10px;">Other Details:</strong>
                     {!! Form::textarea('other_details', null, array('class' =>
@@ -624,9 +623,9 @@ button#imagecolor {
                 <button type="button" id="delete_specs" class="btn custom-modal-btn btn-danger">Delete</button>
                   </div>
                   <div class="form-group">
-                   
+
                     <div style="text-align:right;width: 78%;">
-                     
+
                       <div class="upload-btn-wrapper">
                          <button class="btnsss" >Upload </button>
                          <input  type="file" name="spec_sheet[]" multiple>
@@ -635,55 +634,55 @@ button#imagecolor {
                     <div class="text-info">Can be upload multiple files (Only PDF)</div>
                     <div class="text-danger" id="spec_sheet[]"></div>
                   </div>
-                </div> 
+                </div>
                 <div class="col-md-3">
                   <input type="hidden" id="item_id" name="id">
                     <div class="form-group" style="margin-top: 15px;">
                       <strong>Brand:</strong>
                           <select name="brand_id" id="brand_id" class="form-control custom-modal-textbox">
-                           
+
                             @foreach ($brands as $key=>$brand)
                             <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
                             @endforeach
-                          </select>  
+                          </select>
                           <div class="text-danger" id="brand_id"></div>
-                    </div>                                    
-                            
+                    </div>
+
                     <div class="form-group">
                       <strong>Model:</strong>
                         {!! Form::text('model', null, array('placeholder' => 'Model','class' =>
                         'form-control custom-modal-textbox', 'id' =>'model')) !!}
                         <div class="text-danger" id="model"></div>
                     </div>
-                           
-                           
+
+
                     <div class="form-group">
                       <strong>Derivative:</strong>
                         {!! Form::text('derivative', null, array('placeholder' => 'Derivative','class' =>
                         'form-control custom-modal-textbox', 'id' =>'derivative')) !!}
                       <div class="text-danger" id="derivative"></div>
                     </div>
-                            
+
                     <div class="form-group">
                       <strong>Region:</strong>
                         <select name="region_id" id="region_id" class="form-control custom-modal-textbox">
-                           
+
                             @foreach ($regions as $key=>$region)
                             <option value="{{$region->id}}">{{$region->region_name}}</option>
                             @endforeach
-                        </select>  
+                        </select>
                       <div class="text-danger" id="region_id"></div>
                     </div>
-                            
-                            
+
+
                     <div class="form-group">
                       <strong>Department:</strong>
                       <select name="department_id" id="department_id" class="form-control custom-modal-textbox">
-                        
+
                             @foreach ($departments as $key=>$department)
                             <option value="{{$department->id}}">{{$department->department_name}}</option>
                             @endforeach
-                      </select>  
+                      </select>
                       <div class="text-danger" id="department_id"></div>
                     </div>
                     <div class="form-group">
@@ -692,32 +691,32 @@ button#imagecolor {
                       'form-control custom-modal-textbox', 'id' =>'registration_number')) !!}
                       <div class="text-danger" id="registration_number"></div>
                     </div>
-                              
+
                     <div class="form-group">
                       <strong>Loan Cost:</strong>
                       {!! Form::number('loan_cost', null, array('placeholder' => '0.00','class' =>
                       'form-control custom-modal-textbox', 'id' =>'loan_cost')) !!}
                       <div class="text-danger" id="loan_cost"></div>
                     </div>
-                              
+
                    <!--  <div class="form-group">
                       <strong>Registation Plate Colour:</strong>
                       {!! Form::color('registration_plate_colour', '#FAF43D', array('placeholder' => '0.00','class' =>
                       'form-control custom-modal-textbox', 'id' =>'registration_plate_colour','style' =>'padding:0px!important;width:25%;')) !!}
                       <div class="text-danger" id="registration_plate_colour"></div>
                     </div> -->
-             <!-- end --> 
-             <!-- strart third 3 -->  
+             <!-- end -->
+             <!-- strart third 3 -->
 
 
 
 
-             <!--  -->    
+             <!--  -->
 <!-- color chooser -->
 <script type="text/javascript">
 
   function colorchanger(color){
-  
+
     $('#imagecolor').css('background-color',color);
    $('#colorselecter').css('background-color',color);
   }
@@ -735,13 +734,13 @@ button#imagecolor {
 </style>
 <select onchange ="colorchanger(this.value)" id="colorselecter">
   <option selected value="red" class="red">
-    
+
   </option>
    <option value="green" class="green">
-  
+
   </option>
    <option value="blue" class="blue">
-    
+
   </option>
 </select>
 
@@ -757,21 +756,21 @@ button#imagecolor {
                       'form-control custom-modal-textbox', 'id' =>'vin')) !!}
                       <div class="text-danger" id="vin"></div>
                     </div>
-                  </div> 
+                  </div>
                   <div class="col-md-3">
                       <div class="form-group" style="margin-top: 15px;">
                         <strong>Adoption Date:</strong>
                         {!! Form::date('adoption_date', null, array('class' =>
                         'form-control custom-modal-textbox', 'id' =>'adoption_date','style' =>'padding:0px!important;')) !!}
                         <div class="text-danger" id="adoption_date"></div>
-                      </div>                                   
-                    
+                      </div>
+
                       <div class="form-group">
                         <strong>Projected Defleet Date:</strong>
                         {!! Form::date('projected_defleet_date', null, array('class' =>
                         'form-control custom-modal-textbox', 'id' =>'projected_defleet_date','style' =>'padding:0px!important;')) !!}
                         <div class="text-danger" id="projected_defleet_date"></div>
-                      </div> 
+                      </div>
                       <div class="form-group">
                           <strong>Lead Time:</strong>
                           {!! Form::text('lead_time', 0, array('class' =>
@@ -784,7 +783,7 @@ button#imagecolor {
                         'form-control custom-modal-textbox', 'id' =>'lag_time')) !!}
                         <div class="text-danger" id="lag_time"></div>
                       </div>
-                    
+
                       <div class="form-group">
                           <strong>Engine:</strong>
                           {!! Form::text('engine', null, array('placeholder' => 'Engine','class' =>
@@ -815,8 +814,8 @@ button#imagecolor {
                         'form-control custom-modal-textbox', 'id' =>'order_number')) !!}
                         <div class="text-danger" id="order_number"></div>
                       </div>
-                    </div> 
-                  </div>        
+                    </div>
+                  </div>
                   </div>
             </div>
 
@@ -824,7 +823,7 @@ button#imagecolor {
                 <hr style="margin-top: 0px;">
                 <button type="submit" class="btn custom-modal-btn btn-success" id="btn"></button>
                 <button type="button" class="btn custom-modal-btn btn-danger" data-dismiss="modal">Cancel</button>
-                
+
               </div>
             {!! Form::close() !!}
         </div>
@@ -869,12 +868,12 @@ textarea#textara1w {
       <div class="modal-content" style="background-color: #f2f2f2;">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><i class="icon-cancel-circle2"></i></button>
-          
+
         </div>
         <h6 class="modal-title md-heading-custom" id="form_heading">CONFIGURE EMAIL TEMPLATE</h6>
 
         <div class="modal-body md-body-custom"><br>
-         
+
         <form action="{{route('vehicles.store')}}" id="itemform" class="form-horizontal" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
@@ -886,7 +885,7 @@ textarea#textara1w {
                      <span class="iption">Description:</span>
                     <span class="iptionsub">Subject:</span>
                    </div>
-                   <input type="text" name="" class="discription">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp;                
+                   <input type="text" name="" class="discription">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp;
                    <input type="text" name="" class="discription">
                  </div>
                   <div class="description">
@@ -894,7 +893,7 @@ textarea#textara1w {
                      <span class="iption">From Name:</span>
                     <span class="iptionsub">Reply To Email:</span>
                    </div>
-                   <input type="text" name="" class="discription">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp;                
+                   <input type="text" name="" class="discription">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp;
                    <input type="text" name="" class="discription">
                  </div>
                   <div class="description">
@@ -902,7 +901,7 @@ textarea#textara1w {
                      <span class="iption">From Email:</span>
                     <span class="iptionsub">To Email:</span>
                    </div>
-                   <input type="text" name="" class="discription">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp;                
+                   <input type="text" name="" class="discription">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp;
                    <input type="text" name="" class="discription">
                  </div>
                   <div class="description">
@@ -910,7 +909,7 @@ textarea#textara1w {
                      <span class="iption">CC Email:</span>
                     <span class="iptionsubs">BCC Email:</span>
                    </div>
-                   <input type="text" name="" class="discription">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp;                
+                   <input type="text" name="" class="discription">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp;
                    <input type="text" name="" class="discription">
                  </div>
                      <span>Status</span><br>
@@ -919,12 +918,12 @@ textarea#textara1w {
                       <input type="checkbox" id="defaultCheck" name="example2">
                       <label for="defaultCheck">Inactive</label><br>
                       <div class="toolstips">
-                      
+
                       <span>Email Boy</span>
                        <a href="#" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                            <i class="fa fa-question-circle"></i>
                           </a>
-                     
+
                       <textarea id="textara1" name="" rows="8" cols="53">
 
                     </textarea>
@@ -936,7 +935,7 @@ textarea#textara1w {
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
-    
+
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -950,14 +949,14 @@ textarea#textara1w {
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
-      
+
     </div>
   </div>
                        <!--  -->
 
                      </div>
                     </div>
-                </div> 
+                </div>
 
                 <div class="col-md-5">
                   <div class="text-area-1">
@@ -966,10 +965,10 @@ textarea#textara1w {
                     </textarea>
                     <div class="view-button">
                     <button style="background-color:#486288;color: #fff;">View</button>&nbsp&nbsp&nbsp;
-                    <button style="background-color:#ff4e4e;color: #fff;">Delete</button>  
+                    <button style="background-color:#ff4e4e;color: #fff;">Delete</button>
                     </div>
                     <div class="img-up-load">
-                     
+
                     </div>
                  <div class="imgs-upload1">
                    <input type="" name="" class="image-up">
@@ -979,9 +978,9 @@ textarea#textara1w {
                     </div>
                  </div>
                   </div>
-               
-                </div>  
-                  </div>        
+
+                </div>
+                  </div>
                   </div>
             </div>
 
@@ -989,7 +988,7 @@ textarea#textara1w {
                 <hr style="margin-top: 0px;">
                 <button type="submit" class="btn custom-modal-btn btn-success" id="btn">Upload</button>
                 <button type="button" class="btn custom-modal-btn btn-danger" data-dismiss="modal">Cancel</button>
-                
+
               </div>
             {!! Form::close() !!}
         </div>
@@ -1002,7 +1001,7 @@ textarea#textara1w {
 $(document).ready(function(){
   /**/
   colorchanger('red');
-  
+
   /**/
   $("#chekckk").click(function(){
   $("#aaa").toggle();
@@ -1016,7 +1015,7 @@ $(document).ready(function(){
       <div class="modal-content" style="background-color: #f2f2f2;">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><i class="icon-cancel-circle2"></i></button>
-          
+
         </div>
 
         <div class="modal-title md-heading-custom" style="background-color:#30a02c;" id="form_heading">
@@ -1034,17 +1033,17 @@ $(document).ready(function(){
 
         <div id="demo-container">
           <div class="textclick">
-            <div id="tick-mark"></div> 
+            <div id="tick-mark"></div>
 
           </div>
         </div>
-      
+
         <!--  -->
         <!-- end of container -->
         <!-- accordian -->
         <div id="aaa">
           <div class="modal-body md-body-custom allset">
-           
+
           <form action="{{route('vehicles.store')}}" id="itemform" class="form-horizontal" method="POST" enctype="multipart/form-data">
               @csrf
             <div class="row">
@@ -1052,7 +1051,7 @@ $(document).ready(function(){
                 <div class="col-md-12 main">
                   <div class="col-md-3">
                      <div class="car-img">
-                        <img class="image-1" src="{{ asset('assets/images/logo1.png') }}">                   
+                        <img class="image-1" src="{{ asset('assets/images/logo1.png') }}">
                       </div>
                       <div class="sides-1">
                         <button class="rt-number">9867RT</button><br>
@@ -1066,12 +1065,12 @@ $(document).ready(function(){
                         <span class="stratdate">Start Date</span>
                         <span class="enddate">End Date</span>
                         <div class="form-groupdate">
-                           <span class="datepicker"><input type="text" id="feRouteDate" />  
+                           <span class="datepicker"><input type="text" id="feRouteDate" />
                            <img class="fa fa-calendar ass" src="{{ asset('assets/images/icon/calendar.png') }}" alt="">
-                           </span> 
-                           <span class="datepickers"><input type="text" id="feRouteDate" />  
+                           </span>
+                           <span class="datepickers"><input type="text" id="feRouteDate" />
                            <img class="fa fa-calendar as" src="{{ asset('assets/images/icon/calendar.png') }}" alt="">
-                           </span> 
+                           </span>
                         </div>
                      </div>
                      <br>
@@ -1080,7 +1079,7 @@ $(document).ready(function(){
                         <span class="booknowaa">purpose of loan</span>
                      </div>
                      <div class="book-loan">
-                        <input type="" name="" class="ref-name">&nbsp&nbsp           
+                        <input type="" name="" class="ref-name">&nbsp&nbsp
                         <input type="" name="" class="loan-name">
                      </div>
                      <br>
@@ -1099,7 +1098,7 @@ $(document).ready(function(){
                         <span class="booknowa1">Lead time (days)</span>
                      </div>
                      <div class="book-loan">
-                        <input type="" name="" class="ref-name">&nbsp&nbsp           
+                        <input type="" name="" class="ref-name">&nbsp&nbsp
                         <input type="" name="" class="loan-name">
                      </div>
                      <br>
@@ -1115,7 +1114,7 @@ $(document).ready(function(){
                            Show delivery day
                            </label>
                            <input class="form-check-input-reverse" type="checkbox" value="" id="defaultCheck1">
-                        </div>&nbsp  &nbsp  &nbsp  
+                        </div>&nbsp  &nbsp  &nbsp
                         <div class="form-check">
                            <label class="form-check-label" for="defaultCheck1">
                            Show collection day
@@ -1128,18 +1127,18 @@ $(document).ready(function(){
                           </textarea>
                      <!-- button -->
                      <div class="button1">
-                        <button class="editss">Edit</button>&nbsp 
-                        <button class="editss">Mark as primary</button>&nbsp 
+                        <button class="editss">Edit</button>&nbsp
+                        <button class="editss">Mark as primary</button>&nbsp
                         <button class="editss" style="background-color:#ff4e4e">Delete</button>
                      </div>
-                     
+
                      <div class="button2">
-                        <button class="editss">Select from existing contact</button>&nbsp 
+                        <button class="editss">Select from existing contact</button>&nbsp
                         <button class="editss">Select from existing list</button>
                      </div>
-                    
+
                      <div class="button3">
-                        <button  class="editss">Add new contact</button>&nbsp 
+                        <button  class="editss">Add new contact</button>&nbsp
                         <button class="editss">Add new list</button>
                      </div>
                      <label for="w3review">Vehicle:</label>
@@ -1174,12 +1173,12 @@ $(document).ready(function(){
                 <div class="modal-footer md-footer-custom">
                     <hr style="margin-top: 0px;">
                     <button type="submit" class="btn custom-modal-btn btn-success" id="btn">Save change</button>
-                    <button type="button" class="btn custom-modal-btn btn-danger" data-dismiss="modal">Cancel</button> 
+                    <button type="button" class="btn custom-modal-btn btn-danger" data-dismiss="modal">Cancel</button>
                     <div class="delete-booking">
                        <button type="button" class="btn custom-modal-btn btn-danger" data-dismiss="modal">Delete Booking</button>
-                    </div>              
+                    </div>
                 </div>
-    
+
               </div>
 
             </div>
@@ -1213,16 +1212,16 @@ $(document).ready(function(){
             </div>
         </div>
 
-        <div id="aaa1">    
+        <div id="aaa1">
         <div class="modal-body md-body-custom">
-         
+
         <form action="{{route('vehicles.store')}}" id="itemform" class="form-horizontal" method="POST" enctype="multipart/form-data">
             @csrf
           <div class="row">
    <div class="col-md-12 main">
       <div class="col-md-5">
         <div class="main-for-checking">
-               
+
         <div class="for-checking">
           <label>Pickup Form</label><br>
   <label class="switch" for="checkbox">
@@ -1248,7 +1247,7 @@ $(document).ready(function(){
   </label>
 </div>
         <!--  -->
-        <div class="main-address">        
+        <div class="main-address">
         <div class="address">
           <span class="address1">Address1</span><br>
           <input type="text" name="name" class="address2">
@@ -1258,7 +1257,7 @@ $(document).ready(function(){
           <input type="text" name="name" class="address2">
         </div>
         </div>
-          <div class="main-address">        
+          <div class="main-address">
         <div class="address">
           <span class="address1">Twon/City</span><br>
           <input type="text" name="name" class="address2">
@@ -1268,7 +1267,7 @@ $(document).ready(function(){
           <input type="text" name="name" class="address2">
         </div>
         </div>
-          <div class="main-address">        
+          <div class="main-address">
         <div class="address">
           <span class="address1">Postcode</span><br>
           <input type="text" name="name" class="address2">
@@ -1289,19 +1288,19 @@ $(document).ready(function(){
 <div class="createby1">
     <span>createbysonsoncheckit@gmail.com on 12/02/2022</span><br>
     <span>createbysonsoncheckit@gmail.com on 12/02/2022</span>
-  
+
 </div>
   </div>
     <div class="modal-footer md-footer-custom foot">
                 <hr style="margin-top: 0px;">
                 <button type="submit" class="btn custom-modal-btn btn-success" id="btn">Save change</button>
-                <button type="button" class="btn custom-modal-btn btn-danger" data-dismiss="modal">Cancel</button> 
-                             
+                <button type="button" class="btn custom-modal-btn btn-danger" data-dismiss="modal">Cancel</button>
+
               </div>
                 {!! Form::close() !!}
                 <!-- end -->
         </div>
-        </div>   
+        </div>
          <!-- start third-->
                    <script>
 $(document).ready(function(){
@@ -1329,12 +1328,12 @@ $(document).ready(function(){
 
         <div id="aaa2">
         <div class="modal-body md-body-custom">
-         
+
         <form action="{{route('vehicles.store')}}" id="itemform" class="form-horizontal" method="POST" enctype="multipart/form-data">
             @csrf
           <div class="row">
    <div class="col-md-12 main">
-  
+
       <div class="col-md-7">
 
          <div class="main-for-checking11">
@@ -1344,10 +1343,10 @@ $(document).ready(function(){
   <input type="checkbox" checked>
   <span class="slidera rounda"></span>
 </label>
-    
+
         </div>
         <!--  -->
-        <div class="main-address">        
+        <div class="main-address">
         <div class="address">
           <span class="address1">Address1</span><br>
           <input type="text" name="name" class="address2">
@@ -1357,7 +1356,7 @@ $(document).ready(function(){
           <input type="text" name="name" class="address2">
         </div>
         </div>
-          <div class="main-address">        
+          <div class="main-address">
         <div class="address">
           <span class="address1">Twon/City</span><br>
           <input type="text" name="name" class="address2">
@@ -1367,7 +1366,7 @@ $(document).ready(function(){
           <input type="text" name="name" class="address2">
         </div>
         </div>
-          <div class="main-address">        
+          <div class="main-address">
         <div class="address">
           <span class="address1">Postcode</span><br>
           <input type="text" name="name" class="address2">
@@ -1386,7 +1385,7 @@ $(document).ready(function(){
    </div>
        <div class="col-md-5">
         <div class="main-for-checking1">
-               
+
         <div class="for-checking">
             <span>Deliver To</span><br>
        <label class="switcha">
@@ -1406,14 +1405,14 @@ $(document).ready(function(){
 <div class="createby1">
     <span>createbysonsoncheckit@gmail.com on 12/02/2022</span><br>
     <span>createbysonsoncheckit@gmail.com on 12/02/2022</span>
-  
+
 </div>
   </div>
     <div class="modal-footer md-footer-custom foot">
                 <hr style="margin-top: 0px;">
                 <button type="submit" class="btn custom-modal-btn btn-success" id="btn">Save change</button>
-                <button type="button" class="btn custom-modal-btn btn-danger" data-dismiss="modal">Cancel</button> 
-                             
+                <button type="button" class="btn custom-modal-btn btn-danger" data-dismiss="modal">Cancel</button>
+
               </div><br>
                 {!! Form::close() !!}
            <!-- end -->
@@ -1445,14 +1444,14 @@ function edititem(id) {
             $.each(res, function(key, value) {
               $('#'+key).val(value);
             });
-            
+
             var specs = res.specs;
             $.each(specs, function(key, value) {
-             
+
               $('#uploaded_spec').append('<option value="'+value.id+'">'+value.file_name+'</option>');
             });
-            
-            
+
+
             var filesrc = filepath+'/'+res.image;
             $('#image-review').html('<img src="'+filesrc+'" style="width:100%;height:100%"/>');
             $('#image-text').html(res.registration_number);
@@ -1461,7 +1460,7 @@ function edititem(id) {
             //console.log(res.specs);
 //uploaded_spec
 
-       
+
 
         }
     });
@@ -1532,7 +1531,7 @@ $(document).ready(function($) {
         $('#popup_model3').modal('show');
     });
     $('#view_specs').click(function() {
-      
+
       var filepath = "{{asset('storage')}}/";
       var filename = $('#uploaded_spec option:selected').text();
       window.open(filepath+filename, '_blank');
@@ -1554,13 +1553,13 @@ $(document).ready(function($) {
               }
           });
   }
-        
+
     });
 
     //view_specs
 
 
 
-});   
+});
 </script>
 @endsection

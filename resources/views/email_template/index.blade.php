@@ -15,11 +15,8 @@
     <hr style="margin: 0px 20px;">
     <div class="row">
         <div class="col-md-8" style="padding: 15px 30px;">
-            <a href="{{ route('email-template.index') }}" class="btn btn-primary"><img
-                    src="{{ asset('assets/images/icon/refresh.png') }}" alt="refresh"
-                    style="width: 20px;margin-left: -8px;" />&nbsp; Refresh @yield('heading')</a>
             @can('user-create')
-                <a id="additem" class="btn btn-primary" style="margin-left: 20px;"><img
+                <a id="additem" class="btn btn-primary"><img
                         src="{{ asset('assets/images/icon/add.png') }}" alt="add"
                         style="width: 21px;margin-left: -8px;" />&nbsp; Add New Item</a>
             @endcan
@@ -62,7 +59,7 @@
                         <strong>{{ $message }}</strong>
                     </div>
                 @enderror
-                
+
             </div>
             <div class="panel-body" style="padding: 0px 10px 10px 10px;">
                 <div class="row">
@@ -272,7 +269,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <div><strong>Email Body:</strong><span style="padding-left: 73%;"
-                                                    data-popup="tooltip" title="%%FirstName%% = First name of contact<br> 
+                                                    data-popup="tooltip" title="%%FirstName%% = First name of contact<br>
                                 %%LastName%% = Last name of contact<br>
                                 %%BookingData%% = Booking Date<br>
                                 %%InboundAdd%% = Inblund Address<br>
@@ -316,9 +313,9 @@
                                     <div class="form-group">
 
                                         <div style="text-align:right;width: 97.5%;margin-top:7px">
-                                        
+
                                             <div class="upload-btn-wrapper">
-                                                
+
                                                 <button class="btnsss">&nbsp; Upload &nbsp; </button>
                                                 <input type="file" name="spec_sheet[]" multiple>
                                             </div>
@@ -423,11 +420,11 @@
                             } else {
                                 $('#status_inactive').prop("checked", true);
                             }
-                           
+
                             if(res.is_spec =='1'){
                                 $('#is_spec').prop("checked", true);
                             }
-                            
+
                             var specs = res.specs;
                             $.each(specs, function(key, value) {
 
@@ -495,7 +492,7 @@
 
                         if (confirm("Delete file Record?") == true) {
 
-                            var id = $('#item_id').val();
+                            var id = $('#uploaded_spec option:selected').val();
                             // ajax
                             $.ajax({
                                 type: "POST",
@@ -525,8 +522,8 @@
                     });
                     $('#insert_html').click(function() {
                         var data = $('#email_body').val();
-                        
-                         
+
+
                         CKEDITOR.instances['editor_area'].setData(data);
                         $('#popup_model_editor').modal('show');
 

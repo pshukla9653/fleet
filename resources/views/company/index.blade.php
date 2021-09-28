@@ -13,7 +13,6 @@
 	</div>
 <div class="row">
   <div class="col-md-8" style="padding: 30px;">
-  <a onclick="location.reload();" class="btn btn-primary"><i class="icon-reload-alt position-left"></i> Refresh @yield('heading')</a>
   <a href="{{ route('companies.create') }}" class="btn btn-primary"><i class="icon-plus-circle2 position-left"></i> Add New Item</a>
 
   </div>

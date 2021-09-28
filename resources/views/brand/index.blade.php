@@ -7,40 +7,39 @@
 	  <div class="page-title" style="margin: 0px 20px;">
 		<h6><i class="icon-home2 position-left"></i> <i class="fa fa-angle-double-right"></i> <span style="color: #3a6d7f;">Configure</span> <i class="fa fa-angle-double-right"></i> @yield('heading')</h6>
 	  </div>
-  
-	  
+
+
 	</div>
 	</div>
   <hr style="margin: 0px 20px;">
-  <div class="row">		
+  <div class="row">
     <div class="col-md-8" style="padding: 15px 30px;">
-    <a href="{{ route('brands.index')}}" class="btn btn-primary"><img src="{{ asset('assets/images/icon/refresh.png') }}" alt="refresh" style="width: 20px;margin-left: -8px;"/>&nbsp;  Refresh @yield('heading')</a>
-    @can('brand-create')	
-    <a id="additem" class="btn btn-primary" style="margin-left: 20px;"><img src="{{ asset('assets/images/icon/add.png') }}" alt="add" style="width: 21px;margin-left: -8px;"/>&nbsp;  Add New Item</a>
+    @can('brand-create')
+    <a id="additem" class="btn btn-primary"><img src="{{ asset('assets/images/icon/add.png') }}" alt="add" style="width: 21px;margin-left: -8px;"/>&nbsp;  Add New Item</a>
     @endcan
     </div>
     <div class="col-md-4" style="padding: 15px 30px;">
     <form class="example" action="">
       <input type="text" placeholder="Search" name="search">
       <button type="submit"><img src="{{ asset('assets/images/icon/search.png') }}" alt="search"/></button>
-      </form>		
+      </form>
     </div>
-    
-    </div>	
 
-<div class="content"> 
-  
-  <!-- Main charts --> 
-  <!-- Quick stats boxes --> 
-  
-  <!-- /quick stats boxes --> 
+    </div>
+
+<div class="content">
+
+  <!-- Main charts -->
+  <!-- Quick stats boxes -->
+
+  <!-- /quick stats boxes -->
   <!-- /main charts -->
   <div class="panel panel-flat">
     <div class="panel-heading" style="padding: 0px;">
       <h5 class="panel-title">Brand</h5>
       <div class="heading-elements">
         </div>
-      
+
     </div>
     @if ($message = Session::get('success'))
     <div class="alert alert-success">
@@ -58,11 +57,11 @@
         </div>
     @enderror
     <div class="panel-body" style="padding: 0px 10px 10px 10px;">
-      <div class="row"> 
-    
+      <div class="row">
+
 
           <table class="table table-bordered">
-  
+
     @foreach ($brand as $key => $brands)
     <tr>
       <td style="width: 15%">
@@ -74,20 +73,20 @@
         &nbsp;
         {{ $brands->brand_name }}
       </td>
-        
+
       <td style="width: 80%">
 		<img src="{{asset('storage/'.$brands->file_name)}}" width="50" height="50" style="border-radius:50%"/>
 		</td>
-          
+
     <td style="width: 5%">
-            
+
       @can('brand-delete')
         <a onclick="deleteitem({{ $brands->id }})">
           <img src="{{ asset('assets/images/icon/delete.png') }}" alt="delete"/>
         </a>
-      @endcan  
-      
-       
+      @endcan
+
+
     </td>
     </tr>
     @endforeach
@@ -104,7 +103,7 @@
     <div class="modal-content" style="background-color: #f2f2f2;">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><i class="icon-cancel-circle2"></i></button>
-        
+
       </div>
       <h6 class="modal-title md-heading-custom" id="form_heading"></h6>
       <div class="modal-body md-body-custom">
@@ -115,7 +114,7 @@
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
-          
+
           <input type="hidden" id="item_id" name="id">
             <div class="form-group"> <strong>{{ __('Brand Name') }}:</strong> {!! Form::text('brand_name', null, array('placeholder' => 'Brand Name','class' => 'form-control custom-modal-textbox', 'id' => 'brand_name')) !!} </div>
             <div class="text-danger" id="error_name"></div>
@@ -123,8 +122,8 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
       <div class="form-group">
-        
-         
+
+
           <div class="form-group"> <strong>{{ __('Brand Logo') }}:</strong>
             <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" autocomplete="image" id="image" >
 
@@ -137,7 +136,7 @@
       </div>
   </div>
   <div id="img-review" style="padding: 10px;"></div>
-  
+
 </div>
 
       </div>
@@ -146,10 +145,10 @@
         <hr style="margin-top: 0px;">
         <button type="submit" class="btn custom-modal-btn btn-success" id="btn"></button>
         <button type="button" class="btn custom-modal-btn btn-danger" data-dismiss="modal">Cancel</button>
-        
+
       </div>
-          
-{!! Form::close() !!}      
+
+{!! Form::close() !!}
     </div>
   </div>
 </div>
@@ -176,11 +175,11 @@ function edititem(id) {
               $('#popup_model').modal('show');
               $('#image').removeAttr('required','required');
               $('#img-review').html('<img src="'+filesrc+'" width="50" height="50"/>');
-             
-              
+
+
            }
         });
-       
+
     }
    function deleteitem(id){
     $.ajaxSetup({
@@ -188,10 +187,10 @@ function edititem(id) {
          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          }
      });
-        
+
         if (confirm("Delete Record?") == true) {
-         
-          
+
+
          // ajax
          $.ajax({
              type:"POST",
@@ -210,7 +209,7 @@ function edititem(id) {
             $.each( msg, function( key, value ) {
                 $(".print-error-msg").find("ul").append('<li>'+value+'</li>');
             });
-        }   
+        }
   $(document).ready(function($){
      $.ajaxSetup({
          headers: {
@@ -218,10 +217,10 @@ function edititem(id) {
          }
      });
 
-     
+
 
      $('#additem').click(function () {
-       
+
         $('#itemform').trigger("reset");
         $('#form_heading').html("Add Brand");
         $('#brand_name').val();
@@ -232,10 +231,10 @@ function edititem(id) {
         $('#item_id').val('');
         $('#popup_model').modal('show');
      });
-  
-     
-     
-     
+
+
+
+
  });
  </script>
 @endsection
