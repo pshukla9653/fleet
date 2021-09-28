@@ -463,8 +463,7 @@
                 data: {id: id},
                 dataType: 'json',
                 success: function (res) {
-                    $('#itemform').trigger("reset");
-                    $('#itemform').attr("action", "{{ url('edit-vehicle/id') }}".replace("{id}", id));
+                    $('#itemform').attr("action", "{{ url('edit-vehicle/{id}') }}".replace("{id}", id));
                     $('#form_heading').html("Configure Vehicle");
                     $('#btn').html('Update');
                     $('#item_id').val(res.id);

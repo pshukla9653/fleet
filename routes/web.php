@@ -37,6 +37,8 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::post('roles-add', [RoleController::class,'store']);
+    Route::post('roles-edit', [RoleController::class,'edit']);
+    Route::post('roles-edit/{id}', [RoleController::class,'update']);
     Route::get('roles-list', [RoleController::class,'get_list']);
     Route::post('roles-delete', [RoleController::class,'destroy']);
     Route::resource('companies', CompanyController::class);
