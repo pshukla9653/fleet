@@ -502,7 +502,11 @@
                                 },
                                 dataType: 'json',
                                 success: function(res) {
-                                    window.location.reload();
+                                    if(res.success == true){
+                                        alert('Delete file successfully');
+                                        $('#uploaded_spec option:selected').remove();
+                                    }
+                                    
                                 }
                             });
                         }
