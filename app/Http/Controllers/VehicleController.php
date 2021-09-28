@@ -76,86 +76,88 @@ class VehicleController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->id){
-            $validation = ['registration_number' => 'unique:vehicles,registration_number,'.$request->id,
-                            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-                            'loan_cost' => 'required|numeric',
-                            'value' => 'numeric',
-                            'adoption_date' => 'required',
-                            'projected_defleet_date' => 'required',
-                            'spec_sheet.*' => 'mimes:pdf|max:10000',
-            ];
-        }else{
-            $validation = ['registration_number' => 'required|unique:vehicles,registration_number',
-                            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-                            'loan_cost' => 'required|numeric',
-                            'value' => 'numeric',
-                            'adoption_date' => 'required',
-                            'projected_defleet_date' => 'required',
-                            'spec_sheet.*' => 'mimes:pdf|max:10000',
-                        ];
-        }
+        $validation = ['registration_number' => 'required|unique:vehicles,registration_number',
+                        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                        'loan_cost' => 'required|numeric',
+                        'value' => 'numeric',
+                        'adoption_date' => 'required',
+                        'projected_defleet_date' => 'required',
+                        'spec_sheet.*' => 'mimes:pdf|max:10000',
+                    ];
 		$this->validate($request, $validation);
         $path = '/';
-        if($request->id){
-            $input = $request->all();
-            $vehicle  = Vehicle::find($request->id);
-            if ($request->hasfile('image')) {
-                $image = $request->file('image');
-
-            if (Storage::disk('public')->exists($path, $vehicle->image)) {
-                Storage::disk('public')->delete($path, $vehicle->image);
-            }
-            $image_name= Storage::disk('public')->put($path, $image);
-            $input['image'] = $image_name;
-			$input['company_id'] = Auth()->user()->company_id;
-        }else{
-            unset($input['image']);
-        }
-        if($request->hasfile('spec_sheet')){
-            $spec_sheet = $request->file('spec_sheet');
-            foreach($spec_sheet as $key=>$spec){
-                $file_name= Storage::disk('public')->put($path, $spec);
-			    $vehicle_specs['vehicle_id'] = $request->id;
-                $vehicle_specs['original_name'] = $spec->getClientOriginalName();
-                $vehicle_specs['file_name'] = $file_name;
-                DB::table('vehicle_specs')->insert($vehicle_specs);
-            }
-        }
-        else{
-            unset($input['spec_sheet']);
-        }
-        $vehicle->update($input);
-        return redirect()->route('vehicles.index')->with('success','Vehicle updated successfully');
-        }
-        else{
-        //
-
-
         $input = $request->all();
 
         if ($request->hasfile('image')) {
             $image = $request->file('image');
             $image_name= Storage::disk('public')->put($path, $image);
             $input['image'] = $image_name;
-			$input['company_id'] = Auth()->user()->company_id;
+            $input['company_id'] = Auth()->user()->company_id;
         }
-
 
         $vahicle = Vehicle::create($input);
         if($request->hasfile('spec_sheet')){
             $spec_sheet = $request->file('spec_sheet');
-            foreach($spec_sheet as $key=>$spec){
+            foreach($spec_sheet as $spec){
                 $file_name= Storage::disk('public')->put($path, $spec);
-			    $vehicle_specs['vehicle_id'] = $vahicle['id'];
+                $vehicle_specs['vehicle_id'] = $vahicle['id'];
+                $vehicle_specs['original_name'] = $spec->getClientOriginalName();
                 $vehicle_specs['file_name'] = $file_name;
                 DB::table('vehicle_specs')->insert($vehicle_specs);
             }
         }
+
         return redirect()->route('vehicles.index')->with('success','Vehicle created successfully');
-        }
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $validation = ['registration_number' => 'unique:vehicles,registration_number,'.$request->id,
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'loan_cost' => 'required|numeric',
+            'value' => 'numeric',
+            'adoption_date' => 'required',
+            'projected_defleet_date' => 'required',
+            'spec_sheet.*' => 'mimes:pdf|max:10000',
+        ];
+        $this->validate($request, $validation);
+        $path = '/';
+        $input = $request->all();
+        $vehicle  = Vehicle::find($request->id);
+        if ($request->hasfile('image')) {
+            $image = $request->file('image');
+
+            if (Storage::disk('public')->exists($path, $vehicle->image)) {
+                Storage::disk('public')->delete($path, $vehicle->image);
+            }
+            $image_name= Storage::disk('public')->put($path, $image);
+            $input['image'] = $image_name;
+            $input['company_id'] = Auth()->user()->company_id;
+        }else{
+            unset($input['image']);
+        }
+        if($request->hasfile('spec_sheet')){
+            $spec_sheet = $request->file('spec_sheet');
+            foreach($spec_sheet as $spec){
+                $file_name= Storage::disk('public')->put($path, $spec);
+                $vehicle_specs['vehicle_id'] = $request->id;
+                $vehicle_specs['original_name'] = $spec->getClientOriginalName();
+                $vehicle_specs['file_name'] = $file_name;
+                DB::table('vehicle_specs')->insert($vehicle_specs);
+            }
+        } else{
+            unset($input['spec_sheet']);
+        }
+        $vehicle->update($input);
+
+        return redirect()->route('vehicles.index')->with('success','Vehicle updated successfully');
+    }
     /**
      * Show the form for editing the specified resource.
      *
