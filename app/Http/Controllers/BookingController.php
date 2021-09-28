@@ -138,6 +138,14 @@ class BookingController extends Controller
                 'user_email'=> Auth()->user()->email,
                 'event'=> 'Modified',
             ]);
+
+            /**
+             * @note Prevent sending emails on development environment
+             */
+            if (env('APP_ENV') !== 'local') {
+                $this->bookingService->sendBookingEmails($booking);
+            }
+
             }
             else{
                 return response()->json(['success' => false]);
