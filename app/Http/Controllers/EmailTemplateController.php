@@ -21,7 +21,9 @@ class EmailTemplateController extends Controller
 
         if($request->input('search')){
             $query = $request->input('search');
-            $emailTemplate = EmailTemplate::where('subject', 'LIKE', '%'. $query. '%')->orderBy('id','DESC')->paginate(10);
+            $emailTemplate = EmailTemplate::where('subject', 'LIKE', '%'. $query. '%')
+                ->orWhere('description', 'LIKE', '%'. $query. '%')
+                ->orderBy('id','DESC')->paginate(10);
 
             return view('email_template.index', compact('emailTemplate'));
 
