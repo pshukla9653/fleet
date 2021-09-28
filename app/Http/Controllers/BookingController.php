@@ -223,8 +223,12 @@ class BookingController extends Controller
                         'event'=> 'Created',
                     ]);
 
-            //$this->bookingService->sendBookingEmails($booking);
-
+                /**
+                 * @note Prevent sending emails on development environment
+                 */
+                if (env('APP_ENV') !== 'local') {
+                    $this->bookingService->sendBookingEmails($booking);
+                }
             }
             else{
                 return response()->json(['success' => false]);
