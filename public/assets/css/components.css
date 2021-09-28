@@ -320,7 +320,7 @@ a.badge,
 .showmin{
 	transition : .3s transform ease-in-out;
 	transform : rotate(180deg);
-	margin-left: 30px !important;
+	margin-left: 60px !important;
   margin-top: -35px !important;
 }
 
@@ -448,7 +448,7 @@ a.badge,
 .panel-title{
 	box-shadow:rgb(99 99 99 / 20%) 0px 2px 8px 0px;
 	height:50px;
-	padding:12px;	
+	padding:12px;
 }
 * {
   box-sizing: border-box;
@@ -852,7 +852,7 @@ form.example::after {
 }
 @media (min-width: 769px) {
   .sidebar-xs .sidebar-main {
-    width: 56px;
+    width: 108px;
   }
   .sidebar-xs .sidebar-main .sidebar-category {
     display: none;
@@ -18127,7 +18127,7 @@ thead .htCollapseButton:after {
 *
 *  # Responsive extension
 *
-*  Optimise the table's layout for different screen sizes through the dynamic 
+*  Optimise the table's layout for different screen sizes through the dynamic
 *  insertion and removal of columns from the table
 *
 *  Version: 1.0

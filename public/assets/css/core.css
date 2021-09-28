@@ -445,7 +445,7 @@ a.bg-danger:focus {
   background: url(../images/backgrounds/seamless.png);
 }
 .page-title {
- 
+
   display: block;
   position: relative;
 }
@@ -1107,7 +1107,7 @@ fieldset[disabled] .form-control {
   color: #999999;
 }
 .form-control[readonly] {
-  
+
   border-bottom-color: #ddd;
   color: #333333;
   -webkit-box-shadow: none;
@@ -7002,7 +7002,7 @@ h6.panel-title,
     padding-left: 40px !important;
     width: 85%;
     margin-left: 23px;
-    
+
 }
 
 .btn-login-effect{
@@ -7046,7 +7046,7 @@ h6.panel-title,
   padding: 2px 10px!important;
 }
 .custom-modal-textbox{
-  
+
     color: #000 !important;
     border: 1px solid #bbb8b8;
     background-color: #f2f2f2;
@@ -7055,12 +7055,12 @@ h6.panel-title,
     height: 32px;
     margin: 10px 2px !important;
 
-    
+
 }
 
 .modal-lg{
   width: 55%!important;
-  margin: 12% auto !important;
+  margin: auto auto !important;
 }
 
 .remember-checkbox{
@@ -7072,4 +7072,14 @@ h6.panel-title,
     color: #677ba6;
     font-weight: 800!important;
     font-size: 17px;
+}
+
+.sidebar-user-material{
+    height: 96px;
+    padding: 12px;
+}
+
+.sidebar-user-material .category-content{
+    top: 50%;
+    transform: translateY(-50%);
 }

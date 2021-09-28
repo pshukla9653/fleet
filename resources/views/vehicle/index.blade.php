@@ -250,13 +250,12 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="col-md-6">
-                                    <div id="image-text"
-                                         style="position: relative;bottom: -140px;left: 15px;width: fit-content;padding: 5px;border-radius: 5px;">
-                                    </div>
-                                    <div id="image-review" style="height: 130px; border: 1px solid #bbb8b8;
+                                    <div id="image-review" style="min-height:35px; border: 1px solid #bbb8b8; position:relative;
                       background-color: #f2f2f2; width:80%; margin:20px 20px 0px 0px;">
-                                        <img class="hidden" id="image" src="#" alt="the image"
-                                             style="width:100%;height:100%;"/>
+                                        <img class="img-responsive center-block hidden" id="image" src="#" alt="the image"/>
+                                        <div id="image-text"
+                                             style="position: absolute;bottom: 5%;left: 5%;width: fit-content;padding: 5px;border-radius: 5px;">
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <div style="text-align: right; width: 78%;">
