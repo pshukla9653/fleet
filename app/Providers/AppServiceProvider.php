@@ -27,5 +27,15 @@ class AppServiceProvider extends ServiceProvider
         //
 		\Illuminate\Support\Facades\Schema::defaultStringLength(191);
         Paginator::useBootstrap();
+
+        /**
+         * TODO:: To be checked if there is a better way
+         * This is forcing application to use cloudfront cdn as application url instead of origin itself
+         * Also forcing application to use https
+         */
+        if (env('APP_ENV') !== 'local') {
+            \Illuminate\Support\Facades\URL::forceRootUrl(config('app.url'));
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
     }
 }
