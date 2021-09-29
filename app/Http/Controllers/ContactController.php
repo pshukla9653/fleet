@@ -21,7 +21,7 @@ class ContactController extends Controller
          $this->middleware('permission:contact-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:contact-delete', ['only' => ['destroy']]);
     }
-	
+
 	/**
      * Display a listing of the resource.
      *
@@ -33,9 +33,9 @@ class ContactController extends Controller
         if($request->input('search')){
             $query = $request->input('search');
             $contacts = Contact::where('first_name', 'LIKE', '%'. $query. '%')->orderBy('id','DESC')->paginate(10);
-           
+
             return view('contact.index', compact('contacts'));
-            
+
         }
         else{
 		$contacts = Contact::orderBy('id','DESC')->paginate(5);
@@ -44,7 +44,7 @@ class ContactController extends Controller
         }
     }
 
-   
+
 
     /**
      * Store a newly created resource in storage.
@@ -62,7 +62,7 @@ class ContactController extends Controller
         $status = array();
         $status['success'] = false;
         $input = $request->all();
-		
+
         if($request->id){
             $contact = Contact::find($request->id);
             $contact->update($input);
@@ -75,14 +75,14 @@ class ContactController extends Controller
             $status['contact'] = $contact;
             $status['success'] = true;
         }
-        
-        
+
+
         return response()->json($status);
-    
-        
+
+
     }
 
-    
+
 
     /**
      * Show the form for editing the specified resource.
@@ -98,19 +98,24 @@ class ContactController extends Controller
         return response()->json($contact);
     }
 
-    
-
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request, $id): \Illuminate\Http\RedirectResponse
     {
-        //
-		    Contact::find($request->id)->delete();
-        return response()->json(['success' => true]);
+        try {
+            $contact = Contact::find($id);
+            if ($contact->exists) {
+                $contact->delete();
+                return back()->with('success', 'Contact with id = '.$id.' has been deleted successfully!');
+            }
+            throw new \Exception('Something went wrong. Contact with id = '.$id.' does not exist on our records', 404);
+        } catch (\Exception $exception) {
+            return back()->with('error', $exception->getMessage());
+        }
     }
 
     public function get_contact_list_for_search(Request $request)
@@ -125,7 +130,7 @@ class ContactController extends Controller
             		->get();
         }
         return response()->json($contacts);
-        
+
     }
 
     public function get_contact_list()
@@ -149,7 +154,7 @@ class ContactController extends Controller
         }
         echo $html;
         //print_r($contactlist);die;
-        
+
     }
     public function get_contact_list_for_list()
     {
@@ -170,7 +175,7 @@ class ContactController extends Controller
                   </tr>';
         }
         echo $html;
-        
+
     }
     public function get_existing_contact_list()
     {
@@ -211,14 +216,14 @@ class ContactController extends Controller
             $list_contact = DB::table('list_contacts')->where('list_id', '=', $value->id)->get();
             $html.='
                 <h5> '.$value->list_name.' </h5>
-                
+
               <div class="toggle-div">';
               foreach ($list_contact as $key => $val) {
                 $contact = DB::table('contacts')->where('id', '=', $val->contact_id)->first();
                 if(!empty($contact)){
                   $html.='<p id="'.$contact->id.'"><input type="checkbox" id="'.$contact->id.'" value="'.$contact->id.'" name="contacts[]" /> &nbsp;&nbsp;&nbsp;<lable for="'.$contact->id.'">'.$contact->first_name.' '.$contact->last_name.'</lable></p>';
                 }
-                 
+
               }
               $html.="</div>";
         }

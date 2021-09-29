@@ -41,25 +41,38 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('roles-edit/{id}', [RoleController::class,'update']);
     Route::get('roles-list', [RoleController::class,'get_list']);
     Route::post('roles-delete', [RoleController::class,'destroy']);
+
     Route::resource('companies', CompanyController::class);
+
     Route::resource('users', UserController::class);
     Route::post('edit-user', [UserController::class, 'edit']);
     Route::post('delete-user', [UserController::class, 'destroy']);
+
     Route::resource('contacts', ContactController::class);
     Route::post('edit-contact', [ContactController::class, 'edit']);
-    Route::post('delete-contact', [ContactController::class, 'destroy']);
+    Route::post('contact/delete/{id}', [ContactController::class, 'destroy'])->name('contact.delete');
+    Route::get('get-contact-lists', [ContactController::class, 'get_contact_list']);
+    Route::post('get-contact-lists-for-search', [ContactController::class, 'get_contact_list_for_search']);
+    Route::get('get-contact-lists-for-list', [ContactController::class, 'get_contact_list_for_list']);
+    Route::get('get-contact-lists-booking', [ContactController::class, 'get_existing_contact_list_booking']);
+    Route::get('get-lists-booking', [ContactController::class, 'get_existing_list_booking']);
+
 	Route::resource('brands', BrandController::class);
     Route::post('edit-brand', [BrandController::class, 'edit']);
     Route::post('delete-brand', [BrandController::class, 'destroy']);
+
 	Route::resource('regions', RegionController::class);
     Route::post('edit-region', [RegionController::class, 'edit']);
     Route::post('delete-region', [RegionController::class, 'destroy']);
+
 	Route::resource('departments', DepartmentController::class);
     Route::post('edit-department', [DepartmentController::class, 'edit']);
     Route::post('delete-department', [DepartmentController::class, 'destroy']);
+
     Route::resource('loantypes', LoanTypeController::class);
     Route::post('edit-loantype', [LoanTypeController::class, 'edit']);
     Route::post('delete-loantype', [LoanTypeController::class, 'destroy']);
+
     Route::resource('vehicles', VehicleController::class);
     Route::post('vehicle', [VehicleController::class, 'store']);
     Route::post('edit-vehicle', [VehicleController::class, 'edit']);
@@ -67,6 +80,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::delete('delete-vehicle', [VehicleController::class, 'destroy']);
     Route::post('deletespec-vehicle', [VehicleController::class, 'delete']);
     Route::post('remove-img-vehicle', [VehicleController::class, 'remove_img']);
+
     Route::resource('email-template', EmailTemplateController::class);
     Route::post('edit-email-template', [EmailTemplateController::class, 'edit']);
     Route::post('delete-email-template', [EmailTemplateController::class, 'destroy']);
@@ -75,12 +89,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('lists', ListsController::class);
     Route::post('edit-lists', [ListsController::class, 'edit']);
     Route::post('delete-lists', [ListsController::class, 'destroy']);
-
-    Route::get('get-contact-lists', [ContactController::class, 'get_contact_list']);
-    Route::post('get-contact-lists-for-search', [ContactController::class, 'get_contact_list_for_search']);
-    Route::get('get-contact-lists-for-list', [ContactController::class, 'get_contact_list_for_list']);
-    Route::get('get-contact-lists-booking', [ContactController::class, 'get_existing_contact_list_booking']);
-    Route::get('get-lists-booking', [ContactController::class, 'get_existing_list_booking']);
     Route::post('get-lists-contact-list', [ListsController::class, 'get_lists_contact_list']);
     Route::post('delete-contact', [ListsController::class, 'delete_contact']);
     Route::post('get-contacts-by-list-id', [ListsController::class, 'get_contacts_by_list_id']);

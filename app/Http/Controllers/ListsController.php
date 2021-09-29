@@ -21,11 +21,11 @@ class ListsController extends Controller
     {
         if($request->input('search')){
             $query = $request->input('search');
-            
+
             $lists = Lists::where('list_name', 'LIKE', '%'. $query.'%')->orderBy('id','DESC')->paginate(10);
-           
+
             return view('lists.index', compact('lists'));
-            
+
         } else{
             $lists = Lists::orderBy('id','DESC')->paginate(5);
             return view('lists.index', compact('lists'))
@@ -61,20 +61,20 @@ class ListsController extends Controller
 
             }
             $status['success'] = true;
-            $status['list_id'] = $lists->id; 
+            $status['list_id'] = $lists->id;
         } else{
             $lists   =   Lists::Create( [
                         'company_id' => Auth()->user()->company_id,
                         'list_name' => $request->list_name
                     ]);
-           
+
             foreach ($request->contacts as $key => $value) {
                 $contact = ListContact::Create([
                     'company_id' => Auth()->user()->company_id,
                     'list_id' => $lists->id,
                     'contact_id' => $value
                 ]);
-                
+
 
             }
             $status['success'] = true;
@@ -83,20 +83,20 @@ class ListsController extends Controller
         return response()->json($status);
     }
 
-    
+
     public function show(Lists $lists)
     {
         //
     }
 
-    
+
     public function edit(Request $request)
     {
         $lists = Lists::find($request->id);
         return response()->json($lists);
     }
 
-    
+
     public function update(Request $request, Lists $lists)
     {
         //
@@ -108,6 +108,7 @@ class ListsController extends Controller
         Lists::find($request->id)->delete();
         return response()->json(['success' => true]);
     }
+
     public function get_lists_contact_list(Request $request)
     {
         $contactlist = DB::table('list_contacts')
@@ -120,7 +121,7 @@ class ListsController extends Controller
                                    'contacts.phone_number')
                           ->where('list_contacts.list_id', '=', $request->id)
                           ->get();
-        
+
         $html='<tr>
                 <th>Name</th>
                 <th>Surname</th>
@@ -128,7 +129,7 @@ class ListsController extends Controller
                 <th>Action</th>
               </tr>';
         foreach ($contactlist as $key => $value) {
-            
+
             $html.='<tr class="contact-row">
                     <td><input type="hidden" name="contacts[]" value="'.$value->id.'"> '.$value->first_name.'</td>
                     <td>'.$value->last_name.'</td>
@@ -138,10 +139,11 @@ class ListsController extends Controller
         }
         echo $html;
     }
+
     public function delete_contact(Request $request)
     {
         $res = DB::table('list_contacts')->where('id', '=', $request->id)->delete();
-        
+
         return response()->json(['success' => true]);
     }
 
@@ -175,7 +177,7 @@ class ListsController extends Controller
             		->get();
         }
         return response()->json($lists);
-        
+
     }
 
 }

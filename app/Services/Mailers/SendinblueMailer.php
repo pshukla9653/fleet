@@ -64,13 +64,19 @@ class SendinblueMailer extends IMailer
                 'name' => $this->dto->from_name,
                 'email' => $this->dto->from_email,
             ],
-            'attachment' => collect($this->dto->getAttachments())->map(function ($item) {
+        ];
+
+        /**
+         * Attach to data attachments only if there are attachments to be send
+         */
+        if (!empty($this->dto->attachments)) {
+            $data['attachment'] = collect($this->dto->getAttachments())->map(function ($item) {
                 $item['content'] = $item['data'];
                 unset($item['data']);
 
                 return $item;
-            })->toArray()
-        ];
+            })->toArray();
+        }
 
         $data['htmlContent'] = $this->getHtmlContent();
 

@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\EmailTemplate;
+use App\Services\EmailTemplateService;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Storage;
 
 class EmailTemplateController extends Controller
 {
+    public function __construct(protected EmailTemplateService $emailTemplateService) {
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,82 +42,34 @@ class EmailTemplateController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-
-        if ($request->id) {
+        try {
             $validation = [
                 'description' => 'required',
                 'subject' => 'required',
                 'email_body' => 'required',
                 'spec_sheet.*' => 'mimes:pdf,doc,docx,xls,xlsx|max:10000',
             ];
-        } else {
-            $validation = [
-                'description' => 'required',
-                'subject' => 'required',
-                'email_body' => 'required',
-                'spec_sheet.*' => 'mimes:pdf,doc,docx,xls,xlsx|max:10000',
-            ];
-        }
-        $this->validate($request, $validation);
-        $path = '/';
-
-
-        if ($request->id) {
-
-            $input = $request->all();
-            if ($request->has('is_spec')) {
-                $input['is_spec'] = 1;
-            } else {
-                $input['is_spec'] = 0;
-            }
-            $emailTemplate = EmailTemplate::find($request->id);
-            if ($request->hasfile('spec_sheet')) {
-                $spec_sheet = $request->file('spec_sheet');
-                foreach ($spec_sheet as $key => $spec) {
-                    $file_name = Storage::disk('public')->put($path, $spec);
-                    $email_file['template_id'] = $request->id;
-                    $email_file['file_name'] = $file_name;
-                    DB::table('email_file')->insert($email_file);
+            $this->validate($request, $validation);
+            if (isset($request->id) && !empty($request->id)) {
+                $emailTemplate = EmailTemplate::find($request->id);
+                if (! $emailTemplate->exists) {
+                    throw new \Exception('Something went wrong. Email Template not found in our records!', 404);
                 }
+                $this->emailTemplateService->store($request, $emailTemplate);
+                $message = "Email Template Updated successfully";
             } else {
-                unset($input['spec_sheet']);
-            }
-
-            $emailTemplate->update($input);
-            return redirect()->route('email-template.index')
-                ->with('success', 'Email Template Updated successfully');
-        } else {
-            //
-
-
-            $input = $request->all();
-            $input['company_id'] = Auth()->user()->company_id;
-            if ($request->has('is_spec')) {
-                $input['is_spec'] = 1;
-            } else {
-                $input['is_spec'] = 0;
-            }
-
-
-            $emailTemplate = EmailTemplate::create($input);
-            if ($request->hasfile('spec_sheet')) {
-                $spec_sheet = $request->file('spec_sheet');
-                foreach ($spec_sheet as $key => $spec) {
-                    $file_name = Storage::disk('public')->put($path, $spec);
-                    $email_file['template_id'] = $emailTemplate->id;
-                    $email_file['file_name'] = $file_name;
-                    DB::table('email_file')->insert($email_file);
-                }
+                $this->emailTemplateService->store($request);
+                $message = "Email template added successfully!";
             }
             return redirect()->route('email-template.index')
-                ->with('success', 'Email Template created successfully');
+                ->with('success', $message);
+        } catch (\Exception $exception) {
+            return back()->with('error', $exception->getMessage());
         }
-
-
     }
 
 

@@ -65,9 +65,6 @@
 
 <body>
 
-
-
-
 	<!-- Page container -->
 	<div class="page-container">
 
@@ -201,44 +198,44 @@
 
 			<!-- Main content -->
 			<div class="content-wrapper">
-<!-- Main navbar -->
-<div class="navbar navbar-default header-highlight" style="margin: 20px 20px 5px 20px; border-radius: 3px; box-shadow:rgb(99 99 99 / 20%) 0px 2px 8px 0px; height: 30px !important;">
-	<div class="nav navbar-nav visible-xs-block">
-		<div style="text-align: right; margin: 15px; padding: 5px;"><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a>
-		<a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></div>
-	</div>
+            <!-- Main navbar -->
+            <div class="navbar navbar-default header-highlight" style="margin: 20px 20px 5px 20px; border-radius: 3px; box-shadow:rgb(99 99 99 / 20%) 0px 2px 8px 0px; height: 30px !important;">
+                <div class="nav navbar-nav visible-xs-block">
+                    <div style="text-align: right; margin: 15px; padding: 5px;"><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a>
+                    <a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></div>
+                </div>
 
-	<div class="navbar-collapse collapse" id="navbar-mobile">
+                <div class="navbar-collapse collapse" id="navbar-mobile">
 
-		<div class="nav navbar-nav"><h6 style="margin-top: 16px; text-transform: uppercase;"><strong>@yield('heading-pre')@yield('heading')</strong></h6></div>
-		<ul class="nav navbar-nav navbar-right">
-
-
-
-			<li style="padding-top: 10px;"><img src="{{ asset('assets/images/icon/bell.png') }}" alt="bell" style="width: 17px;"/>
-				<span>{{ Auth::user()->first_name }}</span>
-				<img style="max-width: 40px" src="{{ asset('assets/images/icon/oval.png') }}" alt="">
-			</li>
-			<li class="dropdown dropdown-user">
-				<a class="dropdown-toggle" data-toggle="dropdown" style="padding-top: 18px; padding-left:0px;">
-
-					<i class="caret"></i>
-				</a>
-
-				<ul class="dropdown-menu dropdown-menu-right">
-
-					<li><a href="{{ route('logout') }}" onClick="event.preventDefault();
-												 document.getElementById('logout-form').submit();"><i class="icon-switch2"></i> {{ __('Logout') }}</a></li>
-				</ul>
-			</li>
-		</ul>
-		<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-									@csrf
-								</form>
+                    <div class="nav navbar-nav"><h6 style="margin-top: 16px; text-transform: uppercase;"><strong>@yield('heading-pre')@yield('heading')</strong></h6></div>
+                    <ul class="nav navbar-nav navbar-right">
 
 
-	</div>
-</div>
+
+                        <li style="padding-top: 10px;"><img src="{{ asset('assets/images/icon/bell.png') }}" alt="bell" style="width: 17px;"/>
+                            <span>{{ Auth::user()->first_name }}</span>
+                            <img style="max-width: 40px" src="{{ asset('assets/images/icon/oval.png') }}" alt="">
+                        </li>
+                        <li class="dropdown dropdown-user">
+                            <a class="dropdown-toggle" data-toggle="dropdown" style="padding-top: 18px; padding-left:0px;">
+
+                                <i class="caret"></i>
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-right">
+
+                                <li><a href="{{ route('logout') }}" onClick="event.preventDefault();
+                                                             document.getElementById('logout-form').submit();"><i class="icon-switch2"></i> {{ __('Logout') }}</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+
+
+                </div>
+            </div>
 
 			<!-- Page header -->
 			@yield('content')
@@ -281,5 +278,7 @@
         });
 
     </script>
+
+    @include('layouts.scripts')
 </body>
 </html>
