@@ -21,15 +21,12 @@ class HistoryController extends Controller
                 ->orWhere('event', 'LIKE', '%'. $query. '%')
                 ->orderBy('id','DESC')->paginate(10);
 
-            return view('histories.index', compact('histories'));
+            return view('histories.index', compact('histories', 'query'));
+        } else{
+            $histories = History::orderBy('id','DESC')->paginate(10);
 
-        }
-        else{
-        $histories = History::orderBy('id','DESC')->paginate(5);
-
-        //var_dump($brands); exit;
-        return view('histories.index', compact('histories'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+            return view('histories.index', compact('histories'))
+                ->with('i', ($request->input('page', 1) - 1) * 5);
         }
     }
 
@@ -42,7 +39,6 @@ class HistoryController extends Controller
      */
     public function destroy(Request $request)
     {
-        //
 		History::find($request->id)->delete();
         return response()->json(['success' => true]);
     }

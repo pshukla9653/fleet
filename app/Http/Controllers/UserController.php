@@ -29,7 +29,6 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-
         $roles = Role::pluck('name','name')->all();
         if($request->input('search')){
             $query = $request->input('search');
@@ -37,15 +36,15 @@ class UserController extends Controller
                 ->orWhere('last_name', 'LIKE', '%'. $query. '%')
                 ->orWhere('phone_number', 'LIKE', '%'. $query. '%')
                 ->orWhere('email', 'LIKE', '%'. $query. '%')
-                ->orderBy('id','DESC')->paginate(10);
+                ->orderBy('id','DESC')
+                ->paginate(10);
 
-            return view('users.index', compact('data','roles'));
+            return view('users.index', compact('data','roles', 'query'));
 
-        }
-        else{
-        $data = User::orderBy('id','DESC')->paginate(5);
-        return view('users.index', compact('data','roles'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+        } else{
+            $data = User::orderBy('id','DESC')->paginate(10);
+            return view('users.index', compact('data','roles'))
+                ->with('i', ($request->input('page', 1) - 1) * 5);
         }
     }
 

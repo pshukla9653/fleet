@@ -21,7 +21,7 @@ class ContactController extends Controller
          $this->middleware('permission:contact-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:contact-delete', ['only' => ['destroy']]);
     }
-	
+
 	/**
      * Display a listing of the resource.
      *
@@ -29,22 +29,22 @@ class ContactController extends Controller
      */
     public function index(Request $request)
     {
-        //
         if($request->input('search')){
             $query = $request->input('search');
-            $contacts = Contact::where('first_name', 'LIKE', '%'. $query. '%')->orderBy('id','DESC')->paginate(10);
-           
-            return view('contact.index', compact('contacts'));
-            
-        }
-        else{
-		$contacts = Contact::orderBy('id','DESC')->paginate(5);
-        return view('contact.index', compact('contacts'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+            $contacts = Contact::where('first_name', 'LIKE', '%'. $query. '%')
+                ->orWhere('last_name', 'LIKE', '%'. $query. '%')
+                ->orWhere('email', 'LIKE', '%'. $query. '%')
+                ->orWhere('phone_number', 'LIKE', '%'. $query. '%')
+                ->orderBy('id','DESC')->paginate(1);
+
+            return view('contact.index', compact('contacts', 'query'));
+        } else{
+            $contacts = Contact::orderBy('id','DESC')->paginate(10);
+
+            return view('contact.index', compact('contacts'))
+                ->with('i', ($request->input('page', 1) - 1) * 5);
         }
     }
-
-   
 
     /**
      * Store a newly created resource in storage.
@@ -54,7 +54,6 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
 		$this->validate($request, [
             'first_name' => 'required',
             'email' => 'required|email',
@@ -62,7 +61,7 @@ class ContactController extends Controller
         $status = array();
         $status['success'] = false;
         $input = $request->all();
-		
+
         if($request->id){
             $contact = Contact::find($request->id);
             $contact->update($input);
@@ -75,14 +74,9 @@ class ContactController extends Controller
             $status['contact'] = $contact;
             $status['success'] = true;
         }
-        
-        
-        return response()->json($status);
-    
-        
-    }
 
-    
+        return response()->json($status);
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -92,13 +86,10 @@ class ContactController extends Controller
      */
     public function edit(Request $request)
     {
-        //
 		$contact = Contact::find($request->id);
-    	//var_dump($contact); exit;
         return response()->json($contact);
     }
 
-    
 
     /**
      * Remove the specified resource from storage.
@@ -124,14 +115,13 @@ class ContactController extends Controller
                     ->orwhere('last_name', 'LIKE', "%$search%")
             		->get();
         }
+
         return response()->json($contacts);
-        
     }
 
     public function get_contact_list()
     {
         $contactlist = Contact::all();
-        //print_r($contactlist);die;
         $html='<tr>
                 <th>Name</th>
                 <th>Surname</th>
@@ -148,9 +138,8 @@ class ContactController extends Controller
                   </tr>';
         }
         echo $html;
-        //print_r($contactlist);die;
-        
     }
+
     public function get_contact_list_for_list()
     {
         $contactlist = Contact::all();
@@ -161,7 +150,6 @@ class ContactController extends Controller
                 <th>Action</th>
               </tr>';
         foreach ($contactlist as $key => $value) {
-            //echo $value->first_name."<br>";
             $html.='<tr class="contact-row">
                     <td><input type="hidden" name="contacts[]" value="'.$value->id.'"> '.$value->first_name.'</td>
                     <td>'.$value->last_name.'</td>
@@ -170,12 +158,11 @@ class ContactController extends Controller
                   </tr>';
         }
         echo $html;
-        
     }
+
     public function get_existing_contact_list()
     {
         $contactlist = Contact::all();
-        //print_r($contactlist);die;
         $html='<tr>
                 <th>Name</th>
                 <th>Surname</th>
@@ -183,7 +170,6 @@ class ContactController extends Controller
                 <th>Action</th>
               </tr>';
         foreach ($contactlist as $key => $value) {
-            //echo $value->first_name."<br>";
             $html.='<tr class="contact-row">
                     <td><input type="hidden" name="contacts[]" value="'.$value->id.'"> '.$value->first_name.'</td>
                     <td>'.$value->last_name.'</td>
@@ -192,8 +178,8 @@ class ContactController extends Controller
                   </tr>';
         }
         echo $html;
-        //print_r($contactlist);die;
     }
+
     public function get_existing_contact_list_booking()
     {
         $contactlist = Contact::all();
@@ -203,6 +189,7 @@ class ContactController extends Controller
         }
         echo $html;
     }
+
     public function get_existing_list_booking()
     {
         $lists = DB::table("lists")->get();
@@ -211,14 +198,14 @@ class ContactController extends Controller
             $list_contact = DB::table('list_contacts')->where('list_id', '=', $value->id)->get();
             $html.='
                 <h5> '.$value->list_name.' </h5>
-                
+
               <div class="toggle-div">';
               foreach ($list_contact as $key => $val) {
                 $contact = DB::table('contacts')->where('id', '=', $val->contact_id)->first();
                 if(!empty($contact)){
                   $html.='<p id="'.$contact->id.'"><input type="checkbox" id="'.$contact->id.'" value="'.$contact->id.'" name="contacts[]" /> &nbsp;&nbsp;&nbsp;<lable for="'.$contact->id.'">'.$contact->first_name.' '.$contact->last_name.'</lable></p>';
                 }
-                 
+
               }
               $html.="</div>";
         }

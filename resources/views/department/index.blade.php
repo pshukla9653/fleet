@@ -19,7 +19,7 @@
   </div>
   <div class="col-md-4" style="padding: 15px 30px;">
   <form class="example" action="">
-    <input type="text" placeholder="Search.." name="search">
+    <input type="text" placeholder="Search.." name="search" value="{{ $query ?? "" }}">
     <button type="submit"><img src="{{ asset('assets/images/icon/search.png') }}" alt="search"/></button>
     </form>
   </div>
@@ -75,7 +75,7 @@
 </table>
 
 <br>
-{!! $departments->render() !!}
+{!! $departments->withQueryString()->links() !!}
       </div>
     </div>
   </div>

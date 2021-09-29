@@ -14,7 +14,7 @@ class DepartmentController extends Controller
          $this->middleware('permission:department-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:department-delete', ['only' => ['destroy']]);
     }
-	
+
 	/**
      * Display a listing of the resource.
      *
@@ -22,17 +22,14 @@ class DepartmentController extends Controller
      */
     public function index(Request $request)
     {
-        //
 		if($request->input('search')){
             $query = $request->input('search');
             $departments = Department::where('department_name', 'LIKE', '%'. $query. '%')->orderBy('id','DESC')->paginate(10);
-            return view('department.index', compact('departments'));
-            
-        }
-        else{
-        $departments = Department::orderBy('id','DESC')->paginate(5);
-        return view('department.index', compact('departments'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+            return view('department.index', compact('departments', 'query'));
+        } else{
+            $departments = Department::orderBy('id','DESC')->paginate(5);
+            return view('department.index', compact('departments'))
+                ->with('i', ($request->input('page', 1) - 1) * 5);
         }
     }
 
@@ -62,7 +59,7 @@ class DepartmentController extends Controller
             $validation = ['department_name' => 'required|unique:departments,department_name'];
         }
 		$this->validate($request, $validation);
-        
+
         if($request->id){
             $input = $request->all();
             $department = Department::find($request->id);
@@ -72,13 +69,13 @@ class DepartmentController extends Controller
         $department   =   Department::Create(
             [
                 'company_id' => Auth()->user()->company_id,
-                'department_name' => $request->department_name, 
-                
+                'department_name' => $request->department_name,
+
             ]);
         }
             return response()->json(['success' => true]);
-    
-        
+
+
     }
 
     /**
@@ -87,7 +84,7 @@ class DepartmentController extends Controller
      * @param  \App\Models\Department  $departments
      * @return \Illuminate\Http\Response
      */
-   
+
 
     /**
      * Show the form for editing the specified resource.
@@ -98,7 +95,7 @@ class DepartmentController extends Controller
     public function edit(Request $request)
     {
         //
-      
+
 		$department = Department::find($request->id);
     	//var_dump($contact); exit;
         return response()->json($department);
@@ -111,7 +108,7 @@ class DepartmentController extends Controller
      * @param  \App\Models\Department  $departments
      * @return \Illuminate\Http\Response
      */
-    
+
 
     /**
      * Remove the specified resource from storage.
@@ -122,7 +119,7 @@ class DepartmentController extends Controller
     public function destroy(Request $request)
     {
         //
-       
+
 		Department::find($request->id)->delete();
         return response()->json(['success' => true]);
     }

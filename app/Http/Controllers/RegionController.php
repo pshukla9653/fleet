@@ -14,7 +14,7 @@ class RegionController extends Controller
          $this->middleware('permission:region-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:region-delete', ['only' => ['destroy']]);
     }
-	
+
 	/**
      * Display a listing of the resource.
      *
@@ -26,9 +26,9 @@ class RegionController extends Controller
         if($request->input('search')){
             $query = $request->input('search');
             $regions = Region::where('region_name', 'LIKE', '%'. $query. '%')->orderBy('id','DESC')->paginate(10);
-           
-            return view('region.index', compact('regions'));
-            
+
+            return view('region.index', compact('regions', 'query'));
+
         }
         else{
 		$regions = Region::orderBy('id','DESC')->paginate(5);
@@ -37,7 +37,7 @@ class RegionController extends Controller
         }
     }
 
-   
+
 
     /**
      * Store a newly created resource in storage.
@@ -54,7 +54,7 @@ class RegionController extends Controller
             $validation = ['region_name' => 'required|unique:regions,region_name'];
         }
 		$this->validate($request, $validation);
-    
+
         if($request->id){
             $input = $request->all();
             $regions = Region::find($request->id);
@@ -64,16 +64,16 @@ class RegionController extends Controller
         $regions   =   Region::Create(
             [
                 'company_id' => Auth()->user()->company_id,
-                'region_name' => $request->region_name, 
-                
+                'region_name' => $request->region_name,
+
             ]);
         }
             return response()->json(['success' => true]);
-    
-        
+
+
     }
 
-   
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -83,15 +83,15 @@ class RegionController extends Controller
     public function edit(Request $request)
     {
         //
-      
+
 		$Region = Region::find($request->id);
     	//var_dump($contact); exit;
         return response()->json($Region);
     }
 
-    
 
-   
+
+
 
     /**
      * Remove the specified resource from storage.

@@ -23,7 +23,7 @@
         </div>
         <div class="col-md-4" style="padding: 15px 30px;">
             <form class="example" action="">
-                <input type="text" placeholder="Search" name="search">
+                <input type="text" placeholder="Search" name="search" value="{{ $query ?? "" }}">
                 <button type="submit"><img src="{{ asset('assets/images/icon/search.png') }}" alt="search" /></button>
             </form>
         </div>
@@ -122,7 +122,7 @@
                         @endforeach
                     </table>
                     <br>
-                    {!! $emailTemplate->render() !!}
+                    {!! $emailTemplate->withQueryString()->links() !!}
 
                 </div>
             </div>
@@ -513,7 +513,7 @@
                                         alert('Delete file successfully');
                                         $('#uploaded_spec option:selected').remove();
                                     }
-                                    
+
                                 }
                             });
                         }
