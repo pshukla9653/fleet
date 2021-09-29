@@ -970,7 +970,7 @@
                                             <div class="car-img">
                                                 <img class="image-1" id="vahicle_img" src="">
                                             </div>
-                                            <div class="sides-1">
+                                            <div class="sides-1" style="margin-top: 7px">
                                                 <span id="rt-number" style="border-radius: 7px;border-color: #eecc00;margin: 5px;width: 110px;padding: 3px;
                                                                 font-weight: 600;"></span>
                                                 <br>
