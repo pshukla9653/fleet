@@ -29,16 +29,13 @@ class BrandController extends Controller
      */
     public function index(Request $request)
     {
-		
-        //
 		if($request->input('search')){
             $query = $request->input('search');
             $brand = Brand::where('brand_name', 'LIKE', '%'. $query. '%')->orderBy('id','DESC')->paginate(10);
-            return view('brand.index', compact('brand'));
-            
+            return view('brand.index', compact('brand', 'query'));
         }
         else{
-            $brand = Brand::orderBy('id','DESC')->paginate(5);
+            $brand = Brand::orderBy('id','DESC')->paginate(10);
             return view('brand.index', compact('brand'))
                 ->with('i', ($request->input('page', 1) - 1) * 5);
         }
@@ -52,10 +49,10 @@ class BrandController extends Controller
     public function create()
     {
         //
-		
+
         $brand = Role::pluck('name','name')->all();
         return view('brand.create', compact('brand'));
-		
+
     }
 
     /**
@@ -84,36 +81,36 @@ class BrandController extends Controller
             $image_name= Storage::disk('public')->put('/', $image);
             $input['file_name'] = $image_name;
 			$input['company_id'] = Auth()->user()->company_id;
-            
-			
+
+
         }else{
             unset($input['image']);
         }
-          
+
         $brand->update($input);
         }
         else{
         //
-		
+
         $input = $request->all();
-  
+
         if ($image = $request->file('image')) {
             $image_name= Storage::disk('public')->put('/', $image);
             $input['file_name'] = $image_name;
 			$input['company_id'] = Auth()->user()->company_id;
         }
-    
+
          Brand::create($input);
-     
+
         }
         return redirect()->route('brands.index')
                         ->with('success','Brand created successfully');
-						
-    
-        
+
+
+
     }
 
-    
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -135,7 +132,7 @@ class BrandController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    
+
 
     /**
      * Remove the specified resource from storage.
@@ -151,10 +148,10 @@ class BrandController extends Controller
             Storage::disk('public')->delete($brand->file_name);
         }
 		Brand::find($request->id)->delete();
-		
+
         return response()->json(['success' => true]);
     }
-	
 
-    
+
+
 }

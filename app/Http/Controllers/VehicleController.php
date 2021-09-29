@@ -53,7 +53,7 @@ class VehicleController extends Controller
 
         }
         else{
-        $vehicles = Vehicle::orderByRaw("CAST(order_number as UNSIGNED) ASC")->paginate(5);
+        $vehicles = Vehicle::orderByRaw("CAST(order_number as UNSIGNED) ASC")->paginate(10);
 
         //var_dump($brands); exit;
         return view('vehicle.index', compact('vehicles','brands','regions','departments'))

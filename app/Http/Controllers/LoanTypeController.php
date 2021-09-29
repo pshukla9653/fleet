@@ -8,7 +8,7 @@ use Redirect,Response;
 
 class LoanTypeController extends Controller
 {
-    
+
     function __construct()
     {
          $this->middleware('permission:loantype-list|loantype-create|loantype-edit|loantype-delete', ['only' => ['index','store']]);
@@ -16,7 +16,7 @@ class LoanTypeController extends Controller
          $this->middleware('permission:loantype-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:loantype-delete', ['only' => ['destroy']]);
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -24,21 +24,18 @@ class LoanTypeController extends Controller
      */
     public function index(Request $request)
     {
-        //
         if($request->input('search')){
             $query = $request->input('search');
             $loantypes = LoanType::where('loan_type', 'LIKE', '%'. $query. '%')->orderBy('id','DESC')->paginate(10);
-            return view('loantype.index', compact('loantypes'));
-            
-        }
-        else{
-		$loantypes = LoanType::orderBy('id','DESC')->paginate(5);
-        return view('loantype.index', compact('loantypes'))
+            return view('loantype.index', compact('loantypes', 'query'));
+        } else{
+            $loantypes = LoanType::orderBy('id','DESC')->paginate(10);
+            return view('loantype.index', compact('loantypes'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
         }
     }
 
-  
+
     /**
      * Store a newly created resource in storage.
      *
@@ -53,7 +50,7 @@ class LoanTypeController extends Controller
             $validation = ['loan_type' => 'required|unique:loan_types,loan_type'];
         }
 		$this->validate($request, $validation);
-    
+
         if($request->id){
             $input = $request->all();
             $loantype = LoanType::find($request->id);
@@ -63,13 +60,13 @@ class LoanTypeController extends Controller
         $loantype   =   LoanType::Create(
             [
                 'company_id' => Auth()->user()->company_id,
-                'loan_type' => $request->loan_type, 
-                
+                'loan_type' => $request->loan_type,
+
             ]);
         }
             return response()->json(['success' => true]);
-    
-        
+
+
     }
 
    /**
@@ -81,7 +78,7 @@ class LoanTypeController extends Controller
     public function edit(Request $request)
     {
         //
-      
+
 		$loanType = LoanType::find($request->id);
     	//var_dump($contact); exit;
         return response()->json($loanType);

@@ -1,7 +1,7 @@
 <?php
-    
+
 namespace App\Http\Controllers;
-    
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -10,10 +10,10 @@ use Spatie\Permission\Models\Role;
 use DB;
 use Hash;
 use Illuminate\Support\Arr;
-    
+
 class UserController extends Controller
 {
-    
+
 	function __construct()
     {
         //  $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);
@@ -21,7 +21,7 @@ class UserController extends Controller
         //  $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
         //  $this->middleware('permission:user-delete', ['only' => ['destroy']]);
     }
-	
+
 	/**
      * Display a listing of the resource.
      *
@@ -29,22 +29,25 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        
         $roles = Role::pluck('name','name')->all();
         if($request->input('search')){
             $query = $request->input('search');
-            $data = User::where('first_name', 'LIKE', '%'. $query. '%')->orderBy('id','DESC')->paginate(10);
-           
-            return view('users.index', compact('data','roles'));
-            
-        }
-        else{
-        $data = User::orderBy('id','DESC')->paginate(5);
-        return view('users.index', compact('data','roles'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+            $data = User::where('first_name', 'LIKE', '%'. $query. '%')
+                ->orWhere('last_name', 'LIKE', '%'. $query. '%')
+                ->orWhere('phone_number', 'LIKE', '%'. $query. '%')
+                ->orWhere('email', 'LIKE', '%'. $query. '%')
+                ->orderBy('id','DESC')
+                ->paginate(10);
+
+            return view('users.index', compact('data','roles', 'query'));
+
+        } else{
+            $data = User::orderBy('id','DESC')->paginate(10);
+            return view('users.index', compact('data','roles'))
+                ->with('i', ($request->input('page', 1) - 1) * 5);
         }
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -55,7 +58,7 @@ class UserController extends Controller
         $roles = Role::pluck('name','name')->all();
         return view('users.create', compact('roles'));
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -80,7 +83,7 @@ class UserController extends Controller
             ];
         }
 		$this->validate($request, $validation);
-    
+
         $input = $request->all();
 
         if($request->id){
@@ -92,7 +95,7 @@ class UserController extends Controller
             }
 
             $user->update($input);
-        
+
         }
         else
         {
@@ -104,7 +107,7 @@ class UserController extends Controller
         }
         return response()->json(['success' => true]);
     }
-    
+
     /**
      * Display the specified resource.
      *
@@ -116,7 +119,7 @@ class UserController extends Controller
         $user = User::find($id);
         return view('users.show',compact('user'));
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -133,7 +136,7 @@ class UserController extends Controller
         return response()->json($data);
         //return view('users.edit',compact('user','roles','userRole'));
     }
-    
+
     /**
      * Update the specified resource in storage.
      *
@@ -149,24 +152,24 @@ class UserController extends Controller
             'password' => 'same:confirm-password',
             'roles' => 'required'
         ]);
-    
+
         $input = $request->all();
-        if(!empty($input['password'])){ 
+        if(!empty($input['password'])){
             $input['password'] = Hash::make($input['password']);
         }else{
-            $input = Arr::except($input,array('password'));    
+            $input = Arr::except($input,array('password'));
         }
-    
+
         $user = User::find($id);
         $user->update($input);
         DB::table('model_has_roles')->where('model_id',$id)->delete();
-    
+
         $user->assignRole($request->input('roles'));
-    
+
         return redirect()->route('users.index')
                         ->with('success','User updated successfully');
     }
-    
+
     /**
      * Remove the specified resource from storage.
      *

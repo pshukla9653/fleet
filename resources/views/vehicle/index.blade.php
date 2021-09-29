@@ -163,8 +163,7 @@
                         @endforeach
                     </table>
                     <br>
-                    {!! $vehicles->render() !!}
-
+                        {!! $vehicles->withQueryString()->links() !!}
                 </div>
             </div>
         </div>

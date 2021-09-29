@@ -11,25 +11,25 @@ class ListsController extends Controller
 {
     function __construct()
     {
-         //$this->middleware('permission:lists-list|lists-create|lists-edit|lists-delete', ['only' => ['index','store']]);
-         //$this->middleware('permission:lists-create', ['only' => ['create','store']]);
-         //$this->middleware('permission:lists-edit', ['only' => ['edit','update']]);
-         //$this->middleware('permission:lists-delete', ['only' => ['destroy']]);
+        //$this->middleware('permission:lists-list|lists-create|lists-edit|lists-delete', ['only' => ['index','store']]);
+        //$this->middleware('permission:lists-create', ['only' => ['create','store']]);
+        //$this->middleware('permission:lists-edit', ['only' => ['edit','update']]);
+        //$this->middleware('permission:lists-delete', ['only' => ['destroy']]);
     }
 
     public function index(Request $request)
     {
-        if($request->input('search')){
+        if ($request->input('search')) {
             $query = $request->input('search');
 
-            $lists = Lists::where('list_name', 'LIKE', '%'. $query.'%')->orderBy('id','DESC')->paginate(10);
+            $lists = Lists::where('list_name', 'LIKE', '%' . $query . '%')->orderBy('id', 'DESC')->paginate(10);
 
-            return view('lists.index', compact('lists'));
+            return view('lists.index', compact('lists', 'query'));
 
-        } else{
-            $lists = Lists::orderBy('id','DESC')->paginate(5);
+        } else {
+            $lists = Lists::orderBy('id', 'DESC')->paginate(10);
             return view('lists.index', compact('lists'))
-                    ->with('i', ($request->input('page', 1) - 1) * 5);
+                ->with('i', ($request->input('page', 1) - 1) * 5);
         }
     }
 
@@ -41,15 +41,15 @@ class ListsController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
-        if($request->id){
-            $validation = ['list_name' => 'required|unique:lists,list_name,'.$request->id];
-        }else{
+        if ($request->id) {
+            $validation = ['list_name' => 'required|unique:lists,list_name,' . $request->id];
+        } else {
             $validation = ['list_name' => 'required|unique:lists,list_name'];
         }
         $this->validate($request, $validation);
         $status = array();
         $status['success'] = false;
-        if($request->id){
+        if ($request->id) {
             $lists = Lists::find($request->id);
             $lists->update(['list_name' => $request->list_name]);
             foreach ($request->contacts as $key => $value) {
@@ -62,11 +62,11 @@ class ListsController extends Controller
             }
             $status['success'] = true;
             $status['list_id'] = $lists->id;
-        } else{
-            $lists   =   Lists::Create( [
-                        'company_id' => Auth()->user()->company_id,
-                        'list_name' => $request->list_name
-                    ]);
+        } else {
+            $lists = Lists::Create([
+                'company_id' => Auth()->user()->company_id,
+                'list_name' => $request->list_name
+            ]);
 
             foreach ($request->contacts as $key => $value) {
                 $contact = ListContact::Create([
@@ -112,17 +112,17 @@ class ListsController extends Controller
     public function get_lists_contact_list(Request $request)
     {
         $contactlist = DB::table('list_contacts')
-                          ->leftJoin('contacts', 'list_contacts.contact_id', '=', 'contacts.id')
-                          ->select('list_contacts.id as id',
-                                   'list_contacts.list_id as listid',
-                                   'contacts.first_name',
-                                   'contacts.last_name',
-                                   'contacts.email',
-                                   'contacts.phone_number')
-                          ->where('list_contacts.list_id', '=', $request->id)
-                          ->get();
+            ->leftJoin('contacts', 'list_contacts.contact_id', '=', 'contacts.id')
+            ->select('list_contacts.id as id',
+                'list_contacts.list_id as listid',
+                'contacts.first_name',
+                'contacts.last_name',
+                'contacts.email',
+                'contacts.phone_number')
+            ->where('list_contacts.list_id', '=', $request->id)
+            ->get();
 
-        $html='<tr>
+        $html = '<tr>
                 <th>Name</th>
                 <th>Surname</th>
                 <th>Email</th>
@@ -130,11 +130,11 @@ class ListsController extends Controller
               </tr>';
         foreach ($contactlist as $key => $value) {
 
-            $html.='<tr class="contact-row">
-                    <td><input type="hidden" name="contacts[]" value="'.$value->id.'"> '.$value->first_name.'</td>
-                    <td>'.$value->last_name.'</td>
-                    <td>'.$value->email.'</td>
-                    <td class="check-box"><button type="button" class="btn btn-danger delete" onclick="deleteContact(this, '.$value->id.')">Delete</button></td>
+            $html .= '<tr class="contact-row">
+                    <td><input type="hidden" name="contacts[]" value="' . $value->id . '"> ' . $value->first_name . '</td>
+                    <td>' . $value->last_name . '</td>
+                    <td>' . $value->email . '</td>
+                    <td class="check-box"><button type="button" class="btn btn-danger delete" onclick="deleteContact(this, ' . $value->id . ')">Delete</button></td>
                   </tr>';
         }
         echo $html;
@@ -147,19 +147,19 @@ class ListsController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function get_contacts_by_list_id(Request $request){
+    public function get_contacts_by_list_id(Request $request)
+    {
         $status['success'] = false;
         $list = DB::table('list_contacts')->where('list_id', '=', $request->id)->get();
-        if(!empty($list)){
-        foreach($list as $key=>$value){
-            $contact = DB::table('contacts')->where('id','=', $value->contact_id)->first();
-            $contact_list[$key]['id'] = $contact->id;
-            $contact_list[$key]['name'] = $contact->first_name.' '.$contact->last_name;
-        }
-        $status['success'] = true;
-        $status['contacts'] = $contact_list;
-        }
-        else{
+        if (!empty($list)) {
+            foreach ($list as $key => $value) {
+                $contact = DB::table('contacts')->where('id', '=', $value->contact_id)->first();
+                $contact_list[$key]['id'] = $contact->id;
+                $contact_list[$key]['name'] = $contact->first_name . ' ' . $contact->last_name;
+            }
+            $status['success'] = true;
+            $status['contacts'] = $contact_list;
+        } else {
             $status['success'] = false;
         }
 
@@ -170,11 +170,11 @@ class ListsController extends Controller
     {
         $lists = [];
 
-        if($request->has('q')){
+        if ($request->has('q')) {
             $search = $request->q;
-            $lists =Lists::select("id", "list_name")
-            		->where('list_name', 'LIKE', "%$search%")
-            		->get();
+            $lists = Lists::select("id", "list_name")
+                ->where('list_name', 'LIKE', "%$search%")
+                ->get();
         }
         return response()->json($lists);
 

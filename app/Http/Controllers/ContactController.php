@@ -32,19 +32,20 @@ class ContactController extends Controller
         //
         if($request->input('search')){
             $query = $request->input('search');
-            $contacts = Contact::where('first_name', 'LIKE', '%'. $query. '%')->orderBy('id','DESC')->paginate(10);
+            $contacts = Contact::where('first_name', 'LIKE', '%'. $query. '%')
+                ->orWhere('last_name', 'LIKE', '%'. $query. '%')
+                ->orWhere('email', 'LIKE', '%'. $query. '%')
+                ->orWhere('phone_number', 'LIKE', '%'. $query. '%')
+                ->orderBy('id','DESC')->paginate(1);
 
-            return view('contact.index', compact('contacts'));
+            return view('contact.index', compact('contacts', 'query'));
+        } else{
+            $contacts = Contact::orderBy('id','DESC')->paginate(10);
 
-        }
-        else{
-		$contacts = Contact::orderBy('id','DESC')->paginate(5);
-        return view('contact.index', compact('contacts'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+            return view('contact.index', compact('contacts'))
+                ->with('i', ($request->input('page', 1) - 1) * 5);
         }
     }
-
-
 
     /**
      * Store a newly created resource in storage.
@@ -76,13 +77,8 @@ class ContactController extends Controller
             $status['success'] = true;
         }
 
-
         return response()->json($status);
-
-
     }
-
-
 
     /**
      * Show the form for editing the specified resource.
@@ -92,11 +88,10 @@ class ContactController extends Controller
      */
     public function edit(Request $request)
     {
-        //
 		$contact = Contact::find($request->id);
-    	//var_dump($contact); exit;
         return response()->json($contact);
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -129,14 +124,13 @@ class ContactController extends Controller
                     ->orwhere('last_name', 'LIKE', "%$search%")
             		->get();
         }
-        return response()->json($contacts);
 
+        return response()->json($contacts);
     }
 
     public function get_contact_list()
     {
         $contactlist = Contact::all();
-        //print_r($contactlist);die;
         $html='<tr>
                 <th>Name</th>
                 <th>Surname</th>
@@ -153,9 +147,8 @@ class ContactController extends Controller
                   </tr>';
         }
         echo $html;
-        //print_r($contactlist);die;
-
     }
+
     public function get_contact_list_for_list()
     {
         $contactlist = Contact::all();
@@ -166,7 +159,6 @@ class ContactController extends Controller
                 <th>Action</th>
               </tr>';
         foreach ($contactlist as $key => $value) {
-            //echo $value->first_name."<br>";
             $html.='<tr class="contact-row">
                     <td><input type="hidden" name="contacts[]" value="'.$value->id.'"> '.$value->first_name.'</td>
                     <td>'.$value->last_name.'</td>
@@ -177,10 +169,10 @@ class ContactController extends Controller
         echo $html;
 
     }
+
     public function get_existing_contact_list()
     {
         $contactlist = Contact::all();
-        //print_r($contactlist);die;
         $html='<tr>
                 <th>Name</th>
                 <th>Surname</th>
@@ -188,7 +180,6 @@ class ContactController extends Controller
                 <th>Action</th>
               </tr>';
         foreach ($contactlist as $key => $value) {
-            //echo $value->first_name."<br>";
             $html.='<tr class="contact-row">
                     <td><input type="hidden" name="contacts[]" value="'.$value->id.'"> '.$value->first_name.'</td>
                     <td>'.$value->last_name.'</td>
@@ -197,8 +188,8 @@ class ContactController extends Controller
                   </tr>';
         }
         echo $html;
-        //print_r($contactlist);die;
     }
+
     public function get_existing_contact_list_booking()
     {
         $contactlist = Contact::all();
@@ -208,6 +199,7 @@ class ContactController extends Controller
         }
         echo $html;
     }
+
     public function get_existing_list_booking()
     {
         $lists = DB::table("lists")->get();
